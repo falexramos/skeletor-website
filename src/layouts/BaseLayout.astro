@@ -1,4 +1,5 @@
 ---
+//src\layouts\BaseLayout.astro
 import "@/styles/tailwind.css";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
@@ -16,7 +17,7 @@ currentLang as keyof typeof languageList;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Título SEO -->
-    <title>CodeXtreme - Windows Gaming</title>
+    <title>Mires - Restaurando mundos</title>
 
     <!-- Meta Tags SEO -->
     <meta
@@ -38,18 +39,18 @@ currentLang as keyof typeof languageList;
     />
     <meta
       property="og:image"
-      content="https://www.codextreme.me/imagen-previa.png"
+      content="https://www.somosmires.es/imagen-previa.png"
     />
-    <meta property="og:url" content="https://www.codextreme.me/" />
+    <meta property="og:url" content="https://www.somosmires.es/" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="CodeXtremeOS" />
+    <meta name="twitter:title" content="Mires" />
     <meta
       name="twitter:description"
-      content="La mejor versión de Windows modificada para gaming y máximo rendimiento. Descarga CodeXtremeOS ahora y lleva tu experiencia de juego al siguiente nivel."
+      content="Llevamos ayuda a quienes más lo necesitan, impulsamos oportunidades y creamos soluciones sostenibles."
     />
     <meta
       name="twitter:image"
-      content="https://www.codextreme.me/imagen-twitter.png"
+      content="https://www.somosmires.es/imagen-twitter.png"
     />
     <meta
       name="google-site-verification"
@@ -66,12 +67,12 @@ currentLang as keyof typeof languageList;
       {
         "@context": "http://schema.org",
         "@type": "WebSite",
-        "url": "https://www.codextreme.me",
+        "url": "https://www.somosmires.es",
         "name": "CodeXtremeOS",
-        "description": "La mejor versión de Windows modificada para gaming y máximo rendimiento.",
+        "description": "Llevamos ayuda a quienes más lo necesitan, impulsamos oportunidades y creamos soluciones sostenibles.",
         "potentialAction": {
           "@type": "SearchAction",
-          "target": "https://www.codextreme.me/buscar?q={search_term_string}",
+          "target": "https://www.somosmires.es/buscar?q={search_term_string}",
           "query-input": "required name=search_term_string"
         }
       }
