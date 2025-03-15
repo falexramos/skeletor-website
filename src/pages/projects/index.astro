@@ -1,0 +1,105 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { getCollection } from 'astro:content';
+import CTASection from '@/components/CTASection.astro';
+import HeroSection from '@/components/HeroSection.astro';
+
+const currentLang = Astro.currentLocale || "es";
+
+// Obtener los proyectos de la colección
+const projectEntries = await getCollection('projects', ({ id }) => {
+  return id.startsWith(`${currentLang}/`);
+});
+
+// Transformar los datos de la colección al formato que necesitamos
+const projects = projectEntries.map((entry) => ({
+  id: entry.slug.replace(`${currentLang}/`, ''),
+  title: entry.data.title,
+  subtitle: entry.data.subtitle,
+  description: entry.data.description,
+  image: entry.data.image,
+  href: `/projects/${entry.slug.replace(`${currentLang}/`, '')}`
+}));
+
+
+const ctaData = {
+  title: "¿Quieres ser parte del cambio?",
+  description: "Únete a nosotros y ayuda a transformar vidas a través de nuestros proyectos.",
+  primaryButton: {
+    text: "Contacta con Nosotros",
+    href: "/contact"
+  },
+  secondaryButton: {
+    text: "Haz una Donación",
+    href: "/donate"
+  }
+};
+
+const heroData = {
+  title: "Nuestros Proyectos",
+  description: "Trabajamos incansablemente para generar un impacto real y transformador en la vida de las personas más vulnerables."
+};
+
+---
+
+<BaseLayout title="Proyectos - MIRES">
+  <!-- Hero Section -->
+       {/* Hero Section */}
+       <HeroSection {...heroData} />
+
+  <!-- Proyectos Grid -->
+  <section class="py-20 bg-lightbg dark:bg-darkbg">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {projects.map((project) => (
+          <a 
+            href={project.href}
+            class="group relative overflow-hidden rounded-2xl bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300"
+          >
+            <div class="aspect-[16/9] overflow-hidden">
+              <img
+                src={project.image}
+                alt={project.title}
+                class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent"></div>
+            </div>
+            
+            <div class="absolute inset-0 flex flex-col justify-end p-6 text-white">
+              <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                <h3 class="text-2xl font-bold mb-2">{project.title}</h3>
+                <p class="text-gray-300 mb-4">{project.subtitle}</p>
+                <p class="text-sm text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  {project.description}
+                </p>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTASection {...ctaData} />
+
+</BaseLayout>
+
+<style>
+  .bg-grid {
+    mask-image: linear-gradient(to bottom, transparent, black);
+    background-size: 40px 40px;
+    background-image: 
+      linear-gradient(to right, rgb(255 255 255 / 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 1s ease-out forwards;
+  }
+</style>

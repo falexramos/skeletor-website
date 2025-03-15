@@ -1,0 +1,52 @@
+---
+// src/components/TestimonialCard.astro
+interface Props {
+  name: string;
+  text: string;
+  image?: string;
+  role?: string;
+}
+
+const { name, text, image, role = "Voluntario" } = Astro.props;
+---
+
+<div class="bg-lightbg dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+  <div class="flex flex-col h-full">
+    <div class="flex items-center mb-4">
+      <div class="flex-shrink-0">
+        {image ? (
+          <img
+            src={image}
+            alt={name}
+            class="w-16 h-16 rounded-full object-cover border-2 border-primary"
+            loading="lazy"
+          />
+        ) : (
+          <div class="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white text-xl font-bold">
+            {name.charAt(0)}
+          </div>
+        )}
+      </div>
+      <div class="ml-4">
+        <p class="text-primary dark:text-primary-400 font-medium">
+          {name}
+        </p>
+        <p class="text-sm text-gray-500 dark:text-gray-400">
+          {role}
+        </p>
+      </div>
+    </div>
+
+    <div class="flex-grow">
+      <p class="text-gray-600 dark:text-gray-300 italic">
+        "{text}"
+      </p>
+    </div>
+
+    <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+      <svg class="w-8 h-8 text-primary/20" fill="currentColor" viewBox="0 0 32 32">
+        <path d="M10 8c-2.21 0-4 1.79-4 4v12h8v-8h-4v-4c0-1.1.9-2 2-2h2V8h-4zm12 0c-2.21 0-4 1.79-4 4v12h8v-8h-4v-4c0-1.1.9-2 2-2h2V8h-4z"/>
+      </svg>
+    </div>
+  </div>
+</div>

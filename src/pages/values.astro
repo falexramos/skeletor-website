@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import IntroSection from '../components/IntroSection.astro';
+import ValuesGrid from '../components/ValuesGrid.astro';
+import CTASection from '../components/CTASection.astro';
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+const currentLang = Astro.currentLocale || "es";
+
+const values = [
+  {
+    id: 1,
+    title: "Dignidad Humana y Fe en la Restauración",
+    reference: "Art. 10 CE",
+    description: "Cada persona tiene un valor inalienable. Nos comprometemos a tratar a cada individuo con el respeto y la dignidad que merece, proporcionando no solo apoyo material, sino también acompañamiento emocional y espiritual."
+  },
+  {
+    id: 2,
+    title: "Igualdad y Justicia Social",
+    reference: "Art. 14 CE",
+    description: "Rechazamos cualquier forma de discriminación y trabajamos para garantizar oportunidades equitativas para todos, sin importar su género, origen, condición social o situación migratoria. En MIRES, todos tienen derecho a un futuro digno."
+  },
+  {
+    id: 3,
+    title: "Solidaridad y Responsabilidad Compartida",
+    reference: "Art. 9.2 CE",
+    description: "Creemos en una sociedad unida por la ayuda mutua. Nuestra labor no solo atiende necesidades inmediatas, sino que empodera a las personas para que se conviertan en agentes de cambio dentro de sus comunidades."
+  },
+  {
+    id: 4,
+    title: "Protección de la Familia y el Tejido Social",
+    reference: "Art. 39 CE",
+    description: "La familia es la base de la sociedad y merece protección. Trabajamos para apoyar a familias en riesgo de exclusión, víctimas de violencia y trata de personas, asegurando que tengan acceso a un entorno seguro y estable."
+  },
+  {
+    id: 5,
+    title: "Derecho a la Asistencia Social y Económica",
+    reference: "Art. 41 CE",
+    description: "Proporcionamos apoyo directo a quienes más lo necesitan, incluyendo asistencia psicosocial, acompañamiento en la reinserción laboral y recursos básicos para que cada persona tenga la oportunidad de reconstruir su vida."
+  },
+  {
+    id: 6,
+    title: "Integridad y Protección Contra la Violencia",
+    reference: "Art. 15 CE",
+    description: "Somos defensores inquebrantables de la integridad física y moral de cada persona. Luchamos contra la violencia y la trata de personas, con la visión de crear refugios y programas de apoyo para las víctimas."
+  },
+  {
+    id: 7,
+    title: "Sostenibilidad y Economía Circular",
+    reference: "",
+    description: "Nuestra labor promueve la reutilización y el aprovechamiento responsable de recursos, alineándonos con el modelo de economía circular para reducir el desperdicio y generar impacto positivo en el medio ambiente y la sociedad."
+  },
+  {
+    id: 8,
+    title: "Fe y Amor en Acción",
+    reference: "",
+    description: "Inspirados en la Palabra de Dios, creemos en el poder del servicio con amor, misericordia y justicia. Cada acto de ayuda es también un mensaje de esperanza para quienes atraviesan momentos de profunda vulnerabilidad."
+  }
+];
+
+// Datos para HeroSection
+const heroData = {
+  title: "Nuestros Valores",
+  description: "Inspirados en la Fe y la Constitución Española"
+};
+
+// Datos para IntroSection
+const introText = "En MIRES, nuestros valores no son solo principios rectores, sino el fundamento de cada acción que realizamos. Nuestra labor se basa en la Palabra de Dios, que nos llama a servir con amor y justicia, y en los valores y derechos constitucionales de España, que garantizan la dignidad, la igualdad y la solidaridad para todos.";
+
+// Datos para CTASection
+const ctaData = {
+  title: "Únete a nuestra misión",
+  description: "En MIRES, estos valores no son solo palabras. Son nuestra forma de vivir, servir y transformar vidas.",
+  primaryButton: {
+    text: "Contacta con Nosotros",
+    href: getRelativeLocaleUrl(currentLang, "contact")
+  },
+  secondaryButton: {
+    text: "Apoya Nuestra Labor",
+    href: getRelativeLocaleUrl(currentLang, "donate")
+  }
+};
+---
+<BaseLayout title="Nuestros Valores - MIRES">
+  <HeroSection {...heroData} />
+  <IntroSection text={introText} />
+  <ValuesGrid values={values} />
+  <CTASection {...ctaData} />
+</BaseLayout>

@@ -1,0 +1,28 @@
+---
+// src/components/footer/SocialLinks.astro
+interface SocialLink {
+  platform: string;
+  url: string;
+  icon: string;
+}
+
+interface Props {
+  links: SocialLink[];
+}
+
+const { links } = Astro.props;
+---
+
+<div class="flex space-x-4">
+  {links.map(link => (
+    <a 
+      href={link.url}
+      class="text-white hover:text-secondary transition duration-300"
+      aria-label={link.platform}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <Fragment set:html={link.icon} />
+    </a>
+  ))}
+</div>

@@ -1,0 +1,50 @@
+---
+interface Props {
+  title: string;
+  mainDescription: string;
+  organizationDetails: {
+    location: string;
+    nif: string;
+  };
+}
+
+const { title, mainDescription, organizationDetails } = Astro.props;
+---
+
+<section class="py-16 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
+  <div class="container mx-auto px-4 max-w-4xl">
+    <h1 
+      class="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-8 
+             text-center animate-fade-in"
+    >
+      {title}
+    </h1>
+    
+    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 
+                transition-all duration-300 hover:shadow-2xl
+                border border-gray-100 dark:border-gray-700">
+      <p class="text-lg text-gray-700 dark:text-gray-200 mb-6 leading-relaxed">
+        {mainDescription}
+      </p>
+      
+      <div class="flex flex-wrap gap-4 text-sm text-gray-600 dark:text-gray-400">
+        <span class="flex items-center">
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          {organizationDetails.location}
+        </span>
+        <span class="flex items-center">
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          NIF: {organizationDetails.nif}
+        </span>
+      </div>
+    </div>
+  </div>
+</section>

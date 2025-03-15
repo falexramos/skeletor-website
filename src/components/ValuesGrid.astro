@@ -1,0 +1,44 @@
+---
+// src/components/ValuesGrid.astro
+interface Value {
+  id: number;
+  title: string;
+  reference?: string;
+  description: string;
+}
+
+interface Props {
+  values: Value[];
+}
+
+const { values } = Astro.props;
+---
+
+<section class="py-16 bg-white dark:bg-gray-900">
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {values.map((value) => (
+        <div class="bg-lightbg dark:bg-gray-800 rounded-2xl p-8 transition-all duration-300 
+                    hover:shadow-xl dark:hover:shadow-gray-900/50 border border-transparent 
+                    dark:border-gray-700/30">
+          <div class="space-y-4">
+            <div class="border-b-2 border-primary dark:border-primary/30 pb-4">
+              <h3 class="text-xl font-bold text-primary dark:text-primary-400">
+                {value.title}
+              </h3>
+              {value.reference && (
+                <span class="inline-block mt-2 px-3 py-1 bg-secondary dark:bg-secondary/20 
+                           text-white dark:text-secondary-400 text-sm font-medium rounded-full">
+                  {value.reference}
+                </span>
+              )}
+            </div>
+            <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+              {value.description}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

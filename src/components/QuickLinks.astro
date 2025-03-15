@@ -1,0 +1,23 @@
+---
+// src/components/footer/QuickLinks.astro
+interface Link {
+  text: string;
+  href: string;
+}
+
+interface Props {
+  links: Link[];
+}
+
+const { links } = Astro.props;
+---
+
+<ul class="space-y-2 text-white/80">
+  {links.map(link => (
+    <li>
+      <a href={link.href} class="hover:text-secondary transition duration-300">
+        {link.text}
+      </a>
+    </li>
+  ))}
+</ul>

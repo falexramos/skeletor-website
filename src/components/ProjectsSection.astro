@@ -1,0 +1,76 @@
+---
+import ProjectCard from './ProjectCard.astro';
+
+interface Project {
+  title: string;
+  description: string;
+  href: string;
+  image?: string; // Optional image for each project
+}
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  projects: Project[];
+}
+
+const { title, subtitle, projects } = Astro.props;
+---
+
+<section class="py-20 bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
+  <div class="container mx-auto px-4">
+    <div class="max-w-3xl mx-auto text-center mb-16">
+      <h2 
+        class="text-4xl font-bold text-gray-800 dark:text-white mb-4 
+               transition-colors duration-300 animate-fade-in"
+      >
+        {title}
+      </h2>
+      {subtitle && (
+        <p class="text-lg text-gray-600 dark:text-gray-300 transition-colors duration-300">
+          {subtitle}
+        </p>
+      )}
+    </div>
+
+    <div 
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 
+             animate-fade-in-up"
+    >
+      {projects.map((project, index) => (
+        <div 
+          class="transform hover:scale-105 transition-all duration-300"
+          style={`animation-delay: ${index * 150}ms`}
+        >
+          <ProjectCard {...project} />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 1s ease-out forwards;
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 1s ease-out forwards;
+  }
+</style>

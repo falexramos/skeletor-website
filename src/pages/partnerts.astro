@@ -1,0 +1,56 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Partners from "../components/Partners.astro";
+import HeroSection from "@/components/HeroSection.astro";
+import CollaborationSection from "@/components/CollaborationSection.astro";
+import ActionGrid from "@/components/ActionGrid.astro";
+
+const currentLang = Astro.currentLocale || "es";
+
+const heroData = {
+  title: "Organizaciones que Colaboran con Nosotros",
+  description: "",
+};
+
+const collaborationData = [
+  {
+    title: "Banco Santander",
+    description: "Por su apoyo en la reactivación económica y la reconstrucción de comercios y hogares afectados por la DANA. Su compromiso con la inclusión social y el desarrollo sostenible nos permite devolver la esperanza a cientos de familias y pequeños emprendedores."
+  },
+  {
+    title: "Hambre Cero",
+    description: "Por su colaboración en la lucha contra la inseguridad alimentaria. Gracias a su apoyo, miles de familias en situación de vulnerabilidad han recibido alimentos y recursos esenciales para su bienestar."
+  },
+  {
+    title: "Supermercados Más y Más – Grupo Fornes",
+    description: "Por su valiosa contribución en la donación de alimentos, permitiéndonos llegar a más personas y garantizar el acceso a una alimentación digna para quienes más lo necesitan."
+  }
+];
+
+const endMessage = {
+  title: "Colaboración y Alianzas",
+  description: "Nuestra labor se enriquece a través de alianzas estratégicas con otras ONGs, empresas y organismos públicos, ampliando nuestro impacto y generando soluciones sostenibles.",
+  buttonText: "Colabora con nosotros",
+  buttonHref: "/contact"
+};
+---
+
+<BaseLayout title="Partners - MIRES">
+  <!-- Hero Section -->
+  <HeroSection {...heroData} />
+
+  <!-- Partners Component -->
+  <Partners
+    title="Agradecemos especialmente a"
+    subtitle="Organizaciones que hacen posible nuestra labor"
+  />
+
+  <!-- Detalles de Partners -->
+  <ActionGrid 
+    title=""
+    actions={collaborationData}
+  />
+
+  <CollaborationSection {...endMessage} />
+
+</BaseLayout>

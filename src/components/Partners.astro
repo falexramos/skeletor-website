@@ -1,0 +1,51 @@
+---
+///Partners.astro
+interface Props {
+  title: string;
+  subtitle: string;
+}
+
+const { title, subtitle } = Astro.props;
+
+const partners = [
+  {
+    name: "Banco Santander",
+    logo: "/assets/img/partner/mires_santander_partner.jpg"
+  },
+  {
+    name: "HAMBRECERO",
+    logo: "https://hambrecero.es/wp-content/uploads/2024/01/logo-hc_24-white.png"
+  },
+  {
+    name: "Consum",
+    logo: "https://www.consum.es/wp-content/uploads/2025/01/Logo-cast-120.png"
+  }
+];
+---
+
+<section class="py-16 bg-lightbg dark:bg-darkbg">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold text-primary mb-3">
+        {title}
+      </h2>
+      <p class="text-secondary">
+        {subtitle}
+      </p>
+    </div>
+    
+    <div class="flex flex-wrap justify-center gap-x-12 gap-y-8">
+      {partners.map(partner => (
+        <div class="w-[200px] h-[100px] bg-white dark:bg-darkbg rounded-xl 
+                    flex items-center justify-center p-6 
+                    border border-secondary/20 dark:border-secondary/10">
+          <img
+            src={partner.logo}
+            alt={partner.name}
+            class="max-w-full max-h-full object-contain"
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

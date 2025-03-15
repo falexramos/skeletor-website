@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getRelativeLocaleUrl } from "astro:i18n";
+import HeroSection from '../components/HeroSection.astro';
+import DonationCard from '../components/DonationCard.astro';
+import CTASection from '@/components/CTASection.astro';
+
+const currentLang = Astro.currentLocale || "es";
+
+const heroData = {
+  title: "¿Cómo Puedes Ayudar?"
+};
+
+const donationCards = [
+  {
+    title: "Empresas y Comercios",
+    description: "Únete como patrocinador o colabora donando productos y servicios.",
+    whatsapp: {
+      number: "34722630688",
+      text: "Contactar por WhatsApp"
+    }
+  },
+  {
+    title: "Voluntariado",
+    description: "Tu tiempo y habilidades pueden marcar la diferencia. Únete a nuestra red de voluntariado, ya sea como voluntario regular apoyando en nuestras actividades diarias o como voluntario profesional aportando tu experiencia en áreas clave como salud, educación, logística o comunicación. ¡Cada talento suma!",
+    whatsapp: {
+      number: "34722630688",
+      text: "Contactar por WhatsApp"
+    }
+  },
+  {
+    title: "Donaciones",
+    description: "Cada aporte cuenta. Contribuye de manera mensual para garantizar un impacto sostenible o realiza una donación puntual y apoya a quienes más lo necesitan en momentos críticos.",
+    bankDetails: {
+      title: "Donaciones en Efectivo",
+      organization: "Misión Integral Rocío del Espíritu Santo",
+      iban: "ES33 0049 0008 7222 1710 9530"
+    }
+  }
+];
+
+const ctaData = {
+  title: "Súmate a MIRES y transforma el futuro",
+  description: "Tu apoyo puede cambiar vidas. ¡Actúa hoy!",
+  primaryButton: {
+    text: "Haz tu donación",
+    href: "#donar"
+  },
+  secondaryButton: {
+    text: "Únete como voluntario",
+    href: "#voluntariado"
+  }
+};
+
+---
+<BaseLayout title="Donar - MIRES">
+  <HeroSection {...heroData} />
+  
+  <section class="py-16 bg-lightbg dark:bg-darkbg">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto space-y-12">
+        {donationCards.map(card => (
+          <DonationCard {...card} />
+        ))}
+      </div>
+      
+    </div>
+  </section>
+  <CTASection {...ctaData} />
+</BaseLayout>

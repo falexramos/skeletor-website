@@ -1,80 +1,117 @@
 ---
-// index.astro
 import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import ProjectsSection from '../components/ProjectsSection.astro';
+import ImpactDataSection from '../components/ImpactDataSection.astro';
+import CTASection from '../components/CTASection.astro';
+import Partners from '@/components/Partners.astro';
+
+const heroData = {
+  title: "Transformamos la solidaridad en acción",
+  description: "Llevamos ayuda a quienes más lo necesitan, impulsamos oportunidades y creamos soluciones sostenibles.",
+  videoSrc: "/assets/videos/mires_video_ayuda.mp4",
+  primaryButton: {
+    text: "Haz tu donación",
+    href: "#donar"
+  },
+  secondaryButton: {
+    text: "Únete como voluntario",
+    href: "#voluntariado"
+  }
+};
+
+const missionVisionData = {
+  mission: {
+    title: "Misión",
+    description: "Promover el desarrollo social, la solidaridad y el bienestar de las personas en situación de vulnerabilidad, brindando apoyo integral, inclusión y oportunidades que les permitan reconstruir sus vidas con dignidad y autonomía."
+  },
+  vision: {
+    title: "Visión",
+    description: "Ser una organización de referencia en España y el mundo, impulsando un modelo de intervención eficiente, sostenible e innovador que transforme vidas, fortalezca comunidades y promueva una sociedad más inclusiva, resiliente y solidaria."
+  }
+};
+
+const projectsData = {
+  title: "Nuestros Proyectos",
+  projects: [
+    {
+      title: "Proyecto DANA",
+      description: "Centro logístico de donaciones para emergencias y catástrofes.",
+      href: "#dana"
+    },
+    {
+      title: "Coschooling",
+      description: "Espacio de educación alternativa y desarrollo comunitario.",
+      href: "#coschooling"
+    },
+    {
+      title: "Diversamente Hábil",
+      description: "Centro de ocio y desarrollo para personas neurodivergentes.",
+      href: "#diversamente-habil"
+    },
+    {
+      title: "Alimentando Esperanza",
+      description: "Apoyo a familias en situación de vulnerabilidad.",
+      href: "#alimentando-esperanza"
+    }
+  ]
+};
+
+const impactData = {
+  title: "¿Por qué es necesario ayudar?",
+  data: [
+    {
+      value: "4.5M",
+      description: "Personas en riesgo de pobreza en España"
+    },
+    {
+      value: "30%",
+      description: "Niños en hogares con dificultades económicas"
+    },
+    {
+      value: "1,800",
+      description: "Pallets de donaciones gestionadas"
+    }
+  ],
+  footerText: "No podemos cambiar el mundo entero, pero sí el mundo de muchas personas."
+};
+
+const ctaData = {
+  title: "Súmate a MIRES y transforma el futuro",
+  description: "Tu apoyo puede cambiar vidas. ¡Actúa hoy!",
+  primaryButton: {
+    text: "Haz tu donación",
+    href: "#donar"
+  },
+  secondaryButton: {
+    text: "Únete como voluntario",
+    href: "#voluntariado"
+  }
+};
+
+const partners = [
+  {
+    name: "Banco Santander",
+    logo: "/assets/img/partner/mires_santander_partner.jpg",
+    url: "https://www.santander.com"
+  },
+  {
+    name: "Mercadona",
+    logo: "/assets/img/partner/mires_santander_partner.jpg",
+    url: "https://www.mercadona.es"
+  },
+
+];
 ---
 
-<BaseLayout title="Inicio">
-  <main class="font-sans text-slate-800 dark:text-slate-200 bg-lightbg dark:bg-darkbg min-h-screen">
-    <!-- Hero Section con Video de Fondo -->
-    <section class="relative h-screen overflow-hidden">
-      <video
-        autoplay
-        muted
-        loop
-        playsinline
-        class="absolute top-0 left-0 w-full h-full object-cover z-0"
-      >
-        <source src="/assets/videos/mires_video_ayuda.mp4" type="video/mp4" />
-        Tu navegador no soporta videos HTML5.
-      </video>
-      <div class="absolute inset-0 bg-black opacity-40 z-10"></div>
-      <div class="relative z-20 flex flex-col justify-center items-center h-full text-center text-white px-4 animate-fade-in">
-        <h1 class="text-5xl md:text-6xl font-bold mb-4">Ayudando a quienes más lo necesitan</h1>
-        <p class="text-lg md:text-xl mb-8">Juntos podemos hacer una diferencia en la vida de miles de personas vulnerables.</p>
-        <a
-          href="#donar"
-          class="px-6 py-3 bg-secondary text-primary font-semibold rounded-lg shadow-md hover:bg-primary transition duration-300 animate-slide-up"
-        >
-          Donar ahora
-        </a>
-      </div>
-    </section>
 
-    <!-- Sección de Misión -->
-    <section class="py-16 bg-primary text-white">
-      <div class="container mx-auto px-4">
-        <h2 class="text-4xl font-bold mb-8 text-center">Nuestra Misión</h2>
-        <p class="text-lg text-center">
-          Nuestra organización se dedica a entregar alimentos y apoyo a comunidades vulnerables, promoviendo un futuro más justo y equitativo para todos.
-        </p>
-      </div>
-    </section>
-
-    <!-- Sección de Impacto -->
-    <section class="py-16 bg-lightbg dark:bg-darkbg">
-      <div class="container mx-auto px-4">
-        <h2 class="text-4xl font-bold mb-8 text-center text-primary dark:text-secondary">Nuestro Impacto</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div class="text-center animate-slide-up">
-            <h3 class="text-3xl font-bold text-secondary">+10,000</h3>
-            <p class="text-slate-600 dark:text-slate-300">Personas ayudadas</p>
-          </div>
-          <div class="text-center animate-slide-up">
-            <h3 class="text-3xl font-bold text-secondary">+500</h3>
-            <p class="text-slate-600 dark:text-slate-300">Toneladas de alimentos entregados</p>
-          </div>
-          <div class="text-center animate-slide-up">
-            <h3 class="text-3xl font-bold text-secondary">+20</h3>
-            <p class="text-slate-600 dark:text-slate-300">Ciudades impactadas</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Sección de Llamado a la Acción -->
-    <section id="donar" class="py-16 bg-secondary text-primary">
-      <div class="container mx-auto px-4 text-center">
-        <h2 class="text-4xl font-bold mb-8">Únete a nuestra causa</h2>
-        <p class="text-lg mb-8">
-          Con tu donación, podemos seguir transformando vidas. Cada pequeño gesto cuenta.
-        </p>
-        <a
-          href="/donar"
-          class="px-6 py-3 bg-primary text-white font-semibold rounded-lg shadow-md hover:bg-secondary transition duration-300 animate-slide-up"
-        >
-          Haz tu donación hoy
-        </a>
-      </div>
-    </section>
-  </main>
+<BaseLayout>
+  <HeroSection {...heroData} />
+  <Partners
+  title="Empresas Colaboradoras"
+  subtitle="Organizaciones que confían en nuestra labor"
+/>
+  <ProjectsSection {...projectsData} />
+  <ImpactDataSection {...impactData} />
+  <CTASection {...ctaData} />
 </BaseLayout>

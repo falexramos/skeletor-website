@@ -1,0 +1,44 @@
+---
+// src/components/ActionGrid.astro
+interface Action {
+  title: string;
+  description: string;
+}
+
+interface Props {
+  title: string;
+  actions: Action[];
+}
+
+const { title, actions } = Astro.props;
+---
+
+<section class="py-16 bg-white dark:bg-gray-900">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">
+      {title}
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {actions.map((action) => (
+        <div class="bg-gray-50 dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">
+            {action.title}
+          </h3>
+          <p class="text-gray-600 dark:text-gray-300">
+            {action.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid > div {
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .grid > div:hover {
+    transform: translateY(-5px);
+  }
+</style>

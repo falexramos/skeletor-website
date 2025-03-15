@@ -1,0 +1,44 @@
+---
+interface Props {
+  name: string;
+  title: string;
+  story: string;
+  image?: {
+    src: string;
+    alt: string;
+  };
+}
+
+const { name, title, story, image } = Astro.props;
+---
+
+<section class="py-16 bg-white dark:bg-gray-900">
+  <div class="container mx-auto px-4 max-w-5xl">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      {image && (
+        <div class="relative h-[400px] rounded-2xl overflow-hidden shadow-xl">
+          <img
+            src={image.src}
+            alt={image.alt}
+            class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+        </div>
+      )}
+      
+      <div class={`${image ? '' : 'md:col-span-2'}`}>
+        <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-4">
+          {name}
+        </h2>
+        <h3 class="text-xl text-primary dark:text-primary-400 mb-6">
+          {title}
+        </h3>
+        <div class="prose dark:prose-invert max-w-none">
+          <blockquote class="text-lg text-gray-700 dark:text-gray-300 italic leading-relaxed text-justify">
+            {story}
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

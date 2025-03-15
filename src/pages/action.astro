@@ -1,0 +1,61 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import ActionGrid from '../components/ActionGrid.astro';
+import CollaborationSection from '../components/CollaborationSection.astro';
+import { useTranslations } from "@/i18n/utils";
+import CTASection from '@/components/CTASection.astro';
+
+
+const currentLang = (Astro.currentLocale === "es" || Astro.currentLocale === "en") ? Astro.currentLocale : "es";
+const t = useTranslations(currentLang);
+
+const actions = [
+  {
+    title: "Asistencia a personas sin hogar y familias",
+    description: "Proporcionamos alimentos, ropa, artículos básicos y acompañamiento psicosocial.",
+  },
+  {
+    title: "Apoyo a personas neuro divergentes",
+    description: "Creamos espacios seguros, actividades adaptadas y programas de integración.",
+  },
+  {
+    title: "Respuesta ante crisis y desastres",
+    description: "Movilizamos recursos y asistencia inmediata para comunidades afectadas.",
+  },
+  {
+    title: "Reactivación económica y social",
+    description: "Impulsamos iniciativas de empleo, emprendimiento y desarrollo comunitario.",
+  },
+  {
+    title: "Fomento de la solidaridad",
+    description: "Promovemos la economía circular, el voluntariado y la cooperación internacional.",
+  }
+];
+// Datos para HeroSection
+const heroData = {
+  title: "Qué Hacemos",
+  description: "En MIRES, proporcionamos asistencia integral a personas en situación de vulnerabilidad, incluyendo personas sin hogar, familias de bajos recursos, comunidades afectadas por crisis sociales o desastres naturales y personas neurodivergentes."
+};
+
+// Datos para CollaborationSection
+const collaborationData = {
+  title: "Colaboración y Alianzas",
+  description: "Nuestra labor se enriquece a través de alianzas estratégicas con otras ONGs, empresas y organismos públicos, ampliando nuestro impacto y generando soluciones sostenibles.",
+  buttonText: "Colabora con nosotros",
+  buttonHref: "/contact"
+};
+
+
+---
+<BaseLayout>
+  <HeroSection {...heroData} />
+  <ActionGrid 
+    title="Nuestras Acciones Clave"
+    actions={actions}
+  />
+  <CollaborationSection {...collaborationData} />
+
+  
+
+</BaseLayout>
