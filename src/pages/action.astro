@@ -5,6 +5,7 @@ import ActionGrid from '../components/ActionGrid.astro';
 import CollaborationSection from '../components/CollaborationSection.astro';
 import { useTranslations } from "@/i18n/utils";
 import CTASection from '@/components/CTASection.astro';
+import SimpleHeroSection from '@/components/SimpleHeroSection.astro';
 
 
 const currentLang = (Astro.currentLocale === "es" || Astro.currentLocale === "en") ? Astro.currentLocale : "es";
@@ -49,7 +50,7 @@ const collaborationData = {
 
 ---
 <BaseLayout>
-  <HeroSection {...heroData} />
+  <SimpleHeroSection {...heroData} />
   <ActionGrid 
     title="Nuestras Acciones Clave"
     actions={actions}

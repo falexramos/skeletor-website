@@ -1,5 +1,5 @@
 ---
-// src/components/footer/SocialLinks.astro
+// src/components/SocialLinks.astro
 interface SocialLink {
   platform: string;
   url: string;
@@ -17,7 +17,7 @@ const { links } = Astro.props;
   {links.map(link => (
     <a 
       href={link.url}
-      class="text-white hover:text-secondary transition duration-300"
+      class="text-white/80 hover:text-secondary transition-all duration-300 transform hover:scale-110 bg-white/5 hover:bg-white/10 p-2.5 rounded-full"
       aria-label={link.platform}
       target="_blank"
       rel="noopener noreferrer"

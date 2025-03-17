@@ -1,0 +1,81 @@
+---
+interface GalleryImage {
+  src: string;
+  width: number;
+  height: number;
+  alt: string;
+  caption?: string;
+}
+
+interface Props {
+  images: GalleryImage[];
+}
+
+const { images } = Astro.props;
+---
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pswp-gallery" id="gallery">
+  {images.map((image, index) => (
+    <a 
+      href={image.src} 
+      data-pswp-width={image.width} 
+      data-pswp-height={image.height} 
+      class="gallery-item rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group relative"
+      aria-label={image.caption || image.alt}
+    >
+      <img 
+        src={image.src || "/placeholder.svg"} 
+        alt={image.alt} 
+        class="w-full h-72 object-cover transition-transform duration-700 group-hover:scale-105"
+        loading={index < 6 ? "eager" : "lazy"}
+      />
+      {image.caption && (
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+          <p class="text-white p-4">{image.caption}</p>
+        </div>
+      )}
+    </a>
+  ))}
+</div>
+
+<script>
+  import PhotoSwipeLightbox from "photoswipe/lightbox";
+  import "photoswipe/style.css";
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const lightbox = new PhotoSwipeLightbox({
+      gallery: '#gallery',
+      children: '.gallery-item',
+      pswpModule: () => import('photoswipe')
+    });
+    
+    lightbox.init();
+  });
+</script>
+
+<style>
+  /* Estilos adicionales para la galería */
+  .gallery-item {
+    cursor: zoom-in;
+  }
+  
+  /* Animación para las imágenes al cargar la página */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .gallery-item {
+    opacity: 0;
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+  
+  .gallery-item:nth-child(1) { animation-delay: 0.1s; }
+  .gallery-item:nth-child(2) { animation-delay: 0.2s; }
+  .gallery-item:nth-child(3) { animation-delay: 0.3s; }
+  .gallery-item:nth-child(4) { animation-delay: 0.4s; }
+  .gallery-item:nth-child(5) { animation-delay: 0.5s; }
+  .gallery-item:nth-child(6) { animation-delay: 0.6s; }
+  .gallery-item:nth-child(7) { animation-delay: 0.7s; }
+</style>
+

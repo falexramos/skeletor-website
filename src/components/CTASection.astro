@@ -14,23 +14,41 @@ interface Props {
 const { title, description, primaryButton, secondaryButton } = Astro.props;
 ---
 
-<section class="py-20 bg-primary">
-  <div class="container mx-auto px-4 text-center">
-    <h2 class="text-4xl font-bold text-lightbg mb-6">{title}</h2>
-    <p class="text-xl text-lightbg mb-8">{description}</p>
-    <div class="flex flex-col md:flex-row gap-4 justify-center w-full md:w-auto">
-      <a
-        href={primaryButton.href}
-        class="w-full md:w-auto bg-secondary text-lightbg px-8 py-4 md:py-3 rounded-lg hover:bg-primary transition-colors text-lg md:text-base font-medium"
-      >
-        {primaryButton.text}
-      </a>
-      <a
-        href={secondaryButton.href}
-        class="w-full md:w-auto bg-lightbg text-primary px-8 py-4 md:py-3 rounded-lg hover:bg-secondary hover:text-lightbg transition-colors text-lg md:text-base font-medium"
-      >
-        {secondaryButton.text}
-      </a>
+<section class="py-20 bg-primary dark:bg-darkbg relative overflow-hidden">
+  <!-- Fondo Decorativo -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute top-0 left-0 w-64 h-64 bg-secondary/20 rounded-full -translate-x-1/3 -translate-y-1/3 blur-3xl"></div>
+    <div class="absolute bottom-0 right-0 w-96 h-96 bg-secondary/20 rounded-full translate-x-1/3 translate-y-1/3 blur-3xl"></div>
+    <div class="absolute top-1/2 left-1/2 w-72 h-72 bg-white/5 rounded-full -translate-x-1/2 -translate-y-1/2 blur-2xl"></div>
+  </div>
+
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="max-w-3xl mx-auto text-center">
+      <!-- Título -->
+      <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">{title}</h2>
+      
+      <!-- Descripción -->
+      <p class="text-lg md:text-xl text-white/90 mb-10 leading-relaxed">{description}</p>
+      
+      <!-- Botones -->
+      <div class="flex flex-col sm:flex-row gap-6 justify-center">
+        <!-- Botón Primario -->
+        <a 
+          href={primaryButton.href} 
+          class="px-8 py-4 bg-white text-primary rounded-full text-lg font-medium hover:bg-white/90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+        >
+          {primaryButton.text}
+        </a>
+        
+        <!-- Botón Secundario -->
+        <a 
+          href={secondaryButton.href} 
+          class="px-8 py-4 bg-transparent text-white border-2 border-white/80 rounded-full text-lg font-medium hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-1"
+        >
+          {secondaryButton.text}
+        </a>
+      </div>
     </div>
   </div>
 </section>
+

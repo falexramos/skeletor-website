@@ -1,10 +1,13 @@
 ---
+//src\pages\index.astro
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroSection from '../components/HeroSection.astro';
 import ProjectsSection from '../components/ProjectsSection.astro';
 import ImpactDataSection from '../components/ImpactDataSection.astro';
 import CTASection from '../components/CTASection.astro';
 import Partners from '@/components/Partners.astro';
+import MissionVisionSection from '../components/MissionVisionSection.astro';
+
 
 const heroData = {
   title: "Transformamos la solidaridad en acción",
@@ -12,11 +15,11 @@ const heroData = {
   videoSrc: "/assets/videos/mires_video_ayuda.mp4",
   primaryButton: {
     text: "Haz tu donación",
-    href: "#donar"
+    href: "/donate"
   },
   secondaryButton: {
     text: "Únete como voluntario",
-    href: "#voluntariado"
+    href: "/donate"
   }
 };
 
@@ -37,22 +40,26 @@ const projectsData = {
     {
       title: "Proyecto DANA",
       description: "Centro logístico de donaciones para emergencias y catástrofes.",
-      href: "#dana"
+      href: "/projects/dana",
+      image:"/assets/img/projects/mires_proyecto_dana.jpg?height=300&width=400"
     },
     {
       title: "Coschooling",
       description: "Espacio de educación alternativa y desarrollo comunitario.",
-      href: "#coschooling"
+      href: "/projects/coschooling",
+      image:"/assets/img/projects/mires_proyecto_dana.jpg?height=300&width=400"
     },
     {
       title: "Diversamente Hábil",
       description: "Centro de ocio y desarrollo para personas neurodivergentes.",
-      href: "#diversamente-habil"
+      href: "/projects/diversamente",
+      image:"/assets/img/projects/mires_proyecto_dana.jpg?height=300&width=400"
     },
     {
       title: "Alimentando Esperanza",
       description: "Apoyo a familias en situación de vulnerabilidad.",
-      href: "#alimentando-esperanza"
+      href: "/projects/alimentando",
+      image:"/assets/img/projects/mires_proyecto_dana.jpg?height=300&width=400"
     }
   ]
 };
@@ -81,11 +88,11 @@ const ctaData = {
   description: "Tu apoyo puede cambiar vidas. ¡Actúa hoy!",
   primaryButton: {
     text: "Haz tu donación",
-    href: "#donar"
+    href: "/donate"
   },
   secondaryButton: {
     text: "Únete como voluntario",
-    href: "#voluntariado"
+    href: "/contact"
   }
 };
 
@@ -107,11 +114,14 @@ const partners = [
 
 <BaseLayout>
   <HeroSection {...heroData} />
+  <!-- <MissionVisionSection {...missionVisionData} /> -->
+  <ProjectsSection {...projectsData} />
+  <ImpactDataSection {...impactData} />
+  
+  
   <Partners
   title="Empresas Colaboradoras"
   subtitle="Organizaciones que confían en nuestra labor"
-/>
-  <ProjectsSection {...projectsData} />
-  <ImpactDataSection {...impactData} />
+/>  
   <CTASection {...ctaData} />
 </BaseLayout>

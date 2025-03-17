@@ -1,5 +1,4 @@
 ---
-///Partners.astro
 interface Props {
   title: string;
   subtitle: string;
@@ -24,25 +23,24 @@ const partners = [
 ---
 
 <section class="py-16 bg-lightbg dark:bg-darkbg">
-  <div class="container mx-auto px-4">
+  <div class="container mx-auto px-6">
+    <!-- Título y Subtítulo -->
     <div class="text-center mb-12">
-      <h2 class="text-3xl font-bold text-primary mb-3">
-        {title}
-      </h2>
-      <p class="text-secondary">
-        {subtitle}
-      </p>
+      <h2 class="text-3xl font-bold text-primary dark:text-lightbg mb-2">{title}</h2>
+      <p class="text-lg text-secondary dark:text-gray-300">{subtitle}</p>
     </div>
-    
-    <div class="flex flex-wrap justify-center gap-x-12 gap-y-8">
-      {partners.map(partner => (
-        <div class="w-[200px] h-[100px] bg-white dark:bg-darkbg rounded-xl 
-                    flex items-center justify-center p-6 
-                    border border-secondary/20 dark:border-secondary/10">
-          <img
-            src={partner.logo}
-            alt={partner.name}
-            class="max-w-full max-h-full object-contain"
+
+    <!-- Contenedor de Logos -->
+    <div class="flex flex-wrap justify-center items-center gap-8">
+      {partners.map((partner, index) => (
+        <div 
+          class="w-[180px] h-[100px] bg-gray-800 rounded-xl shadow-md p-4 flex items-center justify-center transform transition-all duration-300 hover:scale-105 hover:shadow-lg"
+          style={`transition-delay: ${index * 50}ms`}
+        >
+          <img 
+            src={partner.logo || "/placeholder.svg"} 
+            alt={partner.name} 
+            class="max-w-full max-h-full object-contain transition-opacity duration-300 group-hover:opacity-90"
           />
         </div>
       ))}

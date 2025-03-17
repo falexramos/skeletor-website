@@ -13,27 +13,50 @@ interface Props {
 const { title, data, footerText } = Astro.props;
 ---
 
-<section class="py-20 bg-lightbg">
-  <div class="container mx-auto px-4">
-    <h2 class="text-4xl font-bold text-primary text-center mb-12">{title}</h2>
+<section class="py-24 bg-primary relative overflow-hidden">
+  <!-- Contenido Principal -->
+  <div class="container mx-auto px-6 relative z-10">
+    <!-- Título -->
+    <h2 class="text-5xl font-bold text-lightbg text-center mb-16 animate-fade-in">{title}</h2>
+
+    <!-- Tarjetas de Impacto -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      {
-        data.map((item) => (
-          <div class="text-center">
-            <p class="text-6xl font-bold text-secondary">{item.value}</p>
-            <p class="text-xl text-primary">{item.description}</p>
-          </div>
-        ))
-      }
-    </div>
-    {
-      
-        <div class="text-center mt-8">
-          <span class="text-lg text-primary dark:text-secondary">
-            {footerText}
-          </span>
+      {data.map((item, index) => (
+        <div 
+          class="relative text-center bg-white/10 dark:bg-gray-800/10 backdrop-blur-sm rounded-3xl p-8 shadow-lg transform transition-all duration-500 hover:scale-105 group"
+          style={`transition-delay: ${index * 100}ms`}
+        >
+          <!-- Valor -->
+          <p class="text-7xl font-bold text-secondary  mb-4 group-hover:text-secondary transition-colors duration-300">
+            {item.value}
+          </p>
+          <!-- Descripción -->
+          <p class="text-xl text-lightbg/90 group-hover:text-lightbg transition-colors duration-300">
+            {item.description}
+          </p>
+          <!-- Línea Decorativa -->
+          <div class="absolute bottom-0 left-1/2 w-16 h-1 bg-secondary transform -translate-x-1/2 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
         </div>
-      
-    }
+      ))}
+    </div>
+
+    <!-- Texto del Pie -->
+    <div class="text-center mt-12">
+      <p class="text-2xl text-lightbg/90 italic font-light relative before:absolute before:inset-x-0 before:bottom-0 before:h-0.5 before:bg-secondary/50 before:scale-x-0 before:transition-transform before:duration-300 hover:before:scale-x-100">
+        {footerText}
+      </p>
+    </div>
   </div>
 </section>
+
+<style>
+  /* Animaciones */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  .animate-fade-in {
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+  }
+</style>

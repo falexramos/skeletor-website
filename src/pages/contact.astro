@@ -62,7 +62,7 @@ const contactInfo = [
             <div class={`
               flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center
               ${item.type === 'whatsapp' ? 'bg-[#25D366]/10 text-[#25D366]' : 
-                item.type === 'phone' ? 'bg-primary/10 text-primary' :
+                item.type === 'phone' ? 'bg-primary/10 dark:bg-white/70 text-primary' :
                 'bg-secondary/10 text-secondary'}
             `}>
               <Fragment set:html={item.icon} />
@@ -74,7 +74,7 @@ const contactInfo = [
               <p class={`
                 text-base
                 ${item.type === 'whatsapp' ? 'text-[#25D366]' : 
-                  item.type === 'phone' ? 'text-primary' :
+                  item.type === 'phone' ? 'text-primary dark:text-white' :
                   'text-secondary'}
               `}>
                 {item.text}

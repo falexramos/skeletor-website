@@ -10,7 +10,7 @@ export const labels = {
     "nav.nosotros": "Quienes somos",
     "nav.values": "Valores",
     "nav.projects": "Proyectos",
-    "nav.team": "team",
+    "nav.team": "Equipo",
     "nav.contact": "Contacto",
     "nav.action": "Que Hacemos",
     "nav.donate": "Donaciones",

@@ -2,6 +2,7 @@
 import HeroSection from "@/components/HeroSection.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import "photoswipe/style.css";
+import SimpleHeroSection from "@/components/SimpleHeroSection.astro";
 
 // Definir las categorías de imágenes
 // Definir las categorías con imágenes de portada
@@ -124,7 +125,7 @@ const heroData = {
 
 <BaseLayout title="Galería - MIRES">
   <!-- Hero Section -->
-  <HeroSection {...heroData} />
+  <SimpleHeroSection {...heroData} />
 
   <!-- Cuadrícula de Categorías -->
   <section class="py-16 bg-lightbg dark:bg-darkbg">

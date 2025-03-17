@@ -4,7 +4,8 @@ import FounderStory from '../components/FounderStory.astro';
 import MissionVisionSection from '../components/MissionVisionSection.astro';
 import CTASection from '@/components/CTASection.astro';
 import NetworkSection from '@/components/NetworkSection.astro';
-import HeroSection from '@/components/HeroSection.astro';
+import SimpleHeroSection from '@/components/SimpleHeroSection.astro';
+import HeroSection from '../components/HeroSection.astro';
 
 const heroData = {
   title: "¿Quiénes Somos?",
@@ -48,29 +49,29 @@ const ctaData = {
   },
   secondaryButton: {
     text: "Sé Voluntario",
-    href: "/volunteer"
+    href: "/contact"
   }
 };
 
 ---
 
 <BaseLayout title="Sobre Nosotros - MIRES">
-  <main class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+  
     {/* Hero Section */}
-    <HeroSection {...heroData} />
+    <SimpleHeroSection {...heroData} />
 
     {/* Network Section */}
     <NetworkSection {...networkSection} />
 
     {/* Founder Story */}
-    <FounderStory {...founderData} />
+    <FounderStory {...founderData} />    
 
     {/* Mission and Vision */}
     <MissionVisionSection {...missionVisionData} />
 
     {/* Final CTA */}
     <CTASection {...ctaData} />
-  </main>
+  
 </BaseLayout>
 
 <style>

@@ -4,6 +4,8 @@ import Partners from "../components/Partners.astro";
 import HeroSection from "@/components/HeroSection.astro";
 import CollaborationSection from "@/components/CollaborationSection.astro";
 import ActionGrid from "@/components/ActionGrid.astro";
+import SimpleHeroSection from "@/components/SimpleHeroSection.astro";
+import CTASection from "@/components/CTASection.astro";
 
 const currentLang = Astro.currentLocale || "es";
 
@@ -33,11 +35,25 @@ const endMessage = {
   buttonText: "Colabora con nosotros",
   buttonHref: "/contact"
 };
+
+const ctaData = {
+  title: "¿Quieres ser parte del cambio?",
+  description:
+    "Únete a nosotros y ayuda a transformar vidas a través de nuestros proyectos.",
+  primaryButton: {
+    text: "Contacta con Nosotros",
+    href: "/contact",
+  },
+  secondaryButton: {
+    text: "Haz una Donación",
+    href: "/donate",
+  },
+};
 ---
 
 <BaseLayout title="Partners - MIRES">
   <!-- Hero Section -->
-  <HeroSection {...heroData} />
+  <SimpleHeroSection {...heroData} />
 
   <!-- Partners Component -->
   <Partners
@@ -51,6 +67,6 @@ const endMessage = {
     actions={collaborationData}
   />
 
-  <CollaborationSection {...endMessage} />
+  <CTASection {...ctaData} />
 
 </BaseLayout>

@@ -13,22 +13,6 @@ export default defineConfig({
     }
   },
 
-  // Configuración de Content Collections
-  content: {
-    collections: {
-      projects: {
-        schema: ({ z }) => ({
-          title: z.string(),
-          subtitle: z.string(),
-          description: z.string(),
-          image: z.string(),
-          date: z.date().optional(),
-          featured: z.boolean().default(false),
-          draft: z.boolean().default(false),
-        })
-      }
-    }
-  },
 
   output: 'static',
   integrations: [tailwind(), react()],

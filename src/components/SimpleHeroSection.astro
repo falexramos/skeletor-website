@@ -1,0 +1,75 @@
+---
+interface SimpleHeroSectionProps {
+  title: string;
+  description: string;
+  backgroundColor?: string;
+  textColor?: string;
+  minHeight?: string;
+}
+
+const { 
+  title, 
+  description, 
+  backgroundColor = 'bg-darkbg', // Cambiado a darkbg para mantener coherencia
+  textColor = 'text-white', 
+  minHeight = 'min-h-[60vh]' // Ajustado para mejor responsividad
+} = Astro.props;
+---
+
+<section 
+  class={`relative ${minHeight} flex flex-col justify-center items-center text-center pt-20 sm:pt-24 md:pt-28 lg:pt-32 overflow-hidden ${backgroundColor}`}
+>
+  <!-- Decorative Elements -->
+  <div class="absolute inset-0 overflow-hidden">
+    <div class="absolute top-0 right-0 w-1/2 h-1/2 bg-secondary/5 rounded-full transform translate-x-1/4 -translate-y-1/4 blur-3xl"></div>
+    <div class="absolute bottom-0 left-0 w-1/2 h-1/2 bg-primary/5 rounded-full transform -translate-x-1/4 translate-y-1/4 blur-3xl"></div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container mx-auto px-6 relative z-10 flex flex-col items-center justify-center space-y-8">
+    <!-- Title -->
+    <h1 
+      class={`text-4xl sm:text-5xl md:text-6xl font-bold ${textColor} leading-tight max-w-4xl animate-fade-in`}
+    >
+      {title}
+    </h1>
+    
+    <!-- Description -->
+    <p 
+      class={`text-lg sm:text-xl md:text-2xl ${textColor}/80 max-w-2xl animate-fade-in text-center`} 
+    >
+      {description}
+    </p>
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+    <svg class="w-10 h-10 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+    </svg>
+  </div>
+</section>
+
+<style>
+  /* Fade In Animation */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .animate-fade-in {
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+  }
+
+  /* Bounce Animation */
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0) translateX(-50%); }
+    50% { transform: translateY(-15px) translateX(-50%); }
+  }
+  
+  .animate-bounce {
+    animation: bounce 2s infinite;
+  }
+</style>
+
