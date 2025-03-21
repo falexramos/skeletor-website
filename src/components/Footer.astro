@@ -2,6 +2,22 @@
 // src/components/Footer.astro
 import LogoIcon from "./LogoIcon.astro";
 import SocialLinks from "./SocialLinks.astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { languageList } from "@/i18n/ui";
+import { useTranslations } from "@/i18n/utils";
+
+const getPathWithoutLocale = (path: string): string => {
+  const segments = path.split("/").filter(Boolean);
+  // Si el primer segmento es un idioma, lo eliminamos
+  if (segments[0] === 'en' || segments[0] === 'es') {
+    segments.shift();
+  }
+  return '/' + segments.join("/");
+};
+
+const currentPathWithoutLocale = getPathWithoutLocale(Astro.url.pathname);
+const currentLang = Astro.currentLocale || "es";
+const translateLabels = useTranslations(currentLang as keyof typeof languageList);
 
 const socialLinks = [
   {
@@ -23,27 +39,32 @@ const socialLinks = [
 
 const footerSections = [
   {
-    title: "MIRES",
-    mainContent: "Transformamos la solidaridad en acción, brindando apoyo integral a quienes más lo necesitan.",
+    title: translateLabels("footer.sections.mires.title"),
+    mainContent: translateLabels("footer.sections.mires.mainContent"),
     hasSocial: true
   },
   {
-    title: "Proyectos",
+    title: translateLabels("footer.sections.projects.title"),
     links: [
-      { text: "DANA", href: "/projects/dana" },
-      { text: "Alimentando Esperanza", href: "/projects/food" },
-      { text: "Voluntariado", href: "/volunteer" }
+      { text: translateLabels("footer.sections.projects.links.dana.text"), href: getRelativeLocaleUrl(currentLang, "/projects/dana") },
+      { text: translateLabels("footer.sections.projects.links.food.text"), href: getRelativeLocaleUrl(currentLang, "/projects/alimentando-esperanza") },
+      { text: translateLabels("footer.sections.projects.links.coschooling.text"), href: getRelativeLocaleUrl(currentLang, "/projects/coschooling") },
+      { text: translateLabels("footer.sections.projects.links.diversamente.text"), href: getRelativeLocaleUrl(currentLang, "/projects/diversamente-habil") }
     ]
   },
   {
-    title: "Contacto",
+    title: translateLabels("footer.sections.contact.title"),
     contact: {
-      address: "Valencia, España",
-      phone: "+34 722 630 688",
-      email: "miresvalencia.es@gmail.com"
+      address: translateLabels("footer.sections.contact.address"),
+      phone: translateLabels("footer.sections.contact.phone"),
+      email: translateLabels("footer.sections.contact.email")
     }
   }
 ];
+
+const textSectionCopy = translateLabels("footer.sections.copy");
+const textSectionDesing = translateLabels("footer.sections.desing");
+
 ---
 
 <footer class="relative bg-gradient-to-b from-darkbg to-darkbg/90 dark:from-darkbg dark:to-primary/90 text-white py-16 overflow-hidden">
@@ -56,7 +77,7 @@ const footerSections = [
   <div class="container mx-auto px-4 relative z-10">
     <!-- Logo y Nombre -->
     <div class="flex justify-center mb-12">
-      <a href="/" class="flex items-center group">
+      <a href={getRelativeLocaleUrl(currentLang, "/")} class="flex items-center group">
         
         <LogoIcon className="w-12 h-12 text-white transition-colors duration-500" />
 
@@ -138,9 +159,9 @@ const footerSections = [
 
     <!-- Copyright -->
     <div class="flex flex-col md:flex-row justify-between items-center text-sm text-white/60 dark:text-gray-400">
-      <span>&copy; {new Date().getFullYear()} MIRES. Todos los derechos reservados.</span>
+      <span>&copy; {new Date().getFullYear()} {textSectionCopy}</span>
       <span class="mt-3 md:mt-0">
-        Design by 
+        {textSectionDesing} 
         <a href="https://alcance-it.es/" target="_blank" rel="noopener noreferrer" class="text-secondary hover:text-secondary/80 transition-colors duration-300">
           Alcance IT
         </a>

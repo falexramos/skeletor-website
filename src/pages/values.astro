@@ -6,6 +6,7 @@ import ValuesGrid from '../components/ValuesGrid.astro';
 import CTASection from '../components/CTASection.astro';
 import { getRelativeLocaleUrl } from "astro:i18n";
 import SimpleHeroSection from '@/components/SimpleHeroSection.astro';
+import Cta from '@/components/Cta.astro';
 
 const currentLang = Astro.currentLocale || "es";
 
@@ -73,19 +74,15 @@ const introText = "En MIRES, nuestros valores no son solo principios rectores, s
 const ctaData = {
   title: "Únete a nuestra misión",
   description: "En MIRES, estos valores no son solo palabras. Son nuestra forma de vivir, servir y transformar vidas.",
-  primaryButton: {
-    text: "Contacta con Nosotros",
-    href: getRelativeLocaleUrl(currentLang, "contact")
-  },
-  secondaryButton: {
-    text: "Apoya Nuestra Labor",
-    href: getRelativeLocaleUrl(currentLang, "donate")
-  }
+  contactLink: getRelativeLocaleUrl(currentLang, "contact"),
+  donateLink: getRelativeLocaleUrl(currentLang, "donate"),
+  contactText: "Contacto",
+  donateText: "Voluntario"
 };
 ---
 <BaseLayout title="Nuestros Valores - MIRES">
   <SimpleHeroSection {...heroData} />
   <IntroSection text={introText} />
   <ValuesGrid values={values} />
-  <CTASection {...ctaData} />
+  <Cta {...ctaData} />
 </BaseLayout>

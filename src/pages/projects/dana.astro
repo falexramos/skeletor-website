@@ -1,332 +1,137 @@
 ---
-import BaseLayout from "@/layouts/BaseLayout.astro";
-import { Image } from "astro:assets";
-import SectionTitle from "@/components/SectionTitle.astro";
-import StatCard from "@/components/StatCard.astro";
-import PhotoGallery from "@/components/PhotoGallery.astro";
+import ProjectPage from "@/components/projects/ProjectPage.astro";
 
-const pageTitle = "Proyecto DANA";
-const pageSubtitle = "Centro Logístico de Donaciones para Emergencias y Catástrofes";
-const pageDescription = "Centro especializado en la gestión y distribución de ayuda humanitaria para situaciones de emergencia.";
-
-// Imágenes para la galería
-const galleryImages = [
-  {
-    src: "/assets/img/projects/mires_proyecto_dana.jpg",
-    width: 1200,
-    height: 800,
-    alt: "Centro logístico del Proyecto DANA",
-    caption: "Centro logístico principal del Proyecto DANA"
-  },
-  {
-    src: "/assets/img/projects/mires_proyecto_dana_1.jpg",
-    width: 1200,
-    height: 800,
-    alt: "Voluntarios clasificando donaciones",
-    caption: "Nuestros voluntarios clasificando donaciones recibidas"
-  },
-  {
-    src: "/assets/img/projects/mires_proyecto_dana_12.jpg",
-    width: 1200,
-    height: 800,
-    alt: "Distribución de ayuda humanitaria",
-    caption: "Distribución de ayuda humanitaria a familias afectadas"
-  },
-  {
-    src: "/assets/img/projects/mires_proyecto_dana_13.jpg",
-    width: 1200,
-    height: 800,
-    alt: "Almacén de suministros",
-    caption: "Almacén de suministros organizado por categorías"
-  },
-  {
-    src: "/assets/img/projects/mires_proyecto_dana_14.jpg",
-    width: 1200,
-    height: 800,
-    alt: "Transporte de donaciones",
-    caption: "Transporte de donaciones a zonas afectadas"
-  },
-  {
-    src: "/assets/img/projects/mires_proyecto_dana_15.jpg",
-    width: 1200,
-    height: 800,
-    alt: "Equipo de voluntarios",
-    caption: "Equipo de voluntarios preparando kits de emergencia"
-  },
-  {
-    src: "/assets/img/projects/mires_proyecto_dana_16.jpg",
-    width: 1200,
-    height: 800,
-    alt: "Entrega de ayuda",
-    caption: "Entrega de ayuda directa a personas afectadas"
-  }
-];
-
-// Estadísticas de impacto
-const impactStats = [
-  {
-    value: "1,800+",
-    label: "Pallets de donaciones gestionadas",
-    icon: "package"
-  },
-  {
-    value: "5,000+",
-    label: "Familias asistidas directamente",
-    icon: "users"
-  },
-  {
-    value: "12",
-    label: "Toneladas de textil reciclado",
-    icon: "recycle"
-  },
-  {
-    value: "24/7",
-    label: "Disponibilidad en emergencias",
-    icon: "clock"
-  }
-];
-
-// Áreas de acción
-const actionAreas = [
-  {
-    title: "Recepción y Clasificación",
-    description: "Recepción y clasificación de donaciones de alimentos, ropa, enseres y productos básicos.",
-    icon: "inbox"
-  },
-  {
-    title: "Distribución Eficiente",
-    description: "Distribución eficiente de recursos a comunidades afectadas por crisis.",
-    icon: "truck"
-  },
-  {
-    title: "Alianzas Estratégicas",
-    description: "Alianzas con organizaciones locales e internacionales para ampliar el alcance de la ayuda.",
-    icon: "handshake"
-  },
-  {
-    title: "Logística Especializada",
-    description: "Logística especializada para atender emergencias en España y en otros países.",
-    icon: "map"
-  }
-];
-
-// Ámbito poblacional
-const populations = [
-  "Familias en riesgo de exclusión social",
-  "Personas en situación de calle",
-  "Personas migrantes",
-  "Personas mayores",
-  "Infancia",
-  "Mujeres"
-];
+// Datos del proyecto
+const projectData = {
+  title: "Proyecto DANA",
+  subtitle: "Centro Logístico de Donaciones para Emergencias y Catástrofes",
+  description: "Centro especializado en la gestión y distribución de ayuda humanitaria para situaciones de emergencia.",
+  mainImage: "/assets/img/projects/mires_dana_7.avif",
+  
+  // Ámbito poblacional
+  populations: [
+    "Familias en riesgo de exclusión social",
+    "Personas en situación de calle",
+    "Personas migrantes",
+    "Personas mayores",
+    "Infancia",
+    "Mujeres"
+  ],
+  
+  // Áreas de acción
+  actionAreas: [
+    {
+      title: "Recepción y Clasificación",
+      description: "Recepción y clasificación de donaciones de alimentos, ropa, enseres y productos básicos.",
+      icon: "inbox"
+    },
+    {
+      title: "Distribución Eficiente",
+      description: "Distribución eficiente de recursos a comunidades afectadas por crisis.",
+      icon: "truck"
+    },
+    {
+      title: "Alianzas Estratégicas",
+      description: "Alianzas con organizaciones locales e internacionales para ampliar el alcance de la ayuda.",
+      icon: "handshake"
+    },
+    {
+      title: "Logística Especializada",
+      description: "Logística especializada para atender emergencias en España y en otros países.",
+      icon: "map"
+    }
+  ],
+  
+  // Estadísticas de impacto
+  impactStats: [
+    {
+      value: "1,800+",
+      label: "Pallets de donaciones gestionadas",
+      icon: "package"
+    },
+    {
+      value: "5,000+",
+      label: "Familias asistidas directamente",
+      icon: "users"
+    },
+    {
+      value: "12",
+      label: "Toneladas de textil reciclado",
+      icon: "recycle"
+    },
+    {
+      value: "24/7",
+      label: "Disponibilidad en emergencias",
+      icon: "clock"
+    }
+  ],
+  
+  // Imágenes para la galería
+  galleryImages: [
+    {
+      src: "/assets/img/projects/mires_dana_7.avif",
+      width: 1200,
+      height: 800,
+      alt: "Centro logístico del Proyecto DANA",
+      caption: "Centro logístico principal del Proyecto DANA"
+    },
+    {
+      src: "/assets/img/projects/mires_dana_1.avif",
+      width: 1200,
+      height: 800,
+      alt: "Voluntarios clasificando donaciones",
+      caption: "Nuestros voluntarios clasificando donaciones recibidas"
+    },
+    {
+      src: "/assets/img/projects/mires_dana_2.avif",
+      width: 1200,
+      height: 800,
+      alt: "Distribución de ayuda humanitaria",
+      caption: "Distribución de ayuda humanitaria a familias afectadas"
+    },
+    {
+      src: "/assets/img/projects/mires_dana_3.avif",
+      width: 1200,
+      height: 800,
+      alt: "Almacén de suministros",
+      caption: "Almacén de suministros organizado por categorías"
+    },
+    {
+      src: "/assets/img/projects/mires_dana_4.avif",
+      width: 1200,
+      height: 800,
+      alt: "Transporte de donaciones",
+      caption: "Transporte de donaciones a zonas afectadas"
+    },
+    {
+      src: "/assets/img/projects/mires_dana_5.avif",
+      width: 1200,
+      height: 800,
+      alt: "Equipo de voluntarios",
+      caption: "Equipo de voluntarios preparando kits de emergencia"
+    },
+    {
+      src: "/assets/img/projects/mires_dana_6.avif",
+      width: 1200,
+      height: 800,
+      alt: "Entrega de ayuda",
+      caption: "Entrega de ayuda directa a personas afectadas"
+    }
+  ],
+  
+  // Datos para el CTA
+  ctaTitle: "¿Quieres colaborar con el Proyecto DANA?",
+  ctaDescription: "Tu ayuda puede marcar la diferencia en la vida de muchas personas afectadas por emergencias y catástrofes."
+};
 ---
 
-<BaseLayout title={`${pageTitle} - MIRES`} description={pageDescription}>
-  <!-- Hero Section -->
-  <section class="relative pt-32 pb-20 overflow-hidden bg-darkbg">
-    <div class="absolute inset-0 overflow-hidden">
-      <div class="absolute top-0 right-0 w-1/2 h-1/2 bg-secondary/5 rounded-full transform translate-x-1/4 -translate-y-1/4 blur-3xl"></div>
-      <div class="absolute bottom-0 left-0 w-1/2 h-1/2 bg-primary/5 rounded-full transform -translate-x-1/4 translate-y-1/4 blur-3xl"></div>
-    </div>
-    
-    <div class="container mx-auto px-4 relative z-10">
-      <div class="max-w-4xl mx-auto text-center mb-16">
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-          {pageTitle}
-        </h1>
-        <p class="text-xl md:text-2xl text-white/80 mb-8">
-          {pageSubtitle}
-        </p>
-        <p class="text-lg text-white/70 max-w-3xl mx-auto">
-          {pageDescription}
-        </p>
-      </div>
-      
-      <div class="relative rounded-2xl overflow-hidden shadow-2xl max-w-5xl mx-auto">
-        <Image 
-          src="/assets/img/projects/mires_proyecto_dana.jpg" 
-          alt="Proyecto DANA" 
-          width={1200} 
-          height={800}
-          class="w-full h-auto object-cover"
-        />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
-          <div class="p-6 md:p-8 w-full">
-            <div class="flex items-center justify-between">
-              <p class="text-white text-lg md:text-xl font-medium">Centro Logístico DANA</p>
-              <a href="#gallery" class="bg-white/20 hover:bg-white/30 text-white text-sm px-4 py-2 rounded-full backdrop-blur-sm transition-all duration-300 flex items-center gap-2">
-                <span>Ver galería</span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Descripción del Proyecto -->
-  <section class="py-20 bg-white dark:bg-darkbg/80">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto">
-        <SectionTitle 
-          title="Sobre el Proyecto DANA" 
-          subtitle="Respuesta rápida y eficiente ante emergencias"
-          alignment="left"
-        />
-        
-        <div class="prose prose-lg dark:prose-invert max-w-none">
-          <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
-            El Proyecto DANA es un centro logístico de recepción, organización y distribución de donaciones para situaciones de emergencia, catástrofes naturales y crisis humanitarias. Este espacio nos permite responder de manera rápida y eficiente ante eventos inesperados, asegurando que la ayuda llegue a quienes más lo necesitan.
-          </p>
-          
-          <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-            En el marco de este proyecto, implementamos un sistema de economía circular para minimizar el desperdicio y aprovechar al máximo las donaciones, contribuyendo así a la sostenibilidad ambiental mientras cumplimos nuestra misión humanitaria.
-          </p>
-          
-          <div class="my-12 relative">
-            <div class="absolute inset-0 bg-primary/5 dark:bg-primary/10 rounded-2xl transform rotate-1"></div>
-            <blockquote class="relative bg-white dark:bg-darkbg p-6 md:p-8 rounded-2xl border-l-4 border-primary shadow-md">
-              <svg class="absolute top-4 left-4 w-10 h-10 text-primary/10" fill="currentColor" viewBox="0 0 32 32">
-                <path d="M10 8c-2.21 0-4 1.79-4 4v12h8v-8h-4v-4c0-1.1.9-2 2-2h2V8h-4zm12 0c-2.21 0-4 1.79-4 4v12h8v-8h-4v-4c0-1.1.9-2 2-2h2V8h-4z"/>
-              </svg>
-              <p class="text-gray-700 dark:text-gray-300 text-lg italic pl-8">
-                Nuestro objetivo es ser un puente eficiente entre la solidaridad de quienes donan y las necesidades urgentes de quienes atraviesan situaciones críticas.
-              </p>
-              <footer class="mt-4 text-right text-gray-500 dark:text-gray-400">
-                — Equipo MIRES
-              </footer>
-            </blockquote>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Ámbito Poblacional -->
-  <section class="py-20 bg-gray-50 dark:bg-darkbg">
-    <div class="container mx-auto px-4">
-      <SectionTitle 
-        title="Ámbito Poblacional" 
-        subtitle="Personas y comunidades a las que servimos"
-      />
-      
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6 max-w-5xl mx-auto mt-12">
-        {populations.map((population, index) => (
-          <div class="bg-white dark:bg-darkbg/50 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 p-6 text-center border border-gray-100 dark:border-white/5 flex flex-col items-center justify-center group">
-            <div class="w-16 h-16 rounded-full bg-primary/10 dark:bg-primary/20 flex items-center justify-center mb-4 group-hover:bg-primary/20 dark:group-hover:bg-primary/30 transition-colors duration-300">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                {index === 0 && <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />}
-                {index === 1 && <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />}
-                {index === 2 && <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />}
-                {index === 3 && <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />}
-                {index === 4 && <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />}
-                {index === 5 && <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />}
-              </svg>
-            </div>
-            <h3 class="text-gray-800 dark:text-white font-medium text-lg">{population}</h3>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Áreas de Acción -->
-  <section class="py-20 bg-white dark:bg-darkbg/80">
-    <div class="container mx-auto px-4">
-      <SectionTitle 
-        title="Áreas de Acción" 
-        subtitle="Nuestras principales líneas de trabajo"
-      />
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto mt-12">
-        {actionAreas.map((area, index) => (
-          <div class="bg-gray-50 dark:bg-darkbg/50 rounded-xl p-6 md:p-8 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 dark:border-white/5 flex gap-6 group">
-            <div class="flex-shrink-0">
-              <div class="w-14 h-14 rounded-full bg-primary/10 dark:bg-primary/20 flex items-center justify-center group-hover:bg-primary/20 dark:group-hover:bg-primary/30 transition-colors duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  {area.icon === "inbox" && <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />}
-                  {area.icon === "truck" && <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />}
-                  {area.icon === "handshake" && <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11" />}
-                  {area.icon === "map" && <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />}
-                </svg>
-              </div>
-            </div>
-            <div>
-              <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">{area.title}</h3>
-              <p class="text-gray-600 dark:text-gray-300">{area.description}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Impacto -->
-  <section class="py-20 bg-primary dark:bg-darkbg relative overflow-hidden">
-    <div class="absolute inset-0 pointer-events-none">
-      <div class="absolute top-0 left-0 w-64 h-64 bg-secondary/20 rounded-full -translate-x-1/3 -translate-y-1/3 blur-3xl"></div>
-      <div class="absolute bottom-0 right-0 w-96 h-96 bg-secondary/20 rounded-full translate-x-1/3 translate-y-1/3 blur-3xl"></div>
-      <div class="absolute top-1/2 left-1/2 w-72 h-72 bg-white/5 rounded-full -translate-x-1/2 -translate-y-1/2 blur-2xl"></div>
-    </div>
-    
-    <div class="container mx-auto px-4 relative z-10">
-      <div class="text-center mb-16">
-        <h2 class="text-4xl font-bold text-white mb-4">Nuestro Impacto</h2>
-        <p class="text-xl text-white/80 max-w-3xl mx-auto">
-          Resultados tangibles que demuestran nuestro compromiso con la ayuda humanitaria
-        </p>
-      </div>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
-        {impactStats.map(stat => (
-          <StatCard {...stat} />
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Galería de Fotos -->
-  <section id="gallery" class="py-20 bg-gray-50 dark:bg-darkbg/80">
-    <div class="container mx-auto px-4">
-      <SectionTitle 
-        title="Galería de Imágenes" 
-        subtitle="Conoce nuestro trabajo a través de imágenes"
-      />
-      
-      <div class="mt-12">
-        <PhotoGallery images={galleryImages} />
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="py-20 bg-white dark:bg-darkbg">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto bg-primary dark:bg-primary/90 rounded-2xl overflow-hidden shadow-xl">
-        <div class="p-8 md:p-12 relative">
-          <div class="absolute top-0 right-0 w-64 h-64 bg-secondary/20 rounded-full translate-x-1/3 -translate-y-1/3 blur-3xl"></div>
-          
-          <div class="relative z-10 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">¿Quieres colaborar con el Proyecto DANA?</h2>
-            <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-              Tu ayuda puede marcar la diferencia en la vida de muchas personas afectadas por emergencias y catástrofes.
-            </p>
-            
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="/contact" class="px-8 py-4 bg-white text-primary rounded-full text-lg font-medium hover:bg-white/90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                Contactar
-              </a>
-              <a href="/donate" class="px-8 py-4 bg-transparent text-white border-2 border-white/80 rounded-full text-lg font-medium hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-1">
-                Donar
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</BaseLayout>
+<ProjectPage {...projectData}>
+  <p slot="description-first-paragraph">
+    El Proyecto DANA es un centro logístico de recepción, organización y distribución de donaciones para situaciones de emergencia, catástrofes naturales y crisis humanitarias. Este espacio nos permite responder de manera rápida y eficiente ante eventos inesperados, asegurando que la ayuda llegue a quienes más lo necesitan.
+  </p>
+  
+  <p slot="description-second-paragraph">
+    En el marco de este proyecto, implementamos un sistema de economía circular para minimizar el desperdicio y aprovechar al máximo las donaciones, contribuyendo así a la sostenibilidad ambiental mientras cumplimos nuestra misión humanitaria.
+  </p>
+</ProjectPage>
 

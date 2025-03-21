@@ -1,0 +1,219 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import SectionTitle from "@/components/SectionTitle.astro";
+import TeamMemberCard from "@/components/TeamMemberCard.astro";
+import TestimonialCard from "@/components/TestimonialCard.astro";
+import SimpleHeroSection from "@/components/SimpleHeroSection.astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import Cta from "@/components/Cta.astro";
+
+const currentLang = Astro.currentLocale || "es";
+const leadership = [
+  {
+    name: "Joanna Glod Núñez",
+    role: "President",
+    description:
+      "With a background in community work, Joanna leads MIRES with a clear vision of inclusion and support for the most vulnerable people. Her ability to establish connections and alliances has been key to the organization's growth.",
+    image: "/assets/img/team__mires_johana.avif",
+  },
+  {
+    name: "Martha Rosa González",
+    role: "Secretary",
+    description:
+      "Responsible for administration and internal coordination, Martha ensures the efficiency of all operations. Her organization and commitment to transparency inspire confidence in those who support and collaborate with MIRES.",
+    image: "/assets/img/team__mires_martha_gonzalez.avif",
+  },
+  {
+    name: "Mary Claret Núñez de Glod",
+    role: "Treasurer",
+    description:
+      "With solid experience in financial management, Mary takes care of MIRES's resources, optimizing the use of each donation received to maximize social impact.",
+    image: "/assets/img/team_mires_mary_glod.avif",
+  },
+];
+
+const testimonials = [
+  {
+    name: "Martha Rosa González",
+    text: "For me, it has been an experience that fills me with joy to work in the Lord's work.",
+    image: "/assets/img/volunteers/mires_testimonios_1.avif",
+  },
+  {
+    name: "Enza Liccet",
+    text: "Being a volunteer at Mires has been a unique experience and a satisfaction for doing something that is within me, such as helping and feeling closer to God. Thank you Mires and its people.",
+    image: "/assets/img/volunteers/mires_testimonios_2.avif",
+  },
+  {
+    name: "Iván Silva",
+    text: "Working with Johana's team has been very enriching and an unforgettable experience of helping others.",
+    image: "/assets/img/volunteers/mires_testimonios_3.avif",
+  },
+  {
+    name: "Jonathan Clavijo Melo",
+    text: "Working with the Mires association has been one of the most beautiful things that have happened to me, where I can help people and sometimes make them smile despite the moments life throws at them. Thanks to Joa, who is an angel, for giving me the opportunity to share these experiences and fill the world with love through small gestures.",
+    image: "/assets/img/volunteers/mires_testimonios_4.avif",
+  },
+  {
+    name: "Maria Del Carmen Macías Lozano",
+    text: "In difficult times, you meet good people, and I have had the honor of working as a volunteer alongside Mires.",
+    image: "/assets/img/volunteers/mires_testimonios_6.avif",
+  },
+  {
+    name: "Miriam Garcia",
+    text: "Working with the NGO MIRES brings me happiness because I know I am on my life path, being able to see how people in need can have a slightly happier day.",
+    image: "/assets/img/volunteers/mires_testimonios_8.avif",
+  },
+];
+
+const heroData = {
+  title: "Our Team",
+  description:
+    "People committed to social well-being and community transformation",
+};
+
+// CTA Data
+const ctaData = {
+  title: "Every action counts",
+  description:
+    "Together, we build a more inclusive and supportive future. Your participation can make a difference in the lives of many people.",
+  contactLink: getRelativeLocaleUrl(currentLang, "contact"),
+  donateLink: getRelativeLocaleUrl(currentLang, "donate"),
+  contactText: "Contact",
+  donateText: "Volunteer",
+};
+---
+
+<BaseLayout title="Team - MIRES">
+  <!-- Hero Section -->
+  <SimpleHeroSection {...heroData} />
+
+  <!-- Leadership Section -->
+  <section class="py-20 bg-gray-50 dark:bg-darkbg">
+    <div class="container mx-auto px-4">
+      <SectionTitle
+        title="Leadership Team"
+        subtitle="Meet the people who make our mission possible every day"
+      />
+
+      <div class="space-y-8 max-w-5xl mx-auto">
+        {leadership.map((member) => <TeamMemberCard {...member} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="py-20 bg-white dark:bg-darkbg/80">
+    <div class="container mx-auto px-4">
+      <SectionTitle
+        title="Testimonials from Our Volunteers"
+        subtitle="Experiences that inspire and motivate our daily work"
+      />
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {
+          testimonials.map((testimonial) => (
+            <TestimonialCard {...testimonial} />
+          ))
+        }
+      </div>
+
+      <!-- Ver más testimonios -->
+      <div class="mt-12 text-center">
+        <a
+          href="https://www.instagram.com/somosmires?igsh=MXZtdzl0ZnJhNG1pZQ=="
+          class="inline-flex items-center px-6 py-3 bg-primary/10 hover:bg-primary/20 text-primary dark:bg-primary/20 dark:hover:bg-primary/30 dark:text-white rounded-full transition-all duration-300"
+        >
+          <span>More</span>
+          <svg
+            class="w-5 h-5 ml-2"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <Cta {...ctaData} />
+</BaseLayout>
+
+<style>
+  /* Animaciones para elementos al hacer scroll */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  /* Aplicar animaciones con delay para crear efecto escalonado */
+  section > div > * {
+    opacity: 0;
+  }
+
+  section.in-view > div > * {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  section.in-view > div > *:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  section.in-view > div > *:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+</style>
+
+<script>
+  // Script para detectar cuando las secciones entran en el viewport
+  document.addEventListener("DOMContentLoaded", () => {
+    const sections = document.querySelectorAll("section");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+          }
+        });
+      },
+      { threshold: 0.1 },
+    );
+
+    sections.forEach((section) => {
+      observer.observe(section);
+    });
+
+    // Funcionalidad para los botones "Leer más"
+    const readMoreButtons = document.querySelectorAll(
+      ".testimonial-card button",
+    );
+    readMoreButtons.forEach((button) => {
+      button.addEventListener("click", (e) => {
+        const card = (e.target as Element).closest(".testimonial-card");
+        if (card) {
+          card.classList.toggle("expanded");
+          button.textContent = card.classList.contains("expanded")
+            ? "Leer menos"
+            : "Leer más";
+        }
+      });
+    });
+  });
+</script>

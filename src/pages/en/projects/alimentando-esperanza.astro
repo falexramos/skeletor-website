@@ -1,0 +1,155 @@
+---
+import ProjectPage from "@/components/projects/ProjectPage.astro";
+
+const projectData = {
+  title: "FEEDING HOPE",
+  subtitle: "Support for Families in Vulnerable Situations",
+  description: "This program provides assistance to low-income families, homeless individuals, and at-risk communities by providing basic subsistence resources such as food and clothing.",
+  mainImage: "/assets/img/projects/mires_alimentando_esperanza_7.avif",
+  
+  // Population Scope
+  populations: [
+    "Families at risk of social exclusion lacking basic resources",
+    "Homeless individuals needing support for their well-being and dignity",
+    "Migrants",
+    "Elderly people",
+    "Children",
+    "Women"
+  ],
+  populationColumns: 6, // Use 6 columns to display all items
+  
+  // Areas of Action
+  actionAreas: [
+    {
+      title: "Food Delivery",
+      description: "Delivery of food packages and essential products.",
+      icon: "food"
+    },
+    {
+      title: "Clothing Donation",
+      description: "Donation of clothing and basic items to vulnerable families.",
+      icon: "clothing"
+    },
+    {
+      title: "Strategic Partnerships",
+      description: "Partnerships with supermarkets and companies for surplus collection.",
+      icon: "partnership"
+    },
+    {
+      title: "Awareness",
+      description: "Awareness programs on food security and access to basic resources.",
+      icon: "awareness"
+    }
+  ],
+  
+  // Impact (using text items instead of numerical statistics)
+  impactItems: [
+    "Thousands of meals delivered to families at risk",
+    "Clothing and essential items distributed to those in need",
+    "Collaboration network with companies and supermarkets to optimize aid"
+  ],
+  
+  // Gallery Images
+  galleryImages: [
+    {
+      src: "/assets/img/projects/mires_alimentando_esperanza_7.avif",
+      width: 1200,
+      height: 800,
+      alt: "Food delivery",
+      caption: "Delivery of food packages to families"
+    },
+    {
+      src: "/assets/img/projects/mires_alimentando_esperanza_2.avif",
+      width: 1200,
+      height: 800,
+      alt: "Clothing donation",
+      caption: "Sorting and donation of clothing for vulnerable people"
+    },
+    {
+      src: "/assets/img/projects/mires_alimentando_esperanza_3.avif",
+      width: 1200,
+      height: 800,
+      alt: "Surplus collection",
+      caption: "Collection of food surpluses from supermarkets"
+    },
+    {
+      src: "/assets/img/projects/mires_alimentando_esperanza_4.avif",
+      width: 1200,
+      height: 800,
+      alt: "Awareness",
+      caption: "Awareness programs on food security"
+    },
+    {
+      src: "/assets/img/projects/mires_alimentando_esperanza_5.avif",
+      width: 1200,
+      height: 800,
+      alt: "Family support",
+      caption: "Comprehensive support for families in vulnerable situations"
+    },
+    {
+      src: "/assets/img/projects/mires_alimentando_esperanza_6.avif",
+      width: 1200,
+      height: 800,
+      alt: "Family support",
+      caption: "Comprehensive support for families in vulnerable situations"
+    },
+    {
+      src: "/assets/img/projects/mires_alimentando_esperanza_1.avif",
+      width: 1200,
+      height: 800,
+      alt: "Family support",
+      caption: "Comprehensive support for families in vulnerable situations"
+    },
+    {
+      src: "/assets/img/projects/mires_alimentando_esperanza_8.avif",
+      width: 1200,
+      height: 800,
+      alt: "Family support",
+      caption: "Comprehensive support for families in vulnerable situations"
+    },
+    {
+      src: "/assets/img/projects/mires_alimentando_esperanza_16.avif",
+      width: 1200,
+      height: 800,
+      alt: "Family support",
+      caption: "Comprehensive support for families in vulnerable situations"
+    },
+    {
+      src: "/assets/img/projects/mires_alimentando_esperanza_11.avif",
+      width: 1200,
+      height: 800,
+      alt: "Family support",
+      caption: "Comprehensive support for families in vulnerable situations"
+    }
+  ],
+  
+  // CTA Data
+  ctaTitle: "Do you want to collaborate with Feeding Hope?",
+  ctaDescription: "Your help can make a difference in the lives of families in vulnerable situations."
+};
+
+
+// Actualizar el mapeador de iconos para incluir los nuevos iconos específicos
+import { actionAreaIconPaths } from '@/components/projects/ProjectIconMapper.astro';
+
+// Añadir los nuevos iconos específicos para este proyecto
+const newIcons = {
+  food: "M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z",
+  clothing: "M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z",
+  awareness: "M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+};
+
+// Estos iconos se añadirán automáticamente al mapeador en tiempo de ejecución
+Object.assign(actionAreaIconPaths, newIcons);
+---
+<ProjectPage {...projectData}>
+  <p slot="description-first-paragraph">
+    This program provides assistance to low-income families, homeless individuals, and at-risk communities by providing basic subsistence resources such as food and clothing. Our approach is comprehensive, aiming not only to meet immediate needs but also to create pathways to autonomy.
+  </p>
+  
+  <p slot="description-second-paragraph">
+    Through strategic partnerships with companies, supermarkets, and other organizations, we optimize resources and expand our reach. Additionally, we implement awareness programs on the importance of food security and equitable access to basic resources.
+  </p>
+</ProjectPage>
+
+

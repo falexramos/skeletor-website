@@ -1,0 +1,113 @@
+---
+import ProjectPage from "@/components/projects/ProjectPage.astro";
+
+const projectData = {
+  title: "DIFFERENTLY ABLED",
+  subtitle: "Leisure and Development Center for Neurodivergent People",
+  description: "This center is a safe and inclusive space designed for neurodivergent individuals (ASD, ADHD, Giftedness, Asperger's, among other conditions), where they can explore their interests, strengthen their social skills, and access activities that promote their well-being.",
+  mainImage: "/assets/img/projects/mires_diversamente.avif",
+  
+  // Population Scope
+  populations: [
+    "Neurodivergent children, young people, and adults who need spaces for integration and development",
+    "Families and caregivers who require support in accompanying neurodivergent individuals"
+  ],
+  populationColumns: 2, // Use 2 columns to display the items
+  
+  // Areas of Action
+  actionAreas: [
+    {
+      title: "Adapted Leisure Spaces",
+      description: "Leisure spaces adapted to sensory and cognitive needs.",
+      icon: "space"
+    },
+    {
+      title: "Specialized Workshops",
+      description: "Workshops in art, technology, robotics, music, and more.",
+      icon: "workshop"
+    },
+    {
+      title: "Integration Programs",
+      description: "Social integration programs and training for autonomous living.",
+      icon: "integration"
+    },
+    {
+      title: "Family Support",
+      description: "Support and training for families and caregivers.",
+      icon: "support"
+    }
+  ],
+  
+  // Impact (using text items instead of numerical statistics)
+  impactItems: [
+    "Greater inclusion and opportunities for neurodivergent individuals",
+    "Support network for families and caregivers",
+    "Spaces designed for well-being and personal development"
+  ],
+  
+  // Gallery Images
+  galleryImages: [
+    {
+      src: "/assets/img/projects/mires_diversamente.avif",
+      width: 1200,
+      height: 800,
+      alt: "Adapted space for neurodivergent individuals",
+      caption: "Spaces adapted to sensory and cognitive needs"
+    },
+    {
+      src: "/assets/img/projects/mires_diversamente_1.avif",
+      width: 1200,
+      height: 800,
+      alt: "Art and creativity workshops",
+      caption: "Art workshops for the development of expression"
+    },
+    {
+      src: "/assets/img/projects/mires_diversamente_2.avif",
+      width: 1200,
+      height: 800,
+      alt: "Technological activities",
+      caption: "Technology and robotics activities"
+    },
+    {
+      src: "/assets/img/projects/mires_diversamente_3.avif",
+      width: 1200,
+      height: 800,
+      alt: "Social integration programs",
+      caption: "Programs for the development of social skills"
+    },
+    {
+      src: "/assets/img/projects/mires_diversamente_4.avif",
+      width: 1200,
+      height: 800,
+      alt: "Family support",
+      caption: "Support and training sessions for families"
+    }
+  ],
+  
+  // CTA Data
+  ctaTitle: "Do you want to collaborate with Differently Abled?",
+  ctaDescription: "Your help can make a difference in the lives of neurodivergent individuals and their families."
+};
+
+// Actualizar el mapeador de iconos para incluir los nuevos iconos específicos
+import { actionAreaIconPaths } from '@/components/projects/ProjectIconMapper.astro';
+
+// Añadir los nuevos iconos específicos para este proyecto
+const newIcons = {
+  workshop: "M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+};
+
+// Estos iconos se añadirán automáticamente al mapeador en tiempo de ejecución
+Object.assign(actionAreaIconPaths, newIcons);
+---
+
+<ProjectPage {...projectData}>
+  <p slot="description-first-paragraph">
+    This center is a safe and inclusive space designed for neurodivergent individuals (ASD, ADHD, Giftedness, Asperger's, among other conditions), where they can explore their interests, strengthen their social skills, and access activities that promote their well-being.
+  </p>
+  
+  <p slot="description-second-paragraph">
+    Our approach is based on respect for neurological diversity, recognizing that each person has unique strengths and challenges. We create environments adapted to different sensory and cognitive needs, facilitating enriching experiences that enhance personal development and social inclusion.
+  </p>
+</ProjectPage>
+

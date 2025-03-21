@@ -1,5 +1,4 @@
 ---
-// src/components/NetworkSection.astro
 interface Props {
   title: string;
   description: string;
@@ -8,13 +7,24 @@ interface Props {
 const { title, description } = Astro.props;
 ---
 
-<section class="py-16 bg-white dark:bg-gray-800">
-  <div class="container mx-auto px-4 max-w-4xl text-center">
-    <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-6">
-      {title}
-    </h2>
-    <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed text-justify">
-      {description}
-    </p>
+<section class="py-20 bg-white dark:bg-darkbg/80">
+  <div class="container mx-auto px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4 text-primary dark:text-white">
+          {title}
+        </h2>
+        <div class="h-1 w-24 bg-secondary mx-auto mt-4 rounded"></div>
+      </div>
+      
+      <div class="prose prose-lg dark:prose-invert max-w-none">
+        <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+          {description}
+        </p>
+        
+      
+      </div>
+    </div>
   </div>
 </section>
+

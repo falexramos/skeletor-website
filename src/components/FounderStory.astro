@@ -12,33 +12,51 @@ interface Props {
 const { name, title, story, image } = Astro.props;
 ---
 
-<section class="py-16 bg-white dark:bg-gray-900">
-  <div class="container mx-auto px-4 max-w-5xl">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-      {image && (
-        <div class="relative h-[400px] rounded-2xl overflow-hidden shadow-xl">
-          <img
-            src={image.src}
-            alt={image.alt}
-            class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-          />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-        </div>
-      )}
-      
-      <div class={`${image ? '' : 'md:col-span-2'}`}>
-        <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-4">
-          {name}
-        </h2>
-        <h3 class="text-xl text-primary dark:text-primary-400 mb-6">
-          {title}
-        </h3>
-        <div class="prose dark:prose-invert max-w-none">
-          <blockquote class="text-lg text-gray-700 dark:text-gray-300 italic leading-relaxed text-justify">
-            {story}
-          </blockquote>
+<section class="py-20 bg-gray-50 dark:bg-darkbg">
+  <div class="container mx-auto px-4">
+    <div class="max-w-5xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        {image && (
+          <div class="relative rounded-2xl overflow-hidden shadow-xl group">
+            <div class="aspect-[3/4] overflow-hidden">
+              <img
+                src={image.src || "/placeholder.svg"}
+                alt={image.alt}
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-6">
+              <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+                <h3 class="text-xl font-bold text-white">{name}</h3>
+                <p class="text-white/90 text-sm">{title}</p>
+              </div>
+            </div>
+          </div>
+        )}
+        
+        <div class={`${image ? '' : 'md:col-span-2'}`}>
+          <h2 class="text-3xl font-bold text-primary dark:text-white mb-4">
+            Nuestra Historia
+          </h2>
+          <div class="h-1 w-24 bg-secondary mb-8 rounded"></div>
+          
+          <div class="prose prose-lg dark:prose-invert max-w-none">
+            <blockquote class="relative bg-white dark:bg-darkbg/50 p-6 md:p-8 rounded-2xl border-l-4 border-primary shadow-md">
+              <svg class="absolute top-4 left-4 w-10 h-10 text-primary/10" fill="currentColor" viewBox="0 0 32 32">
+                <path d="M10 8c-2.21 0-4 1.79-4 4v12h8v-8h-4v-4c0-1.1.9-2 2-2h2V8h-4zm12 0c-2.21 0-4 1.79-4 4v12h8v-8h-4v-4c0-1.1.9-2 2-2h2V8h-4z"/>
+              </svg>
+              <p class="text-gray-700 dark:text-gray-300 text-lg italic pl-8 leading-relaxed">
+                {story}
+              </p>
+              <footer class="mt-4 text-right text-gray-500 dark:text-gray-400">
+                — {name}, {title}
+              </footer>
+            </blockquote>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+

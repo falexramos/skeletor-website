@@ -1,0 +1,64 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import HeroSection from '../../components/HeroSection.astro';
+import ActionGrid from '../../components/ActionGrid.astro';
+import CollaborationSection from '../../components/CollaborationSection.astro';
+import { useTranslations } from "@/i18n/utils";
+import CTASection from '@/components/CTASection.astro';
+import SimpleHeroSection from '@/components/SimpleHeroSection.astro';
+import Cta from '@/components/Cta.astro';
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+
+
+const currentLang = (Astro.currentLocale === "es" || Astro.currentLocale === "en") ? Astro.currentLocale : "es";
+const t = useTranslations(currentLang);
+const actions = [
+  {
+    title: "Assistance to Homeless People and Families",
+    description: "We provide food, clothing, basic items, and psychosocial support.",
+  },
+  {
+    title: "Support for Neurodivergent People",
+    description: "We create safe spaces, adapted activities, and integration programs.",
+  },
+  {
+    title: "Response to Crises and Disasters",
+    description: "We mobilize resources and immediate assistance for affected communities.",
+  },
+  {
+    title: "Economic and Social Reactivation",
+    description: "We promote employment, entrepreneurship, and community development initiatives.",
+  },
+  {
+    title: "Promotion of Solidarity",
+    description: "We promote the circular economy, volunteering, and international cooperation.",
+  }
+];
+
+// Data for HeroSection
+const heroData = {
+  title: "What We Do",
+  description: "At MIRES, we provide comprehensive assistance to people in vulnerable situations, including homeless people, low-income families, communities affected by social crises or natural disasters, and neurodivergent individuals."
+};
+
+// Data for CollaborationSection
+const collaborationData = {
+  title: "Collaboration and Partnerships",
+  description: "Our work is enriched through strategic partnerships with other NGOs, companies, and public bodies, expanding our impact and generating sustainable solutions.",
+  buttonText: "Collaborate with us",
+  buttonHref: "/contact"
+};
+
+---
+<BaseLayout>
+  <SimpleHeroSection {...heroData} />
+  <ActionGrid 
+    title="Our Key Actions"
+    actions={actions}
+  />
+  <CollaborationSection {...collaborationData} />
+
+  
+
+</BaseLayout>

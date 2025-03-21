@@ -1,0 +1,40 @@
+---
+import PhotoGallery from "@/components/PhotoGallery.astro";
+
+interface GalleryImage {
+  src: string;
+  width: number;
+  height: number;
+  alt: string;
+  caption?: string;
+}
+
+interface Props {
+  title: string;
+  subtitle: string;
+  images: GalleryImage[];
+}
+
+const { title, subtitle, images } = Astro.props;
+---
+
+<section id="gallery" class="py-20 bg-gray-50 dark:bg-darkbg/80">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl sm:text-4xl font-bold mb-3 text-primary dark:text-white">
+        {title}
+      </h2>
+      
+      <p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+        {subtitle}
+      </p>
+      
+      <div class="h-1 w-24 bg-secondary mx-auto mt-4 rounded"></div>
+    </div>
+    
+    <div class="mt-12">
+      <PhotoGallery images={images} />
+    </div>
+  </div>
+</section>
+

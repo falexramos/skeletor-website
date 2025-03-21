@@ -1,0 +1,78 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import FounderStory from '@/components/FounderStory.astro';
+import MissionVisionSection from '@/components/MissionVisionSection.astro';
+import NetworkSection from '@/components/NetworkSection.astro';
+import SimpleHeroSection from '@/components/SimpleHeroSection.astro';
+import { getRelativeLocaleUrl } from "astro:i18n";
+import Cta from '@/components/Cta.astro';
+
+const currentLang = Astro.currentLocale || "es";
+
+const heroData = {
+  title: "Who Are We?",
+  description: "At MIRES, we transform solidarity into action. Guided by God in principles of love, justice, and service, we work to support homeless people, families in vulnerable situations, victims of abuse and trafficking, neurodivergent individuals, and communities affected by crises and natural disasters. More than help, we offer companionship, integration, and opportunities, bringing not only essential resources but also a message of hope, dignity, and strength. We believe that everyone has a purpose and a new opportunity to rise and move forward."
+};
+
+const networkSection = {
+  title: "Our Support Network",
+  description: "We know that true change is built in community. That's why we have the support of more than 15 international churches, as well as a solid network of collaborators, associations, and local organizations. Together, we work to make the world a more just, supportive, and inclusive place."
+};
+
+const founderData = {
+  name: "Joanna Glod Núñez",
+  title: "Founder of MIRES",
+  story: "Since I was a child, I have always felt a special sensitivity towards people in vulnerable situations. For me, helping is not just an act, it's a calling. The satisfaction of seeing smiles and restoring hope to those who have lost it is my greatest reward. With MIRES, I dedicate myself to making this possible every day. Serving and helping is something bigger than myself, a mission that transforms not only those who receive but also those of us who give.",
+  image: {
+    src: "/assets/img/team__mires_johana.avif", 
+    alt: "Joanna Glod Núñez - Founder of MIRES"
+  }
+};
+
+const missionVisionData = {
+  mission: {
+    title: "Mission",
+    description: "Promote social development, solidarity, and the well-being of people in vulnerable situations by providing comprehensive support, inclusion, and opportunities that allow them to rebuild their lives with dignity and autonomy."
+  },
+  vision: {
+    title: "Vision",
+    description: "To be a reference organization in Spain and the world, promoting an efficient, sustainable, and innovative intervention model that transforms lives, strengthens communities, and promotes a more inclusive, resilient, and supportive society."
+  }
+};
+
+const ctaData = {
+  title: "Join Our Mission",
+  description: "Because serving is our mission. Because every life matters. Because together, we make a difference.",
+  contactLink: getRelativeLocaleUrl(currentLang, "contact"),
+  donateLink: getRelativeLocaleUrl(currentLang, "donate"),
+  contactText: "Be a Volunteer",
+  donateText: "Make a Donation"
+};
+
+---
+
+<BaseLayout title="About Us - MIRES">
+  
+    {/* Hero Section */}
+    <SimpleHeroSection {...heroData} />
+
+    {/* Network Section */}
+    <NetworkSection {...networkSection} />
+
+    {/* Founder Story */}
+    <FounderStory {...founderData} />    
+
+    {/* Mission and Vision */}
+    <MissionVisionSection {...missionVisionData} />
+
+    {/* Final CTA */}
+    <Cta {...ctaData} />
+  
+</BaseLayout>
+
+<style>
+  /* Add any page-specific styles here */
+  main {
+    overflow-x: hidden; /* Prevent horizontal scroll from animations */
+  }
+</style>

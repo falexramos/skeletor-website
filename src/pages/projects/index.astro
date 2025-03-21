@@ -1,7 +1,9 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CTASection from "@/components/CTASection.astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
 
+const currentLang = Astro.currentLocale || "es";
 // Define los datos de los proyectos
 const projectsData = {
   title: "Nuestros Proyectos",
@@ -11,29 +13,29 @@ const projectsData = {
       id: "dana",
       title: "Proyecto DANA",
       description: "Centro logístico de donaciones para emergencias y catástrofes.",
-      href: "/projects/dana",
-      image: "/assets/img/projects/mires_proyecto_dana.jpg"
+      href: getRelativeLocaleUrl(currentLang, "/projects/dana"),
+      image: "/assets/img/projects/mires_dana_7.avif"
     },
     {
       id: "coschooling",
       title: "Coschooling",
       description: "Espacio de educación alternativa y desarrollo comunitario.",
-      href: "/projects/coschooling",
-      image: "/assets/img/projects/mires_proyecto_dana.jpg"
+      href: getRelativeLocaleUrl(currentLang, "/projects/coschooling") ,
+      image: "/assets/img/projects/mires_proyecto_coschooling.avif"
     },
     {
       id: "diversamente-habil",
       title: "Diversamente Hábil",
       description: "Centro de ocio y desarrollo para personas neurodivergentes.",
-      href: "/projects/diversamente-habil",
-      image: "/assets/img/projects/mires_proyecto_dana.jpg"
+      href: getRelativeLocaleUrl(currentLang, "/projects/diversamente-habil"),
+      image: "/assets/img/projects/mires_diversamente.avif"
     },
     {
       id: "alimentando-esperanza",
       title: "Alimentando Esperanza",
       description: "Apoyo a familias en situación de vulnerabilidad.",
-      href: "/projects/alimentando-esperanza",
-      image: "/assets/img/projects/mires_proyecto_dana.jpg"
+      href: getRelativeLocaleUrl(currentLang, "/projects/alimentando-esperanza"),
+      image: "/assets/img/projects/mires_alimentando_esperanza_8.avif"
     }
   ]
 };

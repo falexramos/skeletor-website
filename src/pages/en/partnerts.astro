@@ -1,0 +1,73 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Partners from "../../components/Partners.astro";
+import HeroSection from "@/components/HeroSection.astro";
+import CollaborationSection from "@/components/CollaborationSection.astro";
+import ActionGrid from "@/components/ActionGrid.astro";
+import SimpleHeroSection from "@/components/SimpleHeroSection.astro";
+import CTASection from "@/components/CTASection.astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+const currentLang = Astro.currentLocale || "es";
+
+const heroData = {
+  title: "Organizations Collaborating with Us",
+  description: "",
+};
+
+const collaborationData = [
+  {
+    title: "Banco Santander",
+    description: "For their support in economic reactivation and the reconstruction of businesses and homes affected by DANA. Their commitment to social inclusion and sustainable development allows us to restore hope to hundreds of families and small entrepreneurs."
+  },
+  {
+    title: "Hambre Cero",
+    description: "For their collaboration in the fight against food insecurity. Thanks to their support, thousands of families in vulnerable situations have received food and essential resources for their well-being."
+  },
+  {
+    title: "Supermercados Más y Más – Grupo Fornes",
+    description: "For their valuable contribution in donating food, allowing us to reach more people and ensure access to dignified nutrition for those who need it most."
+  }
+];
+
+const endMessage = {
+  title: "Collaboration and Partnerships",
+  description: "Our work is enriched through strategic alliances with other NGOs, companies, and public bodies, expanding our impact and generating sustainable solutions.",
+  buttonText: "Collaborate with us",
+  buttonHref: "/contact"
+};
+
+const ctaData = {
+  title: "Do you want to be part of the change?",
+  description:
+    "Join us and help transform lives through our projects.",
+  primaryButton: {
+    text: "Contact Us",
+    href: "/contact",
+  },
+  secondaryButton: {
+    text: "Make a Donation",
+    href: "/donate",
+  },
+};
+---
+
+<BaseLayout title="Partners - MIRES">
+  <!-- Hero Section -->
+  <SimpleHeroSection {...heroData} />
+
+  <!-- Partners Component -->
+  <Partners
+    title="Agradecemos especialmente a"
+    subtitle="Organizaciones que hacen posible nuestra labor"
+  />
+
+  <!-- Detalles de Partners -->
+  <ActionGrid 
+    title=""
+    actions={collaborationData}
+  />
+
+  <CTASection {...ctaData} />
+
+</BaseLayout>

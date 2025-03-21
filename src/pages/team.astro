@@ -3,8 +3,11 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import SectionTitle from "@/components/SectionTitle.astro";
 import TeamMemberCard from "@/components/TeamMemberCard.astro";
 import TestimonialCard from "@/components/TestimonialCard.astro";
-import CTASection from "@/components/CTASection.astro";
 import SimpleHeroSection from "@/components/SimpleHeroSection.astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import Cta from "@/components/Cta.astro";
+
+const currentLang = Astro.currentLocale || "es";
 
 const leadership = [
     {
@@ -12,21 +15,21 @@ const leadership = [
         role: "Presidenta",
         description:
             "Con una trayectoria en el trabajo comunitario, Joanna lidera MIRES con una visión clara de inclusión y apoyo a las personas más vulnerables. Su habilidad para establecer conexiones y alianzas ha sido clave para el crecimiento de la organización.",
-        image: "/assets/img/team__mires_johana.jpg",
+        image: "/assets/img/team__mires_johana.avif",
     },
     {
         name: "Martha Rosa González",
         role: "Secretaria",
         description:
             "Responsable de la administración y coordinación interna, Martha garantiza la eficiencia de todas las operaciones. Su organización y compromiso con la transparencia inspiran confianza en quienes apoyan y colaboran con MIRES.",
-        image: "/assets/img/team__mires_martha_gonzalez.jpg",
+        image: "/assets/img/team__mires_martha_gonzalez.avif",
     },
     {
         name: "Mary Claret Núñez de Glod",
         role: "Tesorera",
         description:
             "Con una experiencia sólida en gestión financiera, Mary es quien cuida de los recursos de MIRES, optimizando el uso de cada donación recibida para maximizar el impacto social.",
-        image: "/assets/img/team_mires_mary_glod.jpg",
+        image: "/assets/img/team_mires_mary_glod.avif",
     },
 ];
 
@@ -34,34 +37,34 @@ const testimonials = [
     {
         name: "Martha Rosa González",
         text: "Para mí ha sido una experiencia que me llena de gozo al trabajar en la obra del Señor",
-        image: "/assets/img/volunteers/testimonio_12.jpg"
+        image: "/assets/img/volunteers/mires_testimonios_1.avif"
     },
     {
         name: "Enza Liccet",
         text: "Ser voluntaria de Mires ha sido una experiencia única y una satisfacción por hacer algo que está en mi, como es ayudar y sentirme más cerca de Dios. Gracias Mires y a su gente.",
-        image: "/assets/img/volunteers/testimonio_12.jpg"
+        image: "/assets/img/volunteers/mires_testimonios_2.avif"
     },
     {
         name: "Iván Silva",
         text: "Trabajar con el equipo de Johana ha sido muy enriquecedor y una experiencia inolvidable de ayuda a los demás.",
-        image: "/assets/img/volunteers/testimonio_12.jpg"
+        image: "/assets/img/volunteers/mires_testimonios_3.avif"
     },
     {
         name: "Jonathan Clavijo Melo",
         text: "Trabajar con la asociación mires para mi ha sido una de las cosas más lindas que me han pasado en la cual puedo ayudar a las personas y en momentos sacarles una sonrisa a pesar de los momentos que les pone la vida. Gracias a joa la cual es un ángel me da la oportunidad de compartir estas experiencias y llenar de amor el mundo con pequeños gestos.",
-        image: "/assets/img/volunteers/testimonio_12.jpg"
+        image: "/assets/img/volunteers/mires_testimonios_4.avif"
     },
     {
         name: "Maria Del Carmen Macías Lozano",
         text: "En momentos difíciles se conocen a las buenas personas y he tenido el honor de poder trabajar como voluntaria junto a Mires.",
-        image: "/assets/img/volunteers/testimonio_12.jpg"
+        image: "/assets/img/volunteers/mires_testimonios_6.avif"
     },
     {
         name: "Miriam Garcia",
         text: "Trabajar con la ONG MIRES me aporta felicidad ya que sé que estoy en mi camino de vida, el poder ver como las personas necesitadas pueden tener un día un poco más feliz",
-        image: "/assets/img/volunteers/testimonio_12.jpg"
+        image: "/assets/img/volunteers/mires_testimonios_8.avif"
     },
-    // Mantenemos los primeros 6 testimonios para no hacer el código demasiado largo
+    
 ];
 
 const heroData = {
@@ -73,15 +76,13 @@ const heroData = {
 const ctaData = {
   title: "Cada acción cuenta",
   description: "Juntos, construimos un futuro más inclusivo y solidario. Tu participación puede marcar la diferencia en la vida de muchas personas.",
-  primaryButton: {
-    text: "Únete a Nuestro Equipo",
-    href: "https://wa.me/34722630688"
-  },
-  secondaryButton: {
-    text: "Sé Voluntario",
-    href: "https://wa.me/34722630688"
-  }
+  contactLink: getRelativeLocaleUrl(currentLang, "contact"),
+  donateLink: getRelativeLocaleUrl(currentLang, "donate"),
+  contactText: "Contacto",
+  donateText: "Voluntario"
 };
+
+
 ---
 
 <BaseLayout title="Equipo - MIRES">
@@ -127,7 +128,7 @@ const ctaData = {
   </section>
   
   <!-- CTA Section -->
-  <CTASection {...ctaData} />
+  <Cta {...ctaData} />
 </BaseLayout>
 
 <style>
@@ -186,9 +187,11 @@ const ctaData = {
     const readMoreButtons = document.querySelectorAll('.testimonial-card button');
     readMoreButtons.forEach(button => {
       button.addEventListener('click', (e) => {
-        const card = e.target.closest('.testimonial-card');
-        card.classList.toggle('expanded');
-        button.textContent = card.classList.contains('expanded') ? 'Leer menos' : 'Leer más';
+        const card = (e.target as Element).closest('.testimonial-card');
+        if (card) {
+          card.classList.toggle('expanded');
+          button.textContent = card.classList.contains('expanded') ? 'Leer menos' : 'Leer más';
+        }
       });
     });
   });

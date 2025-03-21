@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getRelativeLocaleUrl } from "astro:i18n";
+import HeroSection from '../../components/HeroSection.astro';
+import DonationCard from '../../components/DonationCard.astro';
+import CTASection from '@/components/CTASection.astro';
+
+const currentLang = Astro.currentLocale || "es";
+
+const heroData = {
+  title: "How Can You Help?"
+};
+
+const donationCards = [
+  {
+    title: "Businesses and Shops",
+    description: "Join as a sponsor or collaborate by donating products and services.",
+    whatsapp: {
+      number: "34722630688",
+      text: "Contact via WhatsApp"
+    }
+  },
+  {
+    title: "Volunteering",
+    description: "Your time and skills can make a difference. Join our volunteer network, either as a regular volunteer supporting our daily activities or as a professional volunteer contributing your expertise in key areas such as health, education, logistics, or communication. Every talent counts!",
+    whatsapp: {
+      number: "34722630688",
+      text: "Contact via WhatsApp"
+    }
+  },
+  {
+    title: "Donations",
+    description: "Every contribution counts. Contribute monthly to ensure a sustainable impact or make a one-time donation to support those in need during critical moments.",
+    bankDetails: {
+      title: "Cash Donations",
+      organization: "Integral Mission Rocío del Espíritu Santo",
+      iban: "ES33 0049 0008 7222 1710 9530"
+    }
+  }
+];
+
+---
+
+<BaseLayout title="Donate - MIRES">
+
+  <HeroSection {...heroData} />
+  
+  <section class="py-16 bg-lightbg dark:bg-darkbg">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto space-y-12">
+        {donationCards.map(card => (
+          <DonationCard {...card} />
+        ))}
+      </div>
+      
+    </div>
+  </section>
+  
+</BaseLayout>

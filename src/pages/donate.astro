@@ -1,9 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getRelativeLocaleUrl } from "astro:i18n";
 import HeroSection from '../components/HeroSection.astro';
 import DonationCard from '../components/DonationCard.astro';
-import CTASection from '@/components/CTASection.astro';
 
 const currentLang = Astro.currentLocale || "es";
 
@@ -39,18 +37,7 @@ const donationCards = [
   }
 ];
 
-const ctaData = {
-  title: "Súmate a MIRES y transforma el futuro",
-  description: "Tu apoyo puede cambiar vidas. ¡Actúa hoy!",
-  primaryButton: {
-    text: "Haz tu donación",
-    href: "#donar"
-  },
-  secondaryButton: {
-    text: "Únete como voluntario",
-    href: "#voluntariado"
-  }
-};
+
 
 ---
 <BaseLayout title="Donar - MIRES">
@@ -66,5 +53,5 @@ const ctaData = {
       
     </div>
   </section>
-  <CTASection {...ctaData} />
+  
 </BaseLayout>

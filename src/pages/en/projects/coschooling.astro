@@ -1,0 +1,88 @@
+---
+import ProjectPage from "@/components/projects/ProjectPage.astro";
+
+// Datos del proyecto
+const projectData = {
+  title: "COSCHOOLING",
+  subtitle: "Alternative Education Space and Community Development",
+  description: "The Coschooling Project is a space adapted to the needs of children and young people in alternative education, providing a safe and stimulating environment where they can develop their potential.",
+  mainImage: "/assets/img/projects/mires_proyecto_coschooling_1.avif",
+  
+  // Population Scope
+  populations: [
+    "Children and young people in homeschooling or with special educational needs",
+    "Families seeking a more flexible and inclusive learning environment"
+  ],
+  
+  // Areas of Action
+  actionAreas: [
+    {
+      title: "Shared Learning Spaces",
+      description: "Shared learning spaces for children in homeschooling.",
+      icon: "space"
+    },
+    {
+      title: "Pedagogical Support",
+      description: "Personalized pedagogical support.",
+      icon: "support"
+    },
+    {
+      title: "Extracurricular Activities",
+      description: "Extracurricular activities focused on emotional, social, and cognitive development.",
+      icon: "activity"
+    },
+    {
+      title: "Training for Families",
+      description: "Training for families and educators.",
+      icon: "education"
+    }
+  ],
+  
+  // Impact (using text items instead of numerical statistics)
+  impactItems: [
+    "Children and young people developing autonomy and critical thinking",
+    "Families empowered in their children's education",
+    "Innovative methodologies for inclusive learning"
+  ],
+  
+  // Gallery Images
+  galleryImages: [
+    {
+      src: "/assets/img/projects/mires_proyecto_coschooling_1.avif",
+      width: 1200,
+      height: 800,
+      alt: "Shared learning space",
+      caption: "Spaces adapted for collaborative learning"
+    },
+    {
+      src: "/assets/img/projects/mires_proyecto_coschooling_2.avif",
+      width: 1200,
+      height: 800,
+      alt: "Educational activities",
+      caption: "Practical activities for skill development"
+    },
+    {
+      src: "/assets/img/projects/mires_proyecto_coschooling.avif",
+      width: 1200,
+      height: 800,
+      alt: "Educational materials",
+      caption: "Pedagogical resources adapted to different needs"
+    }
+  ],
+  
+  // CTA Data
+  ctaTitle: "Do you want to collaborate with the Coschooling Project?",
+  ctaDescription: "Your help can make a difference in the education of children and young people."
+};
+---
+
+<ProjectPage {...projectData}>
+  <p slot="description-first-paragraph">
+    The Coschooling Project is a space adapted to the needs of children and young people in alternative education, providing a safe and stimulating environment where they can develop their potential. It is designed for families seeking an alternative to traditional education.
+  </p>
+  
+  <p slot="description-second-paragraph">
+    Our approach is based on respecting individual learning rhythms, promoting natural curiosity, and the holistic development of each child and young person. We create an environment where they can explore, discover, and grow in community.
+  </p>
+</ProjectPage>
+

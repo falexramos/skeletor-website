@@ -1,11 +1,13 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import FounderStory from '../components/FounderStory.astro';
-import MissionVisionSection from '../components/MissionVisionSection.astro';
-import CTASection from '@/components/CTASection.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import FounderStory from '@/components/FounderStory.astro';
+import MissionVisionSection from '@/components/MissionVisionSection.astro';
 import NetworkSection from '@/components/NetworkSection.astro';
 import SimpleHeroSection from '@/components/SimpleHeroSection.astro';
-import HeroSection from '../components/HeroSection.astro';
+import { getRelativeLocaleUrl } from "astro:i18n";
+import Cta from '@/components/Cta.astro';
+
+const currentLang = Astro.currentLocale || "es";
 
 const heroData = {
   title: "¿Quiénes Somos?",
@@ -22,7 +24,7 @@ const founderData = {
   title: "Fundadora de MIRES",
   story: "Desde pequeña, siempre he sentido una sensibilidad especial hacia las personas en situación de vulnerabilidad. Para mí, ayudar no es solo un acto, es un llamado. La satisfacción de ver sonrisas y de devolver esperanza a quienes la han perdido es mi mayor recompensa. Con MIRES, me dedico a hacer esto posible cada día. El servir y ayudar es algo más grande que yo misma, una misión que transforma no solo a quienes reciben, sino también a quienes damos.",
   image: {
-    src: "/assets/img/team__mires_johana.jpg", 
+    src: "/assets/img/team__mires_johana.avif", 
     alt: "Joanna Glod Núñez - Fundadora de MIRES"
   }
 };
@@ -43,14 +45,10 @@ const missionVisionData = {
 const ctaData = {
   title: "Únete a Nuestra Misión",
   description: "Porque servir es nuestra misión. Porque cada vida importa. Porque juntos, marcamos la diferencia.",
-  primaryButton: {
-    text: "Haz una Donación",
-    href: "/donate"
-  },
-  secondaryButton: {
-    text: "Sé Voluntario",
-    href: "/contact"
-  }
+  contactLink: getRelativeLocaleUrl(currentLang, "contact"),
+  donateLink: getRelativeLocaleUrl(currentLang, "donate"),
+  contactText: "Sé Voluntario",
+  donateText: "Haz una Donación"
 };
 
 ---
@@ -70,7 +68,7 @@ const ctaData = {
     <MissionVisionSection {...missionVisionData} />
 
     {/* Final CTA */}
-    <CTASection {...ctaData} />
+    <Cta {...ctaData} />
   
 </BaseLayout>
 

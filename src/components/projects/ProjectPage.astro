@@ -1,0 +1,155 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ProjectHero from "@/components/projects/ProjectHero.astro";
+import ProjectDescription from "@/components/projects/ProjectDescription.astro";
+import ProjectPopulationGrid from "@/components/projects/ProjectPopulationGrid.astro";
+import ProjectActionAreas from "@/components/projects/ProjectActionAreas.astro";
+import ProjectImpactStats from "@/components/projects/ProjectImpactStats.astro";
+import ProjectImpactItems from "@/components/projects/ProjectImpactItems.astro";
+import ProjectGallerySection from "@/components/projects/ProjectGallerySection.astro";
+import Cta from "@/components/Cta.astro";
+
+interface Props {
+  title: string;
+  subtitle: string;
+  description: string;
+  mainImage: string;
+  populations: string[];
+  actionAreas: {
+    title: string;
+    description: string;
+    icon: string;
+  }[];
+  impactStats?: {
+    value: string;
+    label: string;
+    icon: string;
+  }[];
+  impactItems?: string[];
+  galleryImages: {
+    src: string;
+    width: number;
+    height: number;
+    alt: string;
+    caption?: string;
+  }[];
+  ctaTitle: string;
+  ctaDescription: string;
+  populationColumns?: 2 | 3 | 6;
+}
+
+const { 
+  title, 
+  subtitle, 
+  description, 
+  mainImage,
+  populations,
+  actionAreas,
+  impactStats,
+  impactItems,
+  galleryImages,
+  ctaTitle,
+  ctaDescription,
+  populationColumns = 2
+} = Astro.props;
+---
+
+<BaseLayout title={`${title} - MIRES`} description={description}>
+  <!-- Hero Section -->
+  <ProjectHero 
+    title={title}
+    subtitle={subtitle}
+    description={description}
+    imageSrc={mainImage}
+    imageAlt={`Imagen principal de ${title}`}
+  >
+    <span slot="caption">Centro del Proyecto {title}</span>
+  </ProjectHero>
+
+  <!-- Descripción del Proyecto -->
+  <ProjectDescription 
+    title={`Sobre ${title}`}
+    subtitle="Una alternativa centrada en las necesidades reales"
+    quoteText={`Nuestro objetivo es crear un entorno flexible e inclusivo para el desarrollo integral de las personas.`}
+  >
+    <p slot="description-first-paragraph">
+      <slot name="description-first-paragraph" />
+    </p>
+    
+    <p slot="description-second-paragraph">
+      <slot name="description-second-paragraph" />
+    </p>
+  </ProjectDescription>
+
+  <!-- Ámbito Poblacional -->
+  <ProjectPopulationGrid
+    title="Ámbito Poblacional"
+    subtitle="Personas y comunidades a las que servimos"
+    populations={populations}
+    columns={populationColumns}
+  />
+
+  <!-- Áreas de Acción -->
+  <ProjectActionAreas
+    title="Áreas de Acción"
+    subtitle="Nuestras principales líneas de trabajo"
+    actionAreas={actionAreas}
+  />
+
+  <!-- Impacto - Condicional según el tipo de datos proporcionados -->
+  {impactStats && (
+    <ProjectImpactStats
+      title="Nuestro Impacto"
+      subtitle="Resultados tangibles que demuestran nuestro compromiso"
+      stats={impactStats}
+    />
+  )}
+
+  {impactItems && (
+    <ProjectImpactItems
+      title="Nuestro Impacto"
+      subtitle="Resultados tangibles que demuestran nuestro compromiso"
+      impactItems={impactItems}
+    />
+  )}
+
+  <!-- Galería de Fotos -->
+  <ProjectGallerySection
+    title="Galería de Imágenes"
+    subtitle="Conoce nuestro trabajo a través de imágenes"
+    images={galleryImages}
+  />
+
+  <!-- CTA -->
+  <Cta
+    title={ctaTitle}
+    description={ctaDescription}
+    contactLink="/contact"
+    donateLink="/donate"
+    contactText="Contactar"
+    donateText="Donar"
+  />
+</BaseLayout>
+
+<script>
+  // Script para detectar cuando las secciones entran en el viewport
+  document.addEventListener("DOMContentLoaded", () => {
+    const sections = document.querySelectorAll("section");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+          }
+        });
+      },
+      { threshold: 0.1 },
+    );
+
+    sections.forEach((section) => {
+      observer.observe(section);
+    });
+  });
+</script>
+

@@ -1,0 +1,91 @@
+---
+import { getPopulationIconPath } from './ProjectIconMapper.astro';
+
+interface Props {
+  title: string;
+  subtitle: string;
+  populations: string[];
+  columns?: 2 | 3 | 6;
+}
+
+const { title, subtitle, populations, columns = 2 } = Astro.props;
+
+// Determinar las clases de columnas basadas en el prop columns
+const getColumnsClass = () => {
+  switch(columns) {
+    case 2: return "grid-cols-1 md:grid-cols-2";
+    case 3: return "grid-cols-1 md:grid-cols-3";
+    case 6: return "grid-cols-2 md:grid-cols-3 lg:grid-cols-6";
+    default: return "grid-cols-1 md:grid-cols-2";
+  }
+};
+---
+
+<section class="py-20 bg-gray-50 dark:bg-darkbg">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl sm:text-4xl font-bold mb-3 text-primary dark:text-white">
+        {title}
+      </h2>
+      
+      <p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+        {subtitle}
+      </p>
+      
+      <div class="h-1 w-24 bg-secondary mx-auto mt-4 rounded"></div>
+    </div>
+    
+    <div class={`grid ${getColumnsClass()} gap-4 md:gap-6 max-w-5xl mx-auto mt-12`}>
+      {populations.map((population, index) => (
+        <div class="bg-white dark:bg-darkbg/50 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 p-6 text-center border border-gray-100 dark:border-white/5 flex flex-col items-center justify-center group">
+          <div class="w-16 h-16 rounded-full bg-primary/10 dark:bg-primary/20 flex items-center justify-center mb-4 group-hover:bg-primary/20 dark:group-hover:bg-primary/30 transition-colors duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={getPopulationIconPath(index)} />
+            </svg>
+          </div>
+          <h3 class="text-gray-800 dark:text-white font-medium text-lg">{population}</h3>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Animaciones para elementos al hacer scroll */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  section.in-view .grid > div {
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  section.in-view .grid > div:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  section.in-view .grid > div:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+
+  section.in-view .grid > div:nth-child(4) {
+    animation-delay: 0.4s;
+  }
+
+  section.in-view .grid > div:nth-child(5) {
+    animation-delay: 0.5s;
+  }
+
+  section.in-view .grid > div:nth-child(6) {
+    animation-delay: 0.6s;
+  }
+</style>
+

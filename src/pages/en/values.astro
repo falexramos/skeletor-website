@@ -1,0 +1,114 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import IntroSection from '@/components/IntroSection.astro';
+import ValuesGrid from '@/components/ValuesGrid.astro';
+import SimpleHeroSection from '@/components/SimpleHeroSection.astro';
+import Cta from '@/components/Cta.astro';
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+const currentLang = Astro.currentLocale || "es";
+const values = [
+  {
+    id: 1,
+    title: "Human Dignity and Faith in Restoration",
+    reference: "Art. 10 CE",
+    description: "Every person has an inalienable value. We are committed to treating each individual with the respect and dignity they deserve, providing not only material support but also emotional and spiritual accompaniment."
+  },
+  {
+    id: 2,
+    title: "Equality and Social Justice",
+    reference: "Art. 14 CE",
+    description: "We reject any form of discrimination and work to ensure equal opportunities for all, regardless of gender, origin, social status, or immigration status. At MIRES, everyone has the right to a dignified future."
+  },
+  {
+    id: 3,
+    title: "Solidarity and Shared Responsibility",
+    reference: "Art. 9.2 CE",
+    description: "We believe in a society united by mutual aid. Our work not only addresses immediate needs but also empowers people to become agents of change within their communities."
+  },
+  {
+    id: 4,
+    title: "Protection of Family and Social Fabric",
+    reference: "Art. 39 CE",
+    description: "The family is the foundation of society and deserves protection. We work to support families at risk of exclusion, victims of violence and human trafficking, ensuring they have access to a safe and stable environment."
+  },
+  {
+    id: 5,
+    title: "Right to Social and Economic Assistance",
+    reference: "Art. 41 CE",
+    description: "We provide direct support to those who need it most, including psychosocial assistance, support in labor reintegration, and basic resources so that each person has the opportunity to rebuild their life."
+  },
+  {
+    id: 6,
+    title: "Integrity and Protection Against Violence",
+    reference: "Art. 15 CE",
+    description: "We are unwavering defenders of the physical and moral integrity of every person. We fight against violence and human trafficking, with the vision of creating shelters and support programs for victims."
+  },
+  {
+    id: 7,
+    title: "Sustainability and Circular Economy",
+    reference: "",
+    description: "Our work promotes the reuse and responsible use of resources, aligning with the circular economy model to reduce waste and generate a positive impact on the environment and society."
+  },
+  {
+    id: 8,
+    title: "Faith and Love in Action",
+    reference: "",
+    description: "Inspired by the Word of God, we believe in the power of service with love, mercy, and justice. Each act of help is also a message of hope for those going through moments of deep vulnerability."
+  }
+];
+
+// Data for HeroSection
+const heroData = {
+  title: "Our Values",
+  description: "Inspired by Faith and the Spanish Constitution"
+};
+
+// Data for IntroSection
+const introText = "At MIRES, our values are not just guiding principles, but the foundation of every action we take. Our work is based on the Word of God, which calls us to serve with love and justice, and on the constitutional values and rights of Spain, which guarantee dignity, equality, and solidarity for all.";
+
+// Data for CTASection
+const ctaData = {
+  title: "Join our mission",
+  description: "At MIRES, these values are not just words. They are our way of living, serving, and transforming lives.",
+  contactLink: getRelativeLocaleUrl(currentLang, "contact"),
+  donateLink: getRelativeLocaleUrl(currentLang, "donate"),
+  contactText: "Contact",
+  donateText: "Volunteer"
+};
+---
+
+<BaseLayout title="Our Values - MIRES">
+  <SimpleHeroSection {...heroData} />
+  <IntroSection text={introText} />
+  <ValuesGrid values={values} />
+  <Cta {...ctaData} />
+</BaseLayout>
+
+<style>
+  /* Add any page-specific styles here */
+  :global(section) {
+    position: relative;
+    overflow: hidden;
+  }
+</style>
+
+<script>
+// Script para detectar cuando las secciones entran en el viewport
+document.addEventListener('DOMContentLoaded', () => {
+  const sections = document.querySelectorAll('section');
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+      }
+    });
+  }, { threshold: 0.1 });
+  
+  sections.forEach(section => {
+    observer.observe(section);
+  });
+});
+</script>
+

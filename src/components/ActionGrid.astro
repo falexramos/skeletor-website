@@ -1,39 +1,104 @@
 ---
-// src/components/ActionGrid.astro
 interface Action {
   title: string;
   description: string;
+  icon?: string; // Opcional: para permitir iconos personalizados
 }
 
 interface Props {
   title: string;
+  subtitle?: string; // Opcional: para añadir un subtítulo
   actions: Action[];
 }
 
-const { title, actions } = Astro.props;
+const { title, subtitle, actions } = Astro.props;
+
+// Función para obtener un icono predeterminado si no se proporciona uno
+const getDefaultIcon = (index: number) => {
+  const icons = [
+    "M12 6v6m0 0v6m0-6h6m-6 0H6", // Plus
+    "M13 10V3L4 14h7v7l9-11h-7z", // Lightning
+    "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z", // Check circle
+    "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6", // Home
+    "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253", // Book
+    "M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" // Globe
+  ];
+  return icons[index % icons.length];
+};
 ---
 
-<section class="py-16 bg-white dark:bg-gray-900">
-  <div class="container mx-auto px-4">
-    <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">
-      {title}
-    </h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {actions.map((action) => (
-        <div class="bg-gray-50 dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">
-            {action.title}
-          </h3>
-          <p class="text-gray-600 dark:text-gray-300">
-            {action.description}
+<section class="py-20 bg-white dark:bg-darkbg/80 relative overflow-hidden">
+  <!-- Elementos decorativos de fondo -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <div class="absolute top-0 right-0 w-1/2 h-1/2 bg-primary/5 rounded-full transform translate-x-1/4 -translate-y-1/4 blur-3xl"></div>
+    <div class="absolute bottom-0 left-0 w-1/2 h-1/2 bg-secondary/5 rounded-full transform -translate-x-1/4 translate-y-1/4 blur-3xl"></div>
+  </div>
+  
+  <div class="container mx-auto px-4 relative z-10">
+    <div class="max-w-5xl mx-auto">
+      <!-- Encabezado de sección -->
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4 text-primary dark:text-white">
+          {title}
+        </h2>
+        
+        {subtitle && (
+          <p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            {subtitle}
           </p>
-        </div>
-      ))}
+        )}
+        
+        <div class="h-1 w-24 bg-secondary mx-auto mt-4 rounded"></div>
+      </div>
+      
+      <!-- Grid de acciones -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {actions.map((action, index) => (
+          <div class="bg-gray-50 dark:bg-darkbg/50 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-white/5 overflow-hidden group">
+            <div class="p-8 relative h-full flex flex-col">
+              <!-- Elemento decorativo superior -->
+              <div class="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full transform translate-x-1/3 -translate-y-1/3 group-hover:bg-primary/10 transition-colors duration-300"></div>
+              
+              <div class="relative z-10 flex-grow">
+                <!-- Icono y título -->
+                <div class="flex items-start gap-4 mb-4">
+                  <div class="flex-shrink-0 mt-1">
+                    <div class="w-12 h-12 rounded-full bg-primary/10 dark:bg-lightbg flex items-center justify-center group-hover:bg-primary/20 dark:group-hover:bg-primary/30 transition-colors duration-300">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={action.icon || getDefaultIcon(index)} />
+                      </svg>
+                    </div>
+                  </div>
+                  
+                  <h3 class="text-xl font-bold text-primary dark:text-white">
+                    {action.title}
+                  </h3>
+                </div>
+                
+                <!-- Descripción -->
+                <p class="text-gray-600 dark:text-gray-300 leading-relaxed pl-16">
+                  {action.description}
+                </p>
+              </div>
+              
+              <!-- Indicador de hover -->
+              <div class="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div class="w-8 h-8 rounded-full bg-secondary/10 dark:bg-secondary/20 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   </div>
 </section>
 
 <style>
+  /* Animación al hacer hover */
   .grid > div {
     transition: all 0.3s ease-in-out;
   }
@@ -41,4 +106,42 @@ const { title, actions } = Astro.props;
   .grid > div:hover {
     transform: translateY(-5px);
   }
+  
+  /* Animaciones para elementos al hacer scroll */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  section.in-view .grid > div {
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+  
+  section.in-view .grid > div:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  
+  section.in-view .grid > div:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+  
+  section.in-view .grid > div:nth-child(4) {
+    animation-delay: 0.6s;
+  }
+  
+  section.in-view .grid > div:nth-child(5) {
+    animation-delay: 0.8s;
+  }
+  
+  section.in-view .grid > div:nth-child(6) {
+    animation-delay: 1s;
+  }
 </style>
+

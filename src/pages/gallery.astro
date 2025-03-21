@@ -3,114 +3,198 @@ import HeroSection from "@/components/HeroSection.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import "photoswipe/style.css";
 import SimpleHeroSection from "@/components/SimpleHeroSection.astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import Cta from "@/components/Cta.astro";
 
-// Definir las categorías de imágenes
-// Definir las categorías con imágenes de portada
+const currentLang = Astro.currentLocale || "es";
+
+
 const categories = [
   {
     id: "dana",
     name: "Proyecto DANA",
     description: "Ayuda y reconstrucción tras las inundaciones",
-    cover: "/assets/img/gallery/mires_dana_1.jpg", // Imagen de portada
+    cover: "/assets/img/gallery/mires_dana_7.avif", 
   },
   {
     id: "food",
     name: "Alimentando Esperanza",
     description: "Distribución de alimentos y recursos básicos",
-    cover: "/assets/img/gallery/mires_alimentando_esperanza_1.jpg",
+    cover: "/assets/img/gallery/mires_alimentando_esperanza_7.avif",
   },
   {
     id: "events",
     name: "Eventos Solidarios",
     description: "Actividades y encuentros comunitarios",
-    cover: "/assets/img/gallery/mires_eventos_1.jpg",
+    cover: "/assets/img/gallery/mires_mas_que_un_regalo_navidad_2.avif",
   },
   {
     id: "volunteers",
     name: "Voluntariado",
     description: "Nuestro equipo en acción",
-    cover: "/assets/img/gallery/mires_voluntarios_1.jpg",
+    cover: "/assets/img/gallery/mires_colaboradores_4.avif",
   },
 ];
 
-// Definir las imágenes con sus categorías
+
 const images = [
   // Alimentando Esperanza
   {
-    src: "/assets/img/gallery/mires_alimentando_esperanza_1.jpg",
+    src: "/assets/img/gallery/mires_alimentando_esperanza_19.avif",
     alt: "Alimentando Esperanza - MIRES",
     category: "food",
   },
   {
-    src: "/assets/img/gallery/mires_alimentando_esperanza_2.jpg",
+    src: "/assets/img/gallery/mires_alimentando_esperanza_2.avif",
     alt: "Alimentando Esperanza - MIRES",
     category: "food",
   },
   {
-    src: "/assets/img/gallery/mires_alimentando_esperanza_3.jpg",
+    src: "/assets/img/gallery/mires_alimentando_esperanza_3.avif",
     alt: "Alimentando Esperanza - MIRES",
     category: "food",
   },
   {
-    src: "/assets/img/gallery/mires_alimentando_ezperanza_4.jpg",
+    src: "/assets/img/gallery/mires_alimentando_esperanza_20.avif",
+    alt: "Alimentando Esperanza - MIRES",
+    category: "food",
+  },
+  {
+    src: "/assets/img/gallery/mires_alimentando_esperanza_5.avif",
+    alt: "Alimentando Esperanza - MIRES",
+    category: "food",
+  },
+  {
+    src: "/assets/img/gallery/mires_alimentando_esperanza_6.avif",
+    alt: "Alimentando Esperanza - MIRES",
+    category: "food",
+  },
+  {
+    src: "/assets/img/gallery/mires_alimentando_esperanza_7.avif",
+    alt: "Alimentando Esperanza - MIRES",
+    category: "food",
+  },
+  {
+    src: "/assets/img/gallery/mires_alimentando_esperanza_8.avif",
     alt: "Alimentando Esperanza - MIRES",
     category: "food",
   },
   // Proyecto DANA
   {
-    src: "/assets/img/gallery/mires_dana_1.jpg",
+    src: "/assets/img/gallery/mires_dana_1.avif",
     alt: "Proyecto DANA - MIRES",
     category: "dana",
   },
   {
-    src: "/assets/img/gallery/mires_dana_2.jpg",
+    src: "/assets/img/gallery/mires_dana_2.avif",
     alt: "Proyecto DANA - MIRES",
     category: "dana",
   },
   {
-    src: "/assets/img/gallery/mires_dana_3.jpg",
+    src: "/assets/img/gallery/mires_dana_3.avif",
     alt: "Proyecto DANA - MIRES",
     category: "dana",
   },
+  {
+    src: "/assets/img/gallery/mires_dana_4.avif",
+    alt: "Proyecto DANA - MIRES",
+    category: "dana",
+  },
+  {
+    src: "/assets/img/gallery/mires_dana_5.avif",
+    alt: "Proyecto DANA - MIRES",
+    category: "dana",
+  },
+  {
+    src: "/assets/img/gallery/mires_dana_6.avif",
+    alt: "Proyecto DANA - MIRES",
+    category: "dana",
+  },
+  {
+    src: "/assets/img/gallery/mires_dana_7.avif",
+    alt: "Proyecto DANA - MIRES",
+    category: "dana",
+  },
+  {
+    src: "/assets/img/gallery/mires_dana_8.avif",
+    alt: "Proyecto DANA - MIRES",
+    category: "dana",
+  },
+
   // Eventos
   {
-    src: "/assets/img/gallery/mires_eventos_1.jpg",
+    src: "/assets/img/gallery/mires_mas_que_un_regalo_navidad_1.avif",
     alt: "Eventos Solidarios - MIRES",
     category: "events",
   },
   {
-    src: "/assets/img/gallery/mires_eventos_2.jpg",
+    src: "/assets/img/gallery/mires_mas_que_un_regalo_navidad_2.avif",
     alt: "Eventos Solidarios - MIRES",
     category: "events",
   },
   {
-    src: "/assets/img/gallery/mires_eventos_3.jpg",
+    src: "/assets/img/gallery/mires_mas_que_un_regalo_navidad_3.avif",
+    alt: "Eventos Solidarios - MIRES",
+    category: "events",
+  },
+  {
+    src: "/assets/img/gallery/mires_mas_que_un_regalo_navidad_4.avif",
+    alt: "Eventos Solidarios - MIRES",
+    category: "events",
+  },
+  {
+    src: "/assets/img/gallery/mires_mas_que_un_regalo_navidad_5.avif",
+    alt: "Eventos Solidarios - MIRES",
+    category: "events",
+  },
+  {
+    src: "/assets/img/gallery/mires_mas_que_un_regalo_navidad_6.avif",
+    alt: "Eventos Solidarios - MIRES",
+    category: "events",
+  },
+  {
+    src: "/assets/img/gallery/mires_mas_que_un_regalo_navidad_7.avif",
+    alt: "Eventos Solidarios - MIRES",
+    category: "events",
+  },
+  {
+    src: "/assets/img/gallery/mires_mas_que_un_regalo_navidad_8.avif",
     alt: "Eventos Solidarios - MIRES",
     category: "events",
   },
   // Voluntarios
   {
-    src: "/assets/img/gallery/mires_voluntarios_1.jpg",
+    src: "/assets/img/gallery/mires_colaboradores_2.avif",
     alt: "Voluntarios - MIRES",
     category: "volunteers",
   },
   {
-    src: "/assets/img/gallery/mires_voluntarios_2.jpg",
+    src: "/assets/img/gallery/mires_colaboradores_3.avif",
     alt: "Voluntarios - MIRES",
     category: "volunteers",
   },
   {
-    src: "/assets/img/gallery/mires_voluntarios_3.jpg",
+    src: "/assets/img/gallery/mires_colaboradores_4.avif",
     alt: "Voluntarios - MIRES",
     category: "volunteers",
   },
   {
-    src: "/assets/img/gallery/mires_voluntarios_4.jpg",
+    src: "/assets/img/gallery/mires_colaboradores_5.avif",
     alt: "Voluntarios - MIRES",
     category: "volunteers",
   },
   {
-    src: "/assets/img/gallery/mires_voluntarios_5.jpg",
+    src: "/assets/img/gallery/mires_colaboradores_6.avif",
+    alt: "Voluntarios - MIRES",
+    category: "volunteers",
+  },
+  {
+    src: "/assets/img/gallery/mires_colaboradores_7.avif",
+    alt: "Voluntarios - MIRES",
+    category: "volunteers",
+  },
+  {
+    src: "/assets/img/gallery/mires_colaboradores_8.avif",
     alt: "Voluntarios - MIRES",
     category: "volunteers",
   },
@@ -120,6 +204,15 @@ const heroData = {
   title: "Galería de Imágenes",
   description:
     "Un recorrido visual por nuestro trabajo y el impacto en la comunidad.",
+};
+
+const ctaData = {
+  title:"¿Quieres colaborar con el Proyecto DANA?",
+  description: "En MIRES, estos valores no son solo palabras. Son nuestra forma de vivir, servir y transformar vidas.",
+  contactLink: getRelativeLocaleUrl(currentLang, "contact"),
+  donateLink: getRelativeLocaleUrl(currentLang, "donate"),
+  contactText: "Contáctanos",
+  donateText: "Donar",
 };
 ---
 
@@ -194,6 +287,10 @@ const heroData = {
       ))
     }
   </div>
+
+  <Cta
+    {...ctaData}
+  />
 </BaseLayout>
 
 <style>
