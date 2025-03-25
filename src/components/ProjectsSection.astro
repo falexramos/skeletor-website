@@ -1,35 +1,19 @@
 ---
-interface Project {
-  title: string;
-  description: string;
-  href: string;
-  image?: string; // Optional image for each project
-}
-
-interface Props {
-  title: string;
-  subtitle?: string;
-  projects: Project[];
-}
-
-const { title, subtitle, projects } = Astro.props;
+const { projects } = Astro.props;
 ---
-<section class="py-24 bg-white dark:bg-gray-900 relative overflow-hidden">
-  <div class="container mx-auto px-6">
-    <div class="text-center mb-16">
-      <h2 class="text-4xl font-bold text-primary mb-4">{title}</h2>
-      <p class="text-xl text-secondary max-w-2xl mx-auto">{subtitle}</p>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+
+<section class="py-20 bg-white dark:bg-gray-900 relative overflow-hidden">
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
       {projects.map((project, index) => (
-        <a 
+        <a
           href={project.href}
           class="group bg-lightbg dark:bg-primary/10 rounded-2xl overflow-hidden shadow-lg transform transition-all duration-500 hover:scale-105 hover:shadow-2xl"
           style={`transition-delay: ${index * 100}ms`}
         >
           <div class="h-48 overflow-hidden">
-            <img 
-              src={project.image || "/placeholder.svg?height=300&width=400"} 
+            <img
+              src={project.image || "/placeholder.svg?height=300&width=400"}
               alt={project.title}
               class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
             />
