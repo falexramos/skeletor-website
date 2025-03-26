@@ -99,55 +99,93 @@ const socialLinks = [
 <header class="fixed top-0 left-0 w-full z-50">
   <!-- Top Bar -->
   <div class="w-full bg-white/90 dark:bg-darkbg/90 backdrop-blur-md shadow-md py-4 px-6 flex justify-between items-center border-b border-slate-200 dark:border-white/10 transition-colors duration-300">
-    <!-- Logo -->
-    <a href={getRelativeLocaleUrl(currentLang, "/")} class="flex items-center group">
-      <div class="flex items-center gap-3">
-        <LogoIcon className="w-10 h-10 text-primary dark:text-white transition-colors duration-500" />
-       
-        <span class="text-3xl font-extrabold text-primary dark:text-white transition-colors duration-500">
-          MIRES
-        </span>
-      </div>
-    </a>
-
-  <!-- Right side controls: Language selector, Theme toggle, and Menu button -->
-  <div class="flex items-center gap-3">
-    <!-- Language Selector in Top Bar -->
-    <div class="relative group hidden sm:block">
-      <button class="px-2 py-1 rounded-lg bg-primary/10 hover:bg-primary/20 dark:bg-white/10 dark:hover:bg-white/20 text-primary dark:text-white transition-all duration-300 flex items-center justify-center gap-1">
-        <span class="text-xs font-bold uppercase">{currentLang}</span>
-      </button>
-      <div class="absolute top-full right-0 mt-2 w-24 bg-white dark:bg-darkbg backdrop-blur-md rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-200 dark:border-white/10 overflow-hidden transform origin-top scale-95 group-hover:scale-100 z-50">
-        <ul class="py-1">
-          {
-            Object.entries({es: "Español", en: "English"}).map(
-              ([langCode, langName]) =>
-                currentLang !== langCode && (
-                  <li>
-                    <a href={getRelativeLocaleUrl(langCode as any, currentPathWithoutLocale)} class="block px-3 py-1 text-xs hover:bg-gray-100 dark:hover:bg-white/10 transition-colors text-gray-800 dark:text-white font-medium text-center">
-                      {langName}
-                    </a>
-                  </li>
-                )
-            )
-          }
-        </ul>
-      </div>
+    <!-- Left Side: Social Links (hidden on mobile) -->
+    <div class="hidden md:flex items-center space-x-2">
+      {socialLinks.map(link => (
+        <a 
+          href={link.url} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="p-2 rounded-full bg-primary/10 hover:bg-primary/20 dark:bg-white/10 dark:hover:bg-white/20 text-primary dark:text-white transition-all duration-300"
+          aria-label={link.platform}
+        >
+          <Fragment set:html={link.icon} />
+        </a>
+      ))}
     </div>
     
-    <!-- Theme Toggle in Top Bar -->
-    
+    <!-- Mobile: Just show logo on left -->
+    <div class="md:hidden flex items-center">
+      <a href={getRelativeLocaleUrl(currentLang, "/")} class="flex items-center group">
+        <div class="flex items-center gap-2">
+          <LogoIcon className="w-8 h-8 text-primary dark:text-white transition-colors duration-500" />
+          <span class="text-xl font-extrabold text-primary dark:text-white transition-colors duration-500">
+            MIRES
+          </span>
+        </div>
+      </a>
+    </div>
 
-    <button id="sidebar-theme-toggle" class="px-3 py-2 sm:px-4 sm:py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white transition-all duration-300">
-      <span id="sidebar-theme-icon" class="text-sm">☀️</span>
-    </button>
+    <!-- Center: Logo and Name -->
+    <div class="hidden md:flex items-center justify-center flex-grow">
+      <a href={getRelativeLocaleUrl(currentLang, "/")} class="flex items-center group">
+        <div class="flex items-center gap-3">
+          <LogoIcon className="w-10 h-10 text-primary dark:text-white transition-colors duration-500" />
+          <span class="text-3xl font-extrabold text-primary dark:text-white transition-colors duration-500">
+            MIRES
+          </span>
+        </div>
+      </a>
+    </div>
 
-    <!-- Menu Toggle Button (único elemento en la barra superior) -->
-    <button id="menu-toggle" class="p-2 rounded-full bg-primary/10 hover:bg-primary/20 dark:bg-white/10 dark:hover:bg-white/20 text-primary dark:text-white transition-all duration-300 flex items-center justify-center">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-      </svg>
-    </button>
+    <!-- Right Side: Donate Button, Language Selector, Theme Toggle, Menu Button -->
+    <div class="flex items-center gap-3">
+      <!-- Donate Button (hidden on small screens) -->
+      <a 
+        href={getRelativeLocaleUrl(currentLang, "donate")} 
+        class="hidden sm:flex items-center px-4 py-2 bg-secondary hover:bg-secondary/90 text-white rounded-full text-sm font-medium transition-all duration-300 shadow-sm hover:shadow-md"
+      >
+        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+        </svg>
+        <span>{translateLabels("nav.donate")}</span>
+      </a>
+      
+      <!-- Language Selector -->
+      <div class="relative group ">
+        <button class="px-2 py-1 rounded-lg bg-primary/10 hover:bg-primary/20 dark:bg-white/10 dark:hover:bg-white/20 text-primary dark:text-white transition-all duration-300 flex items-center justify-center gap-1">
+          <span class="text-xs font-bold uppercase">{currentLang}</span>
+        </button>
+        <div class="absolute top-full right-0 mt-2 w-24 bg-white dark:bg-darkbg backdrop-blur-md rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-200 dark:border-white/10 overflow-hidden transform origin-top scale-95 group-hover:scale-100 z-50">
+          <ul class="py-1">
+            {
+              Object.entries({es: "Español", en: "English"}).map(
+                ([langCode, langName]) =>
+                  currentLang !== langCode && (
+                    <li>
+                      <a href={getRelativeLocaleUrl(langCode as any, currentPathWithoutLocale)} class="block px-3 py-1 text-xs hover:bg-gray-100 dark:hover:bg-white/10 transition-colors text-gray-800 dark:text-white font-medium text-center">
+                        {langName}
+                      </a>
+                    </li>
+                  )
+              )
+            }
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Theme Toggle -->
+      <button id="top-theme-toggle" class=" px-2 py-1 rounded-lg bg-primary/10 hover:bg-primary/20 dark:bg-white/10 dark:hover:bg-white/20 text-primary dark:text-white transition-all duration-300 items-center justify-center">
+        <span id="top-theme-icon" class="text-xs">☀️</span>
+      </button>
+
+      <!-- Menu Toggle Button -->
+      <button id="menu-toggle" class="p-2 rounded-full bg-primary/10 hover:bg-primary/20 dark:bg-white/10 dark:hover:bg-white/20 text-primary dark:text-white transition-all duration-300 flex items-center justify-center">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
   </div>
 
   <!-- Sidebar Menu (Hidden by default) - Siempre oscuro -->
@@ -342,6 +380,13 @@ const socialLinks = [
     htmlElement.classList.toggle("dark");
     const isDarkMode = htmlElement.classList.contains("dark");
     sidebarThemeIcon.textContent = isDarkMode ? "🌙" : "☀️";
+    
+    // Also update the top theme icon if it exists
+    const topThemeIcon = document.getElementById("top-theme-icon");
+    if (topThemeIcon) {
+      topThemeIcon.textContent = isDarkMode ? "🌙" : "☀️";
+    }
+    
     localStorage.setItem("theme", isDarkMode ? "dark" : "light");
   };
 
@@ -350,13 +395,31 @@ const socialLinks = [
   if (savedTheme === "dark") {
     htmlElement.classList.remove("dark");
     sidebarThemeIcon.textContent = "☀️";
+    
+    // Also update the top theme icon if it exists
+    const topThemeIcon = document.getElementById("top-theme-icon");
+    if (topThemeIcon) {
+      topThemeIcon.textContent = "☀️";
+    }
   } else {
     htmlElement.classList.add("light");
     sidebarThemeIcon.textContent = "🌙";
+    
+    // Also update the top theme icon if it exists
+    const topThemeIcon = document.getElementById("top-theme-icon");
+    if (topThemeIcon) {
+      topThemeIcon.textContent = "🌙";
+    }
   }
 
   // Add Event Listeners for Theme Toggles
   sidebarThemeToggle.addEventListener("click", toggleTheme);
+  
+  // Add event listener for top theme toggle if it exists
+  const topThemeToggle = document.getElementById("top-theme-toggle");
+  if (topThemeToggle) {
+    topThemeToggle.addEventListener("click", toggleTheme);
+  }
 
   // Menu Toggle Function
   let isMenuOpen = false;
@@ -441,3 +504,4 @@ const socialLinks = [
     }
   }
 </script>
+
