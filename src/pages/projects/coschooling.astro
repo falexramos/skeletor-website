@@ -1,88 +1,127 @@
 ---
 import ProjectPage from "@/components/projects/ProjectPage.astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
 
+const currentLang = Astro.currentLocale || "es";
 // Datos del proyecto
 const projectData = {
   title: "COSCHOOLING",
   subtitle: "Espacio de Educación Alternativa y Desarrollo Comunitario",
-  description: "El Proyecto Coschooling es un espacio adaptado a las necesidades de niños y jóvenes en educación alternativa, brindando un entorno seguro y estimulante donde puedan desarrollar su potencial.",
+  description:
+    "El Proyecto Coschooling es un espacio adaptado a las necesidades de niños y jóvenes en educación alternativa, brindando un entorno seguro y estimulante donde puedan desarrollar su potencial.",
   mainImage: "/assets/img/projects/mires_proyecto_coschooling_1.avif",
-  
+
+  projectDescription: {
+    title: "El Proyecto ",
+    subtitle:
+      "Es un espacio adaptado a las necesidades de niños y jóvenes en educación alternativa, brindando un entorno seguro y estimulante donde puedan desarrollar su potencial.",
+    quoteText:
+      "Está diseñado para familias que buscan una alternativa a la educación tradicional.",
+  },
+
   // Ámbito poblacional
-  populations: [
-    "Niños y jóvenes en educación en casa o con necesidades educativas especiales",
-    "Familias que buscan un entorno de aprendizaje más flexible e inclusivo"
-  ],
-  
+  populationGrid: {
+    title: "Ámbito Poblacional",
+    subtitle: "Personas y comunidades a las que servimos",
+    populations: [
+      "Niños y jóvenes en educación en casa o con necesidades educativas especiales",
+      "Familias que buscan un entorno de aprendizaje más flexible e inclusivo",
+    ],
+  },
+
   // Áreas de acción
-  actionAreas: [
-    {
-      title: "Espacios de Aprendizaje Compartido",
-      description: "Espacios de aprendizaje compartido para niños en educación en casa.",
-      icon: "space"
-    },
-    {
-      title: "Apoyo Pedagógico",
-      description: "Apoyo pedagógico personalizado.",
-      icon: "support"
-    },
-    {
-      title: "Actividades Extracurriculares",
-      description: "Actividades extracurriculares enfocadas en el desarrollo emocional, social y cognitivo.",
-      icon: "activity"
-    },
-    {
-      title: "Formación para Familias",
-      description: "Formación para familias y educadores.",
-      icon: "education"
-    }
-  ],
-  
+  actionAreas: {
+    title: "Áreas de Acción",
+    description: "Nuestras principales líneas de trabajo",
+    actions: [
+      {
+        title: "Espacios de Aprendizaje Compartido",
+        description:
+          "Espacios de aprendizaje compartido para niños en educación en casa.",
+        icon: "space",
+      },
+      {
+        title: "Apoyo Pedagógico",
+        description: "Apoyo pedagógico personalizado.",
+        icon: "support",
+      },
+      {
+        title: "Actividades Extracurriculares",
+        description:
+          "Actividades extracurriculares enfocadas en el desarrollo emocional, social y cognitivo.",
+        icon: "activity",
+      },
+      {
+        title: "Formación para Familias",
+        description: "Formación para familias y educadores.",
+        icon: "education",
+      },
+    ],
+  },
+
   // Impacto (usando items de texto en lugar de estadísticas numéricas)
+  impactTitle: "Nuestro Impacto",
+  impactSubtitle: "Resultados tangibles que demuestran nuestro compromiso",
   impactItems: [
     "Niños y jóvenes desarrollando autonomía y pensamiento crítico",
     "Familias empoderadas en la educación de sus hijos",
-    "Metodologías innovadoras para el aprendizaje inclusivo"
+    "Metodologías innovadoras para el aprendizaje inclusivo",
   ],
-  
+
   // Imágenes para la galería
-  galleryImages: [
-    {
-      src: "/assets/img/projects/mires_proyecto_coschooling_1.avif",
-      width: 1200,
-      height: 800,
-      alt: "Espacio de aprendizaje compartido",
-      caption: "Espacios adaptados para el aprendizaje colaborativo"
-    },
-    {
-      src: "/assets/img/projects/mires_proyecto_coschooling_2.avif",
-      width: 1200,
-      height: 800,
-      alt: "Actividades educativas",
-      caption: "Actividades prácticas para el desarrollo de habilidades"
-    },
-    {
-      src: "/assets/img/projects/mires_proyecto_coschooling.avif",
-      width: 1200,
-      height: 800,
-      alt: "Materiales educativos",
-      caption: "Recursos pedagógicos adaptados a diferentes necesidades"
-    }
-  ],
-  
+  gallerySection: {
+    title: "Galería de Imágenes",
+    subtitle: "Conoce nuestro trabajo a través de imágenes",
+    galleryImages: [
+      {
+        src: "/assets/img/projects/mires_proyecto_coschooling_1.avif",
+        width: 1200,
+        height: 800,
+        alt: "Espacio de aprendizaje compartido",
+        caption: "Espacios adaptados para el aprendizaje colaborativo",
+      },
+      {
+        src: "/assets/img/projects/mires_proyecto_coschooling_2.avif",
+        width: 1200,
+        height: 800,
+        alt: "Actividades educativas",
+        caption: "Actividades prácticas para el desarrollo de habilidades",
+      },
+      {
+        src: "/assets/img/projects/mires_proyecto_coschooling.avif",
+        width: 1200,
+        height: 800,
+        alt: "Materiales educativos",
+        caption: "Recursos pedagógicos adaptados a diferentes necesidades",
+      },
+    ],
+  },
+
   // Datos para el CTA
-  ctaTitle: "¿Quieres colaborar con el Proyecto Coschooling?",
-  ctaDescription: "Tu ayuda puede marcar la diferencia en la educación de niños y jóvenes."
+  ctaData: {
+    title: "¿Quieres colaborar con el Proyecto Coschooling?",
+    description:
+      "Tu ayuda puede marcar la diferencia en la educación de niños y jóvenes.",
+    contactLink: getRelativeLocaleUrl(currentLang, "contact"),
+    donateLink: getRelativeLocaleUrl(currentLang, "donate"),
+    contactText: "Contactar",
+    donateText: "Donar",
+  },
 };
 ---
 
 <ProjectPage {...projectData}>
   <p slot="description-first-paragraph">
-    El Proyecto Coschooling es un espacio adaptado a las necesidades de niños y jóvenes en educación alternativa, brindando un entorno seguro y estimulante donde puedan desarrollar su potencial. Está diseñado para familias que buscan una alternativa a la educación tradicional.
+    El Proyecto Coschooling es un espacio adaptado a las necesidades de niños y
+    jóvenes en educación alternativa, brindando un entorno seguro y estimulante
+    donde puedan desarrollar su potencial. Está diseñado para familias que
+    buscan una alternativa a la educación tradicional.
   </p>
-  
+
   <p slot="description-second-paragraph">
-    Nuestro enfoque se basa en el respeto por los ritmos individuales de aprendizaje, la promoción de la curiosidad natural y el desarrollo integral de cada niño y joven. Creamos un ambiente donde pueden explorar, descubrir y crecer en comunidad.
+    Nuestro enfoque se basa en el respeto por los ritmos individuales de
+    aprendizaje, la promoción de la curiosidad natural y el desarrollo integral
+    de cada niño y joven. Creamos un ambiente donde pueden explorar, descubrir y
+    crecer en comunidad.
   </p>
 </ProjectPage>
-

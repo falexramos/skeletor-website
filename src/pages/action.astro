@@ -6,6 +6,7 @@ import CollaborationSection from '@/components/CollaborationSection.astro';
 import { useTranslations } from "@/i18n/utils";
 import CTASection from '@/components/CTASection.astro';
 import SimpleHeroSection from '@/components/SimpleHeroSection.astro';
+import NetworkSection from '@/components/NetworkSection.astro';
 
 
 const currentLang = (Astro.currentLocale === "es" || Astro.currentLocale === "en") ? Astro.currentLocale : "es";
@@ -35,8 +36,8 @@ const actions = [
 ];
 // Datos para HeroSection
 const heroData = {
-  title: "Qué Hacemos",
-  description: "En MIRES, proporcionamos asistencia integral a personas en situación de vulnerabilidad, incluyendo personas sin hogar, familias de bajos recursos, comunidades afectadas por crisis sociales o desastres naturales y personas neurodivergentes."
+  title: "Qué Hacemos?",
+  description: "En MIRES, proporcionamos asistencia integral."
 };
 
 // Datos para CollaborationSection
@@ -47,10 +48,18 @@ const collaborationData = {
   buttonHref: "/contact"
 };
 
+const networkSection = {
+  title1: "A quien servimos?",
+  description1: `<p class="mb-4">A las personas en situación de vulnerabilidad, incluyendo personas sin hogar, familias de bajos recursos, comunidades afectadas por crisis sociales o desastres naturales y personas neurodivergentes.</p>`,
+  title2: "Cómo lo hacemos?",
+  description2: `<p class="mb-4">A través de programas de apoyo humanitario, integración social y desarrollo sostenible, buscamos mejorar la calidad de vida de quienes más lo necesitan. Nos comprometemos a ofrecer soluciones sostenibles que fomenten su inclusión social y potencien su capacidad para llevar una vida digna y autónoma.</p>`
+};
 
 ---
 <BaseLayout>
   <SimpleHeroSection {...heroData} />
+  {/* Network Section */}
+  <NetworkSection {...networkSection} />
   <ActionGrid 
     title="Nuestras Acciones Clave"
     actions={actions}

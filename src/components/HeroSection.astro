@@ -28,7 +28,7 @@ const { title, description, videoSrc, primaryButton, secondaryButton } = Astro.p
       >
         <source src={videoSrc} type="video/mp4" />
       </video>
-      <div class="absolute inset-0 bg-gradient-to-b from-primary/80 to-primary/40"></div>
+      <div class="absolute inset-0 "></div>
     </div>
   ) : (
     // Si no hay video, agregar un fondo sólido con un gradiente
@@ -67,12 +67,6 @@ const { title, description, videoSrc, primaryButton, secondaryButton } = Astro.p
     )}
   </div>
 
-  <!-- Scroll Indicator (Opcional si no hay botones) -->
- 
-    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-      <svg class="w-10 h-10 text-lightbg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-      </svg>
-    </div>
+
  
 </section>

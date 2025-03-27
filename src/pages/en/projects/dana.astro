@@ -1,127 +1,160 @@
 ---
 import ProjectPage from "@/components/projects/ProjectPage.astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
 
+const currentLang = Astro.currentLocale || "es";
 // Datos del proyecto
 const projectData = {
   title: "DANA Project",
   subtitle: "Logistics Center for Donations for Emergencies and Disasters",
-  description: "Center specialized in the management and distribution of humanitarian aid for emergency situations.",
+  description:
+    "Center specialized in the management and distribution of humanitarian aid for emergency situations.",
   mainImage: "/assets/img/projects/mires_dana_7.avif",
-  
-  // Population Scope
-  populations: [
-    "Families at risk of social exclusion",
-    "Homeless individuals",
-    "Migrants",
-    "Elderly people",
-    "Children",
-    "Women"
-  ],
-  
-  // Areas of Action
-  actionAreas: [
-    {
-      title: "Reception and Classification",
-      description: "Reception and classification of donations of food, clothing, household items, and basic products.",
-      icon: "inbox"
-    },
-    {
-      title: "Efficient Distribution",
-      description: "Efficient distribution of resources to communities affected by crises.",
-      icon: "truck"
-    },
-    {
-      title: "Strategic Alliances",
-      description: "Alliances with local and international organizations to expand the reach of aid.",
-      icon: "handshake"
-    },
-    {
-      title: "Specialized Logistics",
-      description: "Specialized logistics to address emergencies in Spain and other countries.",
-      icon: "map"
-    }
-  ],
-  
-  // Impact Statistics
+
+  actionAreas: {
+    title: "Action Areas",
+    description: "Our main lines of work",
+    actions: [
+      {
+        title: "Reception and Classification",
+        description:
+          "Reception and classification of donations of food, clothing, household items, and basic products.",
+        icon: "inbox",
+      },
+      {
+        title: "Efficient Distribution",
+        description:
+          "Efficient distribution of resources to communities affected by crises.",
+        icon: "truck",
+      },
+      {
+        title: "Strategic Alliances",
+        description:
+          "Alliances with local and international organizations to expand the reach of aid.",
+        icon: "handshake",
+      },
+      {
+        title: "Specialized Logistics",
+        description:
+          "Specialized logistics to address emergencies in Spain and other countries.",
+        icon: "map",
+      },
+    ],
+  },
+
+  impactTitle: "Our Impact",
+  impactSubtitle: "Tangible results that demonstrate our commitment",
+  // Impact statistics
   impactStats: [
     {
       value: "1,800+",
       label: "Pallets of donations managed",
-      icon: "package"
+      icon: "package",
     },
     {
       value: "5,000+",
-      label: "Families assisted directly",
-      icon: "users"
+      label: "Families directly assisted",
+      icon: "users",
     },
     {
       value: "12",
       label: "Tons of recycled textiles",
-      icon: "recycle"
+      icon: "recycle",
     },
     {
       value: "24/7",
       label: "Availability in emergencies",
-      icon: "clock"
-    }
+      icon: "clock",
+    },
   ],
-  
-  // Gallery Images
-  galleryImages: [
-    {
-      src: "/assets/img/projects/mires_dana_7.avif",
-      width: 1200,
-      height: 800,
-      alt: "Logistics center of the DANA Project",
-      caption: "Main logistics center of the DANA Project"
-    },
-    {
-      src: "/assets/img/projects/mires_dana_1.avif",
-      width: 1200,
-      height: 800,
-      alt: "Volunteers sorting donations",
-      caption: "Our volunteers sorting received donations"
-    },
-    {
-      src: "/assets/img/projects/mires_dana_2.avif",
-      width: 1200,
-      height: 800,
-      alt: "Distribution of humanitarian aid",
-      caption: "Distribution of humanitarian aid to affected families"
-    },
-    {
-      src: "/assets/img/projects/mires_dana_3.avif",
-      width: 1200,
-      height: 800,
-      alt: "Supply warehouse",
-      caption: "Supply warehouse organized by categories"
-    },
-    {
-      src: "/assets/img/projects/mires_dana_4.avif",
-      width: 1200,
-      height: 800,
-      alt: "Donation transport",
-      caption: "Transport of donations to affected areas"
-    },
-    {
-      src: "/assets/img/projects/mires_dana_5.avif",
-      width: 1200,
-      height: 800,
-      alt: "Volunteer team",
-      caption: "Volunteer team preparing emergency kits"
-    },
-    {
-      src: "/assets/img/projects/mires_dana_6.avif",
-      width: 1200,
-      height: 800,
-      alt: "Aid delivery",
-      caption: "Direct aid delivery to affected people"
-    }
-  ],
-  
-  // CTA Data
-  ctaTitle: "Do you want to collaborate with the DANA Project?",
-  ctaDescription: "Your help can make a difference in the lives of many people affected by emergencies and disasters."
+
+  gallerySection: {
+    title: "Image Gallery",
+    subtitle: "Get to know our work through images",
+    galleryImages: [
+      {
+        src: "/assets/img/projects/mires_dana_7.avif",
+        width: 1200,
+        height: 800,
+        alt: "Logistics center of the DANA Project",
+        caption: "Main logistics center of the DANA Project",
+      },
+      {
+        src: "/assets/img/projects/mires_dana_1.avif",
+        width: 1200,
+        height: 800,
+        alt: "Volunteers sorting donations",
+        caption: "Our volunteers sorting received donations",
+      },
+      {
+        src: "/assets/img/projects/mires_dana_2.avif",
+        width: 1200,
+        height: 800,
+        alt: "Distribution of humanitarian aid",
+        caption: "Distribution of humanitarian aid to affected families",
+      },
+      {
+        src: "/assets/img/projects/mires_dana_3.avif",
+        width: 1200,
+        height: 800,
+        alt: "Supply warehouse",
+        caption: "Supply warehouse organized by categories",
+      },
+      {
+        src: "/assets/img/projects/mires_dana_4.avif",
+        width: 1200,
+        height: 800,
+        alt: "Transportation of donations",
+        caption: "Transportation of donations to affected areas",
+      },
+      {
+        src: "/assets/img/projects/mires_dana_5.avif",
+        width: 1200,
+        height: 800,
+        alt: "Volunteer team",
+        caption: "Volunteer team preparing emergency kits",
+      },
+      {
+        src: "/assets/img/projects/mires_dana_6.avif",
+        width: 1200,
+        height: 800,
+        alt: "Aid delivery",
+        caption: "Direct aid delivery to affected people",
+      },
+    ],
+  },
+
+  // Data for the CTA
+  ctaData: {
+    title: "Do you want to collaborate with the DANA Project?",
+    description:
+      "Your help can make a difference in the lives of many people affected by emergencies and disasters.",
+    contactLink: getRelativeLocaleUrl(currentLang, "contact"),
+    donateLink: getRelativeLocaleUrl(currentLang, "donate"),
+    contactText: "Contact",
+    donateText: "Donate",
+  },
+  projectDescription: {
+    title: "About",
+    subtitle:
+      "It is a logistics center for the reception, organization, and distribution of donations for emergency situations, natural disasters, and humanitarian crises. This space allows us to respond quickly and efficiently to unexpected events, ensuring that aid reaches those who need it most.",
+    quoteText:
+      "Within the framework of this project, we implement a circular economy system to minimize waste and make the most of donations.",
+  },
+
+  populationGrid: {
+    title: "Population Scope",
+    subtitle: "People and communities we serve",
+    populations: [
+      "Families at risk of social exclusion",
+      "Homeless people",
+      "Migrants",
+      "Elderly people",
+      "Children",
+      "Women",
+    ],
+    columns: 2,
+  },
 };
 ---
 

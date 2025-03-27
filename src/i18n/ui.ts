@@ -15,7 +15,7 @@ export const labels = {
     "nav.action": "Que Hacemos",
     "nav.donate": "Donaciones",
     "nav.partnert": "Colaboración",
-    "nav.gallery": "Geleria",
+    "nav.gallery": "Galería",
     "nav.text.follow": "Síguenos",
     // =========== Tema =========== //
     "theme.toggle": "Cambiar Tema",

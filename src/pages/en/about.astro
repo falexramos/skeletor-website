@@ -11,12 +11,21 @@ const currentLang = Astro.currentLocale || "es";
 
 const heroData = {
   title: "Who Are We?",
-  description: "At MIRES, we transform solidarity into action. Guided by God in principles of love, justice, and service, we work to support homeless people, families in vulnerable situations, victims of abuse and trafficking, neurodivergent individuals, and communities affected by crises and natural disasters. More than help, we offer companionship, integration, and opportunities, bringing not only essential resources but also a message of hope, dignity, and strength. We believe that everyone has a purpose and a new opportunity to rise and move forward."
+  description: "At MIRES, we transform solidarity into action."
 };
 
 const networkSection = {
-  title: "Our Support Network",
-  description: "We know that true change is built in community. That's why we have the support of more than 15 international churches, as well as a solid network of collaborators, associations, and local organizations. Together, we work to make the world a more just, supportive, and inclusive place."
+  title1: "Our Organization",
+  description1: `<p class="mb-4">Based in Valencia, Spain, we are a legally constituted NGO with NIF: G19907617. We work to support homeless people, families in vulnerable situations, victims of abuse and trafficking, neurodivergent individuals, and communities affected by crises and natural disasters.</p>
+  
+  <p class="mb-4">More than help, we offer companionship, integration, and opportunities, bringing not only essential resources but also a message of hope, dignity, and strength. We believe that everyone has a purpose and a new opportunity to rise and move forward.</p>
+  
+  <p>We know that true change is built in community. That's why we have the support of more than 15 international churches, as well as a solid network of collaborators, associations, and local organizations. Together, we work to make the world a more just, supportive, and inclusive place.</p>
+  `,
+  title2: "What We Want",
+  description2: `<p class="mb-4">We want to build a more inclusive, resilient, and supportive society, where every person, regardless of their circumstances, has the opportunity to fully develop and contribute to the common good.</p>
+  
+  <p>Because serving is our mission. Because every life matters. Because together, we make a difference.</p>`
 };
 
 const founderData = {
@@ -26,18 +35,20 @@ const founderData = {
   image: {
     src: "/assets/img/team__mires_johana.avif", 
     alt: "Joanna Glod Núñez - Founder of MIRES"
-  }
+  },
+  founderTitle: "Our Founder"
 };
 
 const missionVisionData = {
   mission: {
     title: "Mission",
-    description: "Promote social development, solidarity, and the well-being of people in vulnerable situations by providing comprehensive support, inclusion, and opportunities that allow them to rebuild their lives with dignity and autonomy."
+    description: "Promote social development, solidarity, and the well-being of people in vulnerable situations, providing comprehensive support, inclusion, and opportunities that allow them to rebuild their lives with dignity and autonomy."
   },
   vision: {
     title: "Vision",
-    description: "To be a reference organization in Spain and the world, promoting an efficient, sustainable, and innovative intervention model that transforms lives, strengthens communities, and promotes a more inclusive, resilient, and supportive society."
-  }
+    description: "To be a reference organization in Spain and the world, driving an efficient, sustainable, and innovative intervention model that transforms lives, strengthens communities, and promotes a more inclusive, resilient, and supportive society."
+  },
+  titleSection: "Our Mission and Vision"
 };
 
 const ctaData = {

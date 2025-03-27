@@ -1,13 +1,15 @@
 ---
+import Cta from "@/components/Cta.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CTASection from "@/components/CTASection.astro";
+import SectionTitle from "@/components/SectionTitle.astro";
 import { getRelativeLocaleUrl } from "astro:i18n";
 
 const currentLang = Astro.currentLocale || "es";
 // Define los datos de los proyectos
 const projectsData = {
   title: "Nuestros Proyectos",
-  subtitle: "Iniciativas que transforman vidas y comunidades",
+  subtitle: "En MIRES, trabajamos incansablemente para generar un impacto real y transformador en la vida de las personas más vulnerables. Nuestros proyectos están diseñados para abordar diferentes áreas de necesidad, proporcionando asistencia inmediata y soluciones sostenibles que fomenten la inclusión y la dignidad.",
   projects: [
     {
       id: "dana",
@@ -44,49 +46,77 @@ const ctaData = {
   title: "¿Quieres ser parte del cambio?",
   description:
     "Únete a nosotros y ayuda a transformar vidas a través de nuestros proyectos.",
-  primaryButton: {
-    text: "Contacta con Nosotros",
-    href: "/contact"
-  },
-  secondaryButton: {
-    text: "Haz una Donación",
-    href: "/donate"
-  }
+  contactLink: getRelativeLocaleUrl(currentLang, "contact"),
+  donateLink: getRelativeLocaleUrl(currentLang, "donate"),
+  contactText: "Contacta con Nosotros",
+  donateText: "Haz una Donación"
 };
+
 ---
+
+
 <BaseLayout title="Proyectos - MIRES">
-  {/* Hero Section */}
-  <section class="py-20 bg-lightbg dark:bg-darkbg">
-    <div class="container mx-auto px-4 text-center">
-      <h1 class="text-4xl md:text-5xl font-bold text-primary mb-6">{projectsData.title}</h1>
-      <p class="text-xl text-secondary max-w-3xl mx-auto">{projectsData.subtitle}</p>
+  {/* Hero Section with Refined Style */}
+  <section class="relative pt-32 pb-20 bg-gradient-to-br from-primary to-primary/90 overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-0 right-0 w-1/2 h-1/2 bg-secondary/20 rounded-full transform translate-x-1/4 -translate-y-1/4 blur-3xl"></div>
+      <div class="absolute bottom-0 left-0 w-1/2 h-1/2 bg-white/10 rounded-full transform -translate-x-1/4 translate-y-1/4 blur-3xl"></div>
+    </div>
+    
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="max-w-4xl mx-auto ">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 text-center">
+          {projectsData.title}
+        </h1>
+        
+        <div class="h-1 w-24 bg-secondary mx-auto mb-10 rounded"></div>
+        
+        <div class="bg-white/10 backdrop-blur-sm p-6 md:p-8 rounded-xl border border-white/20 shadow-lg max-w-3xl mx-auto">
+          <p class="text-lg md:text-xl text-white/90 leading-relaxed text-justify">
+            {projectsData.subtitle}
+          </p>
+        </div>
+      </div>
     </div>
   </section>
 
-  {/* Proyectos Grid */}
-  <section class="py-20 bg-white dark:bg-gray-900 relative overflow-hidden">
+  {/* Proyectos Grid with Enhanced Styling */}
+  <section id="projects" class="py-20 bg-gray-50 dark:bg-gray-900">
     <div class="container mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <SectionTitle 
+        title="" 
+        subtitle=""
+      />
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
         {projectsData.projects.map((project, index) => (
           <a
             href={project.href}
-            class="group bg-lightbg dark:bg-primary/10 rounded-2xl overflow-hidden shadow-lg transform transition-all duration-500 hover:scale-105 hover:shadow-2xl"
-            style={`transition-delay: ${index * 100}ms`}
+            class="group bg-white dark:bg-darkbg/50 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105 border border-gray-100 dark:border-white/5"
           >
-            <div class="h-48 overflow-hidden">
+            <div class="h-56 overflow-hidden relative">
               <img
                 src={project.image || "/placeholder.svg?height=300&width=400"}
                 alt={project.title}
                 class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
               />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>
             <div class="p-6">
-              <h3 class="text-xl font-bold text-primary mb-2 group-hover:text-secondary transition-colors">
+              <h3 class="text-xl font-bold text-primary dark:text-white mb-3 group-hover:text-secondary transition-colors">
                 {project.title}
               </h3>
-              <p class="text-gray-700 dark:text-gray-300">
+              <p class="text-gray-600 dark:text-gray-300">
                 {project.description}
               </p>
+              
+              <div class="mt-4 pt-4 border-t border-gray-100 dark:border-white/10 flex justify-end">
+                <span class="text-sm text-secondary font-medium flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </span>
+              </div>
             </div>
           </a>
         ))}
@@ -95,5 +125,21 @@ const ctaData = {
   </section>
 
   {/* Call to Action */}
-  <CTASection {...ctaData} />
+  <Cta {...ctaData} />
 </BaseLayout>
+
+<style>
+/* Subtle hover effect for project cards */
+.grid > a {
+  transition: all 0.3s ease;
+}
+
+.grid > a:hover {
+  transform: translateY(-5px);
+}
+
+/* Ensure consistent dark mode styling */
+:global(.dark) .bg-white {
+  background-color: rgba(30, 41, 59, 0.5);
+}
+</style>

@@ -13,15 +13,7 @@ const currentLang = Astro.currentLocale || "es";
 const heroData = {
   title: "Transformamos la solidaridad en acción",
   description: "Llevamos ayuda a quienes más lo necesitan, impulsamos oportunidades y creamos soluciones sostenibles.",
-  videoSrc: "/assets/videos/mires_video_ayuda.mp4",
-  primaryButton: {
-    text: "Haz tu donación",
-    href: "/donate"
-  },
-  secondaryButton: {
-    text: "Únete como voluntario",
-    href: "/donate"
-  }
+  videoSrc: "/assets/videos/mires_video_ayuda.mp4"
 };
 
 const missionVisionData = {
@@ -102,7 +94,6 @@ const ctaData = {
 
 <BaseLayout>
   <HeroSection {...heroData} />
-  <!-- <MissionVisionSection {...missionVisionData} /> -->
   <ProjectsSection {...projectsData} />
   <ImpactDataSection {...impactData} />
   

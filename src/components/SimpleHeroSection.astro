@@ -5,71 +5,127 @@ interface SimpleHeroSectionProps {
   backgroundColor?: string;
   textColor?: string;
   minHeight?: string;
+  backgroundImage?: string;
 }
 
 const { 
   title, 
   description, 
-  backgroundColor = 'bg-darkbg', // Cambiado a darkbg para mantener coherencia
+  backgroundColor = 'bg-darkbg', 
   textColor = 'text-white', 
-  minHeight = 'min-h-[60vh]' // Ajustado para mejor responsividad
+  minHeight = 'min-h-[70vh]',
+  backgroundImage = '/assets/img/gallery/mires_alimentando_esperanza1.avif' // Default background image
 } = Astro.props;
 ---
 
 <section 
   class={`relative ${minHeight} flex flex-col justify-center items-center text-center pt-20 sm:pt-24 md:pt-28 lg:pt-32 overflow-hidden ${backgroundColor}`}
 >
-  <!-- Decorative Elements -->
+  <!-- Diagonal Image Background -->
   <div class="absolute inset-0 overflow-hidden">
-    <div class="absolute top-0 right-0 w-1/2 h-1/2 bg-secondary/5 rounded-full transform translate-x-1/4 -translate-y-1/4 blur-3xl"></div>
-    <div class="absolute bottom-0 left-0 w-1/2 h-1/2 bg-primary/5 rounded-full transform -translate-x-1/4 translate-y-1/4 blur-3xl"></div>
+    <!-- Diagonal Overlay - Reduced opacity -->
+    <div class="absolute inset-0 bg-gradient-to-br from-primary/50 via-darkbg/60 to-secondary/50 z-10"></div>
+    
+    <!-- Background Image -->
+    <div class="absolute inset-0 z-0">
+      <div class="absolute inset-0 transform -skew-y-6 scale-110 origin-top-right overflow-hidden">
+        <img 
+          src={backgroundImage || "/placeholder.svg"} 
+          alt="Background" 
+          class="w-full h-full object-cover opacity-90 dark:opacity-60 filter saturate-100"
+        />
+      </div>
+    </div>
+    
+    <!-- Decorative Elements -->
+    <div class="absolute top-0 right-0 w-1/2 h-1/2 bg-secondary/30 rounded-full transform translate-x-1/4 -translate-y-1/4 blur-2xl z-20"></div>
+    <div class="absolute bottom-0 left-0 w-1/2 h-1/2 bg-primary/30 rounded-full transform -translate-x-1/4 translate-y-1/4 blur-2xl z-20"></div>
+    
+    <!-- Diagonal Lines -->
+    <div class="absolute inset-0 z-20 opacity-5">
+      <div class="absolute top-0 left-0 w-full h-full">
+        <div class="h-[1px] w-full bg-white transform rotate-45 origin-top-left"></div>
+        <div class="h-[1px] w-full bg-white transform rotate-45 origin-top-left translate-y-20"></div>
+        <div class="h-[1px] w-full bg-white transform rotate-45 origin-top-left translate-y-40"></div>
+        <div class="h-[1px] w-full bg-white transform rotate-45 origin-top-left translate-y-60"></div>
+        <div class="h-[1px] w-full bg-white transform rotate-45 origin-top-left translate-y-80"></div>
+      </div>
+    </div>
   </div>
 
   <!-- Main Content -->
-  <div class="container mx-auto px-6 relative z-10 flex flex-col items-center justify-center space-y-8">
-    <!-- Title -->
-    <h1 
-      class={`text-4xl sm:text-5xl md:text-6xl font-bold ${textColor} leading-tight max-w-4xl animate-fade-in`}
-    >
-      {title}
-    </h1>
+  <div class="container mx-auto px-6 relative z-30 flex flex-col items-center justify-center space-y-8">
+    <!-- Title with Highlight Effect -->
+    <div class="relative">
+      <h1 
+        class={`text-4xl sm:text-5xl md:text-6xl font-bold ${textColor} leading-tight max-w-4xl animate-slide-up`}
+      >
+        <span class="relative inline-block">
+          {title}
+          <span class="absolute -bottom-2 left-0 w-full h-1 bg-secondary transform scale-x-0 animate-expand origin-left"></span>
+        </span>
+      </h1>
+    </div>
     
-    <!-- Description -->
-    <p 
-      class={`text-lg sm:text-xl md:text-2xl ${textColor}/80 max-w-2xl animate-fade-in text-center`} 
-    >
-      {description}
-    </p>
+    <!-- Description with Backdrop -->
+    <div class="backdrop-blur-sm bg-darkbg/30 dark:bg-darkbg/40 p-6 rounded-xl border border-white/10 shadow-2xl animate-fade-in">
+      <p 
+        class={`text-lg sm:text-xl md:text-2xl ${textColor} max-w-2xl text-center`} 
+      >
+        {description}
+      </p>
+    </div>
+    
+    <!-- Optional Slot for Buttons or Additional Content -->
+    <div class="animate-fade-in delay-300">
+      <slot />
+    </div>
   </div>
 
-  <!-- Scroll Indicator -->
-  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-    <svg class="w-10 h-10 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-    </svg>
-  </div>
+  
 </section>
 
 <style>
-  /* Fade In Animation */
+  /* Enhanced Animations */
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes expand {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0) translateX(-50%); }
+    50% { transform: translateY(-15px) translateX(-50%); }
   }
   
   .animate-fade-in {
     opacity: 0;
     animation: fadeIn 1s ease-out forwards;
   }
-
-  /* Bounce Animation */
-  @keyframes bounce {
-    0%, 100% { transform: translateY(0) translateX(-50%); }
-    50% { transform: translateY(-15px) translateX(-50%); }
+  
+  .animate-slide-up {
+    opacity: 0;
+    animation: slideUp 1.2s ease-out forwards;
   }
   
-  .animate-bounce {
-    animation: bounce 2s infinite;
+  .animate-expand {
+    animation: expand 1.5s ease-out forwards 0.5s;
+  }
+  
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  .delay-300 {
+    animation-delay: 300ms;
   }
 </style>
-

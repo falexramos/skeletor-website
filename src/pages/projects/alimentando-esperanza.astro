@@ -1,155 +1,200 @@
 ---
 import ProjectPage from "@/components/projects/ProjectPage.astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
 
+const currentLang = Astro.currentLocale || "es";
 // Datos del proyecto
 const projectData = {
   title: "ALIMENTANDO ESPERANZA",
   subtitle: "Apoyo a Familias en Situación de Vulnerabilidad",
-  description: "Este programa brinda asistencia a familias de bajos recursos, personas en situación de calle y comunidades en riesgo, proporcionando recursos básicos de subsistencia como alimentos y ropa.",
+  description:
+    "Este programa brinda asistencia a familias de bajos recursos, personas en situación de calle y comunidades en riesgo, proporcionando recursos básicos de subsistencia como alimentos y ropa.",
   mainImage: "/assets/img/projects/mires_alimentando_esperanza_7.avif",
-  
+
+  projectDescription: {
+    title: "",
+    subtitle:
+      "Este programa brinda asistencia a familias de bajos recursos.",
+    quoteText:
+      "Personas en situación de calle y comunidades en riesgo, proporcionando recursos básicos de subsistencia como alimentos y ropa.",
+  },
+
   // Ámbito poblacional
-  populations: [
+  populationGrid: {
+    title: "Ámbito Poblacional",
+    subtitle: "Personas y comunidades a las que servimos",
+    populations: [
     "Familias en riesgo de exclusión social que carecen de recursos básicos",
     "Personas en situación de calle que necesitan apoyo para su bienestar y dignidad",
     "Personas migrantes",
     "Personas mayores",
     "Infancia",
-    "Mujeres"
+    "Mujeres",
   ],
+    columns: 2,
+  },
+  
   populationColumns: 6, // Usar 6 columnas para mostrar todos los elementos
-  
-  // Áreas de acción
-  actionAreas: [
-    {
-      title: "Entrega de Alimentos",
-      description: "Entrega de paquetes de alimentos y productos de primera necesidad.",
-      icon: "food"
-    },
-    {
-      title: "Donación de Ropa",
-      description: "Donación de ropa y enseres básicos a familias vulnerables.",
-      icon: "clothing"
-    },
-    {
-      title: "Alianzas Estratégicas",
-      description: "Alianzas con supermercados y empresas para la recolección de excedentes.",
-      icon: "partnership"
-    },
-    {
-      title: "Sensibilización",
-      description: "Programas de sensibilización sobre la seguridad alimentaria y el acceso a recursos básicos.",
-      icon: "awareness"
-    }
-  ],
-  
+
+  actionAreas: {
+    title: "Áreas de Acción",
+    description: "Nuestras principales líneas de trabajo",
+    actions: [
+      {
+        title: "Entrega de Alimentos",
+        description:
+          "Entrega de paquetes de alimentos y productos de primera necesidad.",
+        icon: "food",
+      },
+      {
+        title: "Donación de Ropa",
+        description:
+          "Donación de ropa y enseres básicos a familias vulnerables.",
+        icon: "clothing",
+      },
+      {
+        title: "Alianzas Estratégicas",
+        description:
+          "Alianzas con supermercados y empresas para la recolección de excedentes.",
+        icon: "partnership",
+      },
+      {
+        title: "Sensibilización",
+        description:
+          "Programas de sensibilización sobre la seguridad alimentaria y el acceso a recursos básicos.",
+        icon: "awareness",
+      },
+    ],
+  },
+
   // Impacto (usando items de texto en lugar de estadísticas numéricas)
+  impactTitle: "Nuestro Impacto",
+  impactSubtitle: "Resultados tangibles que demuestran nuestro compromiso",
   impactItems: [
     "Miles de comidas entregadas a familias en riesgo",
     "Ropa y enseres esenciales distribuidos a quienes más lo necesitan",
-    "Red de colaboración con empresas y supermercados para optimizar la ayuda"
+    "Red de colaboración con empresas y supermercados para optimizar la ayuda",
   ],
-  
-  // Imágenes para la galería
-  galleryImages: [
-    {
-      src: "/assets/img/projects/mires_alimentando_esperanza_7.avif",
-      width: 1200,
-      height: 800,
-      alt: "Entrega de alimentos",
-      caption: "Entrega de paquetes de alimentos a familias"
-    },
-    {
-      src: "/assets/img/projects/mires_alimentando_esperanza_2.avif",
-      width: 1200,
-      height: 800,
-      alt: "Donación de ropa",
-      caption: "Clasificación y donación de ropa para personas vulnerables"
-    },
-    {
-      src: "/assets/img/projects/mires_alimentando_esperanza_3.avif",
-      width: 1200,
-      height: 800,
-      alt: "Recolección de excedentes",
-      caption: "Recolección de excedentes alimentarios de supermercados"
-    },
-    {
-      src: "/assets/img/projects/mires_alimentando_esperanza_4.avif",
-      width: 1200,
-      height: 800,
-      alt: "Sensibilización",
-      caption: "Programas de sensibilización sobre seguridad alimentaria"
-    },
-    {
-      src: "/assets/img/projects/mires_alimentando_esperanza_5.avif",
-      width: 1200,
-      height: 800,
-      alt: "Apoyo a familias",
-      caption: "Apoyo integral a familias en situación de vulnerabilidad"
-    },
-    {
-      src: "/assets/img/projects/mires_alimentando_esperanza_6.avif",
-      width: 1200,
-      height: 800,
-      alt: "Apoyo a familias",
-      caption: "Apoyo integral a familias en situación de vulnerabilidad"
-    },
-    {
-      src: "/assets/img/projects/mires_alimentando_esperanza_1.avif",
-      width: 1200,
-      height: 800,
-      alt: "Apoyo a familias",
-      caption: "Apoyo integral a familias en situación de vulnerabilidad"
-    },
-    {
-      src: "/assets/img/projects/mires_alimentando_esperanza_8.avif",
-      width: 1200,
-      height: 800,
-      alt: "Apoyo a familias",
-      caption: "Apoyo integral a familias en situación de vulnerabilidad"
-    },
-    {
-      src: "/assets/img/projects/mires_alimentando_esperanza_16.avif",
-      width: 1200,
-      height: 800,
-      alt: "Apoyo a familias",
-      caption: "Apoyo integral a familias en situación de vulnerabilidad"
-    },
-    {
-      src: "/assets/img/projects/mires_alimentando_esperanza_11.avif",
-      width: 1200,
-      height: 800,
-      alt: "Apoyo a familias",
-      caption: "Apoyo integral a familias en situación de vulnerabilidad"
-    }
-  ],
-  
-  // Datos para el CTA
-  ctaTitle: "¿Quieres colaborar con Alimentando Esperanza?",
-  ctaDescription: "Tu ayuda puede marcar la diferencia en la vida de familias en situación de vulnerabilidad."
-};
 
+  // Imágenes para la galería
+  gallerySection: {
+    title: "Galería de Imágenes",
+    subtitle: "Conoce nuestro trabajo a través de imágenes",
+    galleryImages: [
+      {
+        src: "/assets/img/projects/mires_alimentando_esperanza_7.avif",
+        width: 1200,
+        height: 800,
+        alt: "Entrega de alimentos",
+        caption: "Entrega de paquetes de alimentos a familias",
+      },
+      {
+        src: "/assets/img/projects/mires_alimentando_esperanza_2.avif",
+        width: 1200,
+        height: 800,
+        alt: "Donación de ropa",
+        caption: "Clasificación y donación de ropa para personas vulnerables",
+      },
+      {
+        src: "/assets/img/projects/mires_alimentando_esperanza_3.avif",
+        width: 1200,
+        height: 800,
+        alt: "Recolección de excedentes",
+        caption: "Recolección de excedentes alimentarios de supermercados",
+      },
+      {
+        src: "/assets/img/projects/mires_alimentando_esperanza_4.avif",
+        width: 1200,
+        height: 800,
+        alt: "Sensibilización",
+        caption: "Programas de sensibilización sobre seguridad alimentaria",
+      },
+      {
+        src: "/assets/img/projects/mires_alimentando_esperanza_5.avif",
+        width: 1200,
+        height: 800,
+        alt: "Apoyo a familias",
+        caption: "Apoyo integral a familias en situación de vulnerabilidad",
+      },
+      {
+        src: "/assets/img/projects/mires_alimentando_esperanza_6.avif",
+        width: 1200,
+        height: 800,
+        alt: "Apoyo a familias",
+        caption: "Apoyo integral a familias en situación de vulnerabilidad",
+      },
+      {
+        src: "/assets/img/projects/mires_alimentando_esperanza_1.avif",
+        width: 1200,
+        height: 800,
+        alt: "Apoyo a familias",
+        caption: "Apoyo integral a familias en situación de vulnerabilidad",
+      },
+      {
+        src: "/assets/img/projects/mires_alimentando_esperanza_8.avif",
+        width: 1200,
+        height: 800,
+        alt: "Apoyo a familias",
+        caption: "Apoyo integral a familias en situación de vulnerabilidad",
+      },
+      {
+        src: "/assets/img/projects/mires_alimentando_esperanza_16.avif",
+        width: 1200,
+        height: 800,
+        alt: "Apoyo a familias",
+        caption: "Apoyo integral a familias en situación de vulnerabilidad",
+      },
+      {
+        src: "/assets/img/projects/mires_alimentando_esperanza_11.avif",
+        width: 1200,
+        height: 800,
+        alt: "Apoyo a familias",
+        caption: "Apoyo integral a familias en situación de vulnerabilidad",
+      },
+    ],
+  },
+
+  // Datos para el CTA
+  ctaData: {
+    title: "¿Quieres colaborar con Alimentando Esperanza?",
+    description:
+      "Tu ayuda puede marcar la diferencia en la vida de familias en situación de vulnerabilidad.",
+    contactLink: getRelativeLocaleUrl(currentLang, "contact"),
+    donateLink: getRelativeLocaleUrl(currentLang, "donate"),
+    contactText: "Contactar",
+    donateText: "Donar",
+  },
+};
 // Actualizar el mapeador de iconos para incluir los nuevos iconos específicos
-import { actionAreaIconPaths } from '@/components/projects/ProjectIconMapper.astro';
+import { actionAreaIconPaths } from "@/components/projects/ProjectIconMapper.astro";
 
 // Añadir los nuevos iconos específicos para este proyecto
 const newIcons = {
   food: "M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z",
-  clothing: "M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z",
-  awareness: "M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+  clothing:
+    "M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z",
+  awareness:
+    "M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9",
 };
 
 // Estos iconos se añadirán automáticamente al mapeador en tiempo de ejecución
 Object.assign(actionAreaIconPaths, newIcons);
+
 ---
 
 <ProjectPage {...projectData}>
   <p slot="description-first-paragraph">
-    Este programa brinda asistencia a familias de bajos recursos, personas en situación de calle y comunidades en riesgo, proporcionando recursos básicos de subsistencia como alimentos y ropa. Nuestro enfoque es integral, buscando no solo cubrir necesidades inmediatas sino también crear caminos hacia la autonomía.
+    Este programa brinda asistencia a familias de bajos recursos, personas en
+    situación de calle y comunidades en riesgo, proporcionando recursos básicos
+    de subsistencia como alimentos y ropa. Nuestro enfoque es integral, buscando
+    no solo cubrir necesidades inmediatas sino también crear caminos hacia la
+    autonomía.
   </p>
-  
+
   <p slot="description-second-paragraph">
-    A través de alianzas estratégicas con empresas, supermercados y otras organizaciones, optimizamos recursos y ampliamos nuestro alcance. Además, implementamos programas de sensibilización sobre la importancia de la seguridad alimentaria y el acceso equitativo a recursos básicos.
+    A través de alianzas estratégicas con empresas, supermercados y otras
+    organizaciones, optimizamos recursos y ampliamos nuestro alcance. Además,
+    implementamos programas de sensibilización sobre la importancia de la
+    seguridad alimentaria y el acceso equitativo a recursos básicos.
   </p>
 </ProjectPage>
-

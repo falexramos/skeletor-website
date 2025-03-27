@@ -1,8 +1,13 @@
 ---
-const { projects } = Astro.props;
+import SectionTitle from "./SectionTitle.astro";
+
+const { projects,title } = Astro.props;
+
+
 ---
 
 <section class="py-20 bg-white dark:bg-gray-900 relative overflow-hidden">
+  <SectionTitle title={title}/>
   <div class="container mx-auto px-4">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
       {projects.map((project, index) => (

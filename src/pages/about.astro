@@ -11,13 +11,23 @@ const currentLang = Astro.currentLocale || "es";
 
 const heroData = {
   title: "¿Quiénes Somos?",
-  description: "En MIRES, transformamos la solidaridad en acción. Guiados por Dios en principios de amor, justicia y servicio, trabajamos para apoyar a personas sin hogar, familias en situación de vulnerabilidad, víctimas de abuso y trata, personas neurodivergentes y comunidades afectadas por crisis y desastres naturales. Más que ayuda, ofrecemos acompañamiento, integración y oportunidades, llevando no solo recursos esenciales, sino también un mensaje de esperanza, dignidad y fortaleza. Creemos que todas las personas tenemos un propósito y una nueva oportunidad para levantarse y avanzar."
+  description: "En MIRES, transformamos la solidaridad en acción."
 };
 
 const networkSection = {
-  title: "Nuestra Red de Apoyo",
-  description: "Sabemos que el verdadero cambio se construye en comunidad. Por eso, contamos con el respaldo de más de 15 iglesias internacionales, así como de una sólida red de colaboradores, asociaciones y organizaciones locales. Unidos, trabajamos para hacer del mundo un lugar más justo, solidario e inclusivo."
+  title1: "Nuestra Organización",
+  description1: `<p class="mb-4">Con sede en Valencia, España, somos una ONG legalmente constituida con NIF: G19907617. Trabajamos para apoyar a personas sin hogar, familias en situación de vulnerabilidad, víctimas de abuso y trata, personas neurodivergentes y comunidades afectadas por crisis y desastres naturales.</p>
+  
+  <p class="mb-4">Más que ayuda, ofrecemos acompañamiento, integración y oportunidades, llevando no solo recursos esenciales, sino también un mensaje de esperanza, dignidad y fortaleza. Creemos que todas las personas tenemos un propósito y una nueva oportunidad para levantarse y avanzar.</p>
+  
+  <p>Sabemos que el verdadero cambio se construye en comunidad. Por eso, contamos con el respaldo de más de 15 iglesias internacionales, así como de una sólida red de colaboradores, asociaciones y organizaciones locales. Unidos, trabajamos para hacer del mundo un lugar más justo, solidario e inclusivo.</p>
+  `,
+  title2: "Lo que Queremos",
+  description2: `<p class="mb-4">Queremos construir una sociedad más inclusiva, resiliente y solidaria, donde cada persona, sin importar sus circunstancias, tenga la oportunidad de desarrollarse plenamente y contribuir al bienestar común.</p>
+  
+  <p>Porque servir es nuestra misión. Porque cada vida importa. Porque juntos, marcamos la diferencia.</p>`
 };
+
 
 const founderData = {
   name: "Joanna Glod Núñez",
@@ -26,7 +36,8 @@ const founderData = {
   image: {
     src: "/assets/img/team__mires_johana.avif", 
     alt: "Joanna Glod Núñez - Fundadora de MIRES"
-  }
+  },
+  founderTitle:"Nuestra Fundadora"
 };
 
 const missionVisionData = {
@@ -37,7 +48,8 @@ const missionVisionData = {
   vision: {
     title: "Visión",
     description: "Ser una organización de referencia en España y el mundo, impulsando un modelo de intervención eficiente, sostenible e innovador que transforme vidas, fortalezca comunidades y promueva una sociedad más inclusiva, resiliente y solidaria."
-  }
+  },
+  titleSection: "Nuestra Misión y Visión"
 };
 
 
@@ -60,6 +72,7 @@ const ctaData = {
 
     {/* Network Section */}
     <NetworkSection {...networkSection} />
+
 
     {/* Founder Story */}
     <FounderStory {...founderData} />    

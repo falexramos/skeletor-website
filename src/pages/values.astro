@@ -1,16 +1,17 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import HeroSection from '../components/HeroSection.astro';
 import IntroSection from '../components/IntroSection.astro';
 import ValuesGrid from '../components/ValuesGrid.astro';
-import CTASection from '../components/CTASection.astro';
 import { getRelativeLocaleUrl } from "astro:i18n";
 import SimpleHeroSection from '@/components/SimpleHeroSection.astro';
 import Cta from '@/components/Cta.astro';
 
+
 const currentLang = Astro.currentLocale || "es";
 
-const values = [
+const valuesData = {
+  titleSection: "Nuestros Principios Fundamentales",
+  values: [
   {
     id: 1,
     title: "Dignidad Humana y Fe en la Restauración",
@@ -59,7 +60,7 @@ const values = [
     reference: "",
     description: "Inspirados en la Palabra de Dios, creemos en el poder del servicio con amor, misericordia y justicia. Cada acto de ayuda es también un mensaje de esperanza para quienes atraviesan momentos de profunda vulnerabilidad."
   }
-];
+]};
 
 // Datos para HeroSection
 const heroData = {
@@ -83,6 +84,6 @@ const ctaData = {
 <BaseLayout title="Nuestros Valores - MIRES">
   <SimpleHeroSection {...heroData} />
   <IntroSection text={introText} />
-  <ValuesGrid values={values} />
+  <ValuesGrid {...valuesData} />
   <Cta {...ctaData} />
 </BaseLayout>

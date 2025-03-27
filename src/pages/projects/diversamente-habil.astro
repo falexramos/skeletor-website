@@ -1,6 +1,8 @@
 ---
 import ProjectPage from "@/components/projects/ProjectPage.astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
 
+const currentLang = Astro.currentLocale || "es";
 // Datos del proyecto
 const projectData = {
   title: "DIVERSAMENTE HÁBILES",
@@ -8,15 +10,29 @@ const projectData = {
   description: "Este centro es un espacio seguro e inclusivo diseñado para personas neurodivergentes (TEA, TDAH, Altas Capacidades, Asperger, entre otras condiciones), donde pueden explorar sus intereses, fortalecer sus habilidades sociales y acceder a actividades que promuevan su bienestar.",
   mainImage: "/assets/img/projects/mires_diversamente.avif",
   
+  projectDescription: {
+    title: "Sobre",
+    subtitle:
+      "Este centro es un espacio seguro e inclusivo diseñado para personas neurodivergentes (TEA, TDAH, Altas Capacidades, Asperger, entre otras condiciones), donde pueden explorar sus intereses.",
+    quoteText:
+      "Buscamos fortalecer sus habilidades sociales y acceder a actividades que promuevan su bienestar."
+  },
+
   // Ámbito poblacional
+  populationGrid: {
+    title: "Ámbito Poblacional",
+    subtitle: "Personas y comunidades a las que servimos",
   populations: [
     "Niños, jóvenes y adultos neurodivergentes que necesitan espacios de integración y desarrollo",
     "Familias y cuidadores que requieren apoyo en el acompañamiento de personas neurodivergentes"
   ],
-  populationColumns: 2, // Usar 2 columnas para mostrar los elementos
-  
+  columns: 2, 
+},
   // Áreas de acción
-  actionAreas: [
+  actionAreas: {
+    title: "Áreas de Acción",
+    description: "Nuestras principales líneas de trabajo",
+    actions: [
     {
       title: "Espacios de Ocio Adaptados",
       description: "Espacios de ocio adaptados a las necesidades sensoriales y cognitivas.",
@@ -37,9 +53,11 @@ const projectData = {
       description: "Apoyo y formación a familias y cuidadores.",
       icon: "support"
     }
-  ],
+  ]},
   
   // Impacto (usando items de texto en lugar de estadísticas numéricas)
+  impactTitle: "Nuestro Impacto",
+  impactSubtitle: "Resultados tangibles que demuestran nuestro compromiso",
   impactItems: [
     "Mayor inclusión y oportunidades para personas neurodivergentes",
     "Red de apoyo para familias y cuidadores",
@@ -47,6 +65,9 @@ const projectData = {
   ],
   
   // Imágenes para la galería
+  gallerySection: {
+    title: "Galería de Imágenes",
+    subtitle: "Conoce nuestro trabajo a través de imágenes",
   galleryImages: [
     {
       src: "/assets/img/projects/mires_diversamente.avif",
@@ -83,11 +104,19 @@ const projectData = {
       alt: "Apoyo a familias",
       caption: "Sesiones de apoyo y formación para familias"
     }
-  ],
+  ]},
   
   // Datos para el CTA
-  ctaTitle: "¿Quieres colaborar con Diversamente Hábiles?",
-  ctaDescription: "Tu ayuda puede marcar la diferencia en la vida de personas neurodivergentes y sus familias."
+  ctaData: {
+    title: "¿Quieres colaborar con Diversamente Hábiles?",
+    description:
+      "Tu ayuda puede marcar la diferencia en la vida de personas neurodivergentes y sus familias.",
+    contactLink: getRelativeLocaleUrl(currentLang, "contact"),
+    donateLink: getRelativeLocaleUrl(currentLang, "donate"),
+    contactText: "Contactar",
+    donateText: "Donar",
+  }
+
 };
 
 // Actualizar el mapeador de iconos para incluir los nuevos iconos específicos

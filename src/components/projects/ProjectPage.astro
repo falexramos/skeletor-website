@@ -1,4 +1,5 @@
 ---
+import { getRelativeLocaleUrl } from "astro:i18n";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import ProjectHero from "@/components/projects/ProjectHero.astro";
 import ProjectDescription from "@/components/projects/ProjectDescription.astro";
@@ -10,125 +11,169 @@ import ProjectGallerySection from "@/components/projects/ProjectGallerySection.a
 import Cta from "@/components/Cta.astro";
 
 interface Props {
-  title: string;
-  subtitle: string;
-  description: string;
-  mainImage: string;
-  populations: string[];
-  actionAreas: {
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  mainImage?: string;
+  populationGrid?: {
     title: string;
-    description: string;
-    icon: string;
-  }[];
+    subtitle: string;
+    populations: string[];
+    columns?: 2 | 3 | 6;
+  };
   impactStats?: {
     value: string;
     label: string;
     icon: string;
   }[];
   impactItems?: string[];
-  galleryImages: {
-    src: string;
-    width: number;
-    height: number;
-    alt: string;
-    caption?: string;
-  }[];
-  ctaTitle: string;
-  ctaDescription: string;
-  populationColumns?: 2 | 3 | 6;
+  impactTitle?: string;
+  impactSubtitle?: string;
+  ctaData?: {
+    title: string;
+    description: string;
+    contactLink: string;
+    donateLink: string;
+    contactText: string;
+    donateText: string;
+  };
+  textBackButton?: string;
+  projectDescription?: {
+    title: string;
+    subtitle: string;
+    quoteText?: string;
+  };
+  actionAreas?: {
+    title: string;
+    description: string;
+    actions: {
+      icon: string;
+      title: string;
+      description: string;
+    }[];
+  };
+  gallerySection?: {
+    title: string;
+    subtitle: string;
+    galleryImages?: {
+      src: string;
+      width: number;
+      height: number;
+      alt: string;
+      caption?: string;
+    }[];
+  };
 }
 
-const { 
-  title, 
-  subtitle, 
-  description, 
+const currentLang = Astro.currentLocale || "es";
+
+const {
+  title,
+  subtitle,
+  description,
   mainImage,
-  populations,
+  populationGrid,
   actionAreas,
   impactStats,
   impactItems,
-  galleryImages,
-  ctaTitle,
-  ctaDescription,
-  populationColumns = 2
+  gallerySection,
+  ctaData,
+  textBackButton,
+  projectDescription,
+  impactTitle,
+  impactSubtitle,
 } = Astro.props;
 ---
 
 <BaseLayout title={`${title} - MIRES`} description={description}>
+  <!-- Back Button -->
+  <div class="fixed top-20 left-4 z-40 mt-4">
+    <a
+      href={getRelativeLocaleUrl(currentLang, "/projects")}
+      class="flex items-center gap-2 px-3 py-2 bg-white/90 dark:bg-darkbg/90 backdrop-blur-sm rounded-full shadow-md hover:shadow-lg transition-all duration-300 text-primary dark:text-white border border-gray-200 dark:border-white/10 group"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-5 w-5 transform group-hover:-translate-x-1 transition-transform duration-300"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+      </svg>
+      <span class="text-sm font-medium">{textBackButton}</span>
+    </a>
+  </div>
+
   <!-- Hero Section -->
-  <ProjectHero 
+  <ProjectHero
     title={title}
     subtitle={subtitle}
-    description={description}
     imageSrc={mainImage}
     imageAlt={`Imagen principal de ${title}`}
   >
-    <span slot="caption">Centro del Proyecto {title}</span>
+    <span slot="caption"> {title}</span>
   </ProjectHero>
 
   <!-- Descripción del Proyecto -->
-  <ProjectDescription 
-    title={`Sobre ${title}`}
-    subtitle="Una alternativa centrada en las necesidades reales"
-    quoteText={`Nuestro objetivo es crear un entorno flexible e inclusivo para el desarrollo integral de las personas.`}
+  <ProjectDescription
+    title={`${projectDescription?.title} ${title}`}
+    subtitle={`${projectDescription?.subtitle}`}
+    quoteText={`${projectDescription?.quoteText}`}
   >
     <p slot="description-first-paragraph">
       <slot name="description-first-paragraph" />
     </p>
-    
+
     <p slot="description-second-paragraph">
       <slot name="description-second-paragraph" />
     </p>
   </ProjectDescription>
 
   <!-- Ámbito Poblacional -->
-  <ProjectPopulationGrid
-    title="Ámbito Poblacional"
-    subtitle="Personas y comunidades a las que servimos"
-    populations={populations}
-    columns={populationColumns}
-  />
+  <ProjectPopulationGrid {...populationGrid} />
 
   <!-- Áreas de Acción -->
   <ProjectActionAreas
-    title="Áreas de Acción"
-    subtitle="Nuestras principales líneas de trabajo"
-    actionAreas={actionAreas}
+    title={actionAreas?.title || "Default Title"}
+    subtitle={actionAreas?.description || "Default Description"}
+    actionAreas={actionAreas?.actions || []}
   />
 
   <!-- Impacto - Condicional según el tipo de datos proporcionados -->
-  {impactStats && (
-    <ProjectImpactStats
-      title="Nuestro Impacto"
-      subtitle="Resultados tangibles que demuestran nuestro compromiso"
-      stats={impactStats}
-    />
-  )}
+  {
+    impactStats && (
+      <ProjectImpactStats
+        title={impactTitle || "Default Title"}
+        subtitle={impactSubtitle || "Default Subtitle"}
+        stats={impactStats}
+      />
+    )
+  }
 
-  {impactItems && (
-    <ProjectImpactItems
-      title="Nuestro Impacto"
-      subtitle="Resultados tangibles que demuestran nuestro compromiso"
-      impactItems={impactItems}
-    />
-  )}
+  {
+    impactItems && (
+      <ProjectImpactItems
+        title={impactTitle || "Default Title"}
+        subtitle={impactSubtitle || "Default Subtitle"}
+        impactItems={impactItems}
+      />
+    )
+  }
 
   <!-- Galería de Fotos -->
-  <ProjectGallerySection
-    title="Galería de Imágenes"
-    subtitle="Conoce nuestro trabajo a través de imágenes"
-    images={galleryImages}
+  <ProjectGallerySection 
+    title={gallerySection?.title}
+    subtitle={gallerySection?.subtitle}
+    images={gallerySection?.galleryImages}
   />
 
   <!-- CTA -->
-  <Cta
-    title={ctaTitle}
-    description={ctaDescription}
-    contactLink="/contact"
-    donateLink="/donate"
-    contactText="Contactar"
-    donateText="Donar"
-  />
+  <Cta {...ctaData} />
 </BaseLayout>
 
 <script>
@@ -152,4 +197,3 @@ const {
     });
   });
 </script>
-

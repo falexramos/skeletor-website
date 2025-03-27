@@ -8,6 +8,7 @@ import CTASection from '@/components/CTASection.astro';
 import SimpleHeroSection from '@/components/SimpleHeroSection.astro';
 import Cta from '@/components/Cta.astro';
 import { getRelativeLocaleUrl } from "astro:i18n";
+import NetworkSection from '@/components/NetworkSection.astro';
 
 
 
@@ -36,11 +37,6 @@ const actions = [
   }
 ];
 
-// Data for HeroSection
-const heroData = {
-  title: "What We Do",
-  description: "At MIRES, we provide comprehensive assistance to people in vulnerable situations, including homeless people, low-income families, communities affected by social crises or natural disasters, and neurodivergent individuals."
-};
 
 // Data for CollaborationSection
 const collaborationData = {
@@ -50,9 +46,22 @@ const collaborationData = {
   buttonHref: "/contact"
 };
 
+const heroData = {
+  title: "What Do We Do?",
+  description: "At MIRES, we provide comprehensive assistance."
+};
+
+const networkSection = {
+  title1: "Whom Do We Serve?",
+  description1: `<p class="mb-4">To people in vulnerable situations, including homeless individuals, low-income families, communities affected by social crises or natural disasters, and neurodivergent individuals.</p>`,
+  title2: "How Do We Do It?",
+  description2: `<p class="mb-4">Through humanitarian support programs, social integration, and sustainable development, we seek to improve the quality of life for those who need it most. We are committed to offering sustainable solutions that promote their social inclusion and enhance their ability to lead a dignified and autonomous life.</p>`
+};
+
 ---
 <BaseLayout>
   <SimpleHeroSection {...heroData} />
+  <NetworkSection {...networkSection} />
   <ActionGrid 
     title="Our Key Actions"
     actions={actions}
