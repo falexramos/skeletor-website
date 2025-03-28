@@ -14,7 +14,7 @@ const {
   backgroundColor = 'bg-darkbg', 
   textColor = 'text-white', 
   minHeight = 'min-h-[50vh] md:min-h-[70vh]',
-  backgroundImage = '/assets/img/gallery/mires_alimentando_esperanza1.avif' // Default background image
+  backgroundImage, 
 } = Astro.props;
 ---
 
@@ -25,15 +25,25 @@ const {
   <div class="absolute inset-0 overflow-hidden">
     <!-- Background Image Container with Responsive Positioning -->
     <div class="absolute inset-0 w-full h-full">
-      <img 
-        src={backgroundImage || "/placeholder.svg"} 
-        alt="Background" 
-        class="w-full h-full object-cover object-center md:object-[center_40%]"
-      />
+      <picture>
+        <img 
+          src={backgroundImage || "/placeholder.svg"} 
+          alt="Background" 
+          class="w-full h-full object-cover object-center scale-[1.02] transition-transform duration-[2s]
+            sm:object-[center_30%] 
+            md:object-[center_35%] 
+            lg:object-[center_40%]
+            xl:object-[center_45%]
+            2xl:object-[center_50%]
+            hover:scale-[1.05]"
+          loading="eager"
+          decoding="async"
+        />
+      </picture>
     </div>
     
     <!-- Overlay Gradient - Adjusted for better visibility -->
-    <div class="absolute inset-0 bg-gradient-to-br from-primary/40 via-darkbg/60 to-secondary/40"></div>
+    <div class="absolute inset-0 bg-gradient-to-br from-primary/20 via-darkbg/20 to-secondary/20"></div>
     
     <!-- Additional Overlay for Text Readability -->
     <div class="absolute inset-0 bg-darkbg/50"></div>
