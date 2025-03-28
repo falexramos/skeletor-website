@@ -4,38 +4,49 @@ interface Props {
   text: string;
   image?: string;
   role?: string;
+  textMore?: string;
+  textLess?: string;
 }
 
-const { name, text, image, role = "Voluntario" } = Astro.props;
+const { name, text, image, role,textMore,textLess} = Astro.props;
 
-// Función para truncar el texto si es demasiado largo
+
 const truncateText = (text: string, maxLength: number = 150) => {
   if (text.length <= maxLength) return text;
   return text.substring(0, maxLength) + '...';
 };
 
 const displayText = truncateText(text, 150);
+const needsTruncation = text.length > 150;
+const uniqueId = `testimonial-${Math.random().toString(36).substring(2, 11)}`;
 ---
 
-<div class="bg-white dark:bg-darkbg/50 p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-white/5 h-full flex flex-col group">
-  <div class="flex items-center mb-4">
-    <div class="flex-shrink-0">
+<div class="bg-white dark:bg-darkbg/50 p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-white/5 h-full flex flex-col group testimonial-card" data-id={uniqueId}>
+  <div class="flex flex-col sm:flex-row items-center mb-6">
+    <div class="flex-shrink-0 mb-4 sm:mb-0 relative">
       {image ? (
-        <img
-          src={image || "/placeholder.svg"}
-          alt={name}
-          class="w-16 h-16 rounded-full object-cover border-2 border-primary/20 group-hover:border-primary transition-colors duration-300"
-          loading="lazy"
-        />
+        <div class="image-container">
+          <div class="absolute inset-0 rounded-full bg-gradient-to-br from-primary to-secondary opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+          <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden border-4 border-primary/20 group-hover:border-primary shadow-md transition-all duration-300 transform group-hover:scale-105 relative">
+            <img
+              src={image || "/placeholder.svg"}
+              alt={name}
+              class="testimonial-image"
+              loading="lazy"
+              onerror="this.onerror=null; this.src='/placeholder.svg'; this.classList.add('fallback-image');"
+            />
+          </div>
+          <div class="absolute inset-0 rounded-full border-2 border-white/30 dark:border-white/10 pointer-events-none"></div>
+        </div>
       ) : (
-        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white text-xl font-bold">
+        <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white text-2xl font-bold shadow-md transform group-hover:scale-105 transition-transform duration-300">
           {name.charAt(0)}
         </div>
       )}
     </div>
     
-    <div class="ml-4">
-      <p class="text-primary dark:text-white font-medium">
+    <div class="sm:ml-6 text-center sm:text-left">
+      <p class="text-lg text-primary dark:text-white font-semibold">
         {name}
       </p>
       <p class="text-sm text-gray-500 dark:text-gray-400">
@@ -45,24 +56,193 @@ const displayText = truncateText(text, 150);
   </div>
 
   <div class="flex-grow">
-    <p class="text-gray-600 dark:text-gray-300 italic relative">
-      <span class="text-4xl text-primary/10 absolute -top-2 -left-1">"</span>
-      <span class="pl-4">{displayText}</span>
-      <span class="text-4xl text-primary/10 absolute -bottom-5 right-0">"</span>
-    </p>
+    <div class="relative bg-gray-50 dark:bg-darkbg/30 p-5 rounded-lg">
+      <span class="text-5xl text-primary/10 absolute -top-4 -left-2">"</span>
+      <p class="text-gray-600 dark:text-gray-300 italic relative z-10 testimonial-text">
+        <span class="pl-4 block testimonial-truncated">{displayText}</span>
+        <span class="pl-4 block hidden testimonial-full">{text}</span>
+      </p>
+      <span class="text-5xl text-primary/10 absolute -bottom-8 right-0">"</span>
+    </div>
   </div>
 
   <div class="mt-6 pt-4 border-t border-gray-200 dark:border-white/10 flex justify-between items-center">
-    <svg class="w-6 h-6 text-secondary/30" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"/>
-      <path d="M13 7h-2v6h6v-2h-4z"/>
-    </svg>
+    <div class="flex items-center">
+      <svg class="w-5 h-5 text-secondary/50 mr-1" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"/>
+        <path d="M13 7h-2v6h6v-2h-4z"/>
+      </svg>
+      
+    </div>
     
-    {text.length > 150 && (
-      <button class="text-xs text-secondary hover:text-primary dark:text-secondary dark:hover:text-white transition-colors">
-        Leer más
+    {needsTruncation && (
+      <button class="text-sm font-medium px-3 py-1 bg-secondary/10 hover:bg-secondary/20 text-secondary rounded-full transition-colors duration-300 testimonial-toggle">
+        {textMore}
       </button>
     )}
   </div>
 </div>
+
+<script define:vars={{ uniqueId, needsTruncation }}>
+
+if (needsTruncation) {
+  document.addEventListener('DOMContentLoaded', () => {
+    const card = document.querySelector(`.testimonial-card[data-id="${uniqueId}"]`);
+    if (!card) return;
+    
+    const truncatedText = card.querySelector('.testimonial-truncated');
+    const fullText = card.querySelector('.testimonial-full');
+    const toggleButton = card.querySelector('.testimonial-toggle');
+    
+    if (!truncatedText || !fullText || !toggleButton) return;
+    
+    let isExpanded = false;
+    
+    toggleButton.addEventListener('click', () => {
+      isExpanded = !isExpanded;
+      
+      if (isExpanded) {
+        truncatedText.classList.add('hidden');
+        fullText.classList.remove('hidden');
+        toggleButton.textContent = '{textLess}';
+      } else {
+        truncatedText.classList.remove('hidden');
+        fullText.classList.add('hidden');
+        toggleButton.textContent = '{textMore}';
+      }
+    });
+  });
+}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  
+  function centerImage(img) {
+    if (!img || img.classList.contains('fallback-image')) return;
+    
+    const container = img.parentElement;
+    if (!container) return;
+    
+    
+    if (img.complete) {
+      processImage(img, container);
+    } else {
+      img.onload = () => processImage(img, container);
+    }
+  }
+  
+  function processImage(img, container) {
+    
+    const imgWidth = img.naturalWidth;
+    const imgHeight = img.naturalHeight;
+    const containerWidth = container.offsetWidth;
+    const containerHeight = container.offsetHeight;
+    
+    
+    const imgRatio = imgWidth / imgHeight;
+    const containerRatio = containerWidth / containerHeight;
+    
+    
+    if (imgRatio > containerRatio) {
+      
+      img.style.width = 'auto';
+      img.style.height = '100%';
+      
+      const widthDiff = (imgWidth * (containerHeight / imgHeight)) - containerWidth;
+      img.style.transform = `translateX(-${widthDiff / 2}px)`;
+    } else {
+      
+      img.style.width = '100%';
+      img.style.height = 'auto';
+      
+      const heightDiff = (imgHeight * (containerWidth / imgWidth)) - containerHeight;
+      img.style.transform = `translateY(-${heightDiff / 4}px)`; 
+    }
+  }
+  
+  
+  const testimonialImages = document.querySelectorAll('.testimonial-image');
+  testimonialImages.forEach(centerImage);
+  
+  
+  window.addEventListener('resize', () => {
+    testimonialImages.forEach(img => {
+      img.style.width = '';
+      img.style.height = '';
+      img.style.transform = '';
+      centerImage(img);
+    });
+  });
+});
+</script>
+
+<style>
+
+.testimonial-toggle {
+  position: relative;
+  overflow: hidden;
+}
+
+.testimonial-toggle::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background-color: var(--secondary-color, rgba(99, 102, 241, 0.2));
+  transition: height 0.3s ease;
+  z-index: -1;
+  border-radius: 9999px;
+}
+
+.testimonial-toggle:hover::after {
+  height: 100%;
+}
+
+
+.testimonial-truncated, .testimonial-full {
+  transition: opacity 0.3s ease;
+}
+
+
+.testimonial-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-5px);
+}
+
+
+.testimonial-text {
+  line-height: 1.6;
+}
+
+
+.image-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.testimonial-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%; 
+}
+
+
+.fallback-image {
+  object-fit: contain;
+  padding: 10%;
+  background-color: #f3f4f6;
+}
+</style>
 

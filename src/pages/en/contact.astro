@@ -34,14 +34,18 @@ const contactInfo = [
     text: "Send Email"
   }
 ];
+
+const heroData = {
+  title: "Contact Us",
+  description:"We are here to help",
+  backgroundImage: "/assets/img/gallery/mires_mas_que_un_regalo_navidad_11.avif",
+};
+
 ---
 
 <BaseLayout title="Contact - MIRES">
   <!-- Hero Section -->
-   <SimpleHeroSection
-    title="Contact Us"
-    description="We are here to help"
-  />
+   <SimpleHeroSection  {...heroData} />
   
 
   <!-- Información de Contacto -->

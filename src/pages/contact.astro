@@ -34,14 +34,18 @@ const contactInfo = [
     text: "Enviar email"
   }
 ];
+
+const heroData = {
+  title: "Contacta con Nosotros",
+  description:"Estamos aquí para ayudar",
+  backgroundImage: "/assets/img/gallery/mires_mas_que_un_regalo_navidad_11.avif",
+};
 ---
 
 <BaseLayout title="Contacto - MIRES">
   <!-- Hero Section -->
-  <SimpleHeroSection
-    title="Contacta con Nosotros"
-    description="Estamos aquí para ayudar"
-  />
+  <SimpleHeroSection {...heroData} />
+  
   
   <!-- Información de Contacto -->
   <section class="py-12 md:py-20 bg-lightbg dark:bg-darkbg overflow-hidden w-full">

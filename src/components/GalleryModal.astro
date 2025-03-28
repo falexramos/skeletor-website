@@ -1,0 +1,129 @@
+---
+import "photoswipe/style.css";
+
+interface GalleryModalProps {
+  categories: Array<{ id: string; name: string }>;
+  images: Array<{ src: string; alt: string; category: string }>;
+}
+
+const { categories, images } = Astro.props as GalleryModalProps;
+---
+
+<div id="gallery-modal" class="fixed inset-0 bg-black/90 z-50 hidden">
+  <button
+    id="close-gallery"
+    class="absolute top-4 right-4 text-white text-4xl">&times;</button
+  >
+
+  {categories.map((category) => (
+    <div class="gallery-content hidden" data-category={category.id}>
+      <h2 class="text-3xl font-bold text-white text-center mb-8 pt-8">
+        {category.name}
+      </h2>
+      <div class="pswp-gallery container mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {images
+          .filter((img) => img.category === category.id)
+          .map((image) => (
+            <a
+              href={image.src}
+              data-pswp-width="800"
+              data-pswp-height="600"
+              class="gallery-item"
+            >
+              <div class="aspect-square overflow-hidden rounded-lg">
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
+                />
+              </div>
+            </a>
+          ))}
+      </div>
+    </div>
+  ))}
+</div>
+
+
+
+<style>
+
+
+  #gallery-modal {
+    overflow-y: auto;
+  }
+
+  .gallery-content {
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+  }
+
+  .gallery-content.active {
+    opacity: 1;
+  }
+</style>
+
+
+<script>
+  import PhotoSwipeLightbox from "photoswipe/lightbox";
+
+  // Inicializar PhotoSwipe
+  const lightbox = new PhotoSwipeLightbox({
+    gallery: ".pswp-gallery",
+    children: ".gallery-item",
+    pswpModule: () => import("photoswipe"),
+    padding: { top: 20, bottom: 20, left: 20, right: 20 },
+  });
+
+  lightbox.init();
+
+  // Manejo del modal
+  const modal = document.getElementById("gallery-modal");
+  const categoryCards = document.querySelectorAll(".category-card");
+  const closeButton = document.getElementById("close-gallery");
+  const galleryContents = document.querySelectorAll(".gallery-content");
+
+  categoryCards.forEach((card) => {
+    card.addEventListener("click", () => {
+      const categoryId = (card as HTMLElement).dataset.category;
+      if (modal) {
+        modal.classList.remove("hidden");
+        document.body.style.overflow = "hidden";
+      }
+
+      galleryContents.forEach((content) => {
+        if ((content as HTMLElement).dataset.category === categoryId) {
+          content.classList.remove("hidden");
+          setTimeout(() => content.classList.add("active"), 100);
+        } else {
+          content.classList.add("hidden");
+          content.classList.remove("active");
+        }
+      });
+    });
+  });
+
+  if (closeButton) {
+    closeButton.addEventListener("click", () => {
+      if (modal) {
+        modal.classList.add("hidden");
+      }
+
+      document.body.style.overflow = "auto";
+      galleryContents.forEach((content) => {
+        content.classList.remove("active");
+      });
+    });
+  }
+
+  // Cerrar con Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      if (modal) {
+        modal.classList.add("hidden");
+      }
+      document.body.style.overflow = "auto";
+    }
+  });
+</script>

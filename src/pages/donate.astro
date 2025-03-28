@@ -2,11 +2,13 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroSection from '../components/HeroSection.astro';
 import DonationCard from '../components/DonationCard.astro';
+import SimpleHeroSection from '@/components/SimpleHeroSection.astro';
 
 const currentLang = Astro.currentLocale || "es";
 
 const heroData = {
-  title: "¿Cómo Puedes Ayudar?"
+  title: "¿Cómo Puedes Ayudar?",
+  backgroundImage: "/assets/img/gallery/mires_alimentando_esperanza_18.avif",
 };
 
 const donationCards = [
@@ -41,7 +43,7 @@ const donationCards = [
 
 ---
 <BaseLayout title="Donar - MIRES">
-  <HeroSection {...heroData} />
+  <SimpleHeroSection {...heroData} />
   
   <section class="py-16 bg-lightbg dark:bg-darkbg">
     <div class="container mx-auto px-4">
