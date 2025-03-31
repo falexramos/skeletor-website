@@ -1,7 +1,7 @@
 ---
 interface Props {
   title: string;
-  description: string;
+  description?: string;
   backgroundColor?: string;
   textColor?: string;
   minHeight?: string;
@@ -27,7 +27,7 @@ const {
     <div class="absolute inset-0 w-full h-full">
       <picture>
         <img 
-          src={backgroundImage || "/placeholder.svg"} 
+          src={backgroundImage} 
           alt="Background" 
           class="w-full h-full object-cover object-center scale-[1.02] transition-transform duration-[2s]
             sm:object-[center_30%] 
@@ -79,13 +79,15 @@ const {
     </div>
     
     <!-- Description with Backdrop -->
-    <div class="backdrop-blur-sm bg-darkbg/30 dark:bg-darkbg/40 p-6 rounded-xl border border-white/10 shadow-2xl animate-fade-in max-w-2xl">
+    {description && (
+      <div class="backdrop-blur-sm bg-darkbg/30 dark:bg-darkbg/40 p-6 rounded-xl border border-white/10 shadow-2xl animate-fade-in max-w-2xl">
       <p 
         class={`text-lg sm:text-xl md:text-2xl ${textColor} text-center`} 
       >
         {description}
       </p>
-    </div>
+      </div>
+    )}
     
     <!-- Optional Slot for Buttons or Additional Content -->
     <div class="animate-fade-in delay-300">

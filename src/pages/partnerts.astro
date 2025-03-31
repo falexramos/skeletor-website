@@ -1,8 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Partners from "../components/Partners.astro";
-import HeroSection from "@/components/HeroSection.astro";
-import CollaborationSection from "@/components/CollaborationSection.astro";
 import ActionGrid from "@/components/ActionGrid.astro";
 import SimpleHeroSection from "@/components/SimpleHeroSection.astro";
 import CTASection from "@/components/CTASection.astro";
@@ -10,9 +8,7 @@ import CTASection from "@/components/CTASection.astro";
 const currentLang = Astro.currentLocale || "es";
 
 const heroData = {
-  title: "Organizaciones que Colaboran con Nosotros",
-  description: "",
-  backgroundImage: "/assets/img/mires_bg.png",
+  title: "Organizaciones que Colaboran con MIRES",
 };
 
 const collaborationData = [
@@ -29,13 +25,6 @@ const collaborationData = [
     description: "Por su valiosa contribución en la donación de alimentos, permitiéndonos llegar a más personas y garantizar el acceso a una alimentación digna para quienes más lo necesitan."
   }
 ];
-
-const endMessage = {
-  title: "Colaboración y Alianzas",
-  description: "Nuestra labor se enriquece a través de alianzas estratégicas con otras ONGs, empresas y organismos públicos, ampliando nuestro impacto y generando soluciones sostenibles.",
-  buttonText: "Colabora con nosotros",
-  buttonHref: "/contact"
-};
 
 const ctaData = {
   title: "¿Quieres ser parte del cambio?",
