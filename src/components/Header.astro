@@ -4,6 +4,7 @@ import { languageList } from "@/i18n/ui";
 import { useTranslations } from "@/i18n/utils";
 import SocialLinks from "./SocialLinks.astro";
 import LogoIcon from "./LogoIcon.astro";
+import LogoText from "./LogoText.astro";
 
 
 const getPathWithoutLocale = (path: string): string => {
@@ -98,7 +99,7 @@ const socialLinks = [
 
 <header class="fixed top-0 left-0 w-full z-50">
   <!-- Top Bar -->
-  <div class="w-full bg-white/90 dark:bg-darkbg/90 backdrop-blur-md shadow-md py-4 px-6 flex justify-between items-center border-b border-slate-200 dark:border-white/10 transition-colors duration-300">
+  <div class="w-full bg-darkbg/90 backdrop-blur-md shadow-md py-4 px-6 flex justify-between items-center border-b border-white/10 transition-colors duration-300">
     <!-- Left Side: Social Links (hidden on mobile) -->
     <div class="hidden md:flex items-center space-x-2">
       {socialLinks.map(link => (
@@ -106,7 +107,7 @@ const socialLinks = [
           href={link.url} 
           target="_blank" 
           rel="noopener noreferrer" 
-          class="p-2 rounded-full bg-primary/10 hover:bg-primary/20 dark:bg-white/10 dark:hover:bg-white/20 text-primary dark:text-white transition-all duration-300"
+          class="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all duration-300"
           aria-label={link.platform}
         >
           <Fragment set:html={link.icon} />
@@ -114,14 +115,14 @@ const socialLinks = [
       ))}
     </div>
     
-    <!-- Mobile: Just show logo on left -->
+    <!-- Replace the mobile view section with this updated version that includes the requested elements -->
+
+    <!-- Mobile: Show logo with name, language selector and theme toggle -->
     <div class="md:hidden flex items-center">
       <a href={getRelativeLocaleUrl(currentLang, "/")} class="flex items-center group">
         <div class="flex items-center gap-2">
-          <LogoIcon className="w-8 h-8 text-primary dark:text-white transition-colors duration-500" />
-          <span class="text-xl font-extrabold text-primary dark:text-white transition-colors duration-500">
-            MIRES
-          </span>
+          <LogoIcon className="w-8 h-8 text-white transition-colors duration-500" />
+          <LogoText className="text-white transition-colors duration-500" />          
         </div>
       </a>
     </div>
@@ -130,40 +131,29 @@ const socialLinks = [
     <div class="hidden md:flex items-center justify-center flex-grow">
       <a href={getRelativeLocaleUrl(currentLang, "/")} class="flex items-center group">
         <div class="flex items-center gap-3">
-          <LogoIcon className="w-10 h-10 text-primary dark:text-white transition-colors duration-500" />
-          <span class="text-3xl font-extrabold text-primary dark:text-white transition-colors duration-500">
-            MIRES
-          </span>
+          <LogoIcon className="w-10 h-10 text-white transition-colors duration-500" />
+          <LogoText className="text-white transition-colors duration-500" />          
         </div>
       </a>
     </div>
 
-    <!-- Right Side: Donate Button, Language Selector, Theme Toggle, Menu Button -->
-    <div class="flex items-center gap-3">
-      <!-- Donate Button (hidden on small screens) -->
-      <a 
-        href={getRelativeLocaleUrl(currentLang, "donate")} 
-        class="hidden sm:flex items-center px-4 py-2 bg-secondary hover:bg-secondary/90 text-white rounded-full text-sm font-medium transition-all duration-300 shadow-sm hover:shadow-md"
-      >
-        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-        </svg>
-        <span>{translateLabels("nav.donate")}</span>
-      </a>
-      
-      <!-- Language Selector -->
-      <div class="relative group ">
-        <button class="px-2 py-1 rounded-lg bg-primary/10 hover:bg-primary/20 dark:bg-white/10 dark:hover:bg-white/20 text-primary dark:text-white transition-all duration-300 flex items-center justify-center gap-1">
+    <!-- Replace the right side controls section for mobile -->
+
+    <!-- Right Side: Language Selector, Theme Toggle, Menu Button (for mobile) -->
+    <div class="flex items-center gap-2">
+      <!-- Language Selector (visible on all screens) -->
+      <div class="relative group">
+        <button class="px-2 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-all duration-300 flex items-center justify-center">
           <span class="text-xs font-bold uppercase">{currentLang}</span>
         </button>
-        <div class="absolute top-full right-0 mt-2 w-24 bg-white dark:bg-darkbg backdrop-blur-md rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-200 dark:border-white/10 overflow-hidden transform origin-top scale-95 group-hover:scale-100 z-50">
+        <div class="absolute top-full right-0 mt-2 w-24 bg-darkbg backdrop-blur-md rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-white/10 overflow-hidden transform origin-top scale-95 group-hover:scale-100 z-50">
           <ul class="py-1">
             {
               Object.entries({es: "Español", en: "English"}).map(
                 ([langCode, langName]) =>
                   currentLang !== langCode && (
                     <li>
-                      <a href={getRelativeLocaleUrl(langCode as any, currentPathWithoutLocale)} class="block px-3 py-1 text-xs hover:bg-gray-100 dark:hover:bg-white/10 transition-colors text-gray-800 dark:text-white font-medium text-center">
+                      <a href={getRelativeLocaleUrl(langCode as any, currentPathWithoutLocale)} class="block px-3 py-1 text-xs hover:bg-white/10 transition-colors text-white font-medium text-center">
                         {langName}
                       </a>
                     </li>
@@ -174,13 +164,24 @@ const socialLinks = [
         </div>
       </div>
       
-      <!-- Theme Toggle -->
-      <button id="top-theme-toggle" class=" px-2 py-1 rounded-lg bg-primary/10 hover:bg-primary/20 dark:bg-white/10 dark:hover:bg-white/20 text-primary dark:text-white transition-all duration-300 items-center justify-center">
+      <!-- Theme Toggle (visible on all screens) -->
+      <button id="top-theme-toggle" class="px-2 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-all duration-300 items-center justify-center">
         <span id="top-theme-icon" class="text-xs">☀️</span>
       </button>
 
+      <!-- Donate Button (hidden on extra small screens) -->
+      <a 
+        href={getRelativeLocaleUrl(currentLang, "donate")} 
+        class="flex items-center px-2 py-1 bg-secondary hover:bg-secondary/90 text-white rounded-full text-xs font-medium transition-all duration-300 shadow-sm hover:shadow-md"
+      >
+        <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+        </svg>
+        <span>{translateLabels("nav.donate")}</span>
+      </a>
+
       <!-- Menu Toggle Button -->
-      <button id="menu-toggle" class="p-2 rounded-full bg-primary/10 hover:bg-primary/20 dark:bg-white/10 dark:hover:bg-white/20 text-primary dark:text-white transition-all duration-300 flex items-center justify-center">
+      <button id="menu-toggle" class="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all duration-300 flex items-center justify-center">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
@@ -196,11 +197,10 @@ const socialLinks = [
         <a href={getRelativeLocaleUrl(currentLang, "/")} class="flex items-center group">
           <div class="flex items-center gap-3">
             
-            <LogoIcon className="w-8 h-8 sm:w-10 sm:h-10 text-white transition-colors duration-500" />
 
-            <span class="text-2xl sm:text-3xl font-extrabold text-white transition-colors duration-500">
-              MIRES
-            </span>
+            <LogoIcon className="w-8 h-8 text-white transition-colors duration-500" />
+            <LogoText className="text-white transition-colors duration-500" />          
+
           </div>
         </a>
         <button id="close-menu" class="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all duration-300">
@@ -504,4 +504,3 @@ const socialLinks = [
     }
   }
 </script>
-

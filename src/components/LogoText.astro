@@ -1,0 +1,32 @@
+---
+interface LogoTextProps {
+  className?: string;
+}
+
+const {
+  className = "h-8 text-white transition-colors duration-500",
+} = Astro.props;
+---
+
+<div class={className}>
+  <span class="text-base 
+  sm:text-sm 
+  md:text-xl 
+  font-regular
+  tracking-wide 
+  baskerville"> 
+    MIRES
+  </span>
+</div>
+
+<style>
+  /* Import Baskerville font only for this component */
+  @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap');
+  
+  /* Apply the font only to elements within this component */
+  .baskerville {
+    font-family: 'Libre Baskerville', serif;
+    letter-spacing: 0.05em;
+  }
+</style>
+
