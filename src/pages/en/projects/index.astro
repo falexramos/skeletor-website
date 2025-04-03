@@ -16,28 +16,28 @@ const projectsData = {
       title: "DANA Project",
       description: "Logistics center for donations for emergencies and disasters.",
       href: getRelativeLocaleUrl(currentLang, "/projects/dana"),
-      image: "/assets/img/projects/mires_dana_7.avif"
-    },
-    {
-      id: "coschooling",
-      title: "Coschooling",
-      description: "Alternative education space and community development.",
-      href: getRelativeLocaleUrl(currentLang, "/projects/coschooling"),
-      image: "/assets/img/projects/mires_proyecto_coschooling.avif"
-    },
-    {
-      id: "diversamente-habil",
-      title: "Differently Able",
-      description: "Leisure and development center for neurodivergent people.",
-      href: getRelativeLocaleUrl(currentLang, "/projects/diversamente-habil"),
-      image: "/assets/img/projects/mires_diversamente.avif"
+      image: "/assets/img/projects/mires_dana_7.avif",status: "active"
     },
     {
       id: "alimentando-esperanza",
       title: "Feeding Hope",
       description: "Support for families in vulnerable situations.",
       href: getRelativeLocaleUrl(currentLang, "/projects/alimentando-esperanza"),
-      image: "/assets/img/projects/mires_alimentando_esperanza_8.avif"
+      image: "/assets/img/projects/mires_alimentando_esperanza_8.avif",status: "active"
+    },
+    {
+      id: "coschooling",
+      title: "Coschooling",
+      description: "Alternative education space and community development.",
+      href: getRelativeLocaleUrl(currentLang, "/projects/coschooling"),
+      image: "/assets/img/projects/mires_proyecto_coschooling.avif",status: "coming-soon"
+    },
+    {
+      id: "diversamente-habil",
+      title: "Differently Able",
+      description: "Leisure and development center for neurodivergent people.",
+      href: getRelativeLocaleUrl(currentLang, "/projects/diversamente-habil"),
+      image: "/assets/img/projects/mires_diversamente.avif",status: "coming-soon"
     }
   ]
 };
@@ -53,91 +53,105 @@ const ctaData = {
 };
 ---
 
-<BaseLayout title="Projects - MIRES">
-{/* Hero Section with Refined Style */}
-<section class="relative pt-32 pb-20 bg-gradient-to-br from-primary to-primary/90 overflow-hidden">
-  <div class="absolute inset-0 opacity-10">
-    <div class="absolute top-0 right-0 w-1/2 h-1/2 bg-secondary/20 rounded-full transform translate-x-1/4 -translate-y-1/4 blur-3xl"></div>
-    <div class="absolute bottom-0 left-0 w-1/2 h-1/2 bg-white/10 rounded-full transform -translate-x-1/4 translate-y-1/4 blur-3xl"></div>
-  </div>
-  
-  <div class="container mx-auto px-6 relative z-10">
-    <div class="max-w-4xl mx-auto ">
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 text-center">
-        {projectsData.title}
-      </h1>
-      
-      <div class="h-1 w-24 bg-secondary mx-auto mb-10 rounded"></div>
-      
-      <div class="bg-white/10 backdrop-blur-sm p-6 md:p-8 rounded-xl border border-white/20 shadow-lg max-w-3xl mx-auto">
-        <p class="text-lg md:text-xl text-white/90 leading-relaxed text-justify">
-          {projectsData.subtitle}
-        </p>
+<BaseLayout title="Proyectos - MIRES">
+  {/* Hero Section with Refined Style */}
+  <section class="relative pt-32 pb-20 bg-gradient-to-br from-primary to-primary/90 overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-0 right-0 w-1/2 h-1/2 bg-secondary/20 rounded-full transform translate-x-1/4 -translate-y-1/4 blur-3xl"></div>
+      <div class="absolute bottom-0 left-0 w-1/2 h-1/2 bg-white/10 rounded-full transform -translate-x-1/4 translate-y-1/4 blur-3xl"></div>
+    </div>
+    
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="max-w-4xl mx-auto ">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 text-center">
+          {projectsData.title}
+        </h1>
+        
+        <div class="h-1 w-24 bg-secondary mx-auto mb-10 rounded"></div>
+        
+        <div class="bg-white/10 backdrop-blur-sm p-6 md:p-8 rounded-xl border border-white/20 shadow-lg max-w-3xl mx-auto">
+          <p class="text-lg md:text-xl text-white/90 leading-relaxed text-justify">
+            {projectsData.subtitle}
+          </p>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-{/* Proyectos Grid with Enhanced Styling */}
-<section id="projects" class="py-20 bg-gray-50 dark:bg-gray-900">
-  <div class="container mx-auto px-4">
-    <SectionTitle 
-      title="" 
-      subtitle=""
-    />
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
-      {projectsData.projects.map((project, index) => (
-        <a
-          href={project.href}
-          class="group bg-white dark:bg-darkbg/50 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105 border border-gray-100 dark:border-white/5"
-        >
-          <div class="h-56 overflow-hidden relative">
-            <img
-              src={project.image || "/placeholder.svg?height=300&width=400"}
-              alt={project.title}
-              class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          </div>
-          <div class="p-6">
-            <h3 class="text-xl font-bold text-primary dark:text-white mb-3 group-hover:text-secondary transition-colors">
-              {project.title}
-            </h3>
-            <p class="text-gray-600 dark:text-gray-300">
-              {project.description}
-            </p>
-            
-            <div class="mt-4 pt-4 border-t border-gray-100 dark:border-white/10 flex justify-end">
-              <span class="text-sm text-secondary font-medium flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </span>
+  {/* Proyectos Grid with Enhanced Styling */}
+  <section id="projects" class="py-20 bg-gray-50 dark:bg-gray-900">
+    <div class="container mx-auto px-4">
+      <SectionTitle 
+        title="" 
+        subtitle=""
+      />
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
+        {projectsData.projects.map((project, index) => (
+          <a
+            href={project.href}
+            class={`group bg-white dark:bg-darkbg/50 rounded-2xl 
+              overflow-hidden shadow-lg hover:shadow-xl transition-all 
+              duration-500 hover:scale-105 border border-gray-100 dark:border-white/5 relative 
+              `}
+          >
+            <div class="h-56 overflow-hidden relative">
+              <img
+                src={project.image || "/placeholder.svg?height=300&width=400"}
+                alt={project.title}
+                class={`w-full h-full object-cover transition-all duration-700 group-hover:scale-110`}
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              
+              {/* Status Badge */}
+              <div class={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold ${
+                project.status === "active" 
+                  ? "bg-green-500/90 text-white" 
+                  : "bg-gray-500/90 text-white"
+              }`}>
+                {project.status === "active" ? "Active" : "Coming soon"}
+              </div>
             </div>
-          </div>
-        </a>
-      ))}
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-primary dark:text-white mb-3 group-hover:text-secondary transition-colors">
+                {project.title}
+              </h3>
+              <p class="text-gray-600 dark:text-gray-300">
+                {project.description}
+              </p>
+              
+              <div class="mt-4 pt-4 border-t border-gray-100 dark:border-white/10 flex justify-end">
+                
+                  <span class="text-sm text-secondary font-medium flex items-center">                   
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </span>
+                
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-{/* Call to Action */}
-<Cta {...ctaData} />
+  {/* Call to Action */}
+  <Cta {...ctaData} />
 </BaseLayout>
 
 <style>
 /* Subtle hover effect for project cards */
 .grid > a {
-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .grid > a:hover {
-transform: translateY(-5px);
+  transform: translateY(-5px);
 }
 
 /* Ensure consistent dark mode styling */
 :global(.dark) .bg-white {
-background-color: rgba(30, 41, 59, 0.5);
+  background-color: rgba(30, 41, 59, 0.5);
 }
 </style>

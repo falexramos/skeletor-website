@@ -7,6 +7,7 @@ interface Props {
   imageAlt?: string;
   ctaText?: string;
   ctaLink?: string;
+  defaultCategory?: string; // Categoría por defecto para mostrar en el modal
 }
 
 const { 
@@ -16,7 +17,8 @@ const {
   imageSrc, 
   imageAlt = "Imagen del proyecto", 
   ctaText = "Ver galería", 
-  ctaLink = "#gallery" 
+  ctaLink = "#gallery",
+  defaultCategory = "all" // Valor por defecto
 } = Astro.props;
 ---
 
@@ -41,30 +43,34 @@ const {
     </div>
     
     <div class="relative rounded-2xl overflow-hidden shadow-2xl max-w-5xl mx-auto">
-      <img 
-        src={imageSrc || "/placeholder.svg"} 
-        alt={imageAlt}
-        class="w-full h-auto object-cover"
-      />
-      <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
-        <div class="p-6 md:p-8 w-full">
-          <div class="flex items-center justify-between">
-            <p class="text-white text-lg md:text-xl font-medium">
-              <slot name="caption"></slot>
-            </p>
-            <a 
-              href={ctaLink} 
-              class="bg-white/20 hover:bg-white/30 text-white text-sm px-4 py-2 rounded-full backdrop-blur-sm transition-all duration-300 flex items-center gap-2"
+  <!-- Contenedor con altura fija y proporción controlada -->
+  <div class="relative h-[400px] md:h-[500px] bg-gray-900">
+    <img 
+      src={imageSrc || "/placeholder.svg"} 
+      alt={imageAlt}
+      class="absolute inset-0 w-full h-full object-cover object-center"
+    />
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
+    <div class="p-6 md:p-8 w-full">
+      <div class="flex items-center justify-between">
+        <p class="text-white text-lg md:text-xl font-medium">
+          <slot name="caption"></slot>
+        </p>
+        <a 
+              href={ctaLink}
+              class="category-card bg-white/20 hover:bg-white/30 text-white text-sm px-4 py-2 rounded-full backdrop-blur-sm transition-all duration-300 flex items-center gap-2"
+              data-category={defaultCategory}
             >
               <span>{ctaText}</span>
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
               </svg>
             </a>
-          </div>
-        </div>
       </div>
     </div>
+  </div>
+</div>
   </div>
 </section>
 

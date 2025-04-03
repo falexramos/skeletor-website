@@ -14,12 +14,30 @@ interface Props {
 }
 
 const { title, subtitle, actionAreas } = Astro.props;
+
+// Array de colores para los iconos
+const iconColors = [
+  'from-blue-500 to-cyan-400',
+  'from-purple-500 to-pink-400',
+  'from-green-500 to-emerald-400',
+  'from-orange-500 to-amber-400',
+  'from-red-500 to-rose-400',
+  'from-indigo-500 to-violet-400'
+];
+
+// Función para obtener un color basado en el índice
+const getIconColor = (index: number) => {
+  return iconColors[index % iconColors.length];
+};
 ---
 
-<section class="py-20 bg-white dark:bg-darkbg/80">
-  <div class="container mx-auto px-4">
+<section class="py-20 bg-gray-50  dark:bg-darkbg relative overflow-hidden">
+  <!-- Elementos decorativos -->
+  
+
+  <div class="container mx-auto px-4 relative z-10">
     <div class="text-center mb-12">
-      <h2 class="text-3xl sm:text-4xl font-bold mb-3 text-primary dark:text-white">
+      <h2 class="text-3xl sm:text-4xl font-bold mb-3 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
         {title}
       </h2>
       
@@ -27,21 +45,41 @@ const { title, subtitle, actionAreas } = Astro.props;
         {subtitle}
       </p>
       
-      <div class="h-1 w-24 bg-secondary mx-auto mt-4 rounded"></div>
+      <div class="h-1 w-24 bg-gradient-to-r from-primary to-secondary mx-auto mt-4 rounded-full"></div>
     </div>
     
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto mt-12">
-      {actionAreas.map((area) => (
-        <div class="bg-gray-50 dark:bg-darkbg/50 rounded-xl p-6 md:p-8 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 dark:border-white/5 flex gap-6 group">
+      {actionAreas.map((area, index) => (
+        <div class="bg-white dark:bg-darkbg/50 backdrop-blur-sm rounded-xl p-6 md:p-8 shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-white/5 flex gap-6 group hover:-translate-y-1">
           <div class="flex-shrink-0">
-            <div class="w-14 h-14 rounded-full bg-primary/10 dark:bg-secondary flex items-center justify-center group-hover:bg-primary/20 dark:group-hover:bg-secondary/30 transition-colors duration-300">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={getActionAreaIconPath(area.icon)} />
-              </svg>
+            <div class={`w-14 h-14 rounded-xl bg-gradient-to-br ${getIconColor(index)} p-0.5 rotate-1 group-hover:rotate-3 transition-all duration-300`}>
+              <div class="w-full h-full bg-white dark:bg-darkbg rounded-lg flex items-center justify-center transform -rotate-1 group-hover:-rotate-3 transition-all duration-300">
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  class="h-7 w-7 group-hover:scale-110 transition-transform duration-300" 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="currentColor"
+                  style={`stroke: url(#action-gradient-${index});`}
+                >
+                  <defs>
+                    <linearGradient id={`action-gradient-${index}`} x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="var(--color-start)" />
+                      <stop offset="100%" stop-color="var(--color-end)" />
+                    </linearGradient>
+                  </defs>
+                  <path 
+                    stroke-linecap="round" 
+                    stroke-linejoin="round" 
+                    stroke-width="2" 
+                    d={getActionAreaIconPath(area.icon)} 
+                  />
+                </svg>
+              </div>
             </div>
           </div>
           <div>
-            <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">{area.title}</h3>
+            <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2 group-hover:text-primary dark:group-hover:text-secondary transition-colors duration-300">{area.title}</h3>
             <p class="text-gray-600 dark:text-gray-300">{area.description}</p>
           </div>
         </div>
@@ -51,6 +89,23 @@ const { title, subtitle, actionAreas } = Astro.props;
 </section>
 
 <style>
+  @keyframes pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 0.8; }
+  }
+
+  .animate-pulse {
+    animation: pulse 4s ease-in-out infinite;
+  }
+
+  /* Definir variables CSS para los colores de gradiente */
+  .from-blue-500 { --color-start: #3b82f6; --color-end: #22d3ee; }
+  .from-purple-500 { --color-start: #8b5cf6; --color-end: #ec4899; }
+  .from-green-500 { --color-start: #22c55e; --color-end: #10b981; }
+  .from-orange-500 { --color-start: #f97316; --color-end: #fbbf24; }
+  .from-red-500 { --color-start: #ef4444; --color-end: #f43f5e; }
+  .from-indigo-500 { --color-start: #6366f1; --color-end: #8b5cf6; }
+
   /* Animaciones para elementos al hacer scroll */
   @keyframes fadeInUp {
     from {
@@ -80,4 +135,23 @@ const { title, subtitle, actionAreas } = Astro.props;
     animation-delay: 0.6s;
   }
 </style>
+
+<script>
+  // Añadir la clase in-view cuando el elemento es visible
+  document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    document.querySelectorAll('section').forEach((section) => {
+      observer.observe(section);
+    });
+  });
+</script>
 

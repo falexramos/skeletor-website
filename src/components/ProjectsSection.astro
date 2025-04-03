@@ -1,38 +1,51 @@
 ---
 import SectionTitle from "./SectionTitle.astro";
 
-const { projects,title } = Astro.props;
-
-
+const { projects, title} = Astro.props;
 ---
 
 <section class="py-20 bg-white dark:bg-gray-900 relative overflow-hidden">
-  <SectionTitle title={title}/>
+  <SectionTitle title={title} />
   <div class="container mx-auto px-4">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-      {projects.map((project, index) => (
-        <a
-          href={project.href}
-          class="group bg-lightbg dark:bg-primary/10 rounded-2xl overflow-hidden shadow-lg transform transition-all duration-500 hover:scale-105 hover:shadow-2xl"
-          style={`transition-delay: ${index * 100}ms`}
-        >
-          <div class="h-48 overflow-hidden">
-            <img
-              src={project.image || "/placeholder.svg?height=300&width=400"}
-              alt={project.title}
-              class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
-            />
-          </div>
-          <div class="p-6">
-            <h3 class="text-xl font-bold text-primary mb-2 group-hover:text-secondary transition-colors">
-              {project.title}
-            </h3>
-            <p class="text-gray-700 dark:text-gray-300">
-              {project.description}
-            </p>
-          </div>
-        </a>
-      ))}
+      {
+        projects.map((project, index) => (
+          <a
+            href={project.href}
+            class="group bg-lightbg dark:bg-primary/10 rounded-2xl overflow-hidden shadow-lg transform transition-all duration-500 hover:scale-105 hover:shadow-2xl"
+            style={`transition-delay: ${index * 100}ms`}
+          >
+            <div class="h-48 overflow-hidden">
+              <img
+                src={project.image || "/placeholder.svg?height=300&width=400"}
+                alt={project.title}
+                class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
+              />
+
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+              {/* Status Badge */}
+              <div
+                class={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold ${
+                  project.status === "Activo" || project.status === "Active"
+                    ? "bg-green-500/90 text-white"
+                    : "bg-gray-500/90 text-white"
+                }`}
+              >
+                {project.status}
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-primary mb-2 group-hover:text-secondary transition-colors">
+                {project.title}
+              </h3>
+              <p class="text-gray-700 dark:text-gray-300">
+                {project.description}
+              </p>
+            </div>
+          </a>
+        ))
+      }
     </div>
   </div>
 </section>

@@ -16,28 +16,32 @@ const projectsData = {
       title: "Proyecto DANA",
       description: "Centro logístico de donaciones para emergencias y catástrofes.",
       href: getRelativeLocaleUrl(currentLang, "/projects/dana"),
-      image: "/assets/img/projects/mires_dana_7.avif"
-    },
-    {
-      id: "coschooling",
-      title: "Coschooling",
-      description: "Espacio de educación alternativa y desarrollo comunitario.",
-      href: getRelativeLocaleUrl(currentLang, "/projects/coschooling") ,
-      image: "/assets/img/projects/mires_proyecto_coschooling.avif"
-    },
-    {
-      id: "diversamente-habil",
-      title: "Diversamente Hábil",
-      description: "Centro de ocio y desarrollo para personas neurodivergentes.",
-      href: getRelativeLocaleUrl(currentLang, "/projects/diversamente-habil"),
-      image: "/assets/img/projects/mires_diversamente.avif"
+      image: "/assets/img/projects/mires_dana_7.avif",
+      status: "active"
     },
     {
       id: "alimentando-esperanza",
       title: "Alimentando Esperanza",
       description: "Apoyo a familias en situación de vulnerabilidad.",
       href: getRelativeLocaleUrl(currentLang, "/projects/alimentando-esperanza"),
-      image: "/assets/img/projects/mires_alimentando_esperanza_8.avif"
+      image: "/assets/img/projects/mires_alimentando_esperanza_8.avif",
+      status: "active"
+    },
+    {
+      id: "coschooling",
+      title: "Coschooling",
+      description: "Espacio de educación alternativa y desarrollo comunitario.",
+      href: getRelativeLocaleUrl(currentLang, "/projects/coschooling") ,
+      image: "/assets/img/projects/mires_proyecto_coschooling.avif",
+      status: "coming-soon"
+    },
+    {
+      id: "diversamente-habil",
+      title: "Diversamente Hábil",
+      description: "Centro de ocio y desarrollo para personas neurodivergentes.",
+      href: getRelativeLocaleUrl(currentLang, "/projects/diversamente-habil"),
+      image: "/assets/img/projects/mires_diversamente.avif",
+      status: "coming-soon"
     }
   ]
 };
@@ -92,15 +96,27 @@ const ctaData = {
         {projectsData.projects.map((project, index) => (
           <a
             href={project.href}
-            class="group bg-white dark:bg-darkbg/50 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105 border border-gray-100 dark:border-white/5"
+            class={`group bg-white dark:bg-darkbg/50 rounded-2xl 
+              overflow-hidden shadow-lg hover:shadow-xl transition-all 
+              duration-500 hover:scale-105 border border-gray-100 dark:border-white/5 relative 
+              `}
           >
             <div class="h-56 overflow-hidden relative">
               <img
                 src={project.image || "/placeholder.svg?height=300&width=400"}
                 alt={project.title}
-                class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
+                class={`w-full h-full object-cover transition-all duration-700 group-hover:scale-110`}
               />
               <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              
+              {/* Status Badge */}
+              <div class={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold ${
+                project.status === "active" 
+                  ? "bg-green-500/90 text-white" 
+                  : "bg-gray-500/90 text-white"
+              }`}>
+                {project.status === "active" ? "Activo" : "Próximamente"}
+              </div>
             </div>
             <div class="p-6">
               <h3 class="text-xl font-bold text-primary dark:text-white mb-3 group-hover:text-secondary transition-colors">
@@ -111,11 +127,13 @@ const ctaData = {
               </p>
               
               <div class="mt-4 pt-4 border-t border-gray-100 dark:border-white/10 flex justify-end">
-                <span class="text-sm text-secondary font-medium flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </span>
+                
+                  <span class="text-sm text-secondary font-medium flex items-center">                   
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </span>
+                
               </div>
             </div>
           </a>

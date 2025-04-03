@@ -1,4 +1,6 @@
 ---
+import LogoText from './LogoText.astro';
+
 interface Props {
   title: string;
   description?: string;
@@ -24,26 +26,34 @@ const {
   <!-- Background Image with Responsive Handling -->
   <div class="absolute inset-0 overflow-hidden">
     <!-- Background Image Container with Responsive Positioning -->
-    <div class="absolute inset-0 w-full h-full">
-      <picture>
-        <img 
-          src={backgroundImage} 
-          alt="Background" 
-          class="w-full h-full object-cover object-center scale-[1.02] transition-transform duration-[2s]
-            sm:object-[center_30%] 
-            md:object-[center_35%] 
-            lg:object-[center_40%]
-            xl:object-[center_45%]
-            2xl:object-[center_50%]
-            hover:scale-[1.05]"
-          loading="eager"
-          decoding="async"
-        />
-      </picture>
-    </div>
     
+    
+
+    {backgroundImage && (
+      <div class="absolute inset-0 w-full h-full">
+        <picture>
+          <img 
+            src={backgroundImage} 
+            alt="Background" 
+            class="w-full h-full object-cover object-center scale-[1.02] transition-transform duration-[2s]
+              sm:object-[center_30%] 
+              md:object-[center_35%] 
+              lg:object-[center_40%]
+              xl:object-[center_45%]
+              2xl:object-[center_50%]
+              hover:scale-[1.05]"
+            loading="eager"
+            decoding="async"
+          />
+        </picture>
+      </div>
+    )}
+
+
+
     <!-- Overlay Gradient - Adjusted for better visibility -->
-    <div class="absolute inset-0 bg-gradient-to-br from-primary/20 via-darkbg/20 to-secondary/20"></div>
+    <div class="absolute inset-0 bg-gradient-to-br
+     from-primary/20 via-darkbg/20 to-secondary/20"></div>
     
     <!-- Additional Overlay for Text Readability -->
     <div class="absolute inset-0 bg-darkbg/50"></div>
@@ -72,7 +82,7 @@ const {
         class={`text-4xl sm:text-5xl md:text-6xl font-bold ${textColor} leading-tight max-w-4xl animate-slide-up`}
       >
         <span class="relative inline-block">
-          {title}
+          {title} 
           <span class="absolute -bottom-2 left-0 w-full h-1 bg-secondary transform scale-x-0 animate-expand origin-left"></span>
         </span>
       </h1>
