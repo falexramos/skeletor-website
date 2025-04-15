@@ -251,7 +251,7 @@ const ctaData = {
 
 const videos = [
   {
-    src: "/assets/videos/Mires_Proyecto_DANA.mp4",
+    src: "/assets/videos/Mires_Proyecto_DANA_1.mp4",
     title: "Mires",
   },
   {
@@ -263,17 +263,17 @@ const videos = [
 ---
 
 <BaseLayout title="Gallery - MIRES">
-   <!-- Hero Section -->
+   
    <SimpleHeroSection {...heroData} />
 
-   <!-- Sistema de pestañas para alternar entre imágenes y videos -->
+   
    <section class="py-16 bg-white dark:bg-darkbg">
      <div class="container mx-auto px-4">
-       <!-- Tabs mejorados -->
+       
        <div class="flex justify-center mb-12">
          <div class="inline-flex rounded-full border-2 border-primary/20 p-1 shadow-lg bg-white dark:bg-darkbg/90">
            <button id="tab-images" class="tab-button px-8 py-3 text-lg font-medium rounded-full bg-primary text-white shadow-md">
-             Imágenes
+            Images
            </button>
            <button id="tab-videos" class="tab-button px-8 py-3 text-lg font-medium rounded-full text-primary hover:bg-primary/10 transition-colors">
              Videos
@@ -281,7 +281,7 @@ const videos = [
          </div>
        </div>
        
-       <!-- Contenido de pestañas -->
+       
        <div id="tab-content-images" class="tab-content">
          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
            {
@@ -317,7 +317,7 @@ const videos = [
            {videos.map((video, index) => (
              <div class="video-card group" data-video-src={video.src} data-video-title={video.title}>
                <div class="aspect-video overflow-hidden rounded-2xl shadow-lg relative">
-                 <!-- Video con primer frame -->
+                 
                  <video 
                    class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
                    src={video.src}
@@ -327,14 +327,14 @@ const videos = [
                    disableRemotePlayback
                  ></video>
                  
-                 <!-- Overlay con gradiente y botón de play mejorado -->
+                 
                  <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/10 flex items-center justify-center cursor-pointer play-button group-hover:opacity-90 transition-opacity duration-300">
-                   <!-- Botón de play con efecto de pulso -->
+                   
                    <div class="relative">
-                     <!-- Círculo de pulso exterior -->
+                     
                      <div class="absolute inset-0 rounded-full bg-primary/30 animate-ping-slow opacity-0 group-hover:opacity-100"></div>
                      
-                     <!-- Círculo principal -->
+                     
                      <div class="w-20 h-20 rounded-full bg-gradient-to-br from-primary to-secondary p-0.5 shadow-lg shadow-primary/30 transform group-hover:scale-110 transition-transform duration-300 relative z-10">
                        <div class="w-full h-full rounded-full bg-white dark:bg-darkbg/90 flex items-center justify-center">
                          <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={`stroke: url(#video-btn-gradient-${index});`}>
@@ -354,7 +354,7 @@ const videos = [
                  
                </div>
                
-               <!-- Información del video mejorada -->
+               
                <div class="mt-4 p-2">
                  <h3 class="text-xl font-bold text-primary dark:text-white group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-secondary group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">{video.title}</h3>
                  {video.description && (
@@ -368,10 +368,10 @@ const videos = [
      </div>
    </section>
  
-   <!-- Modal de Galería -->
+   
    <GalleryModal categories={categories} images={images} videos={videos} />
  
-   <!-- Modal de Video mejorado -->
+   
    <div id="video-player-modal" class="fixed inset-0 bg-black/95 z-[60] hidden opacity-0 transition-opacity duration-300">
      <button
        id="close-video-player"
@@ -417,7 +417,7 @@ const videos = [
      @apply transition-all duration-300;
    }
    
-   /* Animación de pulso más lenta */
+   
    @keyframes ping-slow {
      0% {
        transform: scale(1);
@@ -437,10 +437,10 @@ const videos = [
      animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite;
    }
    
-   /* Variables CSS para los colores de gradiente */
+   
    :root {
-     --color-primary: #3b82f6;  /* Ajusta según tu esquema de colores */
-     --color-secondary: #10b981; /* Ajusta según tu esquema de colores */
+     --color-primary: #3b82f6;  
+     --color-secondary: #10b981; 
    }
  </style>
  
@@ -453,21 +453,21 @@ const videos = [
      const contentVideos = document.getElementById('tab-content-videos');
      
      if (tabImages && tabVideos && contentImages && contentVideos) {
-       // Función para cambiar pestañas
+       
        const switchTab = (activeTab: HTMLElement, inactiveTab: HTMLElement, activeContent: HTMLElement, inactiveContent: HTMLElement) => {
-         // Activar pestaña
+       
          activeTab.classList.add('bg-primary', 'text-white', 'shadow-md');
          activeTab.classList.remove('text-primary', 'hover:bg-primary/10');
          
-         // Desactivar pestaña
+       
          inactiveTab.classList.remove('bg-primary', 'text-white', 'shadow-md');
          inactiveTab.classList.add('text-primary', 'hover:bg-primary/10');
          
-         // Mostrar/ocultar contenido con animación
+       
          inactiveContent.classList.add('hidden');
          activeContent.classList.remove('hidden');
          
-         // Animación de entrada
+       
          const items = activeContent.querySelectorAll('.category-card, .video-card');
          items.forEach((item, index) => {
            item.style.opacity = '0';
@@ -481,7 +481,7 @@ const videos = [
          });
        };
        
-       // Eventos de clic
+       
        tabImages.addEventListener('click', () => {
          switchTab(tabImages, tabVideos, contentImages, contentVideos);
        });
@@ -490,7 +490,7 @@ const videos = [
          switchTab(tabVideos, tabImages, contentVideos, contentImages);
        });
        
-       // Inicializar animación para la pestaña activa por defecto
+       
        const activeItems = contentImages.querySelectorAll('.category-card');
        activeItems.forEach((item, index) => {
          item.style.opacity = '0';
@@ -504,14 +504,14 @@ const videos = [
        });
      }
      
-     // Cargar el primer frame de cada video
+     
      const videoElements = document.querySelectorAll('.video-card video');
      videoElements.forEach(video => {
-       // Establecer el currentTime a 0.1 segundos para mostrar el primer frame
+     
        (video as HTMLVideoElement).currentTime = 0.1;
      });
      
-     // Conectar los botones de play con el modal de reproducción
+     
      const playButtons = document.querySelectorAll('.play-button');
      const videoPlayerModal = document.getElementById('video-player-modal');
      const videoContainer = document.getElementById('video-container');
@@ -526,29 +526,29 @@ const videos = [
          const videoTitleText = videoCard.dataset.videoTitle;
          
          if (videoSrc && videoPlayerModal && videoPlayer && videoContainer) {
-           // Establecer la fuente del video
+           
            const source = videoPlayer.querySelector("source");
            if (source) {
              source.setAttribute("src", videoSrc);
              videoPlayer.load();
            }
            
-           // Establecer el título
+           
            if (videoTitle && videoTitleText) {
              videoTitle.textContent = videoTitleText;
            }
            
-           // Mostrar el modal de video con animación
+           
            videoPlayerModal.classList.remove("hidden");
            document.body.style.overflow = "hidden";
            
-           // Animar la entrada
+           
            setTimeout(() => {
              videoPlayerModal.style.opacity = "1";
              videoContainer.style.opacity = "1";
              videoContainer.style.transform = "scale(1)";
              
-             // Reproducir después de completar la animación
+           
              setTimeout(() => {
                videoPlayer.play().catch(e => console.log("Error al reproducir el video:", e));
              }, 300);
@@ -557,15 +557,15 @@ const videos = [
        });
      });
      
-     // Cerrar el modal de video con animación
+     
      if (closeVideoPlayerButton && videoPlayerModal && videoContainer) {
        closeVideoPlayerButton.addEventListener('click', () => {
-         // Animar la salida
+         
          videoContainer.style.opacity = "0";
          videoContainer.style.transform = "scale(0.95)";
          videoPlayerModal.style.opacity = "0";
          
-         // Ocultar después de la animación
+         
          setTimeout(() => {
            videoPlayerModal.classList.add('hidden');
            document.body.style.overflow = "auto";
@@ -578,7 +578,7 @@ const videos = [
        });
      }
      
-     // Cerrar con Escape
+     
      document.addEventListener("keydown", (e) => {
        if (e.key === "Escape" && videoPlayerModal && !videoPlayerModal.classList.contains('hidden')) {
          if (videoContainer) {
