@@ -25,20 +25,29 @@ const getDefaultIcon = (index: number) => {
   ];
   return icons[index % icons.length];
 };
----
 
+// Array de colores para los gradientes
+const gradientColors = [
+'from-purple-500 to-pink-500',
+  'from-blue-500 to-teal-500',
+  'from-green-500 to-emerald-500',
+  'from-yellow-500 to-orange-500',
+  'from-red-500 to-rose-500',
+  'from-indigo-500 to-purple-500'
+];
+---
 <section class="py-20 bg-white dark:bg-darkbg/80 relative overflow-hidden">
-  <!-- Elementos decorativos de fondo -->
+  <!-- Elementos decorativos de fondo con gradientes -->
   <div class="absolute inset-0 overflow-hidden pointer-events-none">
-    <div class="absolute top-0 right-0 w-1/2 h-1/2 bg-primary/5 rounded-full transform translate-x-1/4 -translate-y-1/4 blur-3xl"></div>
-    <div class="absolute bottom-0 left-0 w-1/2 h-1/2 bg-secondary/5 rounded-full transform -translate-x-1/4 translate-y-1/4 blur-3xl"></div>
+    <div class="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-to-br from-primary/20 to-secondary/10 rounded-full transform translate-x-1/4 -translate-y-1/4 blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-to-br from-secondary/10 to-primary/20 rounded-full transform -translate-x-1/4 translate-y-1/4 blur-3xl animate-pulse"></div>
   </div>
   
   <div class="container mx-auto px-4 relative z-10">
     <div class="max-w-5xl mx-auto">
-      <!-- Encabezado de sección -->
+      <!-- Encabezado de sección con gradiente -->
       <div class="text-center mb-16">
-        <h2 class="text-3xl sm:text-4xl font-bold mb-4 text-primary dark:text-white">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
           {title}
         </h2>
         
@@ -48,7 +57,7 @@ const getDefaultIcon = (index: number) => {
           </p>
         )}
         
-        <div class="h-1 w-24 bg-secondary mx-auto mt-4 rounded"></div>
+        <div class="h-1 w-24 bg-gradient-to-r from-primary to-secondary mx-auto mt-4 rounded-full"></div>
       </div>
       
       <!-- Grid de acciones -->
@@ -56,21 +65,41 @@ const getDefaultIcon = (index: number) => {
         {actions.map((action, index) => (
           <div class="bg-gray-50 dark:bg-darkbg/50 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-white/5 overflow-hidden group">
             <div class="p-8 relative h-full flex flex-col">
-              <!-- Elemento decorativo superior -->
-              <div class="absolute top-0 right-0 w-24 h-24 bg-secondary/20  rounded-full transform translate-x-1/3 -translate-y-1/3 group-hover:bg-primary/10 transition-colors duration-300"></div>
+              <!-- Elemento decorativo superior con gradiente -->
+              <div class={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${gradientColors[index % gradientColors.length]} opacity-20 rounded-full transform translate-x-1/3 -translate-y-1/3 group-hover:opacity-30 transition-all duration-300`}></div>
               
               <div class="relative z-10 flex-grow">
-                <!-- Icono y título -->
+                <!-- Icono y título con gradiente -->
                 <div class="flex items-start gap-4 mb-4">
                   <div class="flex-shrink-0 mt-1">
-                    <div class="w-12 h-12 rounded-full bg-primary/10 dark:bg-lightbg flex items-center justify-center group-hover:bg-primary/20 dark:group-hover:bg-primary/30 transition-colors duration-300">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={action.icon || getDefaultIcon(index)} />
-                      </svg>
+                    <div class={`w-12 h-12 rounded-full bg-gradient-to-br ${gradientColors[index % gradientColors.length]} p-0.5 rotate-1 group-hover:rotate-3 transition-all duration-300`}>
+                      <div class="w-full h-full bg-white dark:bg-darkbg rounded-full flex items-center justify-center transform -rotate-1 group-hover:-rotate-3 transition-all duration-300">
+                        <svg 
+                          xmlns="http://www.w3.org/2000/svg" 
+                          class="h-6 w-6 group-hover:scale-110 transition-transform duration-300" 
+                          fill="none" 
+                          viewBox="0 0 24 24" 
+                          stroke="currentColor"
+                          style={`stroke: url(#gradient-${index});`}
+                        >
+                          <defs>
+                            <linearGradient id={`gradient-${index}`} x1="0%" y1="0%" x2="100%" y2="100%">
+                              <stop offset="0%" stop-color="var(--color-start)" />
+                              <stop offset="100%" stop-color="var(--color-end)" />
+                            </linearGradient>
+                          </defs>
+                          <path 
+                            stroke-linecap="round" 
+                            stroke-linejoin="round" 
+                            stroke-width="2" 
+                            d={action.icon || getDefaultIcon(index)} 
+                          />
+                        </svg>
+                      </div>
                     </div>
                   </div>
                   
-                  <h3 class="text-xl font-bold text-primary dark:text-white">
+                  <h3 class="text-xl font-bold text-primary dark:text-white group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-secondary group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
                     {action.title}
                   </h3>
                 </div>
@@ -81,12 +110,20 @@ const getDefaultIcon = (index: number) => {
                 </p>
               </div>
               
-              <!-- Indicador de hover -->
+              <!-- Indicador de hover con gradiente -->
               <div class="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div class="w-8 h-8 rounded-full bg-secondary/10 dark:bg-secondary/20 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
+                <div class={`w-8 h-8 rounded-full bg-gradient-to-br ${gradientColors[index % gradientColors.length]} p-0.5`}>
+                  <div class="w-full h-full bg-white dark:bg-darkbg rounded-full flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={`stroke: url(#arrow-gradient-${index});`}>
+                      <defs>
+                        <linearGradient id={`arrow-gradient-${index}`} x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stop-color="var(--color-start)" />
+                          <stop offset="100%" stop-color="var(--color-end)" />
+                        </linearGradient>
+                      </defs>
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -106,6 +143,24 @@ const getDefaultIcon = (index: number) => {
   .grid > div:hover {
     transform: translateY(-5px);
   }
+  
+  /* Animación de pulso para los fondos */
+  @keyframes pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 0.8; }
+  }
+
+  .animate-pulse {
+    animation: pulse 4s ease-in-out infinite;
+  }
+  
+  /* Definir variables CSS para los colores de gradiente */
+  .from-purple-500 { --color-start: #8b5cf6; --color-end: #ec4899; }
+  .from-blue-500 { --color-start: #3b82f6; --color-end: #14b8a6; }
+  .from-green-500 { --color-start: #22c55e; --color-end: #10b981; }
+  .from-yellow-500 { --color-start: #eab308; --color-end: #f97316; }
+  .from-red-500 { --color-start: #ef4444; --color-end: #f43f5e; }
+  .from-indigo-500 { --color-start: #6366f1; --color-end: #8b5cf6; }
   
   /* Animaciones para elementos al hacer scroll */
   @keyframes fadeInUp {
@@ -145,3 +200,21 @@ const getDefaultIcon = (index: number) => {
   }
 </style>
 
+<script>
+  // Añadir la clase in-view cuando el elemento es visible
+  document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    document.querySelectorAll('section').forEach((section) => {
+      observer.observe(section);
+    });
+  });
+</script>

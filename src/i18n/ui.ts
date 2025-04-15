@@ -7,12 +7,12 @@ export const labels = {
   es: {
     // =========== Navegación =========== //
   "nav.home": "Inicio",
-  "nav.nosotros": "Quiénes somos",
+  "nav.nosotros": "¿Quiénes somos?",
   "nav.values": "Valores",
   "nav.projects": "Proyectos",
   "nav.team": "Equipo",
   "nav.contact": "Contacto",
-  "nav.action": "Qué Hacemos",
+  "nav.action": "¿Qué Hacemos?",
   "nav.donate": "Donaciones",
   "nav.partnert": "Colaboración",
   "nav.gallery": "Galería",
@@ -41,12 +41,12 @@ export const labels = {
   en: {
     // =========== Navigation =========== //
     "nav.home": "Home",
-    "nav.nosotros": "About Us",
+    "nav.nosotros": "About Us?",
     "nav.values": "Values",
     "nav.projects": "Projects",
     "nav.team": "Team",
     "nav.contact": "Contact",
-    "nav.action": "What We Do",
+    "nav.action": "What We Do?",
     "nav.donate": "Donations",
     "nav.partnert": "Collaboration",
     "nav.gallery": "Gallery",

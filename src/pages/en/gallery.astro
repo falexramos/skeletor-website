@@ -5,6 +5,7 @@ import "photoswipe/style.css";
 import SimpleHeroSection from "@/components/SimpleHeroSection.astro";
 import Cta from "@/components/Cta.astro";
 import { getRelativeLocaleUrl } from "astro:i18n";
+import GalleryModal from "@/components/GalleryModal.astro";
 
 
 const currentLang = Astro.currentLocale || "es";
@@ -86,6 +87,7 @@ const images = [
     category: "food",
   },
   // Proyecto DANA
+  
   {
     src: "/assets/img/gallery/mires_dana_1.avif",
     alt: "Proyecto DANA - MIRES",
@@ -117,7 +119,7 @@ const images = [
     category: "dana",
   },
   {
-    src: "/assets/img/gallery/mires_dana_23.avif",
+    src: "/assets/img/gallery/mires_dana_10.avif",
     alt: "Proyecto DANA - MIRES",
     category: "dana",
   },
@@ -247,163 +249,354 @@ const ctaData = {
   donateText: "Donate",
 };
 
+const videos = [
+  {
+    src: "/assets/videos/Mires_Proyecto_DANA.mp4",
+    title: "Mires",
+  },
+  {
+    src: "/assets/videos/mires_video_ayuda.mp4",
+    title: "DANA Humanitarian Aid",
+  },
+];
+
 ---
 
 <BaseLayout title="Gallery - MIRES">
-  <!-- Hero Section -->
-  <SimpleHeroSection {...heroData} />
+   <!-- Hero Section -->
+   <SimpleHeroSection {...heroData} />
 
-  <!-- Cuadrícula de Categorías -->
-  <section class="py-16 bg-lightbg dark:bg-darkbg">
-    <div class="container mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {
-          categories.map((category) => (
-            <button class="category-card group" data-category={category.id}>
-              <div class="relative overflow-hidden rounded-2xl shadow-lg aspect-[16/9]">
-                <img
-                  src={category.cover}
-                  alt={category.name}
-                  class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
-                />
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent">
-                  <div class="absolute bottom-0 left-0 right-0 p-6 text-left">
-                    <h3 class="text-2xl font-bold text-white mb-2">
-                      {category.name}
-                    </h3>
-                    <p class="text-white/90">{category.description}</p>
-                  </div>
-                </div>
-              </div>
-            </button>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <!-- Modal de Galería -->
-  <div id="gallery-modal" class="fixed inset-0 bg-black/90 z-50 hidden">
-    <button
-      id="close-gallery"
-      class="absolute top-4 right-4 text-white text-4xl">&times;</button
-    >
-
-    {
-      categories.map((category) => (
-        <div class="gallery-content hidden" data-category={category.id}>
-          <h2 class="text-3xl font-bold text-white text-center mb-8 pt-8">
-            {category.name}
-          </h2>
-          <div class="pswp-gallery container mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {images
-              .filter((img) => img.category === category.id)
-              .map((image) => (
-                <a
-                  href={image.src}
-                  data-pswp-width="800"
-                  data-pswp-height="600"
-                  class="gallery-item"
-                >
-                  <div class="aspect-square overflow-hidden rounded-lg">
-                    <img
-                      src={image.src}
-                      alt={image.alt}
-                      class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                      loading="lazy"
-                    />
-                  </div>
-                </a>
-              ))}
-          </div>
-        </div>
-      ))
-    }
-  </div>
-
-  <Cta
-    {...ctaData}
-  />
-</BaseLayout>
-
-<style>
-  .category-card {
-    @apply w-full transform hover:-translate-y-1 transition-all duration-300;
-  }
-
-  #gallery-modal {
-    overflow-y: auto;
-  }
-
-  .gallery-content {
-    opacity: 0;
-    transition: opacity 0.3s ease-out;
-  }
-
-  .gallery-content.active {
-    opacity: 1;
-  }
-</style>
-
-<script>
-  import PhotoSwipeLightbox from "photoswipe/lightbox";
-
-  // Inicializar PhotoSwipe
-  const lightbox = new PhotoSwipeLightbox({
-    gallery: ".pswp-gallery",
-    children: ".gallery-item",
-    pswpModule: () => import("photoswipe"),
-    padding: { top: 20, bottom: 20, left: 20, right: 20 },
-  });
-
-  lightbox.init();
-
-  // Manejo del modal
-  const modal = document.getElementById("gallery-modal");
-  const categoryCards = document.querySelectorAll(".category-card");
-  const closeButton = document.getElementById("close-gallery");
-  const galleryContents = document.querySelectorAll(".gallery-content");
-
-  categoryCards.forEach((card) => {
-    card.addEventListener("click", () => {
-      const categoryId = (card as HTMLElement).dataset.category;
-      if (modal) {
-        modal.classList.remove("hidden");
-        document.body.style.overflow = "hidden";
-      }
-
-      galleryContents.forEach((content) => {
-        if ((content as HTMLElement).dataset.category === categoryId) {
-          content.classList.remove("hidden");
-          setTimeout(() => content.classList.add("active"), 100);
-        } else {
-          content.classList.add("hidden");
-          content.classList.remove("active");
-        }
-      });
-    });
-  });
-
-  if (closeButton) {
-    closeButton.addEventListener("click", () => {
-      if (modal) {
-        modal.classList.add("hidden");
-      }
-
-      document.body.style.overflow = "auto";
-      galleryContents.forEach((content) => {
-        content.classList.remove("active");
-      });
-    });
-  }
-
-  // Cerrar con Escape
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      if (modal) {
-        modal.classList.add("hidden");
-      }
-      document.body.style.overflow = "auto";
-    }
-  });
-</script>
+   <!-- Sistema de pestañas para alternar entre imágenes y videos -->
+   <section class="py-16 bg-white dark:bg-darkbg">
+     <div class="container mx-auto px-4">
+       <!-- Tabs mejorados -->
+       <div class="flex justify-center mb-12">
+         <div class="inline-flex rounded-full border-2 border-primary/20 p-1 shadow-lg bg-white dark:bg-darkbg/90">
+           <button id="tab-images" class="tab-button px-8 py-3 text-lg font-medium rounded-full bg-primary text-white shadow-md">
+             Imágenes
+           </button>
+           <button id="tab-videos" class="tab-button px-8 py-3 text-lg font-medium rounded-full text-primary hover:bg-primary/10 transition-colors">
+             Videos
+           </button>
+         </div>
+       </div>
+       
+       <!-- Contenido de pestañas -->
+       <div id="tab-content-images" class="tab-content">
+         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+           {
+             categories.map((category) => (
+               <button class="category-card group" data-category={category.id}>
+                 <div class="relative overflow-hidden rounded-2xl shadow-lg aspect-[16/9]">
+                   <img
+                     src={category.cover || "/placeholder.svg"}
+                     alt={category.name}
+                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                   />
+                   <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent">
+                     <div class="absolute bottom-0 left-0 right-0 p-6 text-left">
+                       <h3 class="text-2xl font-bold text-white mb-2">
+                         {category.name}
+                       </h3>
+                       <p class="text-white/90">{category.description}</p>
+                     </div>
+                   </div>
+                 </div>
+               </button>
+             ))
+           }
+         </div>
+       </div>
+       
+       <!-- Contenido de videos mejorado -->
+       <div id="tab-content-videos" class="tab-content hidden">
+         
+         
+         <!-- Grid de videos -->
+         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+           {videos.map((video, index) => (
+             <div class="video-card group" data-video-src={video.src} data-video-title={video.title}>
+               <div class="aspect-video overflow-hidden rounded-2xl shadow-lg relative">
+                 <!-- Video con primer frame -->
+                 <video 
+                   class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                   src={video.src}
+                   preload="metadata"
+                   muted
+                   disablePictureInPicture
+                   disableRemotePlayback
+                 ></video>
+                 
+                 <!-- Overlay con gradiente y botón de play mejorado -->
+                 <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/10 flex items-center justify-center cursor-pointer play-button group-hover:opacity-90 transition-opacity duration-300">
+                   <!-- Botón de play con efecto de pulso -->
+                   <div class="relative">
+                     <!-- Círculo de pulso exterior -->
+                     <div class="absolute inset-0 rounded-full bg-primary/30 animate-ping-slow opacity-0 group-hover:opacity-100"></div>
+                     
+                     <!-- Círculo principal -->
+                     <div class="w-20 h-20 rounded-full bg-gradient-to-br from-primary to-secondary p-0.5 shadow-lg shadow-primary/30 transform group-hover:scale-110 transition-transform duration-300 relative z-10">
+                       <div class="w-full h-full rounded-full bg-white dark:bg-darkbg/90 flex items-center justify-center">
+                         <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={`stroke: url(#video-btn-gradient-${index});`}>
+                           <defs>
+                             <linearGradient id={`video-btn-gradient-${index}`} x1="0%" y1="0%" x2="100%" y2="100%">
+                               <stop offset="0%" stop-color="var(--color-primary)" />
+                               <stop offset="100%" stop-color="var(--color-secondary)" />
+                             </linearGradient>
+                           </defs>
+                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                         </svg>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+                 
+               </div>
+               
+               <!-- Información del video mejorada -->
+               <div class="mt-4 p-2">
+                 <h3 class="text-xl font-bold text-primary dark:text-white group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-secondary group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">{video.title}</h3>
+                 {video.description && (
+                   <p class="text-gray-600 dark:text-gray-300 mt-2">{video.description}</p>
+                 )}
+               </div>
+             </div>
+           ))}
+         </div>
+       </div>
+     </div>
+   </section>
+ 
+   <!-- Modal de Galería -->
+   <GalleryModal categories={categories} images={images} videos={videos} />
+ 
+   <!-- Modal de Video mejorado -->
+   <div id="video-player-modal" class="fixed inset-0 bg-black/95 z-[60] hidden opacity-0 transition-opacity duration-300">
+     <button
+       id="close-video-player"
+       class="absolute top-6 right-6 text-white text-4xl hover:text-secondary transition-colors z-10"
+       aria-label="Cerrar video"
+     >
+       <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+       </svg>
+     </button>
+     
+     <div class="flex items-center justify-center h-full">
+       <div class="w-full max-w-5xl mx-auto px-4 transform transition-transform duration-500 scale-95 opacity-0" id="video-container">
+         <h3 id="video-title" class="text-white text-2xl font-bold mb-6 text-center"></h3>
+         <div class="relative pb-[56.25%] h-0 rounded-xl overflow-hidden shadow-2xl">
+           <video 
+             id="video-player" 
+             class="absolute top-0 left-0 w-full h-full" 
+             controls
+             preload="metadata"
+           >
+             <source src="" type="video/mp4">
+             Tu navegador no soporta videos HTML5.
+           </video>
+         </div>
+       </div>
+     </div>
+   </div>
+ 
+   <Cta {...ctaData} />
+ </BaseLayout>
+ 
+ <style>
+   .category-card {
+     @apply w-full transform hover:-translate-y-2 transition-all duration-300;
+   }
+   
+   .video-card {
+     @apply transform hover:-translate-y-2 transition-all duration-300 bg-white dark:bg-darkbg/30 rounded-2xl overflow-hidden shadow-lg border border-gray-100 dark:border-gray-800;
+   }
+   
+   .tab-button {
+     @apply transition-all duration-300;
+   }
+   
+   /* Animación de pulso más lenta */
+   @keyframes ping-slow {
+     0% {
+       transform: scale(1);
+       opacity: 0.8;
+     }
+     50% {
+       transform: scale(1.5);
+       opacity: 0.4;
+     }
+     100% {
+       transform: scale(2);
+       opacity: 0;
+     }
+   }
+   
+   .animate-ping-slow {
+     animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+   }
+   
+   /* Variables CSS para los colores de gradiente */
+   :root {
+     --color-primary: #3b82f6;  /* Ajusta según tu esquema de colores */
+     --color-secondary: #10b981; /* Ajusta según tu esquema de colores */
+   }
+ </style>
+ 
+ <script>
+   // Sistema de pestañas
+   document.addEventListener('DOMContentLoaded', () => {
+     const tabImages = document.getElementById('tab-images');
+     const tabVideos = document.getElementById('tab-videos');
+     const contentImages = document.getElementById('tab-content-images');
+     const contentVideos = document.getElementById('tab-content-videos');
+     
+     if (tabImages && tabVideos && contentImages && contentVideos) {
+       // Función para cambiar pestañas
+       const switchTab = (activeTab: HTMLElement, inactiveTab: HTMLElement, activeContent: HTMLElement, inactiveContent: HTMLElement) => {
+         // Activar pestaña
+         activeTab.classList.add('bg-primary', 'text-white', 'shadow-md');
+         activeTab.classList.remove('text-primary', 'hover:bg-primary/10');
+         
+         // Desactivar pestaña
+         inactiveTab.classList.remove('bg-primary', 'text-white', 'shadow-md');
+         inactiveTab.classList.add('text-primary', 'hover:bg-primary/10');
+         
+         // Mostrar/ocultar contenido con animación
+         inactiveContent.classList.add('hidden');
+         activeContent.classList.remove('hidden');
+         
+         // Animación de entrada
+         const items = activeContent.querySelectorAll('.category-card, .video-card');
+         items.forEach((item, index) => {
+           item.style.opacity = '0';
+           item.style.transform = 'translateY(20px)';
+           
+           setTimeout(() => {
+             item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+             item.style.opacity = '1';
+             item.style.transform = 'translateY(0)';
+           }, 50 * index);
+         });
+       };
+       
+       // Eventos de clic
+       tabImages.addEventListener('click', () => {
+         switchTab(tabImages, tabVideos, contentImages, contentVideos);
+       });
+       
+       tabVideos.addEventListener('click', () => {
+         switchTab(tabVideos, tabImages, contentVideos, contentImages);
+       });
+       
+       // Inicializar animación para la pestaña activa por defecto
+       const activeItems = contentImages.querySelectorAll('.category-card');
+       activeItems.forEach((item, index) => {
+         item.style.opacity = '0';
+         item.style.transform = 'translateY(20px)';
+         
+         setTimeout(() => {
+           item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+           item.style.opacity = '1';
+           item.style.transform = 'translateY(0)';
+         }, 50 * index);
+       });
+     }
+     
+     // Cargar el primer frame de cada video
+     const videoElements = document.querySelectorAll('.video-card video');
+     videoElements.forEach(video => {
+       // Establecer el currentTime a 0.1 segundos para mostrar el primer frame
+       (video as HTMLVideoElement).currentTime = 0.1;
+     });
+     
+     // Conectar los botones de play con el modal de reproducción
+     const playButtons = document.querySelectorAll('.play-button');
+     const videoPlayerModal = document.getElementById('video-player-modal');
+     const videoContainer = document.getElementById('video-container');
+     const videoPlayer = document.getElementById('video-player') as HTMLVideoElement;
+     const videoTitle = document.getElementById('video-title');
+     const closeVideoPlayerButton = document.getElementById('close-video-player');
+     
+     playButtons.forEach((button) => {
+       button.addEventListener('click', () => {
+         const videoCard = button.closest('.video-card') as HTMLElement;
+         const videoSrc = videoCard.dataset.videoSrc;
+         const videoTitleText = videoCard.dataset.videoTitle;
+         
+         if (videoSrc && videoPlayerModal && videoPlayer && videoContainer) {
+           // Establecer la fuente del video
+           const source = videoPlayer.querySelector("source");
+           if (source) {
+             source.setAttribute("src", videoSrc);
+             videoPlayer.load();
+           }
+           
+           // Establecer el título
+           if (videoTitle && videoTitleText) {
+             videoTitle.textContent = videoTitleText;
+           }
+           
+           // Mostrar el modal de video con animación
+           videoPlayerModal.classList.remove("hidden");
+           document.body.style.overflow = "hidden";
+           
+           // Animar la entrada
+           setTimeout(() => {
+             videoPlayerModal.style.opacity = "1";
+             videoContainer.style.opacity = "1";
+             videoContainer.style.transform = "scale(1)";
+             
+             // Reproducir después de completar la animación
+             setTimeout(() => {
+               videoPlayer.play().catch(e => console.log("Error al reproducir el video:", e));
+             }, 300);
+           }, 50);
+         }
+       });
+     });
+     
+     // Cerrar el modal de video con animación
+     if (closeVideoPlayerButton && videoPlayerModal && videoContainer) {
+       closeVideoPlayerButton.addEventListener('click', () => {
+         // Animar la salida
+         videoContainer.style.opacity = "0";
+         videoContainer.style.transform = "scale(0.95)";
+         videoPlayerModal.style.opacity = "0";
+         
+         // Ocultar después de la animación
+         setTimeout(() => {
+           videoPlayerModal.classList.add('hidden');
+           document.body.style.overflow = "auto";
+           
+           if (videoPlayer) {
+             videoPlayer.pause();
+             videoPlayer.currentTime = 0;
+           }
+         }, 300);
+       });
+     }
+     
+     // Cerrar con Escape
+     document.addEventListener("keydown", (e) => {
+       if (e.key === "Escape" && videoPlayerModal && !videoPlayerModal.classList.contains('hidden')) {
+         if (videoContainer) {
+           videoContainer.style.opacity = "0";
+           videoContainer.style.transform = "scale(0.95)";
+         }
+         videoPlayerModal.style.opacity = "0";
+         
+         setTimeout(() => {
+           videoPlayerModal.classList.add('hidden');
+           document.body.style.overflow = "auto";
+           
+           if (videoPlayer) {
+             videoPlayer.pause();
+             videoPlayer.currentTime = 0;
+           }
+         }, 300);
+       }
+     });
+   });
+ </script>

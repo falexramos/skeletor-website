@@ -2,17 +2,30 @@
 import "photoswipe/style.css";
 
 interface GalleryModalProps {
-  categories: Array<{ id: string; name: string }>;
-  images: Array<{ src: string; alt: string; category: string }>;
+  categories: Array<{ id: string; name: string; description?: string }>;
+  images: Array<{ 
+    src: string; 
+    alt: string; 
+    category: string;
+  }>;
+  videos: Array<{
+    src: string;
+    alt?: string;
+    title?: string;
+  }>;
 }
 
-const { categories, images } = Astro.props as GalleryModalProps;
+const { categories, images, videos } = Astro.props as GalleryModalProps;
+
+// Filtrar para asegurarnos de que solo las imágenes (no videos) se muestran en la galería
+const imagesOnly = images.filter(item => !item.src.includes('.mp4') && !item.src.includes('.webm'));
 ---
 
 <div id="gallery-modal" class="fixed inset-0 bg-black/90 z-50 hidden">
   <button
     id="close-gallery"
-    class="absolute top-4 right-4 text-white text-4xl">&times;</button
+    class="absolute top-4 right-4 text-white text-4xl hover:text-secondary transition-colors"
+    >&times;</button
   >
 
   {categories.map((category) => (
@@ -21,19 +34,19 @@ const { categories, images } = Astro.props as GalleryModalProps;
         {category.name}
       </h2>
       <div class="pswp-gallery container mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {images
-          .filter((img) => img.category === category.id)
-          .map((image) => (
+        {imagesOnly
+          .filter((item) => item.category === category.id)
+          .map((item) => (
             <a
-              href={image.src}
+              href={item.src}
               data-pswp-width="800"
               data-pswp-height="600"
               class="gallery-item"
             >
               <div class="aspect-square overflow-hidden rounded-lg">
                 <img
-                  src={image.src}
-                  alt={image.alt}
+                  src={item.src || "/placeholder.svg"}
+                  alt={item.alt}
                   class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                   loading="lazy"
                 />
@@ -45,11 +58,32 @@ const { categories, images } = Astro.props as GalleryModalProps;
   ))}
 </div>
 
-
+<!-- Modal de Video (separado del modal de imágenes) -->
+<div id="video-player-modal" class="fixed inset-0 bg-black/95 z-[60] hidden">
+  <button
+    id="close-video"
+    class="absolute top-4 right-4 text-white text-4xl hover:text-secondary transition-colors"
+    >&times;</button
+  >
+  <div class="flex items-center justify-center h-full">
+    <div class="w-full max-w-4xl mx-auto px-4">
+      <h3 id="video-title" class="text-white text-xl font-bold mb-4 text-center"></h3>
+      <div class="relative pb-[56.25%] h-0">
+        <video 
+          id="video-player" 
+          class="absolute top-0 left-0 w-full h-full" 
+          controls
+          preload="metadata"
+        >
+          <source src="" type="video/mp4">
+          Tu navegador no soporta videos HTML5.
+        </video>
+      </div>
+    </div>
+  </div>
+</div>
 
 <style>
-
-
   #gallery-modal {
     overflow-y: auto;
   }
@@ -64,11 +98,10 @@ const { categories, images } = Astro.props as GalleryModalProps;
   }
 </style>
 
-
 <script>
   import PhotoSwipeLightbox from "photoswipe/lightbox";
 
-  // Inicializar PhotoSwipe
+  // Inicializar PhotoSwipe para imágenes
   const lightbox = new PhotoSwipeLightbox({
     gallery: ".pswp-gallery",
     children: ".gallery-item",
@@ -78,7 +111,7 @@ const { categories, images } = Astro.props as GalleryModalProps;
 
   lightbox.init();
 
-  // Manejo del modal
+  // Manejo del modal de galería de imágenes
   const modal = document.getElementById("gallery-modal");
   const categoryCards = document.querySelectorAll(".category-card");
   const closeButton = document.getElementById("close-gallery");
@@ -117,13 +150,49 @@ const { categories, images } = Astro.props as GalleryModalProps;
     });
   }
 
-  // Cerrar con Escape
+  // Manejo del modal de video
+  const videoModal = document.getElementById("video-player-modal");
+  const closeVideoButton = document.getElementById("close-video");
+  const videoPlayer = document.getElementById("video-player") as HTMLVideoElement;
+  const videoTitle = document.getElementById("video-title");
+  
+  // Cerrar modal de video
+  if (closeVideoButton) {
+    closeVideoButton.addEventListener("click", () => {
+      if (videoModal) {
+        videoModal.classList.add("hidden");
+        document.body.style.overflow = "auto";
+        
+        if (videoPlayer) {
+          videoPlayer.pause();
+          videoPlayer.currentTime = 0;
+        }
+      }
+    });
+  }
+
+  // Cerrar modales con Escape
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
-      if (modal) {
+      // Cerrar modal de imágenes
+      if (modal && !modal.classList.contains("hidden")) {
         modal.classList.add("hidden");
+        document.body.style.overflow = "auto";
+        galleryContents.forEach((content) => {
+          content.classList.remove("active");
+        });
       }
-      document.body.style.overflow = "auto";
+      
+      // Cerrar modal de video
+      if (videoModal && !videoModal.classList.contains("hidden")) {
+        videoModal.classList.add("hidden");
+        document.body.style.overflow = "auto";
+        
+        if (videoPlayer) {
+          videoPlayer.pause();
+          videoPlayer.currentTime = 0;
+        }
+      }
     }
   });
 </script>

@@ -2,71 +2,270 @@
 interface HeroSectionProps {
   title: string;
   description: string;
-  videoSrc?: string; // Video es opcional
+  videoSrc?: string;
   primaryButton?: {
     href: string;
     text: string;
-  }; // Botón primario es opcional
+  };
   secondaryButton?: {
     href: string;
     text: string;
-  }; // Botón secundario es opcional
+  };
 }
 
 const { title, description, videoSrc, primaryButton, secondaryButton } = Astro.props;
+
+// Imágenes para el carrusel
+  const carouselImages = [
+  "/assets/img/index/index_carousel_1.avif",
+  "/assets/img/index/index_carousel_2.avif",
+  "/assets/img/index/index_carousel_3.avif",
+  "/assets/img/index/index_carousel_4.avif",
+  "/assets/img/index/index_carousel_5.avif",
+  "/assets/img/index/index_carousel_6.avif",
+  ];
 ---
+
 <section class="relative h-screen overflow-hidden">
-  <!-- Video Background -->
-  {videoSrc ? (
-    <div class="absolute inset-0 w-full h-full">
-      <video 
-        autoplay 
-        muted 
-        loop 
-        class="object-cover w-full h-full"
-
-      >
-        <source src={videoSrc} type="video/mp4" />
-      </video>
-      <div class="absolute inset-0 "></div>
+  <!-- Carrusel de Imágenes con Efecto Parallax -->
+  <div class="absolute inset-0 w-full h-full">
+    <div id="imageCarousel" class="relative w-full h-full">
+      {carouselImages.map((img, index) => (
+        <div 
+          class={`carousel-slide absolute inset-0 w-full h-full transition-opacity duration-1500 ease-in-out ${index === 0 ? 'opacity-100' : 'opacity-0'}`} 
+          data-index={index}
+        >
+          <div class="absolute inset-0 w-full h-full overflow-hidden">
+            <img 
+              src={img || "/placeholder.svg"} 
+              alt="Imagen de MIRES" 
+              class="object-cover w-full h-full transform scale-110 transition-transform duration-10000 ease-out"
+              style="will-change: transform;"
+            />
+          </div>
+        </div>
+      ))}
     </div>
-  ) : (
-    // Si no hay video, agregar un fondo sólido con un gradiente
-    <div class="absolute inset-0 w-full h-full bg-primary bg-gradient-to-b from-primary/80 to-primary/40"></div>
-  )}
-
-  <!-- Hero Content -->
-  <div class="relative z-10 container mx-auto px-6 h-full flex flex-col justify-center items-center text-center">
-    <h1 class="text-5xl md:text-7xl font-bold text-lightbg mb-6 leading-tight max-w-4xl animate-fade-in">
-      {title}
-    </h1>
-    <p class="text-xl md:text-2xl text-lightbg/90 mb-10 max-w-2xl animate-fade-in text-justify" style="animation-delay: 300ms;">
-      {description}
-    </p>
-
-    <!-- Botones condicionales -->
-    {(primaryButton || secondaryButton) && (
-      <div class="flex flex-col sm:flex-row gap-4 animate-fade-in" style="animation-delay: 600ms;">
-        {primaryButton && (
-          <a 
-            href={primaryButton.href} 
-            class="px-8 py-4 bg-secondary text-lightbg rounded-full text-lg font-medium hover:bg-secondary/90 transition-all transform hover:scale-105 shadow-lg"
-          >
-            {primaryButton.text}
-          </a>
-        )}
-        {secondaryButton && (
-          <a 
-            href={secondaryButton.href} 
-            class="px-8 py-4 bg-lightbg/20 backdrop-blur-sm text-lightbg border-2 border-lightbg/50 rounded-full text-lg font-medium hover:bg-lightbg/30 transition-all transform hover:scale-105"
-          >
-            {secondaryButton.text}
-          </a>
-        )}
-      </div>
-    )}
+    
+    <!-- Overlay gradiente sutil -->
+    <div class="absolute inset-0 bg-gradient-to-b from-primary/30 to-primary/60"></div>
   </div>
 
+  <!-- Indicadores del carrusel -->
+  <div class="absolute bottom-8 left-0 right-0 z-20 flex justify-center gap-3">
+    {carouselImages.map((_, index) => (
+      <button 
+        class="w-12 h-1 rounded-full bg-lightbg/30 hover:bg-lightbg/70 transition-all carousel-indicator" 
+        data-index={index}
+        aria-label={`Slide ${index + 1}`}
+      ></button>
+    ))}
+  </div>
 
- 
+  <!-- Hero Content con diseño asimétrico -->
+  <div class="relative z-10 container mx-auto px-6 h-full flex items-center">
+    <div class="w-full md:w-7/12 lg:w-6/12 relative">
+      <!-- Elemento decorativo -->
+      <div class="absolute -top-10 -left-10 w-20 h-20 border-t-2 border-l-2 border-secondary opacity-70"></div>
+      
+      <!-- Contenido principal -->
+      <div class="hero-content opacity-0 transform translate-y-8">
+        <h1 class="text-5xl md:text-7xl font-bold text-lightbg mb-6 leading-tight hero-title">
+          {title}
+        </h1>
+        <p class="text-xl md:text-2xl text-lightbg/90 mb-10 max-w-xl hero-description">
+          {description}
+        </p>
+
+       
+      </div>
+      
+      <!-- Elemento decorativo -->
+      <div class="absolute -bottom-10 -right-10 w-20 h-20 border-b-2 border-r-2 border-secondary opacity-70"></div>
+    </div>
+    
+   
+    
+  </div>
+  
+  <!-- Controles del carrusel con efecto hover -->
+  <div class="absolute top-1/2 left-0 right-0 z-20 flex justify-between px-6 transform -translate-y-1/2 pointer-events-none">
+    <button id="prevSlide" class="w-12 h-12 rounded-full bg-lightbg/10 backdrop-blur-sm flex items-center justify-center text-lightbg hover:bg-lightbg/20 transition-all transform hover:scale-110 pointer-events-auto">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+      </svg>
+    </button>
+    <button id="nextSlide" class="w-12 h-12 rounded-full bg-lightbg/10 backdrop-blur-sm flex items-center justify-center text-lightbg hover:bg-lightbg/20 transition-all transform hover:scale-110 pointer-events-auto">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+      </svg>
+    </button>
+  </div>
+  
+  
 </section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Elementos del carrusel
+    const slides = document.querySelectorAll('.carousel-slide');
+    const indicators = document.querySelectorAll('.carousel-indicator');
+    const prevButton = document.getElementById('prevSlide');
+    const nextButton = document.getElementById('nextSlide');
+    let currentSlide = 0;
+    let isAnimating = false;
+    
+    // Animación inicial del contenido
+    const heroContent = document.querySelector('.hero-content');
+    if (heroContent) {
+      setTimeout(() => {
+        heroContent.classList.add('animate-fade-in');
+      }, 500);
+    }
+    
+    // Efecto parallax en las imágenes
+    function setupParallax() {
+      document.addEventListener('mousemove', (e) => {
+        const mouseX = e.clientX / window.innerWidth;
+        const mouseY = e.clientY / window.innerHeight;
+        
+        slides.forEach(slide => {
+          const img = slide.querySelector('img');
+          if (img && slide.classList.contains('opacity-100')) {
+            const moveX = (mouseX - 0.5) * 20;
+            const moveY = (mouseY - 0.5) * 20;
+            img.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.1)`;
+          }
+        });
+        
+        // Mover el elemento flotante
+        const floatingElement = document.querySelector('.floating-element');
+        if (floatingElement) {
+          const moveX = (mouseX - 0.5) * 40;
+          const moveY = (mouseY - 0.5) * 40;
+          floatingElement.style.transform = `translate(${moveX}px, ${moveY}px) translateY(-50%)`;
+        }
+      });
+    }
+    
+    // Actualizar indicadores
+    function updateIndicators(index) {
+      indicators.forEach((indicator, i) => {
+        if (i === index) {
+          indicator.classList.add('bg-lightbg', 'w-24');
+          indicator.classList.remove('bg-lightbg/30', 'w-12');
+        } else {
+          indicator.classList.remove('bg-lightbg', 'w-24');
+          indicator.classList.add('bg-lightbg/30', 'w-12');
+        }
+      });
+    }
+    
+    // Actualizar el primer indicador
+    updateIndicators(0);
+    
+    // Función para cambiar a una diapositiva específica
+    function goToSlide(index) {
+      if (isAnimating) return;
+      isAnimating = true;
+      
+      // Ocultar diapositiva actual
+      slides[currentSlide].classList.remove('opacity-100');
+      slides[currentSlide].classList.add('opacity-0');
+      
+      // Mostrar nueva diapositiva
+      currentSlide = index;
+      slides[currentSlide].classList.remove('opacity-0');
+      slides[currentSlide].classList.add('opacity-100');
+      
+      // Actualizar indicadores
+      updateIndicators(currentSlide);
+      
+      // Animar la imagen con zoom
+      const currentImage = slides[currentSlide].querySelector('img');
+      if (currentImage) {
+        currentImage.classList.remove('scale-110');
+        void currentImage.offsetWidth; // Forzar reflow
+        currentImage.classList.add('scale-110');
+      }
+      
+      setTimeout(() => {
+        isAnimating = false;
+      }, 1500);
+    }
+    
+    // Función para ir a la siguiente diapositiva
+    function nextSlide() {
+      const newIndex = (currentSlide + 1) % slides.length;
+      goToSlide(newIndex);
+    }
+    
+    // Función para ir a la diapositiva anterior
+    function prevSlide() {
+      const newIndex = (currentSlide - 1 + slides.length) % slides.length;
+      goToSlide(newIndex);
+    }
+    
+    // Configurar los botones de navegación
+    if (prevButton && nextButton) {
+      prevButton.addEventListener('click', prevSlide);
+      nextButton.addEventListener('click', nextSlide);
+    }
+    
+    // Configurar los indicadores
+    indicators.forEach((indicator, index) => {
+      indicator.addEventListener('click', () => {
+        goToSlide(index);
+      });
+    });
+    
+    // Cambiar diapositivas automáticamente cada 7 segundos
+    setInterval(nextSlide, 7000);
+    
+    // Inicializar parallax
+    setupParallax();
+  });
+</script>
+
+<style>
+  /* Animaciones */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 1s ease-out forwards;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+  
+  /* Animación para el elemento flotante */
+  .floating-element {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(-50%) translateX(0); }
+    50% { transform: translateY(-45%) translateX(10px); }
+  }
+  
+  /* Estilos para los botones */
+  .hero-buttons a:hover {
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+  
+  .hero-buttons a:hover span:first-of-type {
+    color: #2c3e50; /* primary color */
+  }
+  
+  /* Transición suave para los indicadores */
+  .carousel-indicator {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Asegurar que las imágenes tengan una transición suave */
+  .carousel-slide img {
+    transition: transform 0.5s ease-out;
+  }
+</style>
