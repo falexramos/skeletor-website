@@ -7,340 +7,368 @@ export const labels = {
   es: {
     // =========== Navegación =========== //
     "nav.home": "Inicio",
-    "nav.guides": "Guías",
-    "nav.tools": "Herramientas",
-    "nav.software": "Software",
-    "nav.download": "Descargas",
-
+    "nav.about": "Quiénes Somos",
+    "nav.values": "Valores",
+    "nav.messages": "Mensajes",
+    "nav.gallery": "Galería",
+    "nav.asociation": "Asociación",
+    "nav.donate": "Donar",
+    "nav.apolos": "Rincón Apolos",
+    "nav.faq": "Preguntas Frecuentes",
+    "nav.contact": "Contacto",
+    
+    // =========== social media =========== //
+    "social.follow": "Síguenos en redes",
+    
     // =========== Tema =========== //
     "theme.toggle": "Cambiar Tema",
 
-    // =========== Página Principal =========== //
-    "download.button": "Descargar Ahora",
-    "home.description": "🚀 Windows modificado para gaming y rendimiento",
-    "home.ques": "¿Qué es CodeXtremeOS?",
-    "home.opti": "Optimización Extrema",
-    "home.desopti":
-      "ISO modificada de solo 3.2 GB con máximo rendimiento para gaming y productividad.",
-    "home.dev.des":
-      "Creada por CodeFlow con meses de pruebas y optimizaciones para un rendimiento extremo.",
-    "home.safety": "Seguridad Garantizada",
-    "home.safe.des":
-      "Con las últimas actualizaciones de seguridad y protección contra malware.",
-    "home.xbox": "Xbox Live",
-    "home.xbox.des":
-      "Conéctate a Xbox Live y disfruta de tus juegos favoritos en tu PC.",
-    "home.update": "Actualizaciones Inteligentes",
-    "home.update.des":
-      "Solo actualizaciones críticas y de seguridad, sin interrupciones.",
-    "home.performance": "Rendimiento Extremo",
-    "home.performance.des":
-      "Con un rendimiento extremo para gaming y productividad.",
-    "home.drivers": "Controladores Actualizados",
-    "home.drivers.des": "Controladores actualizados hasta enero de 2025",
-    "home.appearance": "Apariencia",
-    "home.appearance.des":
-      "Herramientas para personalizar la apariencia de Windows sin consumo de recursos.",
-    "home.support": "Soporte 24/7",
-    "home.support.des":
-      "Comunidad activa y Soporte técnico 24/7 para resolver tus dudas y problemas.",
-    "home.features": "Características Clave",
-    "home.low": "🔄 Bajo Consumo de Recursos",
-    "home.low.des":
-      "Con un bajo consumo de recursos para un rendimiento extremo.",
-    "home.compatibility": "🎮 Compatibilidad",
-    "home.compatibility.des":
-      "Soporte para juegos AAA y aplicaciones profesionales.",
-    "home.security": "🛡️ Seguridad",
-    "home.security.des":
-      "Con las últimas actualizaciones de seguridad y protección contra malware.",
-    "home.personalization": "✨ Personalización",
-    "home.personalization.des":
-      "Con herramientas populares para personalizar la apariencia de Windows",
-    "home.go": "¿Listo para empezar?",
+    // =========== vision Items =========== //
+    "vision.items.title": "Nuestros Pilares",
+    "vision.items.title.amor": "Amor",
+    "vision.items.description.amor": "El amor es el aroma que cada persona debe transmitir a los demás. Es la esencia de la Iglesia.",
 
-    // =========== Sección NTLite =========== //
-    "ntlite.ntlite_name": "NTLite",
-    "ntlite.aria.forum": "Enlace al foro oficial de guías de NTLite",
+    "vision.items.title.perdon": "Perdon",
+    "vision.items.description.perdon": "Perdonar es amar. Solo con el perdón puedes crecer y sobretodo madurar. El perdón son los brazos de la Iglesia para abrazar al dolido.",
+
+    "vision.items.title.servicio": "Servicio",
+    "vision.items.description.servicio": "El servicio es el amor en acción. Sin práctica no hay verdad. El que ama y perdona, fluye en servir a los demás. Cuidar y sembrar en cada vida es una privilegio que Dios nos da.",
+
+    // ===========Mission section =========== //
+    "mission.section.title": "Nuestra Misión",
+    "mission.section.description": "Exponer el Evangelio de Jesucristo.",
+    "mission.section.imageUrl": "/img/somos_mision.avif",
+    "mission.section.ctaText": "Conoce más",
+
+    "vision.section.title": "Nuestra Visión",
+    "vision.section.description": "Guiar a las personas a una relación creciente con Jesucristo.",
+    "vision.section.imageUrl": "/img/somos_vision.avif",
+    "vision.section.ctaText": "Conoce más",
+
+    // =========== Eventos =========== //
+    "events.mesas.imageUrl" : "/img/somos_mesas.avif",
+    "events.mesas.title": "Viernes, 19:00",
+    "events.mesas.date": "Mesas - Alfafar",
+    "events.domingos.imageUrl" : "/img/somos_domigos.avif",
+    "events.domingos.title": "Domingo, 11:00 AM",
+    "events.domingos.date": "Super Reunión",
+    
+    // =========== Hero Section =========== //
+    "hero.section.videoUrl": "/video/somos_video_principal_inicio_compressed.mp4",
+    "hero.section.title": "Una iglesia para",
+    "hero.section.highlightedWord": "gente,",
+    "hero.section.subtitle": "sin iglesia",
+    "hero.section.ctaText": "Conócenos",
+    "hero.section.scheduleText": "Vamos despacio por que vamos lejos.",
+
+    // =========== CTA Section =========== //
+    "cta.section.title": "Bienvenido",
+    "cta.section.description": "En la familia Somos hay lugar para todos en la mesa.",
+    "cta.section.ctaText": "Contáctanos",
+
+    // =========== team section =========== //
+    "team.section.title": "Nuestros Lideres",
+    "team.section.pastores.title": "Pastores",
+    "team.section.pastores.items.0.name": "William",
+    "team.section.pastores.items.0.role": "Pastor",
+    "team.section.pastores.items.0.image": "/img/somos_team_pastores.jpg",
+    "team.section.pastores.items.1.name": "Jessica",
+    "team.section.pastores.items.1.role": "Pastora",
+    "team.section.pastores.items.1.image": "/img/somos_team_pastores.jpg",
+
+    "team.section.team.title": "Colaboradores",
+    "team.section.items.0.name": "Servidores",
+    "team.section.items.0.image": "/img/team_ujieres.avif",
+    "team.section.items.1.name": "Producción",
+    "team.section.items.1.image": "/img/team_produccion.avif",
+    "team.section.items.2.name": "Música",
+    "team.section.items.2.image": "/img/team_alabanza.avif",
+    "team.section.items.3.name": "Niños",
+    "team.section.items.3.image": "/img/team_kids.avif",
+
+    // =========== Community Section =========== //  
+    "community.section.title": "Conoce y Conecta con Nuestra Comunidad",
+    "community.section.description": "Te invitamos a ser parte de nuestra familia. Aquí encontrarás un lugar para crecer, servir y compartir el amor de Cristo.",
+    "community.section.imageUrl": "/img/somos_comunidad.avif",
+    "community.buttons.text": "Ver Mensajes",
+    "community.buttons.contact": "Contáctanos",
+
+    // =========== Page Header =========== //
+    "page.header.about.title": "Nuestra",
+    "page.header.about.highlightedWord": "Historia",
+    "page.header.about.description": "Desde 2021, Somos es una comunidad cristiana en Alfafar, Valencia, que existe para compartir las buenas noticias de Jesús de Nazaret y hacer discípulos en comunidad.",
+
+
+    // =========== Values Section =========== //
+    "value.section.title": "7 Principios",
+
+    "value.section.items.0.title": "Jesús",
+    "value.section.items.0.icon": "mdi:cross",
+    "value.section.items.0.description": "Jesús de Nazaret es nuestro Señor y Maestro, el sentido de nuestra vida.",
+    "value.section.items.0.verse": "Con Cristo estoy juntamente crucificado, y ya no vivo yo, mas vive Cristo en mí; y lo que ahora vivo en la carne, lo vivo en la fe del Hijo de Dios, el cual me amó y se entregó a sí mismo por mí.",
+    "value.section.items.0.reference": "Gálatas 2:20",
+
+    "value.section.items.1.title": "Iglesia",
+    "value.section.items.1.icon": "mdi:church",
+    "value.section.items.1.description": "La iglesia somos todos, con una misión por cumplir. La mayor expresión de Jesús en la tierra. La mesa donde todos son bienvenidos.",
+    "value.section.items.1.verse": "Pero ustedes son una familia escogida, son sacerdotes reales y son una nación santa. Son un pueblo que Dios compró para que anuncien sus obras extraordinarias: él fue quien los llamó de las tinieblas a su luz maravillosa.",
+    "value.section.items.1.reference": "1 Pedro 2:9",
+
+    "value.section.items.2.title": "Espíritu Santo",
+    "value.section.items.2.icon": "mdi:weather-windy",
+    "value.section.items.2.description": "El motor de nuestras vidas y el amigo que nos consuela, revela y nos guía a la verdad.",
+    "value.section.items.2.verse": "Cuando venga el Espíritu Santo, él les dirá lo que es la verdad y los guiará, para que siempre vivan en la verdad.",
+    "value.section.items.2.reference": "Juan 16:13",
+
+    "value.section.items.3.title": "La Biblia",
+    "value.section.items.3.icon": "mdi:book-open-page-variant",
+    "value.section.items.3.description": "La Biblia es la obra de arte que inspira nuestras vidas y la narrativa de lo que somos.",
+    "value.section.items.3.verse": "Tu palabra es una lámpara que alumbra mi camino",
+    "value.section.items.3.reference": "Salmos 119:105",
+
+    "value.section.items.4.title": "Amor",
+    "value.section.items.4.icon": "mdi:heart",
+    "value.section.items.4.description": "Amar es nuestro estilo de vida.",
+    "value.section.items.4.verse": "El que ama es capaz de aguantarlo todo, de creerlo todo, de esperarlo todo, de soportarlo todo. Sólo el amor vive para siempre...",
+    "value.section.items.4.reference": "1 Corintios 13:7-8",
+
+    "value.section.items.5.title": "El Servicio",
+    "value.section.items.5.icon": "mdi:hand-heart",
+    "value.section.items.5.description": "El servicio nos sana, es nuestro sello de presentación al exterior.",
+    "value.section.items.5.verse": "Más bien sírvanse unos a otros con amor. En efecto, toda la ley se resume en un solo mandamiento: «Ama a tu prójimo como a ti mismo.»",
+    "value.section.items.5.reference": "Gálatas 5:13-14",
+
+    "value.section.items.6.title": "La Creatividad",
+    "value.section.items.6.icon": "mdi:palette",
+    "value.section.items.6.description": "Somos creados para crear, una comunidad llena de arte.",
+    "value.section.items.6.verse": "Porque somos hechura de Dios, creados en Cristo Jesús para buenas obras...",
+    "value.section.items.6.reference": "Efesios 2:10",
+
+    "acero.section.title": "Somos Discicpulos ACERO",
+    "acero.section.subtitle": "Esto es ser un discípulo ACERO",
+
+    "acero.section.items.0.letter": "A",
+    "acero.section.items.0.title": "Animar",
+    "acero.section.items.0.content": "Busquemos la manera de ayudarnos unos a otros a tener más amor.",
+    "acero.section.items.0.verse": "Busquemos la manera de ayudarnos unos a otros a tener más amor y a hacer el bien. No dejemos de asistir a nuestras reuniones, como hacen algunos, sino animémonos unos a otros; y tanto más cuanto que vemos que el día del Señor se acerca.",
+    "acero.section.items.0.reference": "Hebreos 10:24-25",
+
+    "acero.section.items.1.letter": "C",
+    "acero.section.items.1.title": "Cuidar",
+    "acero.section.items.1.content": "No uséis la libertad como ocasión para la carne.",
+    "acero.section.items.1.verse": "Porque vosotros, hermanos, a libertad habéis sido llamados; solamente que no uséis la libertad como ocasión para la carne, sino servíos por amor los unos a los otros. Porque toda la ley en esta sola palabra se cumple: Amarás a tu prójimo como a ti mismo.",
+    "acero.section.items.1.reference": "Gálatas 5:13-14",
+
+    "acero.section.items.2.letter": "E",
+    "acero.section.items.2.title": "Escuchar",
+    "acero.section.items.2.content": "Todos ustedes deben estar listos para escuchar; en cambio deben ser lentos para hablar.",
+    "acero.section.items.2.verse": "Recuerden esto, queridos hermanos: todos ustedes deben estar listos para escuchar; en cambio deben ser lentos para hablar y para enojarse.",
+    "acero.section.items.2.reference": "Santiago 1:19",
+
+    "acero.section.items.3.letter": "R",
+    "acero.section.items.3.title": "Reclutar",
+    "acero.section.items.3.content": "Invitamos a otros a unirse a nuestra misión de servir a Dios y a la comunidad.",
+    "acero.section.items.3.verse": "Lo que me has oído decir delante de muchos testigos, encárgaselo a hombres de confianza que sean capaces de enseñárselo a otros.",
+    "acero.section.items.3.reference": "2 Timoteo 2:2",
+
+    "acero.section.items.4.letter": "O",
+    "acero.section.items.4.title": "Orar",
+    "acero.section.items.4.content": "No se preocupen por nada; en cambio, oren por todo.",
+    "acero.section.items.4.verse": "No se preocupen por nada; en cambio, oren por todo. Díganle a Dios lo que necesitan y denle gracias por todo lo que él ha hecho.",
+    "acero.section.items.4.reference": "Filipenses 4:6",
+
+    // =========== Messages =========== //  
+    "messages.header.title": "Experimenta nuestra",
+    "messages.header.highlightedWord": "comunidad",
+    "messages.header.description": "Mira cómo nuestra comunidad se une en amor, perdón y servicio.",
+    "messages.watchText": "Ver Ahora",
+
+    // =========== Gallery =========== //
+    "gallery.header.title": "Momentos",
+    "gallery.header.highlightedWord": "Somos",
+    "gallery.header.description": "Explora momentos especiales de nuestra comunidad a través de imágenes.",
+
+    "gallery.images.0.title": "Domingos",
+    "gallery.images.0.category": "Servicios",
+    "gallery.images.0.description": "Momentos de adoración en comunidad",
+    "gallery.images.0.url": "/img/somos_domigos.avif",
+    "gallery.images.0.link": "https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDUwNDEzODQzOTE2MDEx?story_media_id=3452814271677272710_20973777906&igsh=MXRtams4b2NkZGRkcQ==",
+
+    "gallery.images.1.title": "Mesas",
+    "gallery.images.1.category": "Comunidad",
+    "gallery.images.1.description": "Tiempo de renovación y crecimiento",
+    "gallery.images.1.url": "/img/somos_mesas.avif",
+    "gallery.images.1.link": "https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MTM0ODY5MTUwMzc5Mzg1?story_media_id=3334721146442659440_20973777906&igsh=MXJsemN5aGdlZnZzZg==",
+
+    "gallery.images.2.title": "Somitos",
+    "gallery.images.2.category": "Jovenes",
+    "gallery.images.2.description": "Construyendo el futuro de la iglesia",
+    "gallery.images.2.url": "/img/team_jovenes.avif",
+    "gallery.images.2.link": "https://www.instagram.com/s/aGlnaGxpZ2h0OjE3OTE4MjY0OTcwMDQ0ODQ1?story_media_id=3188301227711654486_20973777906&igsh=ano2YzZyZnV1cW5s",
+
+    "gallery.images.3.title": "Calles",
+    "gallery.images.3.category": "Obra Social",
+    "gallery.images.3.description": "Sirviendo a nuestra comunidad",
+    "gallery.images.3.url": "/img/somos_asociacion.avif",
+    "gallery.images.3.link": "https://www.instagram.com/p/DEgaAzzoyp-/?igsh=cXFwdzNyZnR1NXZ1",
+
+    "gallery.images.4.title": "Matrimonios",
+    "gallery.images.4.category": "Familia",
+    "gallery.images.4.description": "Momentos",
+    "gallery.images.4.url": "/img/somos_matrimonios.avif",
+    "gallery.images.4.link": "https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDUwNDEzODQzOTE2MDEx?story_media_id=3452814271677272710_20973777906&igsh=MXRtams4b2NkZGRkcQ==",
+
+    "gallery.images.5.title": "Kids",
+    "gallery.images.5.category": "Kids",
+    "gallery.images.5.description": "Enseñando con amor",
+    "gallery.images.5.url": "/img/team_kids.avif",
+    "gallery.images.5.link": "https://www.instagram.com/p/DCe-HHPN72I/?img_index=4&igsh=MW9haXdvdGllcGV6cA==",
+
+    // =========== action Buttons =========== //
+    "asociation.action.buttons.text": "Donar Ahora",
+
+    // =========== asociation =========== //
+    "association.header.title": "Asociación",
+    "association.header.highlightedWord": "Somos",
+    "association.header.description": "Ayudando a quienes más lo necesitan",
+
+    "association.mission.title": "Somos una Asociación",
+    "association.mission.description": "Para proporcionar ayuda inmediata y sostenible a todas las personas, ofreciendo alimentos, ropa, y apoyo emocional para mejorar su calidad de vida y promover su integración social.",
+    "association.mission.imageUrl": "/img/somos_asociacion.avif",
+    "association.mission.ctaText": "Conoce más",
+    "association.mission.ctaLink": "/contact",
+
+    "association.help.title": "¿Cómo puedes ayudar?",
+
+    "association.collaborate.title": "Colabora con Nosotros",
+    "association.collaborate.subtitle": "Tu Apoyo es Fundamental",
+    "association.collaborate.description": "Cada pequeña acción marca la diferencia en la vida de quienes más lo necesitan. Juntos podemos construir una comunidad más solidaria y justa.",
+
+    "association.help.items.0.icon": "mdi:check-circle",
+    "association.help.items.0.text": "Donando alimentos no perecederos, ropa en buen estado o material escolar.",
+
+    "association.help.items.1.icon": "mdi:check-circle",
+    "association.help.items.1.text": "Realizando una aportación económica para mantener nuestros programas.",
+
+    "association.help.items.2.icon": "mdi:check-circle",
+    "association.help.items.2.text": "Uniéndote como voluntario y dedicando tu tiempo a quienes más lo necesitan.",
+
+    "association.help.items.3.icon": "mdi:check-circle",
+    "association.help.items.3.text": "Difundiendo nuestra labor en redes sociales y entre tus conocidos.",
+
+    "association.help.items.4.icon": "mdi:check-circle",
+    "association.help.items.4.text": "Organizando eventos o campañas de recaudación a beneficio de la asociación.",
+
+    "association.contact.title": "Contáctanos",
+    "association.contact.highlightedWord": "",
+    "association.contact.description": "Nos encantaría saber de ti. Contáctanos a través de cualquiera de estos medios.",
+    "association.contact.callUs": "Llama o WhatsApp",
+    "association.contact.emailUs": "Envíanos un correo",
+    "association.contact.whatsappButton": "WhatsApp",
+
+    // =========== donate =========== //
+    "donate.header.title": "Apoya Nuestra",
+    "donate.header.highlightedWord": "Misión",
+    "donate.header.description": "Tu generosidad nos permite seguir compartiendo el amor de Cristo y a continuar nuestro trabajo en la comunidad.",
+
+    "donate.otherWays.title": "Formas de Donar",
+
+    "donate.options.0.title": "Donación Única",
+    "donate.options.0.description": "Contribuye con un monto específico una sola vez",
+    "donate.options.0.options.0": "€ 50",
+    "donate.options.0.options.1": "€ 100",
+    "donate.options.0.options.2": "€ 200",
+    "donate.options.0.options.3": "Otro monto",
+    "donate.options.0.buttonText": "Donar Ahora",
+    "donate.options.0.link": "https://checkout.square.site/merchant/MLVCPMBE067QX/checkout/4LQASNIQNLO7ZS255XREYDOX",
+
+    "donate.options.1.title": "Donación Mensual",
+    "donate.options.1.description": "Apoya nuestra misión con una donación mensual",
+    "donate.options.1.options.0": "€ 25/mes",
+    "donate.options.1.options.1": "€ 50/mes",
+    "donate.options.1.options.2": "€ 100/mes",
+    "donate.options.1.options.3": "Otro monto",
+    "donate.options.1.buttonText": "Donar Ahora",
+    "donate.options.1.link": "https://checkout.square.site/merchant/MLVCPMBE067QX/checkout/4LQASNIQNLO7ZS255XREYDOX",
+
+    "donate.methods.0.title": "Transferencia Bancaria",
+    "donate.methods.0.description": "Realiza una transferencia directa a nuestra cuenta bancaria.",
+    "donate.methods.0.details": "ES64 3159 0011 1927 6970 4624",
+
+    "donate.methods.1.title": "Voluntariado",
+    "donate.methods.1.description": "Dona tu tiempo y talentos para servir a la comunidad.",
+
+    "donate.methods.2.title": "Código de Donativo",
+    "donate.methods.2.description": "Utiliza nuestro código de donativo para realizar aportes específicos.",
+    "donate.methods.2.details": "Bizum Código Donativo: [03587]",
+
+    // =========== Apolos Section =========== //    
+    "apolos.header.title": "Rincon",
+    "apolos.header.highlightedWord": "Apolos",
+    "apolos.header.description": "Encuentra respuestas a preguntas comunes.",
+
+    "apolos.faqs.0.question": "¿Es el Dios del Cristianismo obsoleto y está pasado de moda?",
+    "apolos.faqs.0.answer": "BXTFvkB0FdA",
+
+    "apolos.faqs.1.question": "¿Qué tipo de Dios deja que una iglesia lo represente?",
+    "apolos.faqs.1.answer": "FGTGEFfcyH0",
+
+    "apolos.faqs.2.question": "¿Cómo envía un Dios bueno, a personas al infierno?",
+    "apolos.faqs.2.answer": "G3iIv7PJLZM",
+
+    "apolos.faqs.3.question": "¿La evolución responde a todas nuestras preguntas?",
+    "apolos.faqs.3.answer": "gck5SJzp70g",
+
+    "apolos.faqs.4.question": "¿Por qué existe el sufrimiento?",
+    "apolos.faqs.4.answer": "4xiH6dpdjtA",
+
+    "apolos.contact.question": "¿No encontraste lo que buscabas?",
+    "apolos.contact.buttonText": "Contáctanos",
+
+    // =========== FAQ Section =========== //
+    "faq.header.title": "Preguntas",
+    "faq.header.highlightedWord": "Frecuentes",
+    "faq.header.description": "Información importante sobre nuestra comunidad.",
+
+    "faq.items.0.question": "¿Dónde estamos ubicados?",
+    "faq.items.0.answer": "Estamos ubicados en Calle del Sol # 60, Alfafar, Valencia, España",
+
+    "faq.items.1.question": "¿Cuáles son los horarios de servicio?",
+    "faq.items.1.answer": "Nuestros servicios dominicales son a las 11:00 AM. También tenemos reuniones de grupos pequeños en mesas los viernes a las 19:00 y servicios de oración los viernes a las 18:00",
+
+    "faq.items.2.question": "¿Cómo puedo pedir ayuda o consejería?",
+    "faq.items.2.answer": "Puedes solicitar ayuda o consejería en nuestra página de contacto, llamando a nuestra oficina al (+34) 679 88 50 65, o acercándote a nuestra comunidad.",
+
+    "faq.items.3.question": "¿Cómo puedo ser parte de la comunidad?",
+    "faq.items.3.answer": "Hay muchas formas de involucrarte: asistiendo a nuestros servicios, uniéndote a un grupo pequeño, participando en nuestros eventos comunitarios o sirviendo como voluntario en alguno de nuestros ministerios. Tenemos una clase de orientación para nuevos miembros el primer domingo de cada mes después del servicio de las 11:00 AM.",
+
+    "faq.items.4.question": "¿Ofrecen servicios en línea?",
+    "faq.items.4.answer": "Sí, transmitimos nuestros servicios dominicales en vivo a través de nuestro canal de YouTube. También puedes acceder a sermones anteriores en nuestra sección de mensaje en esta página web.",
+
+    "faq.contact.question": "¿No encontraste lo que buscabas?",
+    "faq.contact.buttonText": "Contáctanos",
+
+    // =========== Contacto =========== //    
+    "contact.title": "Contáctanos",
+    "contact.highlightedWord": "",
+    "contact.description": "Nos encantaría saber de ti. Contáctanos a través de cualquiera de estos medios.",
+    "contact.callUs": "Llama o WhatsApp",
+    "contact.emailUs": "Envíanos un correo",
+    "contact.whatsappButton": "WhatsApp",
+
+    "contact.info.phone": "+34 679 88 5065",
+    "contact.info.email": "contacto@iglesiasomos.es",
+    "contact.info.whatsapp": "+34665569144",
 
     // =========== Footer =========== //
-    "footer.description": "Build 24H2 optimizado con mejoras extremas",
-    "footer.version": "v1.0.0",
-    "footer.download": "Descargar",
-    "footer.stable": "Estable",
-    "footer.explore": "Explorar",
-    "footer.connect": "Conectar",
-    "footer.updates": "Actualizaciones",
-    "footer.subscribe": "Suscribirse",
-    "footer.newsletter":
-      "Recibe noticias sobre nuevas versiones y características",
-    "footer.email.placeholder": "Email",
-    "footer.copyright": "© 2025 CodeFlow. Todos los derechos reservados.",
-    "footer.privacy": "Privacidad",
-    "footer.terms": "Términos",
-    "footer.github.title": "Proyecto CodeXtreme ",
-    "footer.github.description": "Descarga desde GitHub",
-    "footer.github.star": "Estrella en GitHub",
-
-    // =========== Accesibilidad =========== //
-    "aria.social.twitter": "Enlace a Twitter de CodeFlow",
-    "aria.social.github": "Enlace a GitHub de CodeFlow",
-    "aria.social.youtube": "Enlace a YouTube de CodeFlow",
-    "aria.social.discord": "Enlace a Discord de CodeFlow",
-    "aria.social.linkedin": "Enlace a LinkedIn de CodeFlow",
-    "aria.social.reddit": "Enlace a Reddit de CodeFlow",
-
-    // =========== Guías =========== //
-    "guides.title": "Guías CodeXtremeOS",
-    "guides.description":
-      "🚀 Domina la optimización con nuestras guías paso a paso.",
-    "guides.meta_title": "Guías y Tutoriales - CodeXtremeOS",
-    "guides.support.title": "¡Apoya a los creadores!",
-    "guides.support.description1":
-      "Estas guías son posibles gracias a la comunidad. Por favor considera",
-    "guides.support.emphasis1": "dar like 👍",
-    "guides.support.description2": "y",
-    "guides.support.emphasis2": "suscribirte 🔔",
-    "guides.support.description3": "a los canales originales",
-    "guides.guide1.title": "Crear tu propia ISO Optimizada",
-    "guides.guide1.description":
-      "Guía completa para crear y personalizar tu ISO de Windows optimizada",
-    "guides.guide2.title": "Mega Pack Optimización",
-    "guides.guide2.description": "Optimiza tu PC un 500% con este mega Pack",
-    "guides.guide3.title": "Personalización",
-    "guides.guide3.description":
-      "Haz que tu Windows luzca genial sin consumo de recursos",
-    "guides.guide4.title": "Directivas Ocultas",
-    "guides.guide4.description":
-      "Activa directivas ocultas para sacar el máximo rendimiento",
-    "guides.view_more": "Ver más",
-    "guides.guide5.title": "Optimización de Recursos",
-    "guides.guide5.description":
-      "Aprende a reducir el uso de CPU y RAM para maximizar el rendimiento de tu ISO.",
-    "guides.guide6.title": "Instalación Limpia",
-    "guides.guide6.description":
-      "Descubre cómo configurar tareas automáticas tras la instalación para mantener tu sistema optimizado.",
-    "guides.guide7.title": "Aumente el Rendimiento",
-    "guides.guide7.description":
-      "Descubre cómo aumentar el rendimiento de tu Windows 11 con estos consejos y trucos.",
-    "guides.guide8.title": "El mejor Software",
-    "guides.guide8.description":
-      "Descubre el mejor software para Windows 10/11 en 2025.",
-
-    // =========== Herramientas =========== //
-    "tools.meta_title": "Herramientas de Optimización - CodeXtremeOS",
-    "tools.title": "Personalización Pro",
-    "tools.subtitle":
-      "🚀 Herramientas de Optimización - Seguridad - Personalización",
-    "tools.opensource.title": "¡Importante!",
-    "tools.opensource.description":
-      "La mayoría de herramientas aquí recomendadas son Open Source. Si las encuentras útiles, por favor considera dar una estrella en sus repositorios oficiales para apoyar a los desarrolladores.",
-    "tools.opensource.how_to_help": "¿Cómo ayudar?",
-    "tools.opensource.step1": "Visita el enlace GitHub de cada herramienta",
-    "tools.opensource.step2":
-      'Haz clic en el botón "⭐ Star" en la esquina superior derecha',
-    "tools.opensource.step3":
-      "¡Listo! Estarás contribuyendo al crecimiento del proyecto",
-    "tools.category1.title": "🛠 Optimización",
-    "tools.category2.title": "🎨 Personalización",
-    "tools.category3.title": "🔒 Seguridad",
-    "tools.tool1.name": "ChrisTitus WinUtil",
-    "tools.tool1.description": "Suite completa de optimización del sistema",
-    "tools.tool2.name": "Microsoft PowerToys",
-    "tools.tool2.description": "Suite de productividad oficial",
-    "tools.tool3.name": "StartAllBack",
-    "tools.tool3.description": "Menú Start clásico para Win11",
-    "tools.tool4.name": "Windhawk",
-    "tools.tool4.description": "Personalización extrema para Windows",
-    "tools.tool5.name": "BleachBit",
-    "tools.tool5.description": "Limpieza profunda y segura",
-    "tools.tool6.name": "O&O ShutUp10",
-    "tools.tool6.description": "Control de privacidad",
-    "tools.tags.windows": "Windows 10/11",
-    "tools.tags.windows11": "Windows 11",
-    "tools.tags.windows_all": "Windows 7/8/10/11",
-    "tools.tags.opensource": "Open Source",
-    "tools.tags.low_risk": "Bajo riesgo",
-    "tools.tags.medium_risk": "Riesgo medio",
-    "tools.download": "Descargar",
-
-    // =========== Software =========== //
-    "software.meta_title": "Software Esencial - CodeXtremeOS",
-    "software.title": "Software Recomendado para Todos",
-    "software.subtitle":
-      "🚀 Explora software confiable que se ajuste a tus necesidades",
-    "software.opensource.title": "Aviso Importante",
-    "software.opensource.description":
-      "Ten en cuenta que el software listado aquí se ofrece tal cual.",
-    "software.opensource.description2":
-      "Úsalo bajo tu propio riesgo y asegúrate de que sea compatible con tu sistema antes de la instalación.",
-    "software.opensource.how_to_help":
-      "¿Cómo sacar el máximo provecho de estas herramientas?",
-    "software.opensource.step1":
-      "Revisa los requisitos y la compatibilidad del software",
-    "software.opensource.step2":
-      "Asegúrate de que tu sistema cumpla con las especificaciones mínimas",
-    "software.opensource.step3":
-      "Instala y usa de acuerdo con las instrucciones del desarrollador. Siempre realiza una copia de seguridad de tus datos antes de hacer cambios.",
-    "software.category1.title": "🛠 Drivers y Runtime",
-    "software.category2.title": "🎨 Aplicaciones de Producción",
-    "software.category3.title": "Software para Windows",
-    "software.tool1.name": "Runtime de DirectX",
-    "software.tool1.description":
-      "Entorno de ejecución para DirectX 9, 10, 11 y 12",
-    "software.tool2.name": "Runtime de VC++",
-    "software.tool2.description":
-      "Bibliotecas de ejecución de Visual C++ para Windows",
-    "software.tool3.name": "Runtime de escritorio .NET 5.0",
-    "software.tool3.description":
-      "Entorno de ejecución para aplicaciones de escritorio .NET 5.0",
-    "software.tool4.name": "Runtime de escritorio .NET 6.0",
-    "software.tool4.description":
-      "Entorno de ejecución para aplicaciones de escritorio .NET 6.0",
-    "software.tool5.name": "Runtime de escritorio .NET 7.0",
-    "software.tool5.description":
-      "Entorno de ejecución para aplicaciones de escritorio .NET 7.0",
-    "software.tool6.name": "Runtime de escritorio .NET 8.0",
-    "software.tool6.description":
-      "Entorno de ejecución para aplicaciones de escritorio .NET 8.0",
-    "software.tags.windows": "Windows 10/11",
-    "software.tags.opensource": "Microsoft",
-    "software.tags.medium_risk": "Requerido",
-    "software.download": "Descargar",
-    "software.tags.cross_platform": "Multiplataforma",
-    "software.tags.stable": "Estable",
-    "software.tool7.name": "Runtime de Edge WebView2",
-    "software.tool7.description": "Runtime de WebView2 para Microsoft Edge",
-    "software.tool8.name": "GIMP",
-    "software.tool8.description":
-      "Editor de imágenes gratuito y de código abierto.",
-    "software.tool9.name": "Krita",
-    "software.tool9.description": "Software de pintura digital para artistas.",
-    "software.tool10.name": "Blender",
-    "software.tool10.description":
-      "Herramienta 3D para modelado, animación y renderizado.",
-    "software.tool11.name": "Inkscape",
-    "software.tool11.description":
-      "Editor de gráficos vectoriales gratuito y de código abierto.",
-    "software.tool12.name": "Darktable",
-    "software.tool12.description":
-      "Software de edición de fotos con flujo de trabajo no destructivo.",
-    "software.tool13.name": "Audacity",
-    "software.tool13.description":
-      "Editor de audio gratuito y de código abierto.",
-    "software.tool14.name": "OBS Studio",
-    "software.tool14.description":
-      "Software para grabación y transmisión en vivo.",
-    "software.tool15.name": "Notepad++",
-    "software.tool15.description": "Editor de texto avanzado para Windows.",
-    "software.tool16.name": "7-Zip",
-    "software.tool16.description":
-      "Herramienta de compresión y descompresión de archivos.",
-    "software.tool17.name": "VLC Media Player",
-    "software.tool17.description": "Reproductor multimedia multiplataforma.",
-    "software.tool18.name": "LibreOffice",
-    "software.tool18.description":
-      "Suite ofimática gratuita y de código abierto.",
-    "software.tool19.name": "Paint.NET",
-    "software.tool19.description":
-      "Editor de imágenes simple pero potente para Windows.",
-    "software.tool20.name": "WinRAR",
-    "software.tool20.description":
-      "Herramienta de compresión de archivos popular.",
-    "software.tool21.name": "CPU-Z",
-    "software.tool21.description": "Herramienta de diagnóstico del sistema.",
-
-    // =========== Descargas =========== //
-    "downloads.hero_description": "🚀 ISOs modificadas",
-    "downloads.announcement.title": "🛠️ Importante:",
-    "downloads.announcement.full_text":
-      "Estas ISOs fueron creadas con NTLite, herramienta que cualquiera puede usar para crear su propia ISO personalizada.",
-    "downloads.announcement.security_title": "⚠️ Recomendación de seguridad:",
-    "downloads.announcement.recommendation":
-      "Para máxima confiabilidad, te recomendamos crear tu propia versión usando:",
-    "downloads.announcement.official_guides": "Guías oficiales de NTLite",
-    "downloads.announcement.our_guides": "Nuestras",
-    "downloads.announcement.custom_tip":
-      "💡 Una ISO personalizada evita bloatware y se adapta exactamente a tus necesidades",
-    "downloads.latest_version.title": "🚀 Última Versión",
-    "downloads.latest_version.name": "CodeXtremeOS 11",
-    "downloads.latest_version.build_info":
-      "Build 24H2 optimizado con mejoras extremas",
-    "downloads.latest_version.build_info_23H2":
-      "Build 23H2 con nuevas funciones",
-    "downloads.11_versions.title": "💿​ CodeXtremeOS 11",
-    "downloads.previous_versions.title": "💿​ Otras Versiones",
-    "downloads.version1.name": "CodeXtremeOS 10",
-    "downloads.version1.build_info": "Build 22H2 con soporte Legacy",
-    "downloads.version2.name": "CodeXtremeOS 11",
-    "downloads.version2.build_info":
-      "Build 23H2 con nuevas funciones y optimizaciones",
-    "downloads.version3.build_info": "Build 22H2 con mejoras extremas",
-    "downloads.tags.x64_uefi": "x64 UEFI",
-    "downloads.tags.stable": "Estable",
-    "downloads.tags.updated": "Actualizado",
-    "downloads.tags.limited_support": "Soporte limitado",
-    "downloads.download_button": "Descargar",
-    "downloads.iso_details": "Detalles de la ISO",
-    "downloads.main_features": "Características principales",
-    "downloads.features.optimization": "Optimización máxima de rendimiento",
-    "downloads.features.telemetry": "Reducción de telemetría",
-    "downloads.features.gaming": "Ideal para jugadores y usuarios avanzados",
-    "downloads.features.security": "Seguridad mejorada y enfoque oficial",
-    "downloads.long_term": "Objetivo a largo plazo",
-    "downloads.long_term_desc":
-      "Sistema operativo refinado y optimizado para uso prolongado",
-    "downloads.guide_info": "La guía para crear esta ISO proviene de este foro",
-    "downloads.guide_link": "Guía de Hellbovine Imagen Optimizada",
-    "downloads.features.iso_size": "3.6 GB ISO",
-    "downloads.features.installed_size_3gb": "3.8 GB ISO",
-    "downloads.features.installed_size_4gb": "4.8 GB ISO",
-    "downloads.features.debloated_optimized": "Optimizada desde el inicio",
-    "downloads.features.full_updatable_build":
-      "Versión Completa y Actualizable",
-    "downloads.features.automatic_updates_paused":
-      "Actualizaciones Automáticas Pausadas Hasta el Año 2029",
-    "downloads.features.intel_rst_drivers":
-      "Drivers Intel RST Integrados en la Instalación",
-    "downloads.features.extreme_performance":
-      "Rendimiento Extremo para tus Aplicaciones y Juegos",
-    "downloads.features.uwp_apps_support":
-      "Soporte Completo para Apps UWP, Xbox, MS Store y mucho más",
-    "downloads.features.additional_language_support":
-      "Soporte Completo para Paquetes de Idioma Adicionales, Voz, etc.",
-    "downloads.features.optional_features_support":
-      "Soporte Completo para todas las características opcionales, incluyendo WSA y WSL2",
-    "downloads.features.improvements_optimizations":
-      "Mejoras y Optimización Adicionales Incluidas",
-    "downloads.features.no_preinstalled_uwp_apps":
-      "No tiene Apps UWP Pre-instaladas",
-    "downloads.features.ms_store_installer_included":
-      "Instalador de MS Store Incluido",
-    "downloads.features.full_featured_updatable_build":
-      "Versión Completa y Actualizable",
-    "downloads.features.automatic_updates_paused_3000":
-      "Actualizaciones Automáticas Pausadas Hasta el Año 2029",
-    "downloads.features.optional_system_transparency":
-      "Incluye Transparencia del Sistema Opcional",
-    "downloads.features.optional_gallery_settings_home":
-      "Incluye 'Galería' y 'Página de Inicio de Configuración' Opcionales",
-    "downloads.features.extreme_performance_apps_games":
-      "Rendimiento Extremo para tus Aplicaciones y Juegos",
-    "downloads.features.integrates_intel_rst_serial_io":
-      "Integra Drivers Intel RST y Serial IO en la Instalación",
-    "downloads.features.full_support_uwp_xbox_ms_store":
-      "Soporte Completo para Apps UWP, Xbox, MS Store y mucho más",
-    "downloads.features.full_support_language_packs":
-      "Soporte Completo para Paquetes de Idioma Adicionales, Voz, etc.",
-    "downloads.features.full_support_optional_features":
-      "Soporte Completo para todas las características opcionales, incluyendo WSA y WSL2",
-    "downloads.features.enabled_rounded_corners_acrylic_mica":
-      "Esquinas Redondeadas, Acrílico y Mica Activados por Defecto (¡Incluso en una VM!)",
-    "downloads.features_no_internet":
-      "No requiere conexión a Internet para la instalación",
-    "downloads.features_telemetry": "Telemetría y Rastreo Eliminados",
-    "downloads.features.additional_improvements_optimizations":
-      "Mejoras y Optimización Adicionales Incluidas",
+    "footer.email": "contacto@iglesiasomos.es",
+    "footer.phone": "(+34) 679 88 5065 - 665 56 9144",
+    "footer.address": "Calle del sol #60, Alfafar - Valencia",
+    "footer.tagline": "Amor, Perdón, Servicio.",
+    "footer.contact": "Contacto",
+    "footer.followUs": "Síguenos",
+    "footer.rights": "Todos los derechos reservados.",
+    "footer.developedBy": "Construido por",
   },
   en: {
     // =========== Navigation =========== //
