@@ -373,318 +373,366 @@ export const labels = {
   en: {
     // =========== Navigation =========== //
     "nav.home": "Home",
-    "nav.guides": "Guides",
-    "nav.tools": "Tools",
-    "nav.software": "Software",
-    "nav.download": "Downloads",
-
+    "nav.about": "About Us",
+    "nav.values": "Values",
+    "nav.messages": "Messages",
+    "nav.gallery": "Gallery",
+    "nav.asociation": "Association",
+    "nav.donate": "Donate",
+    "nav.apolos": "Apolos Corner",
+    "nav.faq": "FAQ",
+    "nav.contact": "Contact",
+    
+    // =========== social media =========== //
+    "social.follow": "Follow us on social media",
+    
     // =========== Theme =========== //
     "theme.toggle": "Toggle Theme",
 
-    // =========== Home Page =========== //
-    "download.button": "Download Now",
-    "home.description": "🚀 Modified Windows for gaming and performance",
-    "home.ques": "What is CodeXtremeOS?",
-    "home.opti": "Extreme Optimization",
-    "home.desopti":
-      "Modified ISO of only 3.2 GB with maximum performance for gaming and productivity.",
-    "home.dev.des":
-      "Created by CodeFlow with months of testing and optimizations for extreme performance.",
-    "home.safety": "Guaranteed Security",
-    "home.safe.des": "With the latest security updates and malware protection.",
-    "home.xbox": "Xbox Live",
-    "home.xbox.des":
-      "Connect to Xbox Live and enjoy your favorite games on your PC.",
-    "home.update": "Smart Updates",
-    "home.update.des": "Only critical and security updates, no interruptions.",
-    "home.performance": "Extreme Performance",
-    "home.performance.des":
-      "With extreme performance for gaming and productivity.",
-    "home.drivers": "Updated Drivers",
-    "home.drivers.des": "Drivers updated until January 2025",
-    "home.appearance": "Appearance",
-    "home.appearance.des":
-      "Tools to customize the appearance of Windows without resource consumption.",
-    "home.support": "24/7 Support",
-    "home.support.des":
-      "Active community and 24/7 technical support to resolve your doubts and issues.",
-    "home.features": "Key Features",
-    "home.low": "🔄 Low Resource Consumption",
-    "home.low.des": "With low resource consumption for extreme performance.",
-    "home.compatibility": "🎮 Compatibility",
-    "home.compatibility.des":
-      "Support for AAA games and professional applications.",
-    "home.security": "🛡️ Security",
-    "home.security.des":
-      "With the latest security updates and malware protection.",
-    "home.personalization": "✨ Personalization",
-    "home.personalization.des":
-      "With popular tools to customize the appearance of Windows",
-    "home.go": "Ready to start?",
+    // =========== vision Items =========== //
+    "vision.items.title": "Our Pillars",
+    "vision.items.title.amor": "Love",
+    "vision.items.description.amor": "Love is the fragrance that every person should transmit to others. It is the essence of the Church.",
 
-    // =========== NTLite Section =========== //
-    "ntlite.ntlite_name": "NTLite",
-    "ntlite.aria.forum": "Link to the official NTLite guide forum",
+    "vision.items.title.perdon": "Forgiveness",
+    "vision.items.description.perdon": "To forgive is to love. Only with forgiveness can you grow and especially mature. Forgiveness is the Church's arms to embrace those who are hurting.",
+
+    "vision.items.title.servicio": "Service",
+    "vision.items.description.servicio": "Service is love in action. Without practice there is no truth. Those who love and forgive flow in serving others. Caring for and sowing into each life is a privilege God gives us.",
+
+    // ===========Mission section =========== //
+    "mission.section.title": "Our Mission",
+    "mission.section.description": "To share the Gospel of Jesus Christ.",
+    "mission.section.imageUrl": "/img/somos_mision.avif",
+    "mission.section.ctaText": "Learn More",
+
+    "vision.section.title": "Our Vision",
+    "vision.section.description": "To guide people to a growing relationship with Jesus Christ.",
+    "vision.section.imageUrl": "/img/somos_vision.avif",
+    "vision.section.ctaText": "Learn More",
+
+    // =========== Events =========== //
+    "events.mesas.imageUrl": "/img/somos_mesas.avif",
+    "events.mesas.title": "Friday, 19:00",
+    "events.mesas.date": "Tables - Alfafar",
+    "events.domingos.imageUrl": "/img/somos_domigos.avif",
+    "events.domingos.title": "Sunday, 11:00 AM",
+    "events.domingos.date": "Super Meeting",
+    
+    // =========== Hero Section =========== //
+    "hero.section.videoUrl": "/video/somos_video_principal_inicio_compressed.mp4",
+    "hero.section.title": "A church for",
+    "hero.section.highlightedWord": "people,",
+    "hero.section.subtitle": "without a church",
+    "hero.section.ctaText": "Get to know us",
+    "hero.section.scheduleText": "We go slow because we're going far.",
+
+    // =========== CTA Section =========== //
+    "cta.section.title": "Welcome",
+    "cta.section.description": "In the Somos family, there's room for everyone at the table.",
+    "cta.section.ctaText": "Contact Us",
+
+    // =========== team section =========== //
+    "team.section.title": "Our Leaders",
+    "team.section.pastores.title": "Pastors",
+    "team.section.pastores.items.0.name": "William",
+    "team.section.pastores.items.0.role": "Pastor",
+    "team.section.pastores.items.0.image": "/img/somos_team_pastores.jpg",
+    "team.section.pastores.items.1.name": "Jessica",
+    "team.section.pastores.items.1.role": "Pastor",
+    "team.section.pastores.items.1.image": "/img/somos_team_pastores.jpg",
+
+    "team.section.team.title": "Collaborators",
+    "team.section.items.0.name": "Servers",
+    "team.section.items.0.image": "/img/team_ujieres.avif",
+    "team.section.items.1.name": "Production",
+    "team.section.items.1.image": "/img/team_produccion.avif",
+    "team.section.items.2.name": "Music",
+    "team.section.items.2.image": "/img/team_alabanza.avif",
+    "team.section.items.3.name": "Kids",
+    "team.section.items.3.image": "/img/team_kids.avif",
+
+    // =========== Community Section =========== //  
+    "community.section.title": "Know and Connect with Our Community",
+    "community.section.description": "We invite you to be part of our family. Here you'll find a place to grow, serve, and share Christ's love.",
+    "community.section.imageUrl": "/img/somos_comunidad.avif",
+    "community.buttons.text": "View Messages",
+    "community.buttons.contact": "Contact Us",
+
+    // =========== Page Header =========== //
+    "page.header.about.title": "Our",
+    "page.header.about.highlightedWord": "Story",
+    "page.header.about.description": "Since 2021, Somos is a Christian community in Alfafar, Valencia, that exists to share the good news of Jesus of Nazareth and make disciples in community.",
+
+    // =========== Values Section =========== //
+    "value.section.title": "7 Principles",
+
+    "value.section.items.0.title": "Jesus",
+    "value.section.items.0.icon": "mdi:cross",
+    "value.section.items.0.description": "Jesus of Nazareth is our Lord and Master, the meaning of our life.",
+    "value.section.items.0.verse": "I am crucified with Christ: nevertheless I live; yet not I, but Christ lives in me: and the life which I now live in the flesh I live by the faith of the Son of God, who loved me, and gave himself for me.",
+    "value.section.items.0.reference": "Galatians 2:20",
+
+    "value.section.items.1.title": "Church",
+    "value.section.items.1.icon": "mdi:church",
+    "value.section.items.1.description": "The church is all of us, with a mission to fulfill. The greatest expression of Jesus on earth. The table where everyone is welcome.",
+    "value.section.items.1.verse": "But you are a chosen people, a royal priesthood, a holy nation, God's special possession, that you may declare the praises of him who called you out of darkness into his wonderful light.",
+    "value.section.items.1.reference": "1 Peter 2:9",
+
+    "value.section.items.2.title": "Holy Spirit",
+    "value.section.items.2.icon": "mdi:weather-windy",
+    "value.section.items.2.description": "The engine of our lives and the friend who comforts, reveals, and guides us to truth.",
+    "value.section.items.2.verse": "When the Spirit of truth comes, he will guide you into all truth.",
+    "value.section.items.2.reference": "John 16:13",
+
+    "value.section.items.3.title": "The Bible",
+    "value.section.items.3.icon": "mdi:book-open-page-variant",
+    "value.section.items.3.description": "The Bible is the work of art that inspires our lives and the narrative of who we are.",
+    "value.section.items.3.verse": "Your word is a lamp for my feet, a light on my path",
+    "value.section.items.3.reference": "Psalm 119:105",
+
+    "value.section.items.4.title": "Love",
+    "value.section.items.4.icon": "mdi:heart",
+    "value.section.items.4.description": "Love is our lifestyle.",
+    "value.section.items.4.verse": "Love bears all things, believes all things, hopes all things, endures all things. Love never ends...",
+    "value.section.items.4.reference": "1 Corinthians 13:7-8",
+
+    "value.section.items.5.title": "Service",
+    "value.section.items.5.icon": "mdi:hand-heart",
+    "value.section.items.5.description": "Service heals us, it is our presentation card to the outside.",
+    "value.section.items.5.verse": "Rather, serve one another in love. The entire law is summed up in a single command: 'Love your neighbor as yourself.'",
+    "value.section.items.5.reference": "Galatians 5:13-14",
+
+    "value.section.items.6.title": "Creativity",
+    "value.section.items.6.icon": "mdi:palette",
+    "value.section.items.6.description": "We are created to create, a community full of art.",
+    "value.section.items.6.verse": "For we are God's handiwork, created in Christ Jesus to do good works...",
+    "value.section.items.6.reference": "Ephesians 2:10",
+
+    "acero.section.title": "We are STEEL Disciples",
+    "acero.section.subtitle": "This is what it means to be a STEEL disciple",
+
+    "acero.section.items.0.letter": "S",
+    "acero.section.items.0.title": "Support",
+    "acero.section.items.0.content": "Let us find ways to help one another have more love.",
+    "acero.section.items.0.verse": "And let us consider how we may spur one another on toward love and good deeds, not giving up meeting together, as some are in the habit of doing, but encouraging one another—and all the more as you see the Day approaching.",
+    "acero.section.items.0.reference": "Hebrews 10:24-25",
+
+    "acero.section.items.1.letter": "T",
+    "acero.section.items.1.title": "Tend",
+    "acero.section.items.1.content": "Do not use your freedom as an opportunity for the flesh.",
+    "acero.section.items.1.verse": "You, my brothers and sisters, were called to be free. But do not use your freedom to indulge the flesh; rather, serve one another humbly in love. For the entire law is fulfilled in keeping this one command: 'Love your neighbor as yourself.'",
+    "acero.section.items.1.reference": "Galatians 5:13-14",
+
+    "acero.section.items.2.letter": "E",
+    "acero.section.items.2.title": "Ear",
+    "acero.section.items.2.content": "Everyone should be quick to listen, slow to speak.",
+    "acero.section.items.2.verse": "My dear brothers and sisters, take note of this: Everyone should be quick to listen, slow to speak and slow to become angry.",
+    "acero.section.items.2.reference": "James 1:19",
+
+    "acero.section.items.3.letter": "E",
+    "acero.section.items.3.title": "Enlist",
+    "acero.section.items.3.content": "We invite others to join our mission to serve God and the community.",
+    "acero.section.items.3.verse": "And the things you have heard me say in the presence of many witnesses entrust to reliable people who will also be qualified to teach others.",
+    "acero.section.items.3.reference": "2 Timothy 2:2",
+
+    "acero.section.items.4.letter": "L",
+    "acero.section.items.4.title": "Listen",
+    "acero.section.items.4.content": "Do not be anxious about anything; instead, pray about everything.",
+    "acero.section.items.4.verse": "Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God.",
+    "acero.section.items.4.reference": "Philippians 4:6",
+
+    // =========== Messages =========== //  
+    "messages.header.title": "Experience our",
+    "messages.header.highlightedWord": "community",
+    "messages.header.description": "See how our community unites in love, forgiveness, and service.",
+    "messages.watchText": "Watch Now",
+
+    // =========== Gallery =========== //
+    "gallery.header.title": "Moments",
+    "gallery.header.highlightedWord": "Somos",
+    "gallery.header.description": "Explore special moments of our community through images.",
+
+    "gallery.images.0.title": "Sundays",
+    "gallery.images.0.category": "Services",
+    "gallery.images.0.description": "Moments of worship in community",
+    "gallery.images.0.url": "/img/somos_domigos.avif",
+    "gallery.images.0.link": "https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDUwNDEzODQzOTE2MDEx?story_media_id=3452814271677272710_20973777906&igsh=MXRtams4b2NkZGRkcQ==",
+
+    "gallery.images.1.title": "Tables",
+    "gallery.images.1.category": "Community",
+    "gallery.images.1.description": "Time of renewal and growth",
+    "gallery.images.1.url": "/img/somos_mesas.avif",
+    "gallery.images.1.link": "https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MTM0ODY5MTUwMzc5Mzg1?story_media_id=3334721146442659440_20973777906&igsh=MXJsemN5aGdlZnZzZg==",
+
+    "gallery.images.2.title": "Youth",
+    "gallery.images.2.category": "Youth",
+    "gallery.images.2.description": "Building the future of the church",
+    "gallery.images.2.url": "/img/team_jovenes.avif",
+    "gallery.images.2.link": "https://www.instagram.com/s/aGlnaGxpZ2h0OjE3OTE4MjY0OTcwMDQ0ODQ1?story_media_id=3188301227711654486_20973777906&igsh=ano2YzZyZnV1cW5s",
+
+    "gallery.images.3.title": "Streets",
+    "gallery.images.3.category": "Social Work",
+    "gallery.images.3.description": "Serving our community",
+    "gallery.images.3.url": "/img/somos_asociacion.avif",
+    "gallery.images.3.link": "https://www.instagram.com/p/DEgaAzzoyp-/?igsh=cXFwdzNyZnR1NXZ1",
+
+    "gallery.images.4.title": "Marriages",
+    "gallery.images.4.category": "Family",
+    "gallery.images.4.description": "Moments",
+    "gallery.images.4.url": "/img/somos_matrimonios.avif",
+    "gallery.images.4.link": "https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDUwNDEzODQzOTE2MDEx?story_media_id=3452814271677272710_20973777906&igsh=MXRtams4b2NkZGRkcQ==",
+
+    "gallery.images.5.title": "Kids",
+    "gallery.images.5.category": "Kids",
+    "gallery.images.5.description": "Teaching with love",
+    "gallery.images.5.url": "/img/team_kids.avif",
+    "gallery.images.5.link": "https://www.instagram.com/p/DCe-HHPN72I/?img_index=4&igsh=MW9haXdvdGllcGV6cA==",
+
+    // =========== action Buttons =========== //
+    "asociation.action.buttons.text": "Donate Now",
+
+    // =========== association =========== //
+    "association.header.title": "Association",
+    "association.header.highlightedWord": "Somos",
+    "association.header.description": "Helping those who need it most",
+
+    "association.mission.title": "We are an Association",
+    "association.mission.description": "To provide immediate and sustainable help to all people, offering food, clothing, and emotional support to improve their quality of life and promote their social integration.",
+    "association.mission.imageUrl": "/img/somos_asociacion.avif",
+    "association.mission.ctaText": "Learn More",
+    "association.mission.ctaLink": "/contact",
+
+    "association.help.title": "How can you help?",
+
+    "association.collaborate.title": "Collaborate with Us",
+    "association.collaborate.subtitle": "Your Support is Essential",
+    "association.collaborate.description": "Every small action makes a difference in the lives of those who need it most. Together we can build a more caring and just community.",
+
+    "association.help.items.0.icon": "mdi:check-circle",
+    "association.help.items.0.text": "Donating non-perishable food, clothing in good condition, or school supplies.",
+
+    "association.help.items.1.icon": "mdi:check-circle",
+    "association.help.items.1.text": "Making a financial contribution to maintain our programs.",
+
+    "association.help.items.2.icon": "mdi:check-circle",
+    "association.help.items.2.text": "Joining as a volunteer and dedicating your time to those who need it most.",
+
+    "association.help.items.3.icon": "mdi:check-circle",
+    "association.help.items.3.text": "Spreading our work on social media and among your contacts.",
+
+    "association.help.items.4.icon": "mdi:check-circle",
+    "association.help.items.4.text": "Organizing fundraising events or campaigns to benefit the association.",
+
+    "association.contact.title": "Contact Us",
+    "association.contact.highlightedWord": "",
+    "association.contact.description": "We'd love to hear from you. Contact us through any of these means.",
+    "association.contact.callUs": "Call or WhatsApp",
+    "association.contact.emailUs": "Send us an email",
+    "association.contact.whatsappButton": "WhatsApp",
+
+    // =========== donate =========== //
+    "donate.header.title": "Support Our",
+    "donate.header.highlightedWord": "Mission",
+    "donate.header.description": "Your generosity allows us to continue sharing Christ's love and continue our work in the community.",
+
+    "donate.otherWays.title": "Ways to Donate",
+
+    "donate.options.0.title": "One-Time Donation",
+    "donate.options.0.description": "Contribute with a specific amount once",
+    "donate.options.0.options.0": "€ 50",
+    "donate.options.0.options.1": "€ 100",
+    "donate.options.0.options.2": "€ 200",
+    "donate.options.0.options.3": "Other amount",
+    "donate.options.0.buttonText": "Donate Now",
+    "donate.options.0.link": "https://checkout.square.site/merchant/MLVCPMBE067QX/checkout/4LQASNIQNLO7ZS255XREYDOX",
+
+    "donate.options.1.title": "Monthly Donation",
+    "donate.options.1.description": "Support our mission with a monthly donation",
+    "donate.options.1.options.0": "€ 25/month",
+    "donate.options.1.options.1": "€ 50/month",
+    "donate.options.1.options.2": "€ 100/month",
+    "donate.options.1.options.3": "Other amount",
+    "donate.options.1.buttonText": "Donate Now",
+    "donate.options.1.link": "https://checkout.square.site/merchant/MLVCPMBE067QX/checkout/4LQASNIQNLO7ZS255XREYDOX",
+
+    "donate.methods.0.title": "Bank Transfer",
+    "donate.methods.0.description": "Make a direct transfer to our bank account.",
+    "donate.methods.0.details": "ES64 3159 0011 1927 6970 4624",
+
+    "donate.methods.1.title": "Volunteering",
+    "donate.methods.1.description": "Donate your time and talents to serve the community.",
+
+    "donate.methods.2.title": "Donation Code",
+    "donate.methods.2.description": "Use our donation code to make specific contributions.",
+    "donate.methods.2.details": "Bizum Donation Code: [03587]",
+
+    // =========== Apolos Section =========== //    
+    "apolos.header.title": "Corner",
+    "apolos.header.highlightedWord": "Apolos",
+    "apolos.header.description": "Find answers to common questions.",
+
+    "apolos.faqs.0.question": "Is the God of Christianity obsolete and outdated?",
+    "apolos.faqs.0.answer": "BXTFvkB0FdA",
+
+    "apolos.faqs.1.question": "What kind of God lets a church represent Him?",
+    "apolos.faqs.1.answer": "FGTGEFfcyH0",
+
+    "apolos.faqs.2.question": "How does a good God send people to hell?",
+    "apolos.faqs.2.answer": "G3iIv7PJLZM",
+
+    "apolos.faqs.3.question": "Does evolution answer all our questions?",
+    "apolos.faqs.3.answer": "gck5SJzp70g",
+
+    "apolos.faqs.4.question": "Why does suffering exist?",
+    "apolos.faqs.4.answer": "4xiH6dpdjtA",
+
+    "apolos.contact.question": "Didn't find what you were looking for?",
+    "apolos.contact.buttonText": "Contact Us",
+
+    // =========== FAQ Section =========== //
+    "faq.header.title": "Frequently",
+    "faq.header.highlightedWord": "Asked Questions",
+    "faq.header.description": "Important information about our community.",
+
+    "faq.items.0.question": "Where are we located?",
+    "faq.items.0.answer": "We are located at Calle del Sol # 60, Alfafar, Valencia, Spain",
+
+    "faq.items.1.question": "What are the service hours?",
+    "faq.items.1.answer": "Our Sunday services are at 11:00 AM. We also have small group meetings at tables on Fridays at 19:00 and prayer services on Fridays at 18:00",
+
+    "faq.items.2.question": "How can I ask for help or counseling?",
+    "faq.items.2.answer": "You can request help or counseling on our contact page, by calling our office at (+34) 679 88 50 65, or by coming to our community.",
+
+    "faq.items.3.question": "How can I be part of the community?",
+    "faq.items.3.answer": "There are many ways to get involved: attending our services, joining a small group, participating in our community events, or serving as a volunteer in any of our ministries. We have an orientation class for new members on the first Sunday of each month after the 11:00 AM service.",
+
+    "faq.items.4.question": "Do you offer online services?",
+    "faq.items.4.answer": "Yes, we broadcast our Sunday services live through our YouTube channel. You can also access previous sermons in our message section on this website.",
+
+    "faq.contact.question": "Didn't find what you were looking for?",
+    "faq.contact.buttonText": "Contact Us",
+
+    // =========== Contact =========== //    
+    "contact.title": "Contact Us",
+    "contact.highlightedWord": "",
+    "contact.description": "We'd love to hear from you. Contact us through any of these means.",
+    "contact.callUs": "Call or WhatsApp",
+    "contact.emailUs": "Send us an email",
+    "contact.whatsappButton": "WhatsApp",
+
+    "contact.info.phone": "+34 679 88 5065",
+    "contact.info.email": "contacto@iglesiasomos.es",
+    "contact.info.whatsapp": "+34665569144",
 
     // =========== Footer =========== //
-    "footer.description": "Build 24H2 optimized with extreme enhancements",
-    "footer.version": "v1.0.0",
-    "footer.download": "Download",
-    "footer.stable": "Stable",
-    "footer.explore": "Explore",
-    "footer.connect": "Connect",
-    "footer.updates": "Updates",
-    "footer.subscribe": "Subscribe",
-    "footer.newsletter": "Receive news about new versions and features",
-    "footer.email.placeholder": "Email",
-    "footer.copyright": "© 2025 CodeFlow. All rights reserved.",
-    "footer.privacy": "Privacy",
-    "footer.terms": "Terms",
-    "footer.github.title": "Project CodeXtreme",
-    "footer.github.description": "Download the project on GitHub",
-    "footer.github.star": "Star on GitHub",
-
-    // =========== Accessibility =========== //
-    "aria.social.twitter": "Link to CodeFlow's Twitter",
-    "aria.social.github": "Link to CodeFlow's GitHub",
-    "aria.social.youtube": "Link to CodeFlow's YouTube",
-    "aria.social.discord": "Link to CodeFlow's Discord",
-    "aria.social.linkedin": "Link to CodeFlow's LinkedIn",
-    "aria.social.reddit": "Link to CodeFlow's Reddit",
-
-    // =========== Guides ===========  //
-    "guides.title": "CodeXtremeOS Guides",
-    "guides.description":
-      "🚀 Master optimization with our step-by-step guides.",
-    "guides.meta_title": "Guides and Tutorials - CodeXtremeOS",
-    "guides.support.title": "Support the creators!",
-    "guides.support.description1":
-      "These guides are possible thanks to the community. Please consider",
-    "guides.support.emphasis1": "liking 👍",
-    "guides.support.description2": "and",
-    "guides.support.emphasis2": "subscribing 🔔",
-    "guides.support.description3": "to the original channels",
-    "guides.guide1.title": "Create Your Own Optimized ISO",
-    "guides.guide1.description":
-      "Complete guide to create and customize your optimized Windows ISO",
-    "guides.guide2.title": "Mega Optimization Pack",
-    "guides.guide2.description": "Optimize your PC by 500% with this mega pack",
-    "guides.guide3.title": "Personalization",
-    "guides.guide3.description":
-      "Make your Windows look great without resource consumption",
-    "guides.guide4.title": "Hidden Policies",
-    "guides.guide4.description":
-      "Enable hidden policies to get the most out of your performance",
-    "guides.view_more": "View more",
-    "guides.guide5.title": "Resource Optimization",
-    "guides.guide5.description":
-      "Learn to reduce CPU and RAM usage to maximize the performance of your ISO.",
-    "guides.guide6.title": "Clean Installation",
-    "guides.guide6.description":
-      "Discover how to set up automatic tasks after installation to keep your system optimized.",
-    "guides.guide7.title": "Increase Performance",
-    "guides.guide7.description":
-      "Discover how to increase the performance of your Windows 11 with these tips and tricks.",
-    "guides.guide8.title": "The Best Software",
-    "guides.guide8.description":
-      "Discover the best software for Windows 10/11 in 2025.",
-
-    // =========== Tools =========== //
-    "tools.meta_title": "Optimization Tools - CodeXtremeOS",
-    "tools.title": "Pro Personalization",
-    "tools.subtitle": "🚀 Optimization - Security - Personalization Tools",
-    "tools.opensource.title": "Important!",
-    "tools.opensource.description":
-      "Most of the tools recommended here are Open Source. If you find them useful, please consider giving a star on their official repositories to support the developers.",
-    "tools.opensource.how_to_help": "How to help?",
-    "tools.opensource.step1": "Visit the GitHub link of each tool",
-    "tools.opensource.step2":
-      'Click the "⭐ Star" button in the top right corner',
-    "tools.opensource.step3":
-      "Done! You will be contributing to the growth of the project",
-    "tools.category1.title": "🛠 Optimization",
-    "tools.category2.title": "🎨 Personalization",
-    "tools.category3.title": "🔒 Security",
-    "tools.tool1.name": "ChrisTitus WinUtil",
-    "tools.tool1.description": "Complete system optimization suite",
-    "tools.tool2.name": "Microsoft PowerToys",
-    "tools.tool2.description": "Official productivity suite",
-    "tools.tool3.name": "StartAllBack",
-    "tools.tool3.description": "Classic Start Menu for Win11",
-    "tools.tool4.name": "Windhawk",
-    "tools.tool4.description": "Extreme personalization for Windows",
-    "tools.tool5.name": "BleachBit",
-    "tools.tool5.description": "Deep and secure cleaning",
-    "tools.tool6.name": "O&O ShutUp10",
-    "tools.tool6.description": "Privacy control",
-    "tools.tags.windows": "Windows 10/11",
-    "tools.tags.windows11": "Windows 11",
-    "tools.tags.windows_all": "Windows 7/8/10/11",
-    "tools.tags.opensource": "Open Source",
-    "tools.tags.low_risk": "Low risk",
-    "tools.tags.medium_risk": "Medium risk",
-    "tools.download": "Download",
-
-    // =========== Software =========== //
-    "software.meta_title": "Essential Software - CodeXtremeOS",
-    "software.title": "Recommended Software for Everyone",
-    "software.subtitle": "🚀 Explore reliable software that fit your needs",
-    "software.opensource.title": "Important Disclaimer",
-    "software.opensource.description":
-      "Please note that the software listed here is provided as-is.",
-    "software.opensource.description2":
-      "Use at your own risk and ensure compatibility with your system before installation.",
-    "software.opensource.how_to_help":
-      "How to Get the Most Out of These Tools?",
-    "software.opensource.step1":
-      "Review the software requirements and compatibility",
-    "software.opensource.step2":
-      "Ensure your system meets the minimum specifications",
-    "software.opensource.step3":
-      "Install and use according to the developer’s instructions. Always back up your data before making changes.",
-    "software.category1.title": "🛠 Drivers & Runtime",
-    "software.category2.title": "🎨 Production Apps",
-    "software.category3.title": "Windows Software",
-    "software.tool1.name": "DirectX Runtime",
-    "software.tool1.description": "Runtime for DirectX 9, 10, 11, and 12",
-    "software.tool2.name": "VC++ Runtime",
-    "software.tool2.description": "Visual C++ Runtime Libraries for Windows",
-    "software.tool3.name": ".NET 5.0 Desktop Runtime",
-    "software.tool3.description": "Runtime for .NET 5.0 Desktop Applications",
-    "software.tool4.name": ".NET 6.0 Desktop Runtime",
-    "software.tool4.description": "Runtime for .NET 6.0 Desktop Applications",
-    "software.tool5.name": ".NET 7.0 Desktop Runtime",
-    "software.tool5.description": "Runtime for .NET 7.0 Desktop Applications",
-    "software.tool6.name": ".NET 8.0 Desktop Runtime",
-    "software.tool6.description": "Runtime for .NET 8.0 Desktop Applications",
-    "software.tags.windows": "Windows 10/11",
-    "software.tags.opensource": "Microsoft",
-    "software.tags.medium_risk": "Required",
-    "software.download": "Download",
-    "software.tags.cross_platform": "Cross-platform",
-    "software.tags.stable": "Stable",
-    "software.tool7.name": "Edge WebView2 Runtime",
-    "software.tool7.description": "WebView2 Runtime for Microsoft Edge",
-    "software.tool8.name": "GIMP",
-    "software.tool8.description": "Free and open-source image editor.",
-    "software.tool9.name": "Krita",
-    "software.tool9.description": "Digital painting software for artists.",
-    "software.tool10.name": "Blender",
-    "software.tool10.description":
-      "3D tool for modeling, animation, and rendering.",
-    "software.tool11.name": "Inkscape",
-    "software.tool11.description":
-      "Free and open-source vector graphics editor.",
-    "software.tool12.name": "Darktable",
-    "software.tool12.description": "Non-destructive photo editing software.",
-    "software.tool13.name": "Audacity",
-    "software.tool13.description": "Free and open-source audio editor.",
-    "software.tool14.name": "OBS Studio",
-    "software.tool14.description": "Software for recording and live streaming.",
-    "software.tool15.name": "Notepad++",
-    "software.tool15.description": "Advanced text editor for Windows.",
-    "software.tool16.name": "7-Zip",
-    "software.tool16.description": "File compression and decompression tool.",
-    "software.tool17.name": "VLC Media Player",
-    "software.tool17.description": "Multi-platform media player.",
-    "software.tool18.name": "LibreOffice",
-    "software.tool18.description": "Free and open-source office suite.",
-    "software.tool19.name": "Paint.NET",
-    "software.tool19.description":
-      "Simple yet powerful image editor for Windows.",
-    "software.tool20.name": "WinRAR",
-    "software.tool20.description": "Popular file compression tool.",
-    "software.tool21.name": "CPU-Z",
-    "software.tool21.description": "System diagnostic tool.",
-
-    // =========== Downloads =========== //
-    "downloads.hero_description": "🚀 Modified ISOs",
-    "downloads.announcement.title": "🛠️ Important:",
-    "downloads.announcement.full_text":
-      "These ISOs were created with NTLite, a tool anyone can use to create their own customized ISO.",
-    "downloads.announcement.security_title": "⚠️ Security Recommendation:",
-    "downloads.announcement.recommendation":
-      "For maximum reliability, we recommend creating your own version using:",
-    "downloads.announcement.official_guides": "NTLite official guides",
-    "downloads.announcement.our_guides": "Our",
-    "downloads.announcement.custom_tip":
-      "💡 A custom ISO avoids bloatware and adapts exactly to your needs",
-    "downloads.latest_version.title": "🚀 Latest Version",
-    "downloads.latest_version.name": "CodeXtremeOS 11",
-    "downloads.latest_version.build_info":
-      "Build 24H2 optimized with extreme enhancements",
-    "downloads.latest_version.build_info_23H2": "Build 23H2 with new features",
-    "downloads.11_versions.title": "💿​ CodeXtremeOS 11",
-    "downloads.previous_versions.title": "💿​ Other Versions",
-    "downloads.version1.name": "CodeXtremeOS 10",
-    "downloads.version1.build_info": "Build 22H2 with Legacy support",
-    "downloads.version2.name": "CodeXtremeOS 11",
-    "downloads.version2.build_info":
-      "Build 23H2 with new features and optimizations",
-    "downloads.version3.build_info": "Build 22H2 with extreme enhancements",
-    "downloads.tags.x64_uefi": "x64 UEFI",
-    "downloads.tags.stable": "Stable",
-    "downloads.tags.updated": "Updated",
-    "downloads.tags.limited_support": "Limited support",
-    "downloads.download_button": "Download",
-    "downloads.iso_details": "ISO Details",
-    "downloads.main_features": "Main Features",
-    "downloads.features.optimization": "Maximum performance optimization",
-    "downloads.features.telemetry": "Reduced telemetry",
-    "downloads.features.gaming": "Ideal for gamers and advanced users",
-    "downloads.features.security": "Enhanced security and official focus",
-    "downloads.long_term": "Long-term goal",
-    "downloads.long_term_desc":
-      "Refined and optimized operating system for prolonged use",
-    "downloads.guide_info":
-      "The guide to create this ISO comes from this forum",
-    "downloads.guide_link": "Hellbovine Optimized Image Guide",
-    "downloads.features.iso_size": "3.6 GB ISO",
-    "downloads.features.installed_size_3gb": "3.8 GB ISO",
-    "downloads.features.installed_size_4gb": "4.8 GB ISO",
-    "downloads.features.debloated_optimized": "Optimized from the start",
-    "downloads.features.full_updatable_build": "Full and Updatable Version",
-    "downloads.features.automatic_updates_paused":
-      "Automatic Updates Paused Until 2029",
-    "downloads.features.intel_rst_drivers":
-      "Intel RST Drivers Integrated in Installation",
-    "downloads.features.extreme_performance":
-      "Extreme Performance for your Applications and Games",
-    "downloads.features.uwp_apps_support":
-      "Full Support for UWP Apps, Xbox, MS Store, and more",
-    "downloads.features.additional_language_support":
-      "Full Support for Additional Language Packs, Voice, etc.",
-    "downloads.features.optional_features_support":
-      "Full Support for all optional features, including WSA and WSL2",
-    "downloads.features.improvements_optimizations":
-      "Additional Improvements and Optimizations Included",
-    "downloads.features.no_preinstalled_uwp_apps": "No Pre-installed UWP Apps",
-    "downloads.features.ms_store_installer_included":
-      "MS Store Installer Included",
-    "downloads.features.full_featured_updatable_build":
-      "Full and Updatable Version",
-    "downloads.features.automatic_updates_paused_3000":
-      "Automatic Updates Paused Until 2029",
-    "downloads.features.optional_system_transparency":
-      "Includes Optional System Transparency",
-    "downloads.features.optional_gallery_settings_home":
-      "Includes Optional 'Gallery' and 'Settings Home Page'",
-    "downloads.features.extreme_performance_apps_games":
-      "Extreme Performance for your Applications and Games",
-    "downloads.features.integrates_intel_rst_serial_io":
-      "Integrates Intel RST and Serial IO Drivers in Installation",
-    "downloads.features.full_support_uwp_xbox_ms_store":
-      "Full Support for UWP Apps, Xbox, MS Store, and more",
-    "downloads.features.full_support_language_packs":
-      "Full Support for Additional Language Packs, Voice, etc.",
-    "downloads.features.full_support_optional_features":
-      "Full Support for all optional features, including WSA and WSL2",
-    "downloads.features.enabled_rounded_corners_acrylic_mica":
-      "Rounded Corners, Acrylic, and Mica Enabled by Default (Even in a VM!)",
-    "downloads.features_no_internet":
-      "No Internet connection required for installation",
-    "downloads.features_telemetry": "Telemetry and Tracking Removed",
-    "downloads.features.additional_improvements_optimizations":
-      "Additional Improvements and Optimizations Included",
+    "footer.email": "contacto@iglesiasomos.es",
+    "footer.phone": "(+34) 679 88 5065 - 665 56 9144",
+    "footer.address": "Calle del sol #60, Alfafar - Valencia",
+    "footer.tagline": "Love, Forgiveness, Service.",
+    "footer.contact": "Contact",
+    "footer.followUs": "Follow Us",
+    "footer.rights": "All rights reserved.",
+    "footer.developedBy": "Built by",
   },
 };
