@@ -1,0 +1,30 @@
+---
+// components/PageHeader.astro
+interface Props {
+  title: string;
+  highlightedWord: string;
+  description: string;
+  className?: string;
+}
+
+const {
+  title,
+  highlightedWord,
+  description,
+  className = "min-h-[70vh] flex items-center px-8 py-8" // Reducido de 70vh a 50vh y añadido py-16
+} = Astro.props;
+---
+
+<section class={className}>
+  <div class="max-w-[90rem] mx-auto w-full">
+    <h1 class="mega-text mb-8">
+      {title}
+      <span class="dark:text-accent text-accent/90">{highlightedWord}</span>
+    </h1>
+    <div class="max-w-3xl">
+      <p class="text-2xl opacity-70 leading-relaxed">
+        {description}
+      </p>
+    </div>
+  </div>
+</section>

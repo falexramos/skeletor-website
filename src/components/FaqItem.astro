@@ -1,0 +1,166 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  question: string;
+  answer: string;
+}
+
+const { question, answer } = Astro.props;
+const modalId = `modal-${answer}`;
+---
+
+<div class="faq-item border-b border-secondary/20 group">
+  <button
+    class="w-full text-left py-6 px-8 bg-secondary dark:bg-dark rounded-3xl transition-all duration-300 
+           hover:bg-accent dark:hover:bg-accent/60
+           focus:outline-none focus:ring-2 focus:ring-accent flex justify-between items-center"
+    data-modal-id={modalId}
+    data-video-id={answer}
+    data-title={question}
+    aria-expanded="false"
+    aria-controls={modalId}
+  >
+    <div class="flex items-center gap-4">
+      <div class="relative w-20 h-14 rounded-xl overflow-hidden shadow-md ring-1 ring-secondary dark:ring-dark">
+        <img 
+          src={`https://img.youtube.com/vi/${answer}/maxresdefault.jpg`}
+          alt="" 
+          class="w-full h-full object-cover"
+          loading="lazy"
+        />
+        <div class="absolute inset-0 bg-gradient-to-br from-dark/60 to-dark/20 flex items-center justify-center">
+          <Icon name="mdi:play-circle" class="h-9 w-9 text-light drop-shadow-lg" />
+        </div>
+      </div>
+      <h3 class="text-2xl font-display font-bold text-dark dark:text-light">{question}</h3>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" 
+         class="h-6 w-6 text-dark/60 dark:text-light/60 transform transition-transform duration-300 group-hover:rotate-180" 
+         fill="none" 
+         viewBox="0 0 24 24" 
+         stroke="currentColor"
+    >
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+
+  <!-- Modal -->
+  <div id={modalId} 
+       class="fixed inset-0 bg-dark/95 z-50 hidden items-center justify-center p-4"
+  >
+    <div class="relative w-full max-w-5xl aspect-video bg-dark rounded-2xl overflow-hidden shadow-2xl">
+      <button
+        class="absolute top-4 right-4 text-light hover:text-accent z-10 p-3 
+               bg-dark/60 rounded-full transition-transform hover:scale-110"
+        data-close-modal={modalId}
+        aria-label="Close video"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      <div id={`video-container-${modalId}`} class="w-full h-full"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function handleModalOpen(modalId: string, videoId: string, title: string) {
+    const modal = document.getElementById(modalId);
+    const videoContainer = document.getElementById(`video-container-${modalId}`);
+    
+    if (modal && videoContainer) {
+      const iframe = document.createElement('iframe');
+      iframe.width = '100%';
+      iframe.height = '100%';
+      iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+      iframe.title = title;
+      iframe.frameBorder = '0';
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      iframe.className = 'w-full h-full';
+
+      videoContainer.innerHTML = '';
+      videoContainer.appendChild(iframe);
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  function handleModalClose(modalId: string) {
+    const modal = document.getElementById(modalId);
+    const videoContainer = document.getElementById(`video-container-${modalId}`);
+    
+    if (modal && videoContainer) {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      videoContainer.innerHTML = '';
+      document.body.style.overflow = 'auto';
+    }
+  }
+
+  // Event delegation for opening modals
+  document.addEventListener('click', (e) => {
+    const button = (e.target as Element).closest('button[data-modal-id]');
+    if (button) {
+      const modalId = button.getAttribute('data-modal-id');
+      const videoId = button.getAttribute('data-video-id');
+      const title = button.getAttribute('data-title');
+      
+      if (modalId && videoId && title) {
+        handleModalOpen(modalId, videoId, title);
+      }
+    }
+
+    // Close button handling
+    const closeButton = (e.target as Element).closest('button[data-close-modal]');
+    if (closeButton) {
+      const modalId = closeButton.getAttribute('data-close-modal');
+      if (modalId) {
+        handleModalClose(modalId);
+      }
+    }
+
+    // Close on outside click
+    const modal = e.target as Element;
+    if (modal.classList.contains('fixed') && !modal.classList.contains('hidden')) {
+      const modalId = modal.id;
+      handleModalClose(modalId);
+    }
+  });
+
+  // Close on escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      const openModal = document.querySelector('.fixed:not(.hidden)');
+      if (openModal && openModal.id) {
+        handleModalClose(openModal.id);
+      }
+    }
+  });
+</script>
+
+<style>
+  .faq-item {
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .faq-item button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 212, 129, 0.3);
+  }
+  
+  .faq-item .fixed {
+    display: flex;
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  .faq-item .fixed:not(.hidden) {
+    opacity: 1;
+    pointer-events: auto;
+  }
+</style>

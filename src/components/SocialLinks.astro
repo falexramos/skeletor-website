@@ -1,0 +1,43 @@
+---
+import { Icon } from 'astro-icon/components';
+
+export const socialLinks = [
+  {
+    name: 'Facebook',
+    url: 'https://www.facebook.com/CCSOMOS.ALFAFAR',
+    icon: 'mdi:facebook'
+  },
+  {
+    name: 'Instagram',
+    url: 'https://www.instagram.com/somosc.c?igsh=aDJlM3c0eGh5OGsy',
+    icon: 'mdi:instagram'
+  },
+  {
+    name: 'YouTube',
+    url: 'https://www.youtube.com/@somos9987',
+    icon: 'mdi:youtube'
+  }
+];
+
+interface Props {
+  className?: string;
+}
+
+const { className = "" } = Astro.props;
+---
+
+<div class={`flex gap-4 ${className}`}>
+  {socialLinks.map(social => (
+    <a 
+      href={social.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="group"
+      aria-label={`Síguenos en ${social.name}`}
+    >
+      <div class="p-2 rounded-full bg-background/10 group-hover:bg-accent transition-colors">
+        <Icon name={social.icon} class="w-6 h-6" />
+      </div>
+    </a>
+  ))}
+</div>

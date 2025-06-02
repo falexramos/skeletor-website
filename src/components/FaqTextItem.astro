@@ -1,0 +1,81 @@
+---
+interface Props {
+  question: string;
+  answer: string;
+}
+
+const { question, answer } = Astro.props;
+const itemId = `faq-${Math.random().toString(36).substring(2, 9)}`;
+---
+
+<div class="faq-text-item border-b border-secondary/20 last:border-b-0">
+  <button
+    class="w-full text-left py-6 px-8 bg-secondary dark:bg-dark rounded-3xl transition-all duration-300 
+           hover:bg-accent/10 dark:hover:bg-accent/10
+           focus:outline-none focus:ring-2 focus:ring-accent flex justify-between items-center"
+    id={`${itemId}-button`}
+    aria-expanded="false"
+    aria-controls={`${itemId}-content`}
+  >
+    <h3 class="text-2xl font-display font-bold text-dark dark:text-light">{question}</h3>
+    <svg xmlns="http://www.w3.org/2000/svg" 
+         class="h-6 w-6 text-dark/60 dark:text-light/60 transform transition-transform duration-300" 
+         fill="none" 
+         viewBox="0 0 24 24" 
+         stroke="currentColor"
+         id={`${itemId}-icon`}
+    >
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+
+  <div 
+    id={`${itemId}-content`}
+    class="overflow-hidden max-h-0 transition-all duration-300 ease-in-out"
+    aria-hidden="true"
+  >
+    <div class="p-8 pt-4 bg-secondary/50 dark:bg-dark/50 rounded-b-3xl">
+      <p class="text-lg text-dark/80 dark:text-light/80 leading-relaxed">{answer}</p>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ itemId }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    const button = document.getElementById(`${itemId}-button`);
+    const content = document.getElementById(`${itemId}-content`);
+    const icon = document.getElementById(`${itemId}-icon`);
+    
+    if (button && content && icon) {
+      button.addEventListener('click', () => {
+        const expanded = button.getAttribute('aria-expanded') === 'true';
+        
+        // Toggle aria-expanded
+        button.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        
+        // Toggle aria-hidden
+        content.setAttribute('aria-hidden', expanded ? 'true' : 'false');
+        
+        // Toggle content visibility
+        if (expanded) {
+          content.style.maxHeight = '0';
+          icon.classList.remove('rotate-180');
+        } else {
+          content.style.maxHeight = content.scrollHeight + 'px';
+          icon.classList.add('rotate-180');
+        }
+      });
+    }
+  });
+</script>
+
+<style>
+  .faq-text-item {
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .faq-text-item button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 212, 129, 0.3);
+  }
+</style>

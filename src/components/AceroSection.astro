@@ -1,0 +1,62 @@
+---
+interface AceroItem {
+  letter: string;
+  title: string;
+  content: string;
+  verse: string;
+  reference: string;
+}
+
+interface Props {
+  title: string;
+  subtitle: string;
+  items: AceroItem[];
+  className?: string;
+}
+
+const { title,subtitle,items, className = "py-16 px-8 bg-light dark:bg-dark" } = Astro.props;
+---
+
+<section class={className}>
+  <div class="max-w-[90rem] mx-auto">
+    <h2 class="text-4xl md:text-5xl font-display font-bold mb-16 text-center dark:text-light">{title}</h2>
+    <h4 class="text-2xl md:text-3xl font-display font-semibold mb-12 text-center dark:text-light/90">{subtitle}</h4>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-16 px-8">
+      {items.map((item) => (
+        <div class="relative p-10 pt-14 bg-secondary dark:bg-secondary/20 rounded-3xl shadow-lg dark:shadow-secondary/10">
+          <div class="absolute -top-8 left-1/2 -translate-x-1/2 w-16 h-16 bg-accent dark:bg-accent/90 rounded-full flex items-center justify-center text-3xl font-bold text-dark shadow-lg">
+            {item.letter}
+          </div>
+          <h3 class="text-2xl font-display font-bold mb-6 text-center dark:text-light">{item.title}</h3>
+          <p class="text-lg mb-6 opacity-80 dark:text-light/80">{item.content}</p>
+          
+          <details class="group">
+            <summary class="list-none text-center cursor-pointer">
+              <span class="inline-flex items-center text-accent dark:text-accent/60 font-semibold hover:opacity-50 transition-opacity">
+                Soporte
+                <svg 
+                  class="w-4 h-4 ml-1 transition-transform group-open:rotate-180" 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="currentColor"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </span>
+            </summary>
+            <div class="mt-4 pt-4 border-t border-dark/10 dark:border-light/10">
+              <blockquote class="italic text-sm opacity-70 dark:text-light/70 mb-2">"{item.verse}"</blockquote>
+              <p class="text-right text-sm font-bold dark:text-light/90">{item.reference}</p>
+            </div>
+          </details>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  details summary::-webkit-details-marker {
+    display: none;
+  }
+</style>

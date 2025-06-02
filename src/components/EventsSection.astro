@@ -1,0 +1,64 @@
+---
+// components/EventsSection.astro
+interface Event {
+  imageUrl: string;
+  title: string;
+  date: string;
+  [key: string]: any; // Para permitir propiedades adicionales
+}
+
+interface Props {
+  title: string;                    // Título personalizable
+  events: Event[];                  // Array de eventos
+  className?: string;              // Clases CSS adicionales
+  containerClassName?: string;      // Clases para el contenedor
+  gridClassName?: string;          // Clases para la grid
+  titleClassName?: string;         // Clases para el título
+  backgroundColor?: string;        // Color de fondo personalizable
+  sectionId?: string;             // ID opcional para la sección
+  cardProps?: {                   // Propiedades para todas las tarjetas
+    className?: string;
+    imageClassName?: string;
+    titleClassName?: string;
+    dateClassName?: string;
+    aspectRatio?: string;
+  };
+}
+
+const { 
+  title, 
+  events, 
+  className = "py-16 px-8",
+  containerClassName = "max-w-[90rem] mx-auto",
+  gridClassName = "grid md:grid-cols-2 lg:grid-cols-3 gap-8",
+  titleClassName = "text-4xl md:text-5xl font-display font-bold mb-16 dark:text-light",
+  backgroundColor = "transparent",
+  sectionId,
+  cardProps = {}
+} = Astro.props;
+
+import EventCard from './EventCard.astro';
+---
+
+<section 
+  id={sectionId}
+  class={className}
+  style={backgroundColor !== "transparent" ? `background-color: ${backgroundColor};` : ""}
+>
+  <div class={containerClassName}>
+    <h2 class={titleClassName}>{title}</h2>
+    <div class={gridClassName}>
+      {events.map(event => (
+        <EventCard 
+          {...event} 
+          className={cardProps.className || "relative overflow-hidden rounded-3xl bg-light dark:bg-secondary/20 shadow-md"}
+          imageClassName={cardProps.imageClassName || "w-full h-full object-cover"}
+          titleClassName={cardProps.titleClassName || "text-2xl font-display font-bold text-dark dark:text-light mb-2"}
+          dateClassName={cardProps.dateClassName || "text-dark/80 dark:text-light/80"}
+          aspectRatio={cardProps.aspectRatio || "1/1"}
+        />
+      ))}
+    </div>
+    <slot /> 
+  </div>
+</section>

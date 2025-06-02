@@ -1,0 +1,78 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import GalleryItem from '../../components/GalleryItem.astro';
+import i18next from '../../i18n/config';
+
+const galleryImages = [
+  {
+    title: 'Domingos',
+    category: 'Servicios',
+    description: 'Momentos de adoración en comunidad',
+    url: '/img/somos_domigos.avif',
+    link: 'https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDUwNDEzODQzOTE2MDEx?story_media_id=3452814271677272710_20973777906&igsh=MXRtams4b2NkZGRkcQ=='
+  },
+  {
+    title: 'Mesas',
+    category: 'Comunidad',
+    description: 'Tiempo de renovación y crecimiento',
+    url: '/img/somos_mesas.avif',
+    link: 'https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MTM0ODY5MTUwMzc5Mzg1?story_media_id=3334721146442659440_20973777906&igsh=MXJsemN5aGdlZnZzZg=='
+  },
+  {
+    title: 'Somitos',
+    category: 'Jovenes',
+    description: 'Construyendo el futuro de la iglesia',
+    url: '/img/team_jovenes.avif',
+    link: 'https://www.instagram.com/s/aGlnaGxpZ2h0OjE3OTE4MjY0OTcwMDQ0ODQ1?story_media_id=3188301227711654486_20973777906&igsh=ano2YzZyZnV1cW5s'
+  },
+  {
+    title: 'Calles',
+    category: 'Obra Social',
+    description: 'Sirviendo a nuestra comunidad',
+    url: '/img/somos_asociacion.avif',
+    link: 'https://www.instagram.com/p/DEgaAzzoyp-/?igsh=cXFwdzNyZnR1NXZ1'
+  },
+  {
+    title: 'Matrimonios',
+    category: 'Familia',
+    description: 'Momentos',
+    url: '/img/somos_matrimonios.avif',
+    link: 'https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDUwNDEzODQzOTE2MDEx?story_media_id=3452814271677272710_20973777906&igsh=MXRtams4b2NkZGRkcQ=='
+  },
+  {
+    title: 'Kids',
+    category: 'Kids',
+    description: 'Enseñando con amor',
+    url: '/img/team_kids.avif',
+    link: 'https://www.instagram.com/p/DCe-HHPN72I/?img_index=4&igsh=MW9haXdvdGllcGV6cA=='
+  }
+];
+
+
+const headerText = {
+  title: "Momentos",
+  highlightedWord: "Somos",
+  description: "Explora momentos especiales de nuestra comunidad a través de imágenes."
+};
+
+const pageTitle = `Momentos | ${i18next.t('site.title')}`;
+---
+
+<Layout title={pageTitle}>
+  <main class="min-h-screen px-8 pb-16 md:px-16 mt-2"> 
+    <div class="max-w-[90rem] mx-auto mb-2">
+      <PageHeader
+        title={headerText.title}
+        highlightedWord={headerText.highlightedWord}
+        description={headerText.description}
+      />
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {galleryImages.map(image => (
+          <GalleryItem {...image} />
+        ))}
+      </div>
+    </div>
+  </main>
+</Layout>

@@ -1,0 +1,117 @@
+---
+import { Icon } from "astro-icon/components";
+import PageHeader from "./PageHeader.astro";
+
+interface Props {
+  className?: string;
+  texts: {
+    title: string;
+    highlightedWord: string;
+    description: string;
+    callUs: string;
+    emailUs: string;
+    whatsappButton: string;
+  };
+}
+
+const { className = "", texts } = Astro.props;
+
+const contactInfo = {
+  phone: "+34 679 88 5065",
+  email: "contacto@iglesiasomos.es",
+  whatsapp: "+34665569144",
+};
+---
+
+<section class:list={["relative py-6 md:py-8 lg:py-12", className]}>
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 space-y-6 md:space-y-8">
+    <PageHeader
+      title={texts.title}
+      highlightedWord={texts.highlightedWord}
+      description={texts.description}
+    />
+
+    <div class="grid gap-6 sm:gap-8 md:grid-cols-2 max-w-5xl mx-auto">
+      <!-- Teléfono/WhatsApp -->
+      <div
+        class="group bg-secondary/80 dark:bg-dark/80 backdrop-blur-sm border-2 border-transparent 
+               dark:border-accent/20 rounded-3xl p-6 sm:p-8 lg:p-10 space-y-6 
+               transition-all duration-300 hover:scale-102 hover:shadow-xl dark:hover:shadow-accent/5
+               hover:border-accent/20 dark:hover:border-accent/30"
+      >
+        <div class="flex justify-center gap-4 sm:gap-6">
+          <div class="p-3 sm:p-4 rounded-full bg-accent text-dark shadow-lg shadow-accent/20 
+                    transition-transform duration-300 group-hover:scale-110">
+            <Icon name="mdi:phone" class="w-6 h-6 sm:w-8 sm:h-8" />
+          </div>
+          <div class="p-3 sm:p-4 rounded-full bg-accent text-dark shadow-lg shadow-accent/20
+                    transition-transform duration-300 group-hover:scale-110">
+            <Icon name="mdi:whatsapp" class="w-6 h-6 sm:w-8 sm:h-8" />
+          </div>
+        </div>
+        <div class="text-center space-y-2 sm:space-y-3">
+          <h2 class="text-2xl sm:text-3xl font-display font-bold text-dark dark:text-light">{texts.callUs}</h2>
+          <a
+            href={`tel:${contactInfo.phone}`}
+            class="text-2xl sm:text-3xl lg:text-4xl block text-accent hover:text-accent/80 
+                   transition-colors font-bold tracking-wide"
+          >
+            {contactInfo.phone}
+          </a>
+        </div>
+        <a
+          href={`https://wa.me/${contactInfo.whatsapp}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="block w-full text-center bg-accent text-dark px-6 sm:px-8 py-3 sm:py-4 
+                 rounded-full text-lg sm:text-xl font-bold hover:bg-opacity-90 transition-all
+                 duration-300 hover:shadow-lg hover:shadow-accent/20 transform hover:-translate-y-0.5"
+        >
+          <span class="flex items-center justify-center gap-2">
+            <Icon name="mdi:whatsapp" class="w-5 h-5 sm:w-6 sm:h-6" />
+            {texts.whatsappButton}
+          </span>
+        </a>
+      </div>
+
+      <!-- Email -->
+      <div
+        class="group bg-secondary/80 dark:bg-dark/80 backdrop-blur-sm border-2 border-transparent 
+               dark:border-accent/20 rounded-3xl p-6 sm:p-8 lg:p-10 space-y-6
+               transition-all duration-300 hover:scale-102 hover:shadow-xl dark:hover:shadow-accent/5
+               hover:border-accent/20 dark:hover:border-accent/30"
+      >
+        <div class="flex justify-center">
+          <div class="p-3 sm:p-4 rounded-full bg-accent text-dark shadow-lg shadow-accent/20
+                    transition-transform duration-300 group-hover:scale-110">
+            <Icon name="mdi:email" class="w-6 h-6 sm:w-8 sm:h-8" />
+          </div>
+        </div>
+        <div class="text-center space-y-2 sm:space-y-3">
+          <h2 class="text-2xl sm:text-3xl font-display font-bold text-dark dark:text-light">{texts.emailUs}</h2>
+          <a
+          href={`mailto:${contactInfo.email}`}
+          class="text-xl sm:text-2xl lg:text-3xl block text-accent hover:text-accent/80 
+                 transition-colors font-bold tracking-wide break-words md:break-normal
+                 max-w-[280px] sm:max-w-none mx-auto"
+        >
+          {contactInfo.email}
+        </a>
+        </div>
+        <div class="h-[52px] sm:h-[60px]"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0px); }
+  }
+
+  .hover\:scale-102:hover {
+    transform: scale(1.02);
+  }
+</style>

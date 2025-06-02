@@ -1,0 +1,62 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import DonationCard from "../../components/DonationCard.astro";
+import OtherWaysToGive from "../../components/OtherWaysToGive.astro";
+import i18next from "../../i18n/config";
+
+const donationOptions = [
+  {
+    title: "Donación Única",
+    description: "Contribuye con un monto específico una sola vez",
+    options: ["€ 50", "€ 100", "€ 200", "Otro monto"],
+    buttonText: "Donar Ahora",
+    link: "https://checkout.square.site/merchant/MLVCPMBE067QX/checkout/4LQASNIQNLO7ZS255XREYDOX",
+  },
+  {
+    title: "Donación Mensual",
+    description: "Apoya nuestra misión con una donación mensual",
+    options: ["€ 25/mes", "€ 50/mes", "€ 100/mes", "Otro monto"],
+    buttonText: "Donar Ahora",
+    link: "https://checkout.square.site/merchant/MLVCPMBE067QX/checkout/4LQASNIQNLO7ZS255XREYDOX",
+  },
+];
+
+const otherMethods = [
+  {
+    title: "Transferencia Bancaria",
+    description: "Realiza una transferencia directa a nuestra cuenta bancaria.",
+    details: "ES64 3159 0011 1927 6970 4624",
+  },
+  {
+    title: "Voluntariado",
+    description: "Dona tu tiempo y talentos para servir a la comunidad.",
+  },
+  {
+    title: "Código de Donativo",
+    description:
+      "Utiliza nuestro código de donativo para realizar aportes específicos.",
+    details: "Bizum Código Donativo: [03587]",
+  },
+];
+
+const pageTitle = `Donar | ${i18next.t("site.title")}`;
+---
+
+<Layout title={pageTitle}>
+  <PageHeader
+    title="Apoya Nuestra"
+    highlightedWord="Misión"
+    description="Tu generosidad nos permite seguir compartiendo el amor de Cristo y a continuar nuestro trabajo en la comunidad."
+  />
+
+  <OtherWaysToGive title="Formas de Donar" methods={otherMethods} />
+
+  <div class="max-w-[90rem] mx-auto">
+    <div class="grid md:grid-cols-2 gap-8">
+      {donationOptions.map((option) => <DonationCard {...option} />)}
+    </div>
+
+    
+  </div>
+</Layout>

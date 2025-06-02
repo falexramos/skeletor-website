@@ -1,0 +1,32 @@
+---
+// components/OtherWaysToGive.astro
+interface DonationMethod {
+  title: string;
+  description: string;
+  details?: string; // Optional details field
+}
+
+interface Props {
+  title: string;
+  methods: DonationMethod[];
+}
+
+const { title, methods } = Astro.props;
+---
+
+<div class="mt-16 p-12 bg-secondary dark:bg-dark/50 rounded-3xl">
+  <h3 class="text-3xl font-display font-bold mb-4 text-dark dark:text-light">{title}</h3>
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {methods.map(method => (
+      <div>
+        <h4 class="text-xl font-bold mb-2 text-dark dark:text-light">{method.title}</h4>
+        <p class="opacity-80 text-dark/90 dark:text-light/70">{method.description}</p>
+        {method.details && (
+          <p class="mt-2 text-sm font-semibold text-dark dark:text-accent border-l-4 border-accent pl-2">
+            {method.details}
+          </p>
+        )}
+      </div>
+    ))}
+  </div>
+</div>

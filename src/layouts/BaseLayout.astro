@@ -4,6 +4,8 @@ import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 
 import { languageList } from "@/i18n/ui";
+import Sidebar from "@/components/Sidebar.astro";
+import DarkModeToggle from "@/components/DarkModeToggle.astro";
 
 const currentLang = Astro.currentLocale || "es";
 currentLang as keyof typeof languageList;
@@ -16,12 +18,12 @@ currentLang as keyof typeof languageList;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Título SEO -->
-    <title>CodeXtreme - Windows Gaming</title>
+    <title>Somos - Comunidad Cristiana</title>
 
     <!-- Meta Tags SEO -->
     <meta
       name="description"
-      content="Descarga CodeXtremeOS, la mejor versión de Windows optimizada para gaming y máximo rendimiento. Eleva tu experiencia de juego a otro nivel."
+      content="Somos - Comunidad Cristiana, Te invitamos a ser parte de nuestra familia. Aquí encontrarás un lugar para crecer, servir y compartir el amor de Cristo."
     />
     <meta name="robots" content="index, follow" />
     <meta
@@ -34,22 +36,22 @@ currentLang as keyof typeof languageList;
     <meta property="og:title" content="CodeXtremeOS" />
     <meta
       property="og:description"
-      content="La mejor versión de Windows modificada para gaming y máximo rendimiento. Descarga CodeXtremeOS ahora y lleva tu experiencia de juego al siguiente nivel."
+      content="Te invitamos a ser parte de nuestra familia. Aquí encontrarás un lugar para crecer, servir y compartir el amor de Cristo."
     />
     <meta
       property="og:image"
-      content="https://www.codextreme.me/imagen-previa.png"
+      content="https://www.iglesiasomos.es/imagen-previa.png"
     />
-    <meta property="og:url" content="https://www.codextreme.me/" />
+    <meta property="og:url" content="https://www.iglesiasomos.es/" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="CodeXtremeOS" />
+    <meta name="twitter:title" content="somos-comunidad-Cristiana" />
     <meta
       name="twitter:description"
-      content="La mejor versión de Windows modificada para gaming y máximo rendimiento. Descarga CodeXtremeOS ahora y lleva tu experiencia de juego al siguiente nivel."
+      content="Te invitamos a ser parte de nuestra familia. Aquí encontrarás un lugar para crecer, servir y compartir el amor de Cristo."
     />
     <meta
       name="twitter:image"
-      content="https://www.codextreme.me/imagen-twitter.png"
+      content="https://www.iglesiasomos.es/imagen-twitter.png"
     />
     <meta
       name="google-site-verification"
@@ -66,25 +68,31 @@ currentLang as keyof typeof languageList;
       {
         "@context": "http://schema.org",
         "@type": "WebSite",
-        "url": "https://www.codextreme.me",
-        "name": "CodeXtremeOS",
-        "description": "La mejor versión de Windows modificada para gaming y máximo rendimiento.",
+        "url": "https://www.iglesiasomos.es",
+        "name": "Somos-Comunidad-Cristiana",
+        "description": "Aquí encontrarás un lugar para crecer, servir y compartir el amor de Cristo.",
         "potentialAction": {
           "@type": "SearchAction",
-          "target": "https://www.codextreme.me/buscar?q={search_term_string}",
+          "target": "https://www.iglesiasomos.es/buscar?q={search_term_string}",
           "query-input": "required name=search_term_string"
         }
       }
     </script>
   </head>
-  <body
-    class="bg-gradient-to-br from-gray-900 to-gray-800 text-gray-100 pt-20 min-h-screen"
-  >
-    <Header />
-    <main class="min-h-[calc(100vh-8rem)]">
-      <!-- Contenido -->
-      <slot />
-    </main>
-    <Footer />
+<body class="min-h-screen bg-light dark:bg-dark flex flex-col">
+    <Sidebar />
+
+    <div class="flex flex-col min-h-screen">
+      <Header>
+        <DarkModeToggle slot="actions" />
+      </Header>
+
+      <main class="flex-1">
+        <slot />
+      </main>
+
+      <Footer />
+    </div>
+
   </body>
 </html>

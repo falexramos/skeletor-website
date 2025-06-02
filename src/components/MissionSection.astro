@@ -1,0 +1,166 @@
+---
+// components/MissionSection.astro
+interface StyleProps {
+  // Contenedor principal
+  sectionBg?: string;          // Color de fondo de la sección
+  sectionPadding?: string;     // Padding de la sección
+  containerWidth?: string;     // Ancho máximo del contenedor
+  containerPadding?: string;   // Padding del contenedor
+
+  // Título
+  titleColor?: string;         // Color del título
+  titleSize?: string;         // Tamaño del título
+  titleSpacing?: string;      // Espaciado del título
+  
+  // Descripción
+  textColor?: string;         // Color del texto
+  textSize?: string;          // Tamaño del texto
+  textOpacity?: string;       // Opacidad del texto
+  
+  // Grid
+  gridGap?: string;           // Espacio entre columnas
+  
+  // Imagen
+  imageRadius?: string;       // Radio de la imagen
+  imageFit?: string;         // Objeto fit de la imagen
+  
+  // Botón CTA
+  ctaBg?: string;            // Color de fondo del botón
+  ctaColor?: string;         // Color del texto del botón
+  ctaHoverBg?: string;       // Color de fondo del botón en hover
+  ctaPadding?: string;       // Padding del botón
+  ctaRadius?: string;        // Radio del botón
+  ctaSize?: string;          // Tamaño del texto del botón
+}
+
+interface Props {
+  title: string;
+  description: string;
+  imageUrl: string;
+  ctaText?: string;
+  ctaLink?: string;
+  styles?: StyleProps;
+}
+
+const defaultStyles: StyleProps = {
+  sectionBg: "bg-light dark:bg-dark",
+  sectionPadding: "py-32 px-8",
+  containerWidth: "max-w-[90rem]",
+  containerPadding: "mx-auto",
+  
+  titleColor: "text-dark dark:text-light",
+  titleSize: "text-5xl md:text-6xl",
+  titleSpacing: "mb-16",
+  
+  textColor: "text-dark dark:text-light",
+  textSize: "text-2xl",
+  textOpacity: "opacity-70",
+  
+  gridGap: "gap-16",
+  
+  imageRadius: "rounded-3xl",
+  imageFit: "object-contain", // Cambiado de object-cover a object-contain
+  
+  ctaBg: "bg-accent dark:bg-accent/90",
+  ctaColor: "text-dark dark:text-light",
+  ctaHoverBg: "hover:bg-accent/90 dark:hover:bg-accent/80",
+  ctaPadding: "px-8 py-4",
+  ctaRadius: "rounded-full",
+  ctaSize: "text-lg"
+};
+
+const {
+  title,
+  description,
+  imageUrl,
+  ctaText,
+  ctaLink,
+  styles = {}
+} = Astro.props;
+
+// Combinar estilos por defecto con los personalizados
+const finalStyles = { ...defaultStyles, ...styles };
+---
+
+<section class:list={[
+  finalStyles.sectionBg,
+  finalStyles.sectionPadding
+]}>
+  <div class:list={[
+    finalStyles.containerWidth,
+    finalStyles.containerPadding
+  ]}>
+    <h2 class:list={[
+      finalStyles.titleColor,
+      finalStyles.titleSize,
+      finalStyles.titleSpacing,
+      "font-display font-bold"
+    ]}>
+      {title}
+    </h2>
+    
+    <div class:list={[
+      "grid md:grid-cols-2 items-center",
+      finalStyles.gridGap
+    ]}>
+      <div class:list={[
+        "relative overflow-hidden", // Eliminado aspect-square
+        finalStyles.imageRadius
+      ]}>
+        <img 
+          src={imageUrl || "/placeholder.svg"}
+          alt={title}
+          class:list={[
+            "w-full", // Eliminado h-full para permitir altura natural
+            finalStyles.imageFit
+          ]}
+        />
+      </div>
+      
+      <div>
+        <p class:list={[
+          finalStyles.textColor,
+          finalStyles.textSize,
+          finalStyles.textOpacity,
+          "leading-relaxed"
+        ]}>
+          {description}
+        </p>
+        
+        {ctaText && ctaLink && (
+          <div class="mt-8">
+            <a 
+              href={ctaLink} 
+              class:list={[
+                "inline-flex items-center",
+                finalStyles.ctaBg,
+                finalStyles.ctaColor,
+                finalStyles.ctaPadding,
+                finalStyles.ctaRadius,
+                finalStyles.ctaSize,
+                finalStyles.ctaHoverBg,
+                "font-bold transition-colors"
+              ]}
+            >
+              {ctaText}
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                class="w-6 h-6 ml-2" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke="currentColor"
+              >
+                <path 
+                  stroke-linecap="round" 
+                  stroke-linejoin="round" 
+                  stroke-width="2" 
+                  d="M17 8l4 4m0 0l-4 4m4-4H3" 
+                />
+              </svg>
+            </a>
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,82 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import FaqItem from '../../components/FaqItem.astro';
+import i18next from '../../i18n/config';
+
+const faqs = [
+  {
+    question: "¿Es el dios del Cristianismo obsoleto y está pasado de moda?",
+    answer: "BXTFvkB0FdA",
+  },
+  {
+    question: "¿Qué tipo de Dios deja que una iglesia lo represente?",
+    answer: "FGTGEFfcyH0",
+  },
+  {
+    question: "¿Cómo envía un Dios bueno, a personas al infierno?",
+    answer: "G3iIv7PJLZM",
+  },
+  {
+    question: "¿La evolución responde a todas nuestras preguntas?",
+    answer: "gck5SJzp70g",
+  },
+  {
+    question: "¿Por qué existe el sufrimiento?",
+    answer: "4xiH6dpdjtA",
+  },
+];
+
+const headerText = {
+  title: "Rincon",
+  highlightedWord: "Apolos",
+  description: "Encuentra respuestas a preguntas comunes.",
+};
+
+const contactText = {
+  question: "¿No encontraste lo que buscabas?",
+  buttonText: "Contáctanos"
+}
+
+const pageTitle = `Rincon apolos | ${i18next.t('site.title')}`;
+
+---
+
+<Layout title={pageTitle}>
+  <main class="min-h-screen px-8">
+    <PageHeader
+      title={headerText.title}
+      highlightedWord={headerText.highlightedWord}
+      description={headerText.description}
+    />
+
+    <div class="max-w-[90rem] mx-auto">
+      <div class="grid gap-8 mb-8">
+        {faqs.map((faq) => <FaqItem {...faq} />)}
+      </div>
+
+      <div class="text-center py-16 bg-secondary dark:bg-dark/50 rounded-3xl">
+        <p class="text-xl mb-6">{contactText.question}</p>
+        <a
+          href="es/contact"
+          class="inline-flex items-center px-8 py-4 bg-accent text-dark rounded-full text-lg font-bold hover:bg-opacity-90 transition-colors"
+        >
+          {contactText.buttonText}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-6 h-6 ml-2"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </main>
+</Layout>

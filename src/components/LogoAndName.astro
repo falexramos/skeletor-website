@@ -1,0 +1,60 @@
+---
+// components/LogoAndName.astro
+import i18next from '../i18n/config';
+import Logo from './Logo.astro';
+
+interface Props {
+  variant?: 'default' | 'large';
+  className?: string;
+}
+
+const { variant = 'large', className = '' } = Astro.props;
+
+const currentPath = Astro.url.pathname;
+const currentLang = currentPath.split('/')[1];
+const homeUrl = `/${currentLang}`;
+
+const sizes = {
+  default: {
+    logo: 'w-10 h-10 md:w-14 md:h-14 lg:w-16 lg:h-16',
+    text: 'text-base md:text-lg lg:text-xl'
+  },
+  large: {
+    logo: 'w-14 h-14 md:w-20 md:h-20 lg:w-24 lg:h-24',
+    text: 'text-lg md:text-xl lg:text-2xl'
+  }
+};
+
+const { text } = sizes[variant];
+---
+
+<a 
+  href={homeUrl} 
+  class:list={[
+    'flex items-center gap-0 md:gap-1 lg:gap-2 hover:opacity-80 transition-opacity', 
+    className
+  ]}
+  aria-label={i18next.t('nav.goHome')}
+>
+  <Logo size={variant} /> 
+
+  <span 
+    class:list={[
+      text, 
+      'font-bold tracking-tight dark:text-light text-dark hidden md:block ml-0', 
+      'whitespace-nowrap'
+    ]}
+  >
+    {i18next.t('site.title')}
+  </span>
+</a>
+
+<style>
+  a {
+    transition: all 0.3s ease;
+  }
+
+  .dark .text-dark {
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  }
+</style>

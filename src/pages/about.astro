@@ -1,0 +1,116 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import MissionSection from '../../components/MissionSection.astro';
+import TeamSection from '../../components/TeamSection.astro';
+import JoinCommunitySection from '../../components/JoinCommunitySection.astro';
+import i18next from '../../i18n/config';
+
+const teamPastores = [
+  {
+    name: "William",
+    role: "Pastor",
+    image: "/img/somos_team_pastores.jpg"
+  },
+  {
+    name: "Jessica",
+    role: "Pastora",
+    image: "/img/somos_team_pastores.jpg"
+  }
+];
+
+const team = [
+  {
+    name: "Servidores",
+    role: "",
+    image: "/img/team_ujieres.avif",
+    
+  },
+  {
+    name: "Producción",
+    role: "",
+    image: "/img/team_produccion.avif"
+  },
+  {
+    name: "Música",
+    role: "",
+    image: "/img/team_alabanza.avif"
+  },
+  {
+    name: "Niños",
+    role: "",
+    image: "/img/team_kids.avif"
+  }
+];
+
+
+
+// Datos de la comunidad en español
+const communityButtons = [
+  {
+    text: "Ver Mensajes",
+    link: "es/messages",
+    variant: "primary" as const
+  },
+  {
+    text: "Contáctanos",
+    link: "es/contact",
+    variant: "secondary" as const
+  }
+];
+
+const pageTitle = `Quiénes Somos | ${i18next.t('site.title')}`;
+
+---
+
+<Layout title={pageTitle}>
+  <PageHeader
+    title="Nuestra"
+    highlightedWord="Historia"
+    description="Desde 2021, Somos es una comunidad cristiana en Alfafar, Valencia, que existe para compartir las buenas noticias de Jesús de Nazaret y hacer discípulos en comunidad."
+  />
+
+ 
+  <MissionSection
+  title="Nuestra Misión"
+  description="Exponer el Evangelio de Jesucristo."
+  imageUrl="/img/somos_mision.avif"
+  ctaText="Conoce más"
+  ctaLink="/contact"
+  styles={{
+    sectionBg: "bg-accent dark:bg-accent",
+    titleColor: "text-dark",
+    textColor: "text-dark",
+    ctaBg: "bg-dark",
+    ctaColor: "text-accent dark:text-accent",
+    ctaHoverBg: "hover:bg-dark/90 dark:hover:bg-bg-light/70"
+  }}
+/>
+
+  <MissionSection
+    title="Nuestra Visión"
+    description="Guiar a las personas a una relación creciente con Jesucristo."
+    imageUrl="/img/somos_vision.avif"
+    ctaText="Conoce más"
+    ctaLink="/contact"
+  />
+
+  <TeamSection
+    title="Nuestros Lideres"
+    team={teamPastores}
+    className="py-8 px-8 bg-accent"
+  />
+
+    <TeamSection
+    title="Colaboradores"
+    team={team}
+    className="py-8 px-8 bg-light/95"
+  />
+
+  <JoinCommunitySection
+    title="Conoce y Conecta con Nuestra Comunidad"
+    description="Te invitamos a ser parte de nuestra familia. Aquí encontrarás un lugar para crecer, servir y compartir el amor de Cristo."
+    imageUrl="/img/somos_comunidad.avif"
+    buttons={communityButtons}
+  />
+</Layout>

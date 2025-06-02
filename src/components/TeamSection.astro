@@ -1,0 +1,43 @@
+---
+// components/TeamSection.astro
+interface TeamMember {
+  name: string;
+  role: string;
+  image: string;
+}
+
+interface Props {
+  title: string;
+  team: TeamMember[];
+  className?: string;
+  backgroundColor?: string;
+}
+
+const {
+  title,
+  team,
+  className = "py-32 px-8",
+  backgroundColor = "bg-accent"
+} = Astro.props;
+---
+
+<section class={`${className} ${backgroundColor}`}>
+  <div class="max-w-[90rem] mx-auto text-dark">
+    <h2 class="large-text mb-16 text-dark">{title}</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {team.map(member => (
+        <div class="group">
+          <div class="mb-6 overflow-hidden rounded-3xl">
+            <img 
+              src={member.image || "/placeholder.svg"} 
+              alt={member.name}
+              class="w-full object-contain transition-transform duration-500 group-hover:scale-105"
+            />
+          </div>
+          <h3 class="text-2xl font-display font-bold">{member.name}</h3>
+          <p class="text-xl opacity-70">{member.role}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,76 @@
+---
+// components/VisionSection.astro
+interface VisionItem {
+  title: string;
+  description: string;
+  icon?: string;        
+  className?: string;   
+}
+
+interface Props {
+  title: string;                    
+  items: VisionItem[];             
+  className?: string;             
+  containerClassName?: string;      
+  gridClassName?: string;          
+  titleClassName?: string;         
+  itemClassName?: string;          
+  itemTitleClassName?: string;     
+  itemDescriptionClassName?: string;
+  backgroundColor?: string;        
+  sectionId?: string;             
+}
+
+const {
+  title,
+  items,
+  className = "py-32 bg-secondary dark:bg-dark",
+  containerClassName = "container mx-auto px-4",
+  gridClassName = "grid md:grid-cols-2 lg:grid-cols-3 gap-12",
+  titleClassName = "large-text mb-16",
+  itemClassName = "",
+  itemTitleClassName = "text-2xl font-display font-bold mb-4",
+  itemDescriptionClassName = "text-xl opacity-70",
+  backgroundColor,
+  sectionId
+} = Astro.props;
+---
+
+<section
+  id={sectionId}
+  class={className}
+  style={backgroundColor ? `background-color: ${backgroundColor};` : ''}
+>
+  <div class={containerClassName}>
+    <h2 class={titleClassName}>{title}</h2>
+    <div class={gridClassName}>
+      {items.map(item => (
+        <div class={`vision-item ${itemClassName} ${item.className || ''}`}>
+          {item.icon && (
+            <div class="vision-icon mb-4">
+              <Fragment set:html={item.icon} />
+            </div>
+          )}
+          <h3 class={itemTitleClassName}>{item.title}</h3>
+          <p class={itemDescriptionClassName}>{item.description}</p>
+        </div>
+      ))}
+    </div>
+    <slot /> {/* Para contenido adicional */}
+  </div>
+</section>
+
+<style>
+  .vision-item {
+    transition: transform 0.3s ease;
+  }
+  
+  .vision-item:hover {
+    transform: translateY(-5px);
+  }
+
+  .vision-icon :global(svg) {
+    width: 48px;
+    height: 48px;
+  }
+</style>

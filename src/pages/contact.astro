@@ -1,0 +1,22 @@
+---
+// pages/es/contact.astro
+import Layout from '../../layouts/Layout.astro';
+import ContactSection from '../../components/ContactSection.astro';
+import i18next from '../../i18n/config';
+
+
+const contactTexts = {
+  title: "Contáctanos",
+  highlightedWord: "", 
+  description: "Nos encantaría saber de ti. Contáctanos a través de cualquiera de estos medios.",
+  callUs: "Llama o WhatsApp",
+  emailUs: "Envíanos un correo",
+  whatsappButton: "WhatsApp"
+};
+
+const pageTitle = `Contácto | ${i18next.t('site.title')}`;
+---
+
+<Layout title={pageTitle}>
+  <ContactSection texts={contactTexts} />
+</Layout>

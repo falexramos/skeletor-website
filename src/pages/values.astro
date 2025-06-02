@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import ValuesSection from '../../components/ValuesSection.astro';
+import JoinCommunitySection from '../../components/JoinCommunitySection.astro';
+import i18next from '../../i18n/config';
+import AceroSection from '@/components/AceroSection.astro';
+
+
+
+// Datos de valores en español
+const values = [
+  {
+    title: "Jesús",
+    icon: "mdi:cross",
+    description: "Jesús de Nazaret es nuestro Señor y Maestro, el sentido de nuestra vida.",
+    verse: "Con Cristo estoy juntamente crucificado, y ya no vivo yo, mas vive Cristo en mí; y lo que ahora vivo en la carne, lo vivo en la fe del Hijo de Dios, el cual me amó y se entregó a sí mismo por mí.",
+    reference: "Gálatas 2:20"
+  },
+  {
+    title: "Iglesia",
+    icon: "mdi:church",
+    description: "La iglesia somos todos, con una misión por cumplir. La mayor expresión de Jesús en la tierra. La mesa donde todos son bienvenidos.",
+    verse: "Pero ustedes son una familia escogida, son sacerdotes reales y son una nación santa. Son un pueblo que Dios compró para que anuncien sus obras extraordinarias: él fue quien los llamó de las tinieblas a su luz maravillosa.",
+    reference: "1 Pedro 2:9"
+  },
+  {
+    title: "Espíritu Santo",
+    icon: "mdi:weather-windy",
+    description: "El motor de nuestras vidas y el amigo que nos consuela, revela y nos guía a la verdad.",
+    verse: "Cuando venga el Espíritu Santo, él les dirá lo que es la verdad y los guiará, para que siempre vivan en la verdad.",
+    reference: "Juan 16:13"
+  },
+  {
+    title: "La Biblia",
+    icon: "mdi:book-open-page-variant",
+    description: "La Biblia es la obra de arte que inspira nuestras vidas y la narrativa de lo que somos.",
+    verse: "Tu palabra es una lámpara que alumbra mi camino",
+    reference: "Salmos 119:105"
+  },
+  {
+    title: "Amor",
+    icon: "mdi:heart",
+    description: "Amar es nuestro estilo de vida.",
+    verse: "El que ama es capaz de aguantarlo todo, de creerlo todo, de esperarlo todo, de soportarlo todo. Sólo el amor vive para siempre...",
+    reference: "1 Corintios 13:7-8"
+  },
+  {
+    title: "El Servicio",
+    icon: "mdi:hand-heart",
+    description: "El servicio nos sana, es nuestro sello de presentación al exterior.",
+    verse: "Más bien sírvanse unos a otros con amor. En efecto, toda la ley se resume en un solo mandamiento: «Ama a tu prójimo como a ti mismo.»",
+    reference: "Gálatas 5:13-14"
+  },
+  {
+    title: "La Creatividad",
+    icon: "mdi:palette",
+    description: "Somos creados para crear, una comunidad llena de arte.",
+    verse: "Porque somos hechura de Dios, creados en Cristo Jesús para buenas obras...",
+    reference: "Efesios 2:10"
+  }
+];
+
+const aceroItems = [
+    {
+      letter: "A",
+      title: "Animar",
+      content: "Busquemos la manera de ayudarnos unos a otros a tener más amor.",
+      verse: "Busquemos la manera de ayudarnos unos a otros a tener más amor y a hacer el bien. No dejemos de asistir a nuestras reuniones, como hacen algunos, sino animémonos unos a otros; y tanto más cuanto que vemos que el día del Señor se acerca.",
+      reference: "Hebreos 10:24-25"
+    },
+    {
+      letter: "C",
+      title: "Cuidar",
+      content: "No uséis la libertad como ocasión para la carne.",
+      verse: "Porque vosotros, hermanos, a libertad habéis sido llamados; solamente que no uséis la libertad como ocasión para la carne, sino servíos por amor los unos a los otros. Porque toda la ley en esta sola palabra se cumple: Amarás a tu prójimo como a ti mismo.",
+      reference: "Gálatas 5:13-14"
+    },
+    {
+      letter: "E",
+      title: "Escuchar",
+      content: "Todos ustedes deben estar listos para escuchar; en cambio deben ser lentos para hablar.",
+      verse: "Recuerden esto, queridos hermanos: todos ustedes deben estar listos para escuchar; en cambio deben ser lentos para hablar y para enojarse.",
+      reference: "Santiago 1:19"
+    },
+    {
+      letter: "R",
+      title: "Reclutar",
+      content: "Invitamos a otros a unirse a nuestra misión de servir a Dios y a la comunidad.",
+      verse: "Lo que me has oído decir delante de muchos testigos, encárgaselo a hombres de confianza que sean capaces de enseñárselo a otros.",
+      reference: "2 Timoteo 2:2"
+    },
+    {
+      letter: "O",
+      title: "Orar",
+      content: "No se preocupen por nada; en cambio, oren por todo.",
+      verse: "No se preocupen por nada; en cambio, oren por todo. Díganle a Dios lo que necesitan y denle gracias por todo lo que él ha hecho.",
+      reference: "Filipenses 4:6"
+    }
+  ];
+// Datos de la comunidad en español
+const communityButtons = [
+  {
+    text: "Ver Mensajes",
+    link: "es/messages",
+    variant: "secondary" as const
+  },
+  {
+    text: "Contáctanos",
+    link: "es/contact",
+    variant: "primary" as const
+  }
+];
+
+const pageTitle = `Valores | ${i18next.t('site.title')}`;
+
+---
+
+<Layout title={pageTitle}>
+  <PageHeader
+    title="Valores"
+    highlightedWord="Somos"
+    description="Una comunidad basada en el Amor, Perdón, Servicio."
+  />
+
+  <ValuesSection
+    title="7 Principios"
+    values={values}
+    className="py-8 px-8 bg-accent"
+  />
+
+  <AceroSection
+    title='Somos Discicpulos ACERO'
+    subtitle='Esto es ser un discípulo ACERO'
+    items={aceroItems}
+    className="py-32 px-8 bg-light dark:bg-dark"
+  />
+
+
+  <JoinCommunitySection
+    title="Conoce, Conecta con Nuestra Comunidad"
+    description="Te invitamos a ser parte de nuestra familia. Aquí encontrarás un lugar para crecer, servir y compartir el amor de Cristo."
+    imageUrl="/img/somos_comunidad.avif"
+    buttons={communityButtons}
+    className="py-32 px-8 bg-dark text-light dark:bg-accent dark:text-dark"
+  />
+</Layout>

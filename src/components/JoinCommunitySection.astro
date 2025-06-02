@@ -1,0 +1,105 @@
+---
+// components/JoinCommunitySection.astro
+interface Button {
+  text: string;
+  link: string;
+  variant: 'primary' | 'secondary';
+}
+
+interface Props {
+  title: string;
+  description: string;
+  imageUrl: string;
+  buttons: Button[];
+  className?: string;
+  containerClassName?: string;
+  gridClassName?: string;
+  contentClassName?: string;
+  titleClassName?: string;
+  descriptionClassName?: string;
+  buttonsClassName?: string;
+  imageClassName?: string;
+}
+
+const {
+  title,
+  description,
+  imageUrl = "/img/somos_comunidad.avif",
+  buttons,
+  className = "py-32 px-8",
+  containerClassName = "max-w-[90rem] mx-auto",
+  gridClassName = "grid md:grid-cols-2 gap-16 items-center",
+  contentClassName = "",
+  titleClassName = "large-text mb-8",
+  descriptionClassName = "text-2xl opacity-70 mb-8",
+  buttonsClassName = "flex flex-wrap gap-4",
+  imageClassName = "relative overflow-hidden rounded-3xl"
+} = Astro.props;
+
+// Función auxiliar para obtener las clases de los botones
+const getButtonClasses = (variant: 'primary' | 'secondary') => {
+  const baseClasses = "inline-flex items-center px-8 py-4 rounded-full text-lg font-bold transition-colors";
+  
+  if (variant === 'primary') {
+    return `${baseClasses} bg-dark text-light dark:bg-light dark:text-dark hover:bg-opacity-90`;
+  }
+  
+  return `${baseClasses} border-2 border-dark dark:border-light hover:bg-dark hover:text-light dark:hover:bg-light dark:hover:text-dark`;
+};
+---
+
+<section class={className}>
+  <div class={containerClassName}>
+    <div class={gridClassName}>
+      <div class={contentClassName}>
+        <h2 class={titleClassName}>{title}</h2>
+        <p class={descriptionClassName}>
+          {description}
+        </p>
+        <div class={buttonsClassName}>
+          {buttons.map(button => (
+            <a 
+              href={button.link} 
+              class={getButtonClasses(button.variant)}
+            >
+              {button.text}
+              {button.variant === 'primary' && (
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  class="w-6 h-6 ml-2" 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="currentColor"
+                >
+                  <path 
+                    stroke-linecap="round" 
+                    stroke-linejoin="round" 
+                    stroke-width="2" 
+                    d="M17 8l4 4m0 0l-4 4m4-4H3" 
+                  />
+                </svg>
+              )}
+            </a>
+          ))}
+        </div>
+      </div>
+      <div class={imageClassName}>
+        <img 
+          src={imageUrl || "/placeholder.svg"}
+          alt={title}
+          class="w-full h-full object-contain"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Añade aquí estilos adicionales si son necesarios */
+  .large-text {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1.1;
+    font-weight: bold;
+  }
+</style>

@@ -1,0 +1,82 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import FaqTextItem from '../../components/FaqTextItem.astro';
+import i18next from '../../i18n/config';
+
+const faqs = [
+  {
+    question: "¿Dónde estamos ubicados?",
+    answer: "Estamos ubicados en Calle del Sol # 60, Alfafar, Valencia, España",
+  },
+  {
+    question: "¿Cuáles son los horarios de servicio?",
+    answer: "Nuestros servicios dominicales son a las 11:00 AM. También tenemos reuniones de grupos pequeños en mesas los viernes a las 19:00  y servicios de oración los viernes a las 18:00",
+  },
+  {
+    question: "¿Cómo puedo pedir ayuda o consejería?",
+    answer: "Puedes solicitar ayuda o consejería en nuestra página de contacto, llamando a nuestra oficina al (+34) 679 88 50 65, o acercándote a nuestra comunidad.",
+  },
+  {
+    question: "¿Cómo puedo ser parte de la comunidad?",
+    answer: "Hay muchas formas de involucrarte: asistiendo a nuestros servicios, uniéndote a un grupo pequeño, participando en nuestros eventos comunitarios o sirviendo como voluntario en alguno de nuestros ministerios. Tenemos una clase de orientación para nuevos miembros el primer domingo de cada mes después del servicio de las 11:00 AM.",
+  },
+  {
+    question: "¿Ofrecen servicios en línea?",
+    answer: "Sí, transmitimos nuestros servicios dominicales en vivo a través de nuestro canal de YouTube. También puedes acceder a sermones anteriores en nuestra sección de mensaje en esta página web.",
+  },
+];
+
+const headerText = {
+  title: "Preguntas",
+  highlightedWord: "Frecuentes",
+  description: "Información importante sobre nuestra comunidad.",
+};
+
+const contactText = {
+  question: "¿No encontraste lo que buscabas?",
+  buttonText: "Contáctanos"
+}
+
+const pageTitle = `FAQ | ${i18next.t('site.title')}`;
+
+---
+
+<Layout title={pageTitle}>
+  <main class="min-h-screen px-8">
+    <PageHeader
+      title={headerText.title}
+      highlightedWord={headerText.highlightedWord}
+      description={headerText.description}
+    />
+
+    <div class="max-w-[90rem] mx-auto">
+      <div class="grid gap-6 mb-8">
+        {faqs.map((faq) => <FaqTextItem {...faq} />)}
+      </div>
+
+      <div class="text-center py-16 bg-secondary dark:bg-dark/50 rounded-3xl">
+        <p class="text-xl mb-6">{contactText.question}</p>
+        <a
+          href="/es/contact"
+          class="inline-flex items-center px-8 py-4 bg-accent text-dark rounded-full text-lg font-bold hover:bg-opacity-90 transition-colors"
+        >
+          {contactText.buttonText}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-6 h-6 ml-2"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </main>
+</Layout>

@@ -1,0 +1,146 @@
+---
+import { Icon } from 'astro-icon/components';
+import { navigationItems } from '../config/navigation';
+import SocialLinks from './SocialLinks.astro';
+import i18next from '../i18n/config';
+import Logo from './Logo.astro';
+
+const currentPath = Astro.url.pathname;
+const currentLang = currentPath.split('/')[1];
+
+await i18next.changeLanguage(currentLang);
+
+const getLocalizedPath = (path: string) => {
+  return path === '/' ? `/${currentLang}` : `/${currentLang}${path}`;
+};
+---
+
+<aside id="sidebar" class="fixed left-0 top-0 z-40 h-screen w-[min(100vw,30rem)] -translate-x-full transition-all duration-500 ease-out overflow-y-auto">
+  <div class="fixed inset-0 w-[min(100vw,30rem)] min-h-full bg-light/95 dark:bg-dark/95 backdrop-blur-md"></div>
+  
+  <div class="relative w-full flex flex-col px-8 py-12">
+    <button 
+      id="close-sidebar" 
+      class="absolute right-6 top-6 p-2 text-dark dark:text-light hover:text-accent transition-colors"
+      aria-label="Cerrar menú"
+    >
+      <Icon name="mdi:close" class="w-8 h-8" />
+    </button>
+    
+    <div class="flex items-center gap-4 mb-12">
+      <Logo size="large" />
+      <span class="text-xl font-bold text-dark dark:text-light">{i18next.t('site.title')}</span>
+      
+    </div>
+
+    <nav class="flex-1">
+      <ul class="space-y-1">
+        {navigationItems.map((item) => (
+          <li>
+            <a
+              href={getLocalizedPath(item.href)}
+              class="block py-3 px-4 transition-all duration-300 hover:bg-accent group"
+            >
+              <span class="text-[clamp(1.5rem,4vw,2.5rem)] font-display font-bold text-dark dark:text-light leading-none group-hover:text-light transition-colors">
+                {i18next.t(item.text)}
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="mt-auto pt-6 border-t border-dark/10 dark:border-light/10">
+      <h3 class="text-lg font-bold text-dark dark:text-light mb-4">{i18next.t('social.follow')}</h3>
+      <SocialLinks className="justify-start gap-4" />
+    </div>
+  </div>
+
+  <div class="absolute left-0 top-0 h-full w-1 bg-accent transform scale-y-0 origin-top transition-transform duration-700" id="accent-bar"></div>
+</aside>
+
+<style>
+  #sidebar:not(.-translate-x-full) #accent-bar {
+    transform: scaleY(1);
+  }
+
+  nav a {
+    position: relative;
+    overflow: hidden;
+  }
+
+  nav a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-accent);
+    transition: left 0.3s ease;
+    z-index: -1;
+  }
+
+  nav a:hover::before {
+    left: 0;
+  }
+
+  /* Custom scrollbar styles for the sidebar */
+  #sidebar::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+  }
+
+  #sidebar::-webkit-scrollbar-track {
+    background: var(--color-light); /* Background of the scrollbar track */
+  }
+
+  #sidebar::-webkit-scrollbar-thumb {
+    background-color: var(--color-accent); /* Color of the scrollbar thumb */
+    border-radius: 10px; /* Rounded corners for the scrollbar thumb */
+    border: 2px solid var(--color-light); /* Border around the scrollbar thumb */
+  }
+
+  #sidebar::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-dark); /* Color of the scrollbar thumb on hover */
+  }
+</style>
+
+<script>
+  const sidebar = document.getElementById('sidebar');
+  const toggleButton = document.getElementById('sidebar-toggle');
+  const closeButton = document.getElementById('close-sidebar');
+  const accentBar = document.getElementById('accent-bar');
+
+  if (sidebar && toggleButton && closeButton) {
+    toggleButton.addEventListener('click', () => {
+      sidebar.classList.remove('-translate-x-full');
+      setTimeout(() => {
+        accentBar.classList.add('scale-y-100');
+      }, 300);
+    });
+
+    const closeSidebar = () => {
+      accentBar.classList.remove('scale-y-100');
+      setTimeout(() => {
+        sidebar.classList.add('-translate-x-full');
+      }, 300);
+    };
+
+    closeButton.addEventListener('click', closeSidebar);
+
+    document.addEventListener('click', (event) => {
+      const isClickInsideSidebar = sidebar.contains(event.target as Node);
+      const isClickOnToggleButton = toggleButton.contains(event.target as Node);
+
+      if (!isClickInsideSidebar && !isClickOnToggleButton && !sidebar.classList.contains('-translate-x-full')) {
+        closeSidebar();
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !sidebar.classList.contains('-translate-x-full')) {
+        closeSidebar();
+      }
+    });
+  }
+</script>

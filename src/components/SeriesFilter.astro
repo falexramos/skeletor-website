@@ -1,0 +1,46 @@
+---
+// components/SeriesFilter.astro
+interface Series {
+  id: string;
+  name: string;
+  active: boolean;
+}
+
+interface Props {
+  series: Series[];
+}
+
+const { series } = Astro.props;
+---
+
+<div class="relative mb-16">
+  <div class="overflow-x-auto scrollbar-hide">
+    <div class="flex min-w-max border-b border-secondary dark:border-dark/50">
+      {series.map(serie => (
+        <button 
+          data-category={serie.id}
+          class={`px-8 py-4 text-lg font-bold transition-all duration-200 border-b-2 -mb-[2px]
+                ${serie.active 
+                  ? 'border-accent text-accent' 
+                  : 'border-transparent hover:text-accent/70 hover:border-accent/50'}`}
+        >
+          {serie.name}
+        </button>
+      ))}
+    </div>
+  </div>
+  
+  <div class="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-light dark:from-dark to-transparent pointer-events-none"></div>
+  <div class="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-light dark:from-dark to-transparent pointer-events-none"></div>
+</div>
+
+<style>
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .scrollbar-hide {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+</style>
