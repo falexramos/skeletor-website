@@ -14,19 +14,25 @@
     "start": "astro dev"
   },
   "dependencies": {
+    "@astrojs/mdx": "^4.3.0",
     "@astrojs/react": "^4.2.1",
+    "@astrojs/sitemap": "^3.4.0",
+    "@fontsource/playfair-display": "^5.1.1",
+    "@fontsource/raleway": "^5.1.1",
     "@heroicons/react": "^2.2.0",
+    "@iconify-json/mdi": "^1.2.3",
     "@nanostores/react": "^0.8.4",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
-    "astro": "^5.4.0",
+    "astro": "^5.8.1",
+    "astro-icon": "^1.1.5",
     "nanostores": "^0.11.3",
     "prismjs": "1.30.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "@astrojs/tailwind": "^6.0.0",
+    "@astrojs/tailwind": "^6.0.2",
     "@tailwindcss/forms": "0.5.5",
     "@tailwindcss/postcss": "4.0.0",
     "@tailwindcss/typography": "0.5.10",
