@@ -31,10 +31,10 @@ module.exports = {
         },
       },
       colors: {
-        primary: '#205781',
-        secondary: '#4F959D',
-        darkbg: '#98D2C0',
-        lightbg: '#F6F8D5',
+        accent: '#ffd481',
+        dark: '#111111',
+        light: '#e5e2db',
+        secondary: '#dee9e5',
         slate: colors.slate,
       },
       boxShadow: {
