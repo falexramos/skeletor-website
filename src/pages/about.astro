@@ -1,116 +1,124 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import PageHeader from '../../components/PageHeader.astro';
-import MissionSection from '../../components/MissionSection.astro';
-import TeamSection from '../../components/TeamSection.astro';
-import JoinCommunitySection from '../../components/JoinCommunitySection.astro';
-import i18next from '../../i18n/config';
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { languageList } from "@/i18n/ui";
+import { useTranslations } from "@/i18n/utils";
+import JoinCommunitySection from "@/components/JoinCommunitySection.astro";
+import MissionSection from "@/components/MissionSection.astro";
+import PageHeader from "@/components/PageHeader.astro";
+import TeamSection from "@/components/TeamSection.astro";
+import Layout from "@/layouts/Layout.astro";
+
+const getPathWithoutLocale = (path: string): string => {
+  const segments = path.split("/").filter(Boolean);
+  return segments.slice(1).join("/") || "/";
+};
+
+const currentPathWithoutLocale = getPathWithoutLocale(Astro.url.pathname);
+const currentLang = Astro.currentLocale || "es";
+const translateLabels = useTranslations(
+  currentLang as keyof typeof languageList,
+);
 
 const teamPastores = [
   {
-    name: "William",
-    role: "Pastor",
-    image: "/img/somos_team_pastores.jpg"
+    name: translateLabels("team.section.pastores.items.0.name"),
+    role: translateLabels("team.section.pastores.items.0.role"),
+    image: translateLabels("team.section.pastores.items.0.image"),
   },
   {
-    name: "Jessica",
-    role: "Pastora",
-    image: "/img/somos_team_pastores.jpg"
-  }
+    name: translateLabels("team.section.pastores.items.1.name"),
+    role: translateLabels("team.section.pastores.items.1.role"),
+    image: translateLabels("team.section.pastores.items.1.image"),
+  },
 ];
 
 const team = [
   {
-    name: "Servidores",
+    name: translateLabels("team.section.items.0.name"),
     role: "",
-    image: "/img/team_ujieres.avif",
-    
+    image: translateLabels("team.section.items.0.image"),
   },
   {
-    name: "Producción",
+    name: translateLabels("team.section.items.1.name"),
     role: "",
-    image: "/img/team_produccion.avif"
+    image: translateLabels("team.section.items.1.image"),
   },
   {
-    name: "Música",
+    name: translateLabels("team.section.items.2.name"),
     role: "",
-    image: "/img/team_alabanza.avif"
+    image: translateLabels("team.section.items.2.image"),
   },
   {
-    name: "Niños",
+    name: translateLabels("team.section.items.3.name"),
     role: "",
-    image: "/img/team_kids.avif"
-  }
+    image: translateLabels("team.section.items.3.image"),
+  },
 ];
-
-
 
 // Datos de la comunidad en español
 const communityButtons = [
   {
-    text: "Ver Mensajes",
-    link: "es/messages",
-    variant: "primary" as const
+    text: translateLabels("community.buttons.text"),
+    link: getRelativeLocaleUrl(currentLang, "messages"),
+    variant: "primary" as const,
   },
   {
-    text: "Contáctanos",
-    link: "es/contact",
-    variant: "secondary" as const
-  }
+    text: translateLabels("community.buttons.contact"),
+    link: getRelativeLocaleUrl(currentLang, "contact"),
+    variant: "secondary" as const,
+  },
 ];
 
-const pageTitle = `Quiénes Somos | ${i18next.t('site.title')}`;
-
+const pageTitle = `${translateLabels("nav.about")} | ${translateLabels("site.title")}`;
 ---
 
 <Layout title={pageTitle}>
   <PageHeader
-    title="Nuestra"
-    highlightedWord="Historia"
-    description="Desde 2021, Somos es una comunidad cristiana en Alfafar, Valencia, que existe para compartir las buenas noticias de Jesús de Nazaret y hacer discípulos en comunidad."
+    title={translateLabels("page.header.about.title")}
+    highlightedWord={translateLabels("page.header.about.highlightedWord")}
+    description={translateLabels("page.header.about.description")}
   />
 
- 
   <MissionSection
-  title="Nuestra Misión"
-  description="Exponer el Evangelio de Jesucristo."
-  imageUrl="/img/somos_mision.avif"
-  ctaText="Conoce más"
-  ctaLink="/contact"
-  styles={{
-    sectionBg: "bg-accent dark:bg-accent",
-    titleColor: "text-dark",
-    textColor: "text-dark",
-    ctaBg: "bg-dark",
-    ctaColor: "text-accent dark:text-accent",
-    ctaHoverBg: "hover:bg-dark/90 dark:hover:bg-bg-light/70"
-  }}
-/>
+    title={translateLabels("mission.section.title")}
+    description={translateLabels("mission.section.description")}
+    imageUrl={translateLabels("mission.section.imageUrl")}
+    ctaText={translateLabels("mission.section.ctaText")}
+    ctaLink={getRelativeLocaleUrl(currentLang, "contact")}
+    styles={{
+      sectionBg: "bg-accent dark:bg-accent",
+      titleColor: "text-dark",
+      textColor: "text-dark",
+      ctaBg: "bg-dark",
+      ctaColor: "text-accent dark:text-accent",
+      ctaHoverBg: "hover:bg-dark/90 dark:hover:bg-bg-light/70",
+    }}
+  />
 
   <MissionSection
-    title="Nuestra Visión"
-    description="Guiar a las personas a una relación creciente con Jesucristo."
-    imageUrl="/img/somos_vision.avif"
-    ctaText="Conoce más"
-    ctaLink="/contact"
+    title={translateLabels("vision.section.title")}
+    description={translateLabels("vision.section.description")}
+    imageUrl={translateLabels("vision.section.imageUrl")}
+    ctaText={translateLabels("vision.section.ctaText")}
+    ctaLink={getRelativeLocaleUrl(currentLang, "contact")}
   />
 
   <TeamSection
-    title="Nuestros Lideres"
+    title={translateLabels("team.section.title")}
     team={teamPastores}
     className="py-8 px-8 bg-accent"
   />
 
-    <TeamSection
-    title="Colaboradores"
+  <TeamSection
+    title={translateLabels("team.section.team.title")}
     team={team}
     className="py-8 px-8 bg-light/95"
   />
 
   <JoinCommunitySection
-    title="Conoce y Conecta con Nuestra Comunidad"
-    description="Te invitamos a ser parte de nuestra familia. Aquí encontrarás un lugar para crecer, servir y compartir el amor de Cristo."
-    imageUrl="/img/somos_comunidad.avif"
+    title={translateLabels("community.section.title")}
+    description={translateLabels("community.section.description")}
+    imageUrl={translateLabels("community.section.imageUrl")}
     buttons={communityButtons}
   />
 </Layout>

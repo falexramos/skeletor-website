@@ -1,44 +1,60 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import PageHeader from '../../components/PageHeader.astro';
-import FaqItem from '../../components/FaqItem.astro';
-import i18next from '../../i18n/config';
+import FaqItem from "@/components/FaqItem.astro";
+import PageHeader from "@/components/PageHeader.astro";
+import Layout from "@/layouts/Layout.astro";
+
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { languageList } from "@/i18n/ui";
+import { useTranslations } from "@/i18n/utils";
+
+const getPathWithoutLocale = (path: string): string => {
+  const segments = path.split("/").filter(Boolean);
+  return segments.slice(1).join("/") || "/";
+};
+
+const currentPathWithoutLocale = getPathWithoutLocale(Astro.url.pathname);
+const currentLang = Astro.currentLocale || "es";
+const translateLabels = useTranslations(
+  currentLang as keyof typeof languageList
+);
+
 
 const faqs = [
   {
-    question: "¿Es el dios del Cristianismo obsoleto y está pasado de moda?",
-    answer: "BXTFvkB0FdA",
+    question: translateLabels("apolos.faqs.0.question"),
+    answer: translateLabels("apolos.faqs.0.answer"),
   },
   {
-    question: "¿Qué tipo de Dios deja que una iglesia lo represente?",
-    answer: "FGTGEFfcyH0",
+    question: translateLabels("apolos.faqs.1.question"),
+    answer: translateLabels("apolos.faqs.1.answer"),
   },
   {
-    question: "¿Cómo envía un Dios bueno, a personas al infierno?",
-    answer: "G3iIv7PJLZM",
+    question: translateLabels("apolos.faqs.2.question"),
+    answer: translateLabels("apolos.faqs.2.answer"),
   },
   {
-    question: "¿La evolución responde a todas nuestras preguntas?",
-    answer: "gck5SJzp70g",
+    question: translateLabels("apolos.faqs.3.question"),
+    answer: translateLabels("apolos.faqs.3.answer"),
   },
   {
-    question: "¿Por qué existe el sufrimiento?",
-    answer: "4xiH6dpdjtA",
+    question: translateLabels("apolos.faqs.4.question"),
+    answer: translateLabels("apolos.faqs.4.answer"),
   },
 ];
 
 const headerText = {
-  title: "Rincon",
-  highlightedWord: "Apolos",
-  description: "Encuentra respuestas a preguntas comunes.",
+  title: translateLabels("apolos.header.title"),
+  highlightedWord: translateLabels("apolos.header.highlightedWord"),
+  description: translateLabels("apolos.header.description"),
 };
 
 const contactText = {
-  question: "¿No encontraste lo que buscabas?",
-  buttonText: "Contáctanos"
+  question: translateLabels("apolos.contact.question"),
+  buttonText: translateLabels("apolos.contact.buttonText"),
 }
 
-const pageTitle = `Rincon apolos | ${i18next.t('site.title')}`;
+
+const pageTitle = `${translateLabels("apolos.header.title")} ${translateLabels("apolos.header.highlightedWord")} | ${translateLabels("site.title")}`;
 
 ---
 
@@ -58,7 +74,7 @@ const pageTitle = `Rincon apolos | ${i18next.t('site.title')}`;
       <div class="text-center py-16 bg-secondary dark:bg-dark/50 rounded-3xl">
         <p class="text-xl mb-6">{contactText.question}</p>
         <a
-          href="es/contact"
+          href={getRelativeLocaleUrl(currentLang, "contact")}
           class="inline-flex items-center px-8 py-4 bg-accent text-dark rounded-full text-lg font-bold hover:bg-opacity-90 transition-colors"
         >
           {contactText.buttonText}

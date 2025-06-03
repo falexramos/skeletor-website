@@ -7,6 +7,8 @@ import { languageList } from "@/i18n/ui";
 import Sidebar from "@/components/Sidebar.astro";
 import DarkModeToggle from "@/components/DarkModeToggle.astro";
 
+import '../styles/global.css';
+
 const currentLang = Astro.currentLocale || "es";
 currentLang as keyof typeof languageList;
 ---

@@ -1,146 +1,156 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import PageHeader from '../../components/PageHeader.astro';
-import ValuesSection from '../../components/ValuesSection.astro';
-import JoinCommunitySection from '../../components/JoinCommunitySection.astro';
-import i18next from '../../i18n/config';
-import AceroSection from '@/components/AceroSection.astro';
+import AceroSection from "@/components/AceroSection.astro";
 
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { languageList } from "@/i18n/ui";
+import { useTranslations } from "@/i18n/utils";
+import JoinCommunitySection from "@/components/JoinCommunitySection.astro";
+import PageHeader from "@/components/PageHeader.astro";
+import ValuesSection from "@/components/ValuesSection.astro";
+import Layout from "@/layouts/Layout.astro";
 
+const getPathWithoutLocale = (path: string): string => {
+  const segments = path.split("/").filter(Boolean);
+  return segments.slice(1).join("/") || "/";
+};
+
+const currentPathWithoutLocale = getPathWithoutLocale(Astro.url.pathname);
+const currentLang = Astro.currentLocale || "es";
+const translateLabels = useTranslations(
+  currentLang as keyof typeof languageList,
+);
 
 // Datos de valores en español
 const values = [
   {
-    title: "Jesús",
-    icon: "mdi:cross",
-    description: "Jesús de Nazaret es nuestro Señor y Maestro, el sentido de nuestra vida.",
-    verse: "Con Cristo estoy juntamente crucificado, y ya no vivo yo, mas vive Cristo en mí; y lo que ahora vivo en la carne, lo vivo en la fe del Hijo de Dios, el cual me amó y se entregó a sí mismo por mí.",
-    reference: "Gálatas 2:20"
+    title: translateLabels("value.section.items.0.title"),
+    icon: translateLabels("value.section.items.0.icon"),
+    description: translateLabels("value.section.items.0.description"),
+    verse: translateLabels("value.section.items.0.verse"),
+    reference: translateLabels("value.section.items.0.reference"),
   },
   {
-    title: "Iglesia",
-    icon: "mdi:church",
-    description: "La iglesia somos todos, con una misión por cumplir. La mayor expresión de Jesús en la tierra. La mesa donde todos son bienvenidos.",
-    verse: "Pero ustedes son una familia escogida, son sacerdotes reales y son una nación santa. Son un pueblo que Dios compró para que anuncien sus obras extraordinarias: él fue quien los llamó de las tinieblas a su luz maravillosa.",
-    reference: "1 Pedro 2:9"
+    title: translateLabels("value.section.items.1.title"),
+    icon: translateLabels("value.section.items.1.icon"),
+    description: translateLabels("value.section.items.1.description"),
+    verse: translateLabels("value.section.items.1.verse"),
+    reference: translateLabels("value.section.items.1.reference"),
   },
   {
-    title: "Espíritu Santo",
-    icon: "mdi:weather-windy",
-    description: "El motor de nuestras vidas y el amigo que nos consuela, revela y nos guía a la verdad.",
-    verse: "Cuando venga el Espíritu Santo, él les dirá lo que es la verdad y los guiará, para que siempre vivan en la verdad.",
-    reference: "Juan 16:13"
+    title: translateLabels("value.section.items.2.title"),
+    icon: translateLabels("value.section.items.2.icon"),
+    description: translateLabels("value.section.items.2.description"),
+    verse: translateLabels("value.section.items.2.verse"),
+    reference: translateLabels("value.section.items.2.reference"),
   },
   {
-    title: "La Biblia",
-    icon: "mdi:book-open-page-variant",
-    description: "La Biblia es la obra de arte que inspira nuestras vidas y la narrativa de lo que somos.",
-    verse: "Tu palabra es una lámpara que alumbra mi camino",
-    reference: "Salmos 119:105"
+    title: translateLabels("value.section.items.3.title"),
+    icon: translateLabels("value.section.items.3.icon"),
+    description: translateLabels("value.section.items.3.description"),
+    verse: translateLabels("value.section.items.3.verse"),
+    reference: translateLabels("value.section.items.3.reference"),
   },
   {
-    title: "Amor",
-    icon: "mdi:heart",
-    description: "Amar es nuestro estilo de vida.",
-    verse: "El que ama es capaz de aguantarlo todo, de creerlo todo, de esperarlo todo, de soportarlo todo. Sólo el amor vive para siempre...",
-    reference: "1 Corintios 13:7-8"
+    title: translateLabels("value.section.items.4.title"),
+    icon: translateLabels("value.section.items.4.icon"),
+    description: translateLabels("value.section.items.4.description"),
+    verse: translateLabels("value.section.items.4.verse"),
+    reference: translateLabels("value.section.items.4.reference"),
   },
   {
-    title: "El Servicio",
-    icon: "mdi:hand-heart",
-    description: "El servicio nos sana, es nuestro sello de presentación al exterior.",
-    verse: "Más bien sírvanse unos a otros con amor. En efecto, toda la ley se resume en un solo mandamiento: «Ama a tu prójimo como a ti mismo.»",
-    reference: "Gálatas 5:13-14"
+    title: translateLabels("value.section.items.5.title"),
+    icon: translateLabels("value.section.items.5.icon"),
+    description: translateLabels("value.section.items.5.description"),
+    verse: translateLabels("value.section.items.5.verse"),
+    reference: translateLabels("value.section.items.5.reference"),
   },
   {
-    title: "La Creatividad",
-    icon: "mdi:palette",
-    description: "Somos creados para crear, una comunidad llena de arte.",
-    verse: "Porque somos hechura de Dios, creados en Cristo Jesús para buenas obras...",
-    reference: "Efesios 2:10"
-  }
+    title: translateLabels("value.section.items.6.title"),
+    icon: translateLabels("value.section.items.6.icon"),
+    description: translateLabels("value.section.items.6.description"),
+    verse: translateLabels("value.section.items.6.verse"),
+    reference: translateLabels("value.section.items.6.reference"),
+  },
 ];
 
 const aceroItems = [
-    {
-      letter: "A",
-      title: "Animar",
-      content: "Busquemos la manera de ayudarnos unos a otros a tener más amor.",
-      verse: "Busquemos la manera de ayudarnos unos a otros a tener más amor y a hacer el bien. No dejemos de asistir a nuestras reuniones, como hacen algunos, sino animémonos unos a otros; y tanto más cuanto que vemos que el día del Señor se acerca.",
-      reference: "Hebreos 10:24-25"
-    },
-    {
-      letter: "C",
-      title: "Cuidar",
-      content: "No uséis la libertad como ocasión para la carne.",
-      verse: "Porque vosotros, hermanos, a libertad habéis sido llamados; solamente que no uséis la libertad como ocasión para la carne, sino servíos por amor los unos a los otros. Porque toda la ley en esta sola palabra se cumple: Amarás a tu prójimo como a ti mismo.",
-      reference: "Gálatas 5:13-14"
-    },
-    {
-      letter: "E",
-      title: "Escuchar",
-      content: "Todos ustedes deben estar listos para escuchar; en cambio deben ser lentos para hablar.",
-      verse: "Recuerden esto, queridos hermanos: todos ustedes deben estar listos para escuchar; en cambio deben ser lentos para hablar y para enojarse.",
-      reference: "Santiago 1:19"
-    },
-    {
-      letter: "R",
-      title: "Reclutar",
-      content: "Invitamos a otros a unirse a nuestra misión de servir a Dios y a la comunidad.",
-      verse: "Lo que me has oído decir delante de muchos testigos, encárgaselo a hombres de confianza que sean capaces de enseñárselo a otros.",
-      reference: "2 Timoteo 2:2"
-    },
-    {
-      letter: "O",
-      title: "Orar",
-      content: "No se preocupen por nada; en cambio, oren por todo.",
-      verse: "No se preocupen por nada; en cambio, oren por todo. Díganle a Dios lo que necesitan y denle gracias por todo lo que él ha hecho.",
-      reference: "Filipenses 4:6"
-    }
-  ];
+  {
+    letter: translateLabels("acero.section.items.0.letter"),
+    title: translateLabels("acero.section.items.0.title"),
+    content: translateLabels("acero.section.items.0.content"),
+    verse: translateLabels("acero.section.items.0.verse"),
+    reference: translateLabels("acero.section.items.0.reference"),
+  },
+  {
+    letter: translateLabels("acero.section.items.1.letter"),
+    title: translateLabels("acero.section.items.1.title"),
+    content: translateLabels("acero.section.items.1.content"),
+    verse: translateLabels("acero.section.items.1.verse"),
+    reference: translateLabels("acero.section.items.1.reference"),
+  },
+  {
+    letter: translateLabels("acero.section.items.2.letter"),
+    title: translateLabels("acero.section.items.2.title"),
+    content: translateLabels("acero.section.items.2.content"),
+    verse: translateLabels("acero.section.items.2.verse"),
+    reference: translateLabels("acero.section.items.2.reference"),
+  },
+  {
+    letter: translateLabels("acero.section.items.3.letter"),
+    title: translateLabels("acero.section.items.3.title"),
+    content: translateLabels("acero.section.items.3.content"),
+    verse: translateLabels("acero.section.items.3.verse"),
+    reference: translateLabels("acero.section.items.3.reference"),
+  },
+  {
+    letter: translateLabels("acero.section.items.4.letter"),
+    title: translateLabels("acero.section.items.4.title"),
+    content: translateLabels("acero.section.items.4.content"),
+    verse: translateLabels("acero.section.items.4.verse"),
+    reference: translateLabels("acero.section.items.4.reference"),
+  },
+];
 // Datos de la comunidad en español
 const communityButtons = [
   {
-    text: "Ver Mensajes",
-    link: "es/messages",
-    variant: "secondary" as const
+    text: translateLabels("community.buttons.text"),
+    link: getRelativeLocaleUrl(currentLang, "messages"),
+    variant: "secondary" as const,
   },
   {
-    text: "Contáctanos",
-    link: "es/contact",
-    variant: "primary" as const
-  }
+    text: translateLabels("community.buttons.contact"),
+    link: getRelativeLocaleUrl(currentLang, "contact"),
+    variant: "primary" as const,
+  },
 ];
 
-const pageTitle = `Valores | ${i18next.t('site.title')}`;
-
+const pageTitle = `${translateLabels("nav.values")} | ${translateLabels("site.title")}`;
 ---
 
 <Layout title={pageTitle}>
   <PageHeader
-    title="Valores"
-    highlightedWord="Somos"
-    description="Una comunidad basada en el Amor, Perdón, Servicio."
+    title={translateLabels("value.section.header.title")}
+    highlightedWord={translateLabels("value.section.header.highlightedWord")}
+    description={translateLabels("value.section.header.description")}
   />
 
   <ValuesSection
-    title="7 Principios"
+    title={translateLabels("value.section.title")}
     values={values}
     className="py-8 px-8 bg-accent"
   />
 
   <AceroSection
-    title='Somos Discicpulos ACERO'
-    subtitle='Esto es ser un discípulo ACERO'
+    title={translateLabels("acero.section.title")}
+    subtitle={translateLabels("acero.section.subtitle")}
     items={aceroItems}
     className="py-32 px-8 bg-light dark:bg-dark"
   />
 
-
   <JoinCommunitySection
-    title="Conoce, Conecta con Nuestra Comunidad"
-    description="Te invitamos a ser parte de nuestra familia. Aquí encontrarás un lugar para crecer, servir y compartir el amor de Cristo."
-    imageUrl="/img/somos_comunidad.avif"
+    title={translateLabels("community.section.title")}
+    description={translateLabels("community.section.description")}
+    imageUrl={translateLabels("community.section.imageUrl")}
     buttons={communityButtons}
     className="py-32 px-8 bg-dark text-light dark:bg-accent dark:text-dark"
   />

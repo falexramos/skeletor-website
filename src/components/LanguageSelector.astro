@@ -1,26 +1,17 @@
 ---
-import { Icon } from 'astro-icon/components';
-import { languages } from "../i18n/config";
-import i18next from '../i18n/config';
+import { Icon } from "astro-icon/components";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { languageList } from "@/i18n/ui";
+import { useTranslations } from "@/i18n/utils";
 
-const currentPath = Astro.url.pathname;
-const currentLang = currentPath.split('/')[1] || 'es';
+const currentLang = Astro.currentLocale || "es";
+const translateLabels = useTranslations(
+  currentLang as keyof typeof languageList,
+);
 
-const languageDetails = {
-  es: {
-    name: "Español",
-    icon: "mdi:web",  // Cambiado a un icono disponible
-    label: "Cambiar idioma a español"
-  },
-  en: {
-    name: "English",
-    icon: "mdi:translate",  // Cambiado a un icono disponible
-    label: "Change language to English"
-  }
-} as const;
-
-const validLang = currentLang in languageDetails ? currentLang : 'es';
-await i18next.changeLanguage(validLang);
+const name = translateLabels("name");
+const icon = translateLabels("icon");
+const label = translateLabels("label");
 ---
 
 <div class="relative group">
@@ -29,17 +20,14 @@ await i18next.changeLanguage(validLang);
     class="flex items-center gap-2 px-4 py-2 rounded-lg border border-dark/10 dark:border-light/10 hover:border-accent focus:border-accent transition-all duration-300"
     aria-expanded="false"
     aria-haspopup="true"
-    aria-label={i18next.t('language.select')}
+    aria-label={currentLang}
   >
-    <Icon 
-      name={languageDetails[validLang].icon}
-      class="w-5 h-5"
-    />
+    <Icon name={icon} class="w-5 h-5" />
     <span class="text-sm font-medium">
-      {languageDetails[validLang].name}
+      {name}
     </span>
-    <Icon 
-      name="mdi:chevron-down" 
+    <Icon
+      name="mdi:chevron-down"
       class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180"
     />
   </button>
@@ -50,60 +38,65 @@ await i18next.changeLanguage(validLang);
     role="menu"
   >
     <div class="py-2">
-      {Object.entries(languageDetails).map(([lang, details]) => (
-        <button
-          class={`w-full flex items-center gap-3 px-4 py-2 text-sm transition-colors hover:bg-accent/10
-            ${validLang === lang ? 'text-accent font-medium' : ''}`}
-          data-lang={lang}
-          role="menuitem"
-          aria-label={details.label}
-        >
-          <Icon 
-            name={details.icon}
-            class="w-5 h-5"
-          />
-          {details.name}
-          {validLang === lang && (
-            <Icon name="mdi:check" class="w-4 h-4 ml-auto" />
-          )}
-        </button>
-      ))}
+      {
+        Object.entries(languageList).map(([langCode, langName]) => (
+          <button
+            class={`w-full flex items-center gap-3 px-4 py-2 text-sm transition-colors hover:bg-accent/10
+            ${currentLang === langCode ? "text-accent font-medium" : ""}`}
+            data-lang={langCode}
+            role="menuitem"
+            aria-label={langName}
+          >
+            <Icon name={icon} class="w-5 h-5" />
+            {langName}
+            {currentLang === langCode && (
+              <Icon name="mdi:check" class="w-4 h-4 ml-auto" />
+            )}
+          </button>
+        ))
+      }
     </div>
   </div>
 </div>
 
 <script>
-  const button = document.getElementById('language-button');
-  const dropdown = document.getElementById('language-dropdown');
-  const languageButtons = document.querySelectorAll('[data-lang]');
+  const button = document.getElementById("language-button");
+  const dropdown = document.getElementById("language-dropdown");
+  const languageButtons = document.querySelectorAll("[data-lang]");
 
-  button?.addEventListener('click', () => {
-    const isExpanded = button.getAttribute('aria-expanded') === 'true';
-    button.setAttribute('aria-expanded', (!isExpanded).toString());
-    
+  button?.addEventListener("click", () => {
+    const isExpanded = button.getAttribute("aria-expanded") === "true";
+    button.setAttribute("aria-expanded", (!isExpanded).toString());
+
     if (isExpanded) {
-      dropdown?.classList.add('opacity-0', 'invisible', 'translate-y-2');
+      dropdown?.classList.add("opacity-0", "invisible", "translate-y-2");
     } else {
-      dropdown?.classList.remove('opacity-0', 'invisible', 'translate-y-2');
+      dropdown?.classList.remove("opacity-0", "invisible", "translate-y-2");
     }
   });
 
-  document.addEventListener('click', (e) => {
-    if (!button?.contains(e.target as Node) && !dropdown?.contains(e.target as Node)) {
-      button?.setAttribute('aria-expanded', 'false');
-      dropdown?.classList.add('opacity-0', 'invisible', 'translate-y-2');
+  document.addEventListener("click", (e) => {
+    if (
+      !button?.contains(e.target as Node) &&
+      !dropdown?.contains(e.target as Node)
+    ) {
+      button?.setAttribute("aria-expanded", "false");
+      dropdown?.classList.add("opacity-0", "invisible", "translate-y-2");
     }
   });
 
-  languageButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const newLang = btn.getAttribute('data-lang');
+  languageButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const newLang = btn.getAttribute("data-lang");
       const currentPath = window.location.pathname;
-      const currentLang = currentPath.split('/')[1];
-      
+      const currentLang = currentPath.split("/")[1];
+
       if (newLang) {
-        if (['es', 'en'].includes(currentLang)) {
-          window.location.pathname = currentPath.replace(`/${currentLang}`, `/${newLang}`);
+        if (["es", "en"].includes(currentLang)) {
+          window.location.pathname = currentPath.replace(
+            `/${currentLang}`,
+            `/${newLang}`,
+          );
         } else {
           window.location.pathname = `/${newLang}${currentPath}`;
         }

@@ -5,7 +5,14 @@ export const languageList = {
 
 export const labels = {
   es: {
+    "name": "Español",
+    "icon": "mdi:web",
+    "label": "Cambiar idioma a español",
+
+    "nav.menu": "Menú",
+    "site.title": "Somos Comunidad Cristiana",
     // =========== Navegación =========== //
+    "nav.goHome": "Ir a Inicio",
     "nav.home": "Inicio",
     "nav.about": "Quiénes Somos",
     "nav.values": "Valores",
@@ -20,7 +27,7 @@ export const labels = {
     // =========== social media =========== //
     "social.follow": "Síguenos en redes",
     
-    // =========== Tema =========== //
+    // =========== Tema =========== // 
     "theme.toggle": "Cambiar Tema",
 
     // =========== vision Items =========== //
@@ -37,24 +44,25 @@ export const labels = {
     // ===========Mission section =========== //
     "mission.section.title": "Nuestra Misión",
     "mission.section.description": "Exponer el Evangelio de Jesucristo.",
-    "mission.section.imageUrl": "/img/somos_mision.avif",
+    "mission.section.imageUrl": "/assets/img/somos_mision.avif",
     "mission.section.ctaText": "Conoce más",
 
     "vision.section.title": "Nuestra Visión",
     "vision.section.description": "Guiar a las personas a una relación creciente con Jesucristo.",
-    "vision.section.imageUrl": "/img/somos_vision.avif",
+    "vision.section.imageUrl": "/assets/img/somos_vision.avif",
     "vision.section.ctaText": "Conoce más",
 
     // =========== Eventos =========== //
-    "events.mesas.imageUrl" : "/img/somos_mesas.avif",
+    "events.title" : "Nuestra Agenda",
+    "events.mesas.imageUrl" : "/assets/img/somos_mesas.avif",
     "events.mesas.title": "Viernes, 19:00",
     "events.mesas.date": "Mesas - Alfafar",
-    "events.domingos.imageUrl" : "/img/somos_domigos.avif",
+    "events.domingos.imageUrl" : "/assets/img/somos_domigos.avif",
     "events.domingos.title": "Domingo, 11:00 AM",
     "events.domingos.date": "Super Reunión",
     
     // =========== Hero Section =========== //
-    "hero.section.videoUrl": "/video/somos_video_principal_inicio_compressed.mp4",
+    "hero.section.videoUrl": "/assets/video/somos_video_principal_inicio_compressed.mp4",
     "hero.section.title": "Una iglesia para",
     "hero.section.highlightedWord": "gente,",
     "hero.section.subtitle": "sin iglesia",
@@ -71,25 +79,26 @@ export const labels = {
     "team.section.pastores.title": "Pastores",
     "team.section.pastores.items.0.name": "William",
     "team.section.pastores.items.0.role": "Pastor",
-    "team.section.pastores.items.0.image": "/img/somos_team_pastores.jpg",
+    "team.section.pastores.items.0.image": "/assets/img/somos_team_pastores.jpg",
     "team.section.pastores.items.1.name": "Jessica",
     "team.section.pastores.items.1.role": "Pastora",
-    "team.section.pastores.items.1.image": "/img/somos_team_pastores.jpg",
+    "team.section.pastores.items.1.image": "/assets/img/somos_team_pastores.jpg",
 
     "team.section.team.title": "Colaboradores",
     "team.section.items.0.name": "Servidores",
-    "team.section.items.0.image": "/img/team_ujieres.avif",
+    "team.section.items.0.image": "/assets/img/team_ujieres.avif",
     "team.section.items.1.name": "Producción",
-    "team.section.items.1.image": "/img/team_produccion.avif",
+    "team.section.items.1.image": "/assets/img/team_produccion.avif",
     "team.section.items.2.name": "Música",
-    "team.section.items.2.image": "/img/team_alabanza.avif",
+    "team.section.items.2.image": "/assets/img/team_alabanza.avif",
     "team.section.items.3.name": "Niños",
-    "team.section.items.3.image": "/img/team_kids.avif",
+    "team.section.items.3.image": "/assets/img/team_kids.avif",
 
     // =========== Community Section =========== //  
     "community.section.title": "Conoce y Conecta con Nuestra Comunidad",
     "community.section.description": "Te invitamos a ser parte de nuestra familia. Aquí encontrarás un lugar para crecer, servir y compartir el amor de Cristo.",
-    "community.section.imageUrl": "/img/somos_comunidad.avif",
+    "community.section.imageUrl": "/assets/img/somos_comunidad.avif",
+
     "community.buttons.text": "Ver Mensajes",
     "community.buttons.contact": "Contáctanos",
 
@@ -100,6 +109,10 @@ export const labels = {
 
 
     // =========== Values Section =========== //
+    "value.section.header.title": "Valores",
+    "value.section.header.highlightedWord": "Somos",
+    "value.section.header.description": "Una comunidad basada en el Amor, Perdón, Servicio.",
+
     "value.section.title": "7 Principios",
 
     "value.section.items.0.title": "Jesús",
@@ -191,37 +204,37 @@ export const labels = {
     "gallery.images.0.title": "Domingos",
     "gallery.images.0.category": "Servicios",
     "gallery.images.0.description": "Momentos de adoración en comunidad",
-    "gallery.images.0.url": "/img/somos_domigos.avif",
+    "gallery.images.0.url": "/assets/img/somos_domigos.avif",
     "gallery.images.0.link": "https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDUwNDEzODQzOTE2MDEx?story_media_id=3452814271677272710_20973777906&igsh=MXRtams4b2NkZGRkcQ==",
 
     "gallery.images.1.title": "Mesas",
     "gallery.images.1.category": "Comunidad",
     "gallery.images.1.description": "Tiempo de renovación y crecimiento",
-    "gallery.images.1.url": "/img/somos_mesas.avif",
+    "gallery.images.1.url": "/assets/img/somos_mesas.avif",
     "gallery.images.1.link": "https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MTM0ODY5MTUwMzc5Mzg1?story_media_id=3334721146442659440_20973777906&igsh=MXJsemN5aGdlZnZzZg==",
 
     "gallery.images.2.title": "Somitos",
     "gallery.images.2.category": "Jovenes",
     "gallery.images.2.description": "Construyendo el futuro de la iglesia",
-    "gallery.images.2.url": "/img/team_jovenes.avif",
+    "gallery.images.2.url": "/assets/img/team_jovenes.avif",
     "gallery.images.2.link": "https://www.instagram.com/s/aGlnaGxpZ2h0OjE3OTE4MjY0OTcwMDQ0ODQ1?story_media_id=3188301227711654486_20973777906&igsh=ano2YzZyZnV1cW5s",
 
     "gallery.images.3.title": "Calles",
     "gallery.images.3.category": "Obra Social",
     "gallery.images.3.description": "Sirviendo a nuestra comunidad",
-    "gallery.images.3.url": "/img/somos_asociacion.avif",
+    "gallery.images.3.url": "/assets/img/somos_asociacion.avif",
     "gallery.images.3.link": "https://www.instagram.com/p/DEgaAzzoyp-/?igsh=cXFwdzNyZnR1NXZ1",
 
     "gallery.images.4.title": "Matrimonios",
     "gallery.images.4.category": "Familia",
     "gallery.images.4.description": "Momentos",
-    "gallery.images.4.url": "/img/somos_matrimonios.avif",
+    "gallery.images.4.url": "/assets/img/somos_matrimonios.avif",
     "gallery.images.4.link": "https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDUwNDEzODQzOTE2MDEx?story_media_id=3452814271677272710_20973777906&igsh=MXRtams4b2NkZGRkcQ==",
 
     "gallery.images.5.title": "Kids",
     "gallery.images.5.category": "Kids",
     "gallery.images.5.description": "Enseñando con amor",
-    "gallery.images.5.url": "/img/team_kids.avif",
+    "gallery.images.5.url": "/assets/img/team_kids.avif",
     "gallery.images.5.link": "https://www.instagram.com/p/DCe-HHPN72I/?img_index=4&igsh=MW9haXdvdGllcGV6cA==",
 
     // =========== action Buttons =========== //
@@ -234,7 +247,7 @@ export const labels = {
 
     "association.mission.title": "Somos una Asociación",
     "association.mission.description": "Para proporcionar ayuda inmediata y sostenible a todas las personas, ofreciendo alimentos, ropa, y apoyo emocional para mejorar su calidad de vida y promover su integración social.",
-    "association.mission.imageUrl": "/img/somos_asociacion.avif",
+    "association.mission.imageUrl": "/assets/img/somos_asociacion.avif",
     "association.mission.ctaText": "Conoce más",
     "association.mission.ctaLink": "/contact",
 
@@ -267,6 +280,7 @@ export const labels = {
     "association.contact.whatsappButton": "WhatsApp",
 
     // =========== donate =========== //
+    "donate.title": "Donar",
     "donate.header.title": "Apoya Nuestra",
     "donate.header.highlightedWord": "Misión",
     "donate.header.description": "Tu generosidad nos permite seguir compartiendo el amor de Cristo y a continuar nuestro trabajo en la comunidad.",
@@ -326,6 +340,7 @@ export const labels = {
     "apolos.contact.buttonText": "Contáctanos",
 
     // =========== FAQ Section =========== //
+    "faq.title": "FAQ",
     "faq.header.title": "Preguntas",
     "faq.header.highlightedWord": "Frecuentes",
     "faq.header.description": "Información importante sobre nuestra comunidad.",
@@ -371,7 +386,13 @@ export const labels = {
     "footer.developedBy": "Construido por",
   },
   en: {
+    "name": "English",
+    "icon": "mdi:translate",
+    "label": "Change language to English",
+    "nav.menu": "Menu",
+    "site.title": "Somos Comunidad Cristiana",
     // =========== Navigation =========== //
+    "nav.goHome": "Go home",
     "nav.home": "Home",
     "nav.about": "About Us",
     "nav.values": "Values",
@@ -403,24 +424,24 @@ export const labels = {
     // ===========Mission section =========== //
     "mission.section.title": "Our Mission",
     "mission.section.description": "To share the Gospel of Jesus Christ.",
-    "mission.section.imageUrl": "/img/somos_mision.avif",
+    "mission.section.imageUrl": "/assets/img/somos_mision.avif",
     "mission.section.ctaText": "Learn More",
 
     "vision.section.title": "Our Vision",
     "vision.section.description": "To guide people to a growing relationship with Jesus Christ.",
-    "vision.section.imageUrl": "/img/somos_vision.avif",
+    "vision.section.imageUrl": "/assets/img/somos_vision.avif",
     "vision.section.ctaText": "Learn More",
 
     // =========== Events =========== //
-    "events.mesas.imageUrl": "/img/somos_mesas.avif",
+    "events.mesas.imageUrl": "/assets/img/somos_mesas.avif",
     "events.mesas.title": "Friday, 19:00",
     "events.mesas.date": "Tables - Alfafar",
-    "events.domingos.imageUrl": "/img/somos_domigos.avif",
+    "events.domingos.imageUrl": "/assets/img/somos_domigos.avif",
     "events.domingos.title": "Sunday, 11:00 AM",
     "events.domingos.date": "Super Meeting",
     
     // =========== Hero Section =========== //
-    "hero.section.videoUrl": "/video/somos_video_principal_inicio_compressed.mp4",
+    "hero.section.videoUrl": "/assets/video/somos_video_principal_inicio_compressed.mp4",
     "hero.section.title": "A church for",
     "hero.section.highlightedWord": "people,",
     "hero.section.subtitle": "without a church",
@@ -437,25 +458,25 @@ export const labels = {
     "team.section.pastores.title": "Pastors",
     "team.section.pastores.items.0.name": "William",
     "team.section.pastores.items.0.role": "Pastor",
-    "team.section.pastores.items.0.image": "/img/somos_team_pastores.jpg",
+    "team.section.pastores.items.0.image": "/assets/img/somos_team_pastores.jpg",
     "team.section.pastores.items.1.name": "Jessica",
     "team.section.pastores.items.1.role": "Pastor",
-    "team.section.pastores.items.1.image": "/img/somos_team_pastores.jpg",
+    "team.section.pastores.items.1.image": "/assets/img/somos_team_pastores.jpg",
 
     "team.section.team.title": "Collaborators",
     "team.section.items.0.name": "Servers",
-    "team.section.items.0.image": "/img/team_ujieres.avif",
+    "team.section.items.0.image": "/assets/img/team_ujieres.avif",
     "team.section.items.1.name": "Production",
-    "team.section.items.1.image": "/img/team_produccion.avif",
+    "team.section.items.1.image": "/assets/img/team_produccion.avif",
     "team.section.items.2.name": "Music",
-    "team.section.items.2.image": "/img/team_alabanza.avif",
+    "team.section.items.2.image": "/assets/img/team_alabanza.avif",
     "team.section.items.3.name": "Kids",
-    "team.section.items.3.image": "/img/team_kids.avif",
+    "team.section.items.3.image": "/assets/img/team_kids.avif",
 
     // =========== Community Section =========== //  
     "community.section.title": "Know and Connect with Our Community",
     "community.section.description": "We invite you to be part of our family. Here you'll find a place to grow, serve, and share Christ's love.",
-    "community.section.imageUrl": "/img/somos_comunidad.avif",
+    "community.section.imageUrl": "/assets/img/somos_comunidad.avif",
     "community.buttons.text": "View Messages",
     "community.buttons.contact": "Contact Us",
 
@@ -465,6 +486,10 @@ export const labels = {
     "page.header.about.description": "Since 2021, Somos is a Christian community in Alfafar, Valencia, that exists to share the good news of Jesus of Nazareth and make disciples in community.",
 
     // =========== Values Section =========== //
+    "value.section.header.title": "Values",
+    "value.section.header.highlightedWord": "We are",
+    "value.section.header.description": "A community based on Love, Forgiveness, Service.",
+
     "value.section.title": "7 Principles",
 
     "value.section.items.0.title": "Jesus",
@@ -556,37 +581,37 @@ export const labels = {
     "gallery.images.0.title": "Sundays",
     "gallery.images.0.category": "Services",
     "gallery.images.0.description": "Moments of worship in community",
-    "gallery.images.0.url": "/img/somos_domigos.avif",
+    "gallery.images.0.url": "/assets/img/somos_domigos.avif",
     "gallery.images.0.link": "https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDUwNDEzODQzOTE2MDEx?story_media_id=3452814271677272710_20973777906&igsh=MXRtams4b2NkZGRkcQ==",
 
     "gallery.images.1.title": "Tables",
     "gallery.images.1.category": "Community",
     "gallery.images.1.description": "Time of renewal and growth",
-    "gallery.images.1.url": "/img/somos_mesas.avif",
+    "gallery.images.1.url": "/assets/img/somos_mesas.avif",
     "gallery.images.1.link": "https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MTM0ODY5MTUwMzc5Mzg1?story_media_id=3334721146442659440_20973777906&igsh=MXJsemN5aGdlZnZzZg==",
 
     "gallery.images.2.title": "Youth",
     "gallery.images.2.category": "Youth",
     "gallery.images.2.description": "Building the future of the church",
-    "gallery.images.2.url": "/img/team_jovenes.avif",
+    "gallery.images.2.url": "/assets/img/team_jovenes.avif",
     "gallery.images.2.link": "https://www.instagram.com/s/aGlnaGxpZ2h0OjE3OTE4MjY0OTcwMDQ0ODQ1?story_media_id=3188301227711654486_20973777906&igsh=ano2YzZyZnV1cW5s",
 
     "gallery.images.3.title": "Streets",
     "gallery.images.3.category": "Social Work",
     "gallery.images.3.description": "Serving our community",
-    "gallery.images.3.url": "/img/somos_asociacion.avif",
+    "gallery.images.3.url": "/assets/img/somos_asociacion.avif",
     "gallery.images.3.link": "https://www.instagram.com/p/DEgaAzzoyp-/?igsh=cXFwdzNyZnR1NXZ1",
 
     "gallery.images.4.title": "Marriages",
     "gallery.images.4.category": "Family",
     "gallery.images.4.description": "Moments",
-    "gallery.images.4.url": "/img/somos_matrimonios.avif",
+    "gallery.images.4.url": "/assets/img/somos_matrimonios.avif",
     "gallery.images.4.link": "https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDUwNDEzODQzOTE2MDEx?story_media_id=3452814271677272710_20973777906&igsh=MXRtams4b2NkZGRkcQ==",
 
     "gallery.images.5.title": "Kids",
     "gallery.images.5.category": "Kids",
     "gallery.images.5.description": "Teaching with love",
-    "gallery.images.5.url": "/img/team_kids.avif",
+    "gallery.images.5.url": "/assets/img/team_kids.avif",
     "gallery.images.5.link": "https://www.instagram.com/p/DCe-HHPN72I/?img_index=4&igsh=MW9haXdvdGllcGV6cA==",
 
     // =========== action Buttons =========== //
@@ -599,7 +624,7 @@ export const labels = {
 
     "association.mission.title": "We are an Association",
     "association.mission.description": "To provide immediate and sustainable help to all people, offering food, clothing, and emotional support to improve their quality of life and promote their social integration.",
-    "association.mission.imageUrl": "/img/somos_asociacion.avif",
+    "association.mission.imageUrl": "/assets/img/somos_asociacion.avif",
     "association.mission.ctaText": "Learn More",
     "association.mission.ctaLink": "/contact",
 
@@ -632,6 +657,7 @@ export const labels = {
     "association.contact.whatsappButton": "WhatsApp",
 
     // =========== donate =========== //
+    "donate.title": "Donate",
     "donate.header.title": "Support Our",
     "donate.header.highlightedWord": "Mission",
     "donate.header.description": "Your generosity allows us to continue sharing Christ's love and continue our work in the community.",
@@ -691,6 +717,7 @@ export const labels = {
     "apolos.contact.buttonText": "Contact Us",
 
     // =========== FAQ Section =========== //
+    "faq.title": "FAQ",
     "faq.header.title": "Frequently",
     "faq.header.highlightedWord": "Asked Questions",
     "faq.header.description": "Important information about our community.",

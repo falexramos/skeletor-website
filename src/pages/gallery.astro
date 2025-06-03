@@ -1,66 +1,78 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import PageHeader from '../../components/PageHeader.astro';
-import GalleryItem from '../../components/GalleryItem.astro';
-import i18next from '../../i18n/config';
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { languageList } from "@/i18n/ui";
+import { useTranslations } from "@/i18n/utils";
+import GalleryItem from "@/components/GalleryItem.astro";
+import PageHeader from "@/components/PageHeader.astro";
+import Layout from "@/layouts/Layout.astro";
+
+const getPathWithoutLocale = (path: string): string => {
+  const segments = path.split("/").filter(Boolean);
+  return segments.slice(1).join("/") || "/";
+};
+
+const currentPathWithoutLocale = getPathWithoutLocale(Astro.url.pathname);
+const currentLang = Astro.currentLocale || "es";
+const translateLabels = useTranslations(
+  currentLang as keyof typeof languageList,
+);
 
 const galleryImages = [
   {
-    title: 'Domingos',
-    category: 'Servicios',
-    description: 'Momentos de adoración en comunidad',
-    url: '/img/somos_domigos.avif',
-    link: 'https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDUwNDEzODQzOTE2MDEx?story_media_id=3452814271677272710_20973777906&igsh=MXRtams4b2NkZGRkcQ=='
+    title: translateLabels("gallery.images.0.title"),
+    category: translateLabels("gallery.images.0.category"),
+    description: translateLabels("gallery.images.0.description"),
+    url: translateLabels("gallery.images.0.url"),
+    link: translateLabels("gallery.images.0.link"),
   },
   {
-    title: 'Mesas',
-    category: 'Comunidad',
-    description: 'Tiempo de renovación y crecimiento',
-    url: '/img/somos_mesas.avif',
-    link: 'https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MTM0ODY5MTUwMzc5Mzg1?story_media_id=3334721146442659440_20973777906&igsh=MXJsemN5aGdlZnZzZg=='
+    title: translateLabels("gallery.images.1.title"),
+    category: translateLabels("gallery.images.1.category"),
+    description: translateLabels("gallery.images.1.description"),
+    url: translateLabels("gallery.images.1.url"),
+    link: translateLabels("gallery.images.1.link")
   },
   {
-    title: 'Somitos',
-    category: 'Jovenes',
-    description: 'Construyendo el futuro de la iglesia',
-    url: '/img/team_jovenes.avif',
-    link: 'https://www.instagram.com/s/aGlnaGxpZ2h0OjE3OTE4MjY0OTcwMDQ0ODQ1?story_media_id=3188301227711654486_20973777906&igsh=ano2YzZyZnV1cW5s'
+    title: translateLabels("gallery.images.2.title"),
+    category: translateLabels("gallery.images.2.category"),
+    description: translateLabels("gallery.images.2.description"),
+    url: translateLabels("gallery.images.2.url"),
+    link: translateLabels("gallery.images.2.link")
   },
   {
-    title: 'Calles',
-    category: 'Obra Social',
-    description: 'Sirviendo a nuestra comunidad',
-    url: '/img/somos_asociacion.avif',
-    link: 'https://www.instagram.com/p/DEgaAzzoyp-/?igsh=cXFwdzNyZnR1NXZ1'
+    title: translateLabels("gallery.images.3.title"),
+    category: translateLabels("gallery.images.3.category"),
+    description: translateLabels("gallery.images.3.description"),
+    url: translateLabels("gallery.images.3.url"),
+    link: translateLabels("gallery.images.3.link")
   },
   {
-    title: 'Matrimonios',
-    category: 'Familia',
-    description: 'Momentos',
-    url: '/img/somos_matrimonios.avif',
-    link: 'https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDUwNDEzODQzOTE2MDEx?story_media_id=3452814271677272710_20973777906&igsh=MXRtams4b2NkZGRkcQ=='
+    title: translateLabels("gallery.images.4.title"),
+    category: translateLabels("gallery.images.4.category"),
+    description: translateLabels("gallery.images.4.description"),
+    url: translateLabels("gallery.images.4.url"),
+    link: translateLabels("gallery.images.4.link")
   },
   {
-    title: 'Kids',
-    category: 'Kids',
-    description: 'Enseñando con amor',
-    url: '/img/team_kids.avif',
-    link: 'https://www.instagram.com/p/DCe-HHPN72I/?img_index=4&igsh=MW9haXdvdGllcGV6cA=='
-  }
+    title: translateLabels("gallery.images.5.title"),
+    category: translateLabels("gallery.images.5.category"),
+    description: translateLabels("gallery.images.5.description"),
+    url: translateLabels("gallery.images.5.url"),
+    link: translateLabels("gallery.images.5.link")
+  },
 ];
 
-
 const headerText = {
-  title: "Momentos",
-  highlightedWord: "Somos",
-  description: "Explora momentos especiales de nuestra comunidad a través de imágenes."
+  title: translateLabels("gallery.header.title"),
+  highlightedWord: translateLabels("gallery.header.highlightedWord"),
+  description: translateLabels("gallery.header.description"),
 };
 
-const pageTitle = `Momentos | ${i18next.t('site.title')}`;
+const pageTitle = `${translateLabels("gallery.header.title")} | ${translateLabels("site.title")}`;
 ---
 
 <Layout title={pageTitle}>
-  <main class="min-h-screen px-8 pb-16 md:px-16 mt-2"> 
+  <main class="min-h-screen px-8 pb-16 md:px-16 mt-2">
     <div class="max-w-[90rem] mx-auto mb-2">
       <PageHeader
         title={headerText.title}
@@ -69,9 +81,7 @@ const pageTitle = `Momentos | ${i18next.t('site.title')}`;
       />
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {galleryImages.map(image => (
-          <GalleryItem {...image} />
-        ))}
+        {galleryImages.map((image) => <GalleryItem {...image} />)}
       </div>
     </div>
   </main>

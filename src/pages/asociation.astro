@@ -1,17 +1,32 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import PageHeader from '../../components/PageHeader.astro';
-import i18next from '../../i18n/config';
-import MissionSection from '@/components/MissionSection.astro';
-import ContactSection from '@/components/ContactSection.astro';
-import HelpSection from '@/components/HelpSection.astro';
+import ContactSection from "@/components/ContactSection.astro";
+import HelpSection from "@/components/HelpSection.astro";
+import MissionSection from "@/components/MissionSection.astro";
+import PageHeader from "@/components/PageHeader.astro";
+import Layout from "@/layouts/Layout.astro";
+
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { languageList } from "@/i18n/ui";
+import { useTranslations } from "@/i18n/utils";
+
+const getPathWithoutLocale = (path: string): string => {
+  const segments = path.split("/").filter(Boolean);
+  return segments.slice(1).join("/") || "/";
+};
+
+const currentPathWithoutLocale = getPathWithoutLocale(Astro.url.pathname);
+const currentLang = Astro.currentLocale || "es";
+const translateLabels = useTranslations(
+  currentLang as keyof typeof languageList
+);
+
 
 
 // Botones de acción
 const actionButtons = [
   {
-    text: "Donar Ahora",
-    link: "/es/donar",
+    text: translateLabels("asociation.action.buttons.text"),
+    link: getRelativeLocaleUrl(currentLang, "donate"),
     variant: "primary"
   }
 ];
@@ -19,53 +34,55 @@ const actionButtons = [
 // Datos para la sección de ayuda
 const helpItems = [
   {
-    icon: "mdi:check-circle",
-    text: "Donando alimentos no perecederos, ropa en buen estado o material escolar."
+    icon: translateLabels("association.help.items.0.icon"),
+    text: translateLabels("association.help.items.0.text")
   },
   {
-    icon: "mdi:check-circle",
-    text: "Realizando una aportación económica para mantener nuestros programas."
+    icon: translateLabels("association.help.items.1.icon"),
+    text: translateLabels("association.help.items.1.text")
   },
   {
-    icon: "mdi:check-circle",
-    text: "Uniéndote como voluntario y dedicando tu tiempo a quienes más lo necesitan."
+    icon: translateLabels("association.help.items.2.icon"),
+    text: translateLabels("association.help.items.2.text")
   },
   {
-    icon: "mdi:check-circle",
-    text: "Difundiendo nuestra labor en redes sociales y entre tus conocidos."
+    icon: translateLabels("association.help.items.3.icon"),
+    text: translateLabels("association.help.items.3.text")
   },
   {
-    icon: "mdi:check-circle",
-    text: "Organizando eventos o campañas de recaudación a beneficio de la asociación."
+    icon: translateLabels("association.help.items.4.icon"),
+    text: translateLabels("association.help.items.4.text")
   }
 ];
 
 const contactTexts = {
-  title: "Contáctanos",
+  title: translateLabels("association.contact.title"),
   highlightedWord: "", 
-  description: "Nos encantaría saber de ti. Contáctanos a través de cualquiera de estos medios.",
-  callUs: "Llama o WhatsApp",
-  emailUs: "Envíanos un correo",
-  whatsappButton: "WhatsApp"
+  description: translateLabels("association.contact.description"),
+  callUs: translateLabels("association.contact.callUs"),
+  emailUs: translateLabels("association.contact.emailUs"),
+  whatsappButton: translateLabels("association.contact.whatsappButton"),
 };
-const pageTitle = `Asociación | ${i18next.t('site.title')}`;
+const pageTitle = `${translateLabels("association.header.title")} | ${translateLabels("site.title")}`;
+
+
 
 ---
 
 <Layout title={pageTitle}>
   <PageHeader
-    title="Asociación"
-    highlightedWord="Somos"
-    description="Ayudando a quienes más lo necesitan"
+    title={translateLabels("association.header.title")}
+    highlightedWord={translateLabels("association.header.highlightedWord")}
+    description={translateLabels("association.header.description")}
   />
 
 
   <MissionSection
-  title="Somos una Asociación"
-  description="Para proporcionar ayuda inmediata y sostenible a todas las personas, ofreciendo alimentos, ropa, y apoyo emocional para mejorar su calidad de vida y promover su integración social.."
-  imageUrl="/img/somos_asociacion.avif"
-  ctaText="Conoce más"
-  ctaLink="/contact"
+  title={translateLabels("association.mission.title")}
+  description={translateLabels("association.mission.description")}
+  imageUrl={translateLabels("association.mission.imageUrl")}
+  ctaText={translateLabels("association.mission.ctaText")}
+  ctaLink={getRelativeLocaleUrl(currentLang, "contact")}
   styles={{
     sectionBg: "bg-accent dark:bg-accent",
     titleColor: "text-dark",
@@ -81,11 +98,11 @@ const pageTitle = `Asociación | ${i18next.t('site.title')}`;
   <!-- Sección de Cómo Ayudar -->
   <section class="py-20 px-8 bg-light dark:bg-dark">
     <div class="max-w-[90rem] mx-auto">
-      <h2 class="text-4xl md:text-5xl font-display font-bold mt-16 mb-8 text-center dark:text-light">Colabora con Nosotros</h2>
+      <h2 class="text-4xl md:text-5xl font-display font-bold mt-16 mb-8 text-center dark:text-light">{translateLabels("association.collaborate.title")}</h2>
       <div class="grid md:grid-cols-2 gap-16 items-center">
         <div >
-          <h3 class="text-3xl font-display font-bold mb-8 dark:text-light">Tu Apoyo es Fundamental</h3>
-          <p class="text-xl mb-6 dark:text-light/90">Cada pequeña acción marca la diferencia en la vida de quienes más lo necesitan. Juntos podemos construir una comunidad más solidaria y justa.</p>
+          <h3 class="text-3xl font-display font-bold mb-8 dark:text-light">{translateLabels("association.collaborate.subtitle")}</h3>
+          <p class="text-xl mb-6 dark:text-light/90">{translateLabels("association.collaborate.description")}</p>
           
           <div class="mt-8 flex flex-wrap gap-4">
             {actionButtons.map((button) => (
@@ -117,7 +134,7 @@ const pageTitle = `Asociación | ${i18next.t('site.title')}`;
         </div>
         
         <HelpSection 
-          title="¿Cómo puedes ayudar?" 
+          title= {translateLabels("association.help.title")}
           items={helpItems}
           styles={{
             bgColor: "bg-secondary dark:bg-secondary/20",

@@ -1,62 +1,131 @@
 ---
-import { Icon } from 'astro-icon/components';
-import { navigationItems } from '../config/navigation';
-import SocialLinks from './SocialLinks.astro';
-import i18next from '../i18n/config';
-import Logo from './Logo.astro';
+import { Icon } from "astro-icon/components";
 
-const currentPath = Astro.url.pathname;
-const currentLang = currentPath.split('/')[1];
+import SocialLinks from "./SocialLinks.astro";
 
-await i18next.changeLanguage(currentLang);
+import Logo from "./Logo.astro";
 
-const getLocalizedPath = (path: string) => {
-  return path === '/' ? `/${currentLang}` : `/${currentLang}${path}`;
-};
+
+
+//---------------------
+
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { languageList } from "@/i18n/ui";
+import { useTranslations } from "@/i18n/utils";
+
+
+const currentLang = Astro.currentLocale || "es";
+const translateLabels = useTranslations(
+  currentLang as keyof typeof languageList,
+);
+
+const navLinks = [
+  {
+    href: getRelativeLocaleUrl(currentLang, "/"),
+    label: translateLabels("nav.home"),
+  },
+
+  {
+    href: getRelativeLocaleUrl(currentLang, "about"),
+    label: translateLabels("nav.about"),
+  },
+  {
+    href: getRelativeLocaleUrl(currentLang, "values"),
+    label: translateLabels("nav.values"),
+  },
+  {
+    href: getRelativeLocaleUrl(currentLang, "messages"),
+    label: translateLabels("nav.messages"),
+  },
+  {
+    href: getRelativeLocaleUrl(currentLang, "gallery"),
+    label: translateLabels("nav.gallery"),
+  },
+  {
+    href: getRelativeLocaleUrl(currentLang, "asociation"),
+    label: translateLabels("nav.asociation"),
+  },
+  {
+    href: getRelativeLocaleUrl(currentLang, "donate"),
+    label: translateLabels("nav.donate"),
+  },
+  {
+    href: getRelativeLocaleUrl(currentLang, "apolos"),
+    label: translateLabels("nav.apolos"),
+  },
+  {
+    href: getRelativeLocaleUrl(currentLang, "faq"),
+    label: translateLabels("nav.faq"),
+  },
+  {
+    href: getRelativeLocaleUrl(currentLang, "contact"),
+    label: translateLabels("nav.contact"),
+  },
+];
+
+const siteTitle = translateLabels("site.title");
+
+const socialFollow = translateLabels("social.follow");
+
 ---
 
-<aside id="sidebar" class="fixed left-0 top-0 z-40 h-screen w-[min(100vw,30rem)] -translate-x-full transition-all duration-500 ease-out overflow-y-auto">
-  <div class="fixed inset-0 w-[min(100vw,30rem)] min-h-full bg-light/95 dark:bg-dark/95 backdrop-blur-md"></div>
-  
+<aside
+  id="sidebar"
+  class="fixed left-0 top-0 z-40 h-screen w-[min(100vw,30rem)] -translate-x-full transition-all duration-500 ease-out overflow-y-auto"
+>
+  <div
+    class="fixed inset-0 w-[min(100vw,30rem)] min-h-full bg-light/95 dark:bg-dark/95 backdrop-blur-md"
+  >
+  </div>
+
   <div class="relative w-full flex flex-col px-8 py-12">
-    <button 
-      id="close-sidebar" 
+    <button
+      id="close-sidebar"
       class="absolute right-6 top-6 p-2 text-dark dark:text-light hover:text-accent transition-colors"
       aria-label="Cerrar menú"
     >
       <Icon name="mdi:close" class="w-8 h-8" />
     </button>
-    
+
     <div class="flex items-center gap-4 mb-12">
       <Logo size="large" />
-      <span class="text-xl font-bold text-dark dark:text-light">{i18next.t('site.title')}</span>
-      
+      <span class="text-xl font-bold text-dark dark:text-light"
+        >{siteTitle}</span
+      >
     </div>
 
     <nav class="flex-1">
       <ul class="space-y-1">
-        {navigationItems.map((item) => (
-          <li>
-            <a
-              href={getLocalizedPath(item.href)}
-              class="block py-3 px-4 transition-all duration-300 hover:bg-accent group"
-            >
-              <span class="text-[clamp(1.5rem,4vw,2.5rem)] font-display font-bold text-dark dark:text-light leading-none group-hover:text-light transition-colors">
-                {i18next.t(item.text)}
-              </span>
-            </a>
-          </li>
-        ))}
+        {
+          navLinks.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="block py-3 px-4 transition-all duration-300 hover:bg-accent group"
+              >
+                <span class="text-[clamp(1.5rem,4vw,2.5rem)] font-display font-bold text-dark dark:text-light leading-none group-hover:text-light transition-colors">
+                  {item.label}
+                </span>
+              </a>
+            </li>
+          ))
+        }
       </ul>
     </nav>
 
     <div class="mt-auto pt-6 border-t border-dark/10 dark:border-light/10">
-      <h3 class="text-lg font-bold text-dark dark:text-light mb-4">{i18next.t('social.follow')}</h3>
+      <h3 class="text-lg font-bold text-dark dark:text-light mb-4">
+        {socialFollow}
+      </h3>
       <SocialLinks className="justify-start gap-4" />
     </div>
   </div>
 
-  <div class="absolute left-0 top-0 h-full w-1 bg-accent transform scale-y-0 origin-top transition-transform duration-700" id="accent-bar"></div>
+  <div
+    class="absolute left-0 top-0 h-full w-1 bg-accent transform scale-y-0 origin-top transition-transform duration-700"
+    id="accent-bar"
+  >
+  </div>
 </aside>
 
 <style>
@@ -70,7 +139,7 @@ const getLocalizedPath = (path: string) => {
   }
 
   nav a::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: -100%;
@@ -101,44 +170,53 @@ const getLocalizedPath = (path: string) => {
   }
 
   #sidebar::-webkit-scrollbar-thumb:hover {
-    background-color: var(--color-dark); /* Color of the scrollbar thumb on hover */
+    background-color: var(
+      --color-dark
+    ); /* Color of the scrollbar thumb on hover */
   }
 </style>
 
 <script>
-  const sidebar = document.getElementById('sidebar');
-  const toggleButton = document.getElementById('sidebar-toggle');
-  const closeButton = document.getElementById('close-sidebar');
-  const accentBar = document.getElementById('accent-bar');
+  const sidebar = document.getElementById("sidebar");
+  const toggleButton = document.getElementById("sidebar-toggle");
+  const closeButton = document.getElementById("close-sidebar");
+  const accentBar = document.getElementById("accent-bar");
 
   if (sidebar && toggleButton && closeButton) {
-    toggleButton.addEventListener('click', () => {
-      sidebar.classList.remove('-translate-x-full');
+    toggleButton.addEventListener("click", () => {
+      sidebar.classList.remove("-translate-x-full");
       setTimeout(() => {
-        accentBar.classList.add('scale-y-100');
+        accentBar.classList.add("scale-y-100");
       }, 300);
     });
 
     const closeSidebar = () => {
-      accentBar.classList.remove('scale-y-100');
+      accentBar.classList.remove("scale-y-100");
       setTimeout(() => {
-        sidebar.classList.add('-translate-x-full');
+        sidebar.classList.add("-translate-x-full");
       }, 300);
     };
 
-    closeButton.addEventListener('click', closeSidebar);
+    closeButton.addEventListener("click", closeSidebar);
 
-    document.addEventListener('click', (event) => {
+    document.addEventListener("click", (event) => {
       const isClickInsideSidebar = sidebar.contains(event.target as Node);
       const isClickOnToggleButton = toggleButton.contains(event.target as Node);
 
-      if (!isClickInsideSidebar && !isClickOnToggleButton && !sidebar.classList.contains('-translate-x-full')) {
+      if (
+        !isClickInsideSidebar &&
+        !isClickOnToggleButton &&
+        !sidebar.classList.contains("-translate-x-full")
+      ) {
         closeSidebar();
       }
     });
 
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && !sidebar.classList.contains('-translate-x-full')) {
+    document.addEventListener("keydown", (event) => {
+      if (
+        event.key === "Escape" &&
+        !sidebar.classList.contains("-translate-x-full")
+      ) {
         closeSidebar();
       }
     });

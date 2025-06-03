@@ -1,6 +1,6 @@
 ---
 // components/LogoAndName.astro
-import i18next from '../i18n/config';
+
 import Logo from './Logo.astro';
 
 interface Props {
@@ -10,9 +10,7 @@ interface Props {
 
 const { variant = 'large', className = '' } = Astro.props;
 
-const currentPath = Astro.url.pathname;
-const currentLang = currentPath.split('/')[1];
-const homeUrl = `/${currentLang}`;
+
 
 const sizes = {
   default: {
@@ -26,6 +24,29 @@ const sizes = {
 };
 
 const { text } = sizes[variant];
+
+
+
+//**********************
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { languageList } from "@/i18n/ui";
+import { useTranslations } from "@/i18n/utils";
+
+const getPathWithoutLocale = (path: string): string => {
+  const segments = path.split("/").filter(Boolean);
+  return segments.slice(1).join("/") || "/";
+};
+
+const currentPathWithoutLocale = getPathWithoutLocale(Astro.url.pathname);
+const currentLang = Astro.currentLocale || "es";
+const translateLabels = useTranslations(
+  currentLang as keyof typeof languageList
+);
+
+const homeUrl = getRelativeLocaleUrl(currentLang, "/");
+const siteTitle = translateLabels("site.title");
+const navGoHome = translateLabels("nav.goHome");
+
 ---
 
 <a 
@@ -34,7 +55,7 @@ const { text } = sizes[variant];
     'flex items-center gap-0 md:gap-1 lg:gap-2 hover:opacity-80 transition-opacity', 
     className
   ]}
-  aria-label={i18next.t('nav.goHome')}
+  aria-label={navGoHome}
 >
   <Logo size={variant} /> 
 
@@ -45,7 +66,7 @@ const { text } = sizes[variant];
       'whitespace-nowrap'
     ]}
   >
-    {i18next.t('site.title')}
+    {siteTitle}
   </span>
 </a>
 

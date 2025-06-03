@@ -1,10 +1,25 @@
 ---
 // src/pages/es/messages.astro
-import Layout from '../../layouts/Layout.astro';
-import PageHeader from '../../components/PageHeader.astro';
-import SeriesFilter from '../../components/SeriesFilter.astro';
-import SermonCard from '../../components/SermonCard.astro';
-import i18next from '../../i18n/config';
+
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { languageList } from "@/i18n/ui";
+import { useTranslations } from "@/i18n/utils";
+import PageHeader from "@/components/PageHeader.astro";
+import SeriesFilter from "@/components/SeriesFilter.astro";
+import SermonCard from "@/components/SermonCard.astro";
+import Layout from "@/layouts/Layout.astro";
+
+const getPathWithoutLocale = (path: string): string => {
+  const segments = path.split("/").filter(Boolean);
+  return segments.slice(1).join("/") || "/";
+};
+
+const currentPathWithoutLocale = getPathWithoutLocale(Astro.url.pathname);
+const currentLang = Astro.currentLocale || "es";
+const translateLabels = useTranslations(
+  currentLang as keyof typeof languageList
+);
+
 
 const sermons = [
   { title: 'EL PRINCIPIO DEL FIN', pastor: 'JOSUE MURILLO', date: '16 Febrero, 2025', description: 'descripcion en texto corto.', videoId: 'i_gyxSGm2X0', duration: '49:00', category: '7 Vidas' },
@@ -22,12 +37,12 @@ const series = [
 
 
 const headerText = {
-  title: "Experimenta nuestra",
-  highlightedWord: "comunidad",
-  description: "Mira cómo nuestra comunidad se une en amor, perdón y servicio."
+  title: translateLabels("messages.header.title"),
+  highlightedWord: translateLabels("messages.header.highlightedWord"),
+  description: translateLabels("messages.header.description")
 };
 
-const pageTitle = `Predicacion | ${i18next.t('site.title')}`;
+const pageTitle = `Predicacion | ${translateLabels("site.title")}`;
 
 ---
 
@@ -40,7 +55,7 @@ const pageTitle = `Predicacion | ${i18next.t('site.title')}`;
         {sermons.map(sermon => (
           <SermonCard
             {...sermon}
-            watchText="Ver Ahora"
+            watchText= {translateLabels("messages.watchText")}
           />
         ))}
       </div>

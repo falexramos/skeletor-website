@@ -2,12 +2,16 @@
 import { Icon } from 'astro-icon/components';
 import LanguageSelector from './LanguageSelector.astro';
 import LogoAndName from './LogoAndName.astro';
-import i18next from '../i18n/config';
+import { useTranslations } from "@/i18n/utils";
+import { languageList } from "@/i18n/ui";
 
-const currentPath = Astro.url.pathname;
-const currentLang = currentPath.split('/')[1];
+const currentLang = Astro.currentLocale || "es";
 
-await i18next.changeLanguage(currentLang);
+const translateLabels = useTranslations(
+  currentLang as keyof typeof languageList
+);
+const navMenu = translateLabels("nav.menu");
+
 ---
 
 <header class="fixed top-0 w-full transition-all duration-300 z-30" id="header">
@@ -15,7 +19,7 @@ await i18next.changeLanguage(currentLang);
     <button 
       id="sidebar-toggle" 
       class="p-2 hover:bg-accent/10 rounded-lg transition-colors mr-4"
-      aria-label={i18next.t('nav.menu')}
+      aria-label={navMenu}
     >
       <Icon name="mdi:menu" class="w-6 h-6" />
     </button>

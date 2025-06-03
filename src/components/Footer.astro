@@ -1,74 +1,74 @@
 ---
-import { Icon } from 'astro-icon/components';
-import SocialLinks from './SocialLinks.astro';
-import LogoAndName from './LogoAndName.astro';
-import i18next from '../i18n/config';
+import { Icon } from "astro-icon/components";
+import SocialLinks from "./SocialLinks.astro";
+import LogoAndName from "./LogoAndName.astro";
 
-const contactInfo = {
-  en: {
-    email: 'contacto@iglesiasomos.es',
-    phone: '(+34) 679 88 5065 - 665 56 9144',
-    address: 'Calle del sol #60, Alfafar - Valencia',
-    tagline: 'Love, Forgiveness, Service.',
-    contact: 'Contact',
-    followUs: 'Follow Us',
-    rights: 'All rights reserved.',
-    developedBy: 'Created by'
-  },
-  es: {
-    email: 'contacto@iglesiasomos.es',
-    phone: '(+34) 679 88 5065 - 665 56 9144',
-    address: 'Calle del sol #60, Alfafar - Valencia',
-    tagline: 'Amor, Perdón, Servicio.',
-    contact: 'Contacto',
-    followUs: 'Síguenos',
-    rights: 'Todos los derechos reservados.',
-    developedBy: 'Construido por'
-  }
-};
 
-const currentPath = Astro.url.pathname;
-const lang = currentPath.startsWith('/es') ? 'es' : 'en';
-const t = contactInfo[lang];
+import { languageList } from "@/i18n/ui";
+import { useTranslations } from "@/i18n/utils";
+
+
+
+const currentLang = Astro.currentLocale || "es";
+const translateLabels = useTranslations(
+  currentLang as keyof typeof languageList,
+);
+
+const email = translateLabels("footer.email");
+const phone = translateLabels("footer.phone");
+const address = translateLabels("footer.address");
+const tagline = translateLabels("footer.tagline");
+const contact = translateLabels("footer.contact");
+const followUs = translateLabels("footer.followUs");
+const rights = translateLabels("footer.rights");
+const developedBy = translateLabels("footer.developedBy");
+const siteTitle = translateLabels("site.title");
+
 ---
 
 <footer class="bg-primary text-background py-12">
   <div class="container mx-auto px-4">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
       <div class="space-y-4">
-        <LogoAndName 
-          variant="default" 
-          className="text-background hover:opacity-80" 
+        <LogoAndName
+          variant="default"
+          className="text-background hover:opacity-80"
         />
         <p class="text-background/80">
-          {t.tagline}
+          {tagline}
         </p>
       </div>
 
       <div class="space-y-4">
-        <h3 class="text-xl font-bold">{t.contact}</h3>
+        <h3 class="text-xl font-bold">{contact}</h3>
         <div class="space-y-2">
           <p class="flex items-center gap-2">
             <Icon name="mdi:email" class="w-5 h-5 text-accent" />
-            <a href={`mailto:${t.email}`} class="hover:text-accent transition-colors">
-              {t.email}
+            <a
+              href={`mailto:${email}`}
+              class="hover:text-accent transition-colors"
+            >
+              {email}
             </a>
           </p>
           <p class="flex items-center gap-2">
             <Icon name="mdi:phone" class="w-5 h-5 text-accent" />
-            <a href={`tel:${t.phone}`} class="hover:text-accent transition-colors">
-              {t.phone}
+            <a
+              href={`tel:${phone}`}
+              class="hover:text-accent transition-colors"
+            >
+              {phone}
             </a>
           </p>
           <p class="flex items-center gap-2">
             <Icon name="mdi:map-marker" class="w-5 h-5 text-accent" />
-            <span>{t.address}</span>
+            <span>{address}</span>
           </p>
         </div>
       </div>
 
       <div class="space-y-4">
-        <h3 class="text-xl font-bold">{t.followUs}</h3>
+        <h3 class="text-xl font-bold">{followUs}</h3>
         <SocialLinks />
       </div>
     </div>
@@ -76,12 +76,21 @@ const t = contactInfo[lang];
     <div class="h-px bg-background/20 my-8"></div>
 
     <div class="text-center text-background/60 space-y-2">
-      <p>&copy; {new Date().getFullYear()} {i18next.t('site.title')}. {t.rights}</p>
+      <p>
+        &copy; {new Date().getFullYear()}
+        {siteTitle}. {rights}
+      </p>
       <p class="text-sm">
-        {t.developedBy} <a href="https://alcance-it.es" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-accent/80 transition-colors">Alcance IT</a>
+        {developedBy}
+        <a
+          href="https://alcance-it.es"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-accent hover:text-accent/80 transition-colors"
+          >Alcance IT</a
+        >
       </p>
     </div>
-  </div>
   </div>
 </footer>
 
@@ -92,27 +101,27 @@ const t = contactInfo[lang];
   }
 
   footer::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(0, 0, 0, 0.2),
-    transparent
-  );
-}
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(0, 0, 0, 0.2),
+      transparent
+    );
+  }
 
-/* Modo oscuro */
-:global(.dark) footer::before {
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.2),
-    transparent
-  );
-}
+  /* Modo oscuro */
+  :global(.dark) footer::before {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+  }
 </style>

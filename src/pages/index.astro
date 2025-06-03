@@ -7,55 +7,63 @@ import MissionSection from '@/components/MissionSection.astro';
 import VisionSection from '@/components/VisionSection.astro';
 import BaseLayout from '../layouts/Layout.astro';
 
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { languageList } from "@/i18n/ui";
+import { useTranslations } from "@/i18n/utils";
+
+const currentLang = Astro.currentLocale || "es";
+const translateLabels = useTranslations(
+  currentLang as keyof typeof languageList
+);
 
 const visionItems = [
   {
-    title: "Amor",
-    description: "El amor es el aroma que cada persona debe transmitir a los demás. Es la esencia de la Iglesia."
+    title: translateLabels("vision.items.title.amor"),
+    description: translateLabels("vision.items.description.amor")
   },
   {
-    title: "Perdon",
-    description: "Perdonar es amar. Solo con el perdón puedes crecer y sobretodo madurar. El perdón son los brazos de la Iglesia para abrazar al dolido."
+    title: translateLabels("vision.items.title.perdon"),
+    description: translateLabels("vision.items.description.perdon")
   },
   {
-    title: "Servicio",
-    description: "El servicio es el amor en acción. Sin práctica no hay verdad. El que ama y perdona, fluye en servir a los demás. Cuidar y sembrar en cada vida es una privilegio que Dios nos da."
+    title: translateLabels("vision.items.title.servicio"),
+    description: translateLabels("vision.items.description.servicio")
   }
 ];
 
 const events = [ 
 {
-    imageUrl: "/img/somos_mesas.avif",
-    title: "Viernes, 19:00",
-    date: "Mesas - Alfafar"
+    imageUrl:  translateLabels("events.mesas.imageUrl"),
+    title: translateLabels("events.mesas.title"),
+    date: translateLabels("events.mesas.date"),
   },
   {
-    imageUrl: "/img/somos_domigos.avif",
-    title: "Domingo, 11:00 AM",
-    date: "Super Reunión"
+    imageUrl: translateLabels("events.domingos.imageUrl"),
+    title: translateLabels("events.domingos.title"),
+    date: translateLabels("events.domingos.date"),
   }
 ];
 
 
 ---
 
-<BaseLayout title="Inicio">
+<BaseLayout title={translateLabels("nav.home")}>
   <HeroSection
-    videoUrl="/video/somos_video_principal_inicio_compressed.mp4"
-    title="Una iglesia para"
-    highlightedWord="gente,"
-    subtitle="sin iglesia"
-    ctaText="Conócenos"
-    ctaLink="es/about"
-    scheduleText="Vamos despacio por que vamos lejos."
+    videoUrl= {translateLabels("hero.section.videoUrl")}
+    title={translateLabels("hero.section.title")}
+    highlightedWord={translateLabels("hero.section.highlightedWord")}
+    subtitle={translateLabels("hero.section.subtitle")}
+    ctaText={translateLabels("hero.section.ctaText")}
+    ctaLink={getRelativeLocaleUrl(currentLang, "about")}
+    scheduleText= {translateLabels("hero.section.scheduleText")}
   />
 
    <MissionSection
-  title="Nuestra Misión"
-  description="Exponer el Evangelio de Jesucristo."
-  imageUrl="/img/somos_mision.avif"
-  ctaText="Conoce más"
-  ctaLink="/contact"
+  title={translateLabels("mission.section.title")}
+  description= {translateLabels("mission.section.description")}
+  imageUrl= {translateLabels("mission.section.imageUrl")}
+  ctaText= {translateLabels("mission.section.ctaText")}
+  ctaLink= {getRelativeLocaleUrl(currentLang, "contact")} 
   styles={{
     sectionBg: "bg-accent dark:bg-accent",
     titleColor: "text-dark",
@@ -66,11 +74,11 @@ const events = [
   }}
 />
 
-  <VisionSection title="Nuestros Pilares" items={visionItems} />
+  <VisionSection title={translateLabels("vision.section.title")} items={visionItems} />
 
    ,
   <EventsSection 
-    title="Nuestra Agenda" 
+    title= {translateLabels("events.title")}
     events={events}
     className="py-16 px-8 bg-light dark:bg-dark"
     cardProps={{
@@ -82,9 +90,9 @@ const events = [
 
 
   <CTASection
-    title="Bienvenido"
-    description="En la familia Somos hay lugar para todos en la mesa."
-    ctaText="Contáctanos"
-    ctaLink="es/contact"
+    title={translateLabels("cta.section.title")} 
+    description= {translateLabels("cta.section.description")}
+    ctaText={translateLabels("cta.section.ctaText")}
+    ctaLink={getRelativeLocaleUrl(currentLang, "contact")} 
   />
 </BaseLayout>
