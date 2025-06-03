@@ -390,7 +390,7 @@ export const labels = {
     "icon": "mdi:translate",
     "label": "Change language to English",
     "nav.menu": "Menu",
-    "site.title": "Somos Comunidad Cristiana",
+    "site.title": "Somos Christian Community",
     // =========== Navigation =========== //
     "nav.goHome": "Go home",
     "nav.home": "Home",
