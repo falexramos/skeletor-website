@@ -52,7 +52,7 @@ const label = translateLabels("label");
             data-lang={langCode}
             role="menuitem"
             aria-label={langName}
-        
+            data-url={getRelativeLocaleUrl(langCode as any, currentPathWithoutLocale)}
           >
             <Icon name={icon} class="w-5 h-5" />
             {langName}
@@ -92,21 +92,11 @@ const label = translateLabels("label");
     }
   });
 
-  languageButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const newLang = btn.getAttribute("data-lang");
-      const currentPath = window.location.pathname;
-      const currentLang = currentPath.split("/")[1];
-      
-      if (newLang) {
-        if (["es", "en"].includes(currentLang)) {
-          window.location.pathname = currentPath.replace(
-            `/${currentLang}`,
-            `/${newLang}`,
-          );
-        } else {
-          window.location.pathname = `/${newLang}${currentPath}`;
-        }
+  languageButtons.forEach((langButton) => {
+    langButton.addEventListener("click", (e) => {
+      const url = (e.currentTarget as HTMLElement).dataset.url;
+      if (url) {
+        window.location.href = url;
       }
     });
   });
