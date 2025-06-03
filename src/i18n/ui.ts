@@ -53,13 +53,16 @@ export const labels = {
     "vision.section.ctaText": "Conoce más",
 
     // =========== Eventos =========== //
-    "events.title" : "Nuestra Agenda",
+    "events.title" : "Agenda Semanal",
+    "events.oracion.imageUrl": "/assets/img/somos_oracion.avif",
+    "events.oracion.title": "Viernes, 18:00 hrs",
+    "events.oracion.date": "Oración semanal",
     "events.mesas.imageUrl" : "/assets/img/somos_mesas.avif",
     "events.mesas.title": "Viernes, 19:00 hrs",
     "events.mesas.date": "Mesas - Alfafar",
     "events.domingos.imageUrl" : "/assets/img/somos_domigos.avif",
     "events.domingos.title": "Domingo, 11:30 AM",
-    "events.domingos.date": "Super Reunión",
+    "events.domingos.date": "Super Reunión (Reunión dominical)",
     
     // =========== Hero Section =========== //
     "hero.section.videoUrl": "/assets/video/somos_video_principal_inicio_compressed.mp4",
@@ -433,6 +436,10 @@ export const labels = {
     "vision.section.ctaText": "Learn More",
 
     // =========== Events =========== //
+    "events.title": "Weekly Schedule",
+    "events.oracion.imageUrl": "/assets/img/somos_oracion.avif",
+    "events.oracion.title": "Friday, 18:00 hrs",
+    "events.oracion.date": "weekly prayer",
     "events.mesas.imageUrl": "/assets/img/somos_mesas.avif",
     "events.mesas.title": "Friday, 19:00 hrs",
     "events.mesas.date": "Tables - Alfafar",
