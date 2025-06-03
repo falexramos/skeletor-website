@@ -1,0 +1,98 @@
+---
+// index.astro
+import CTASection from '@/components/CTASection.astro';
+import EventsSection from '@/components/EventsSection.astro';
+import HeroSection from '@/components/HeroSection.astro';
+import MissionSection from '@/components/MissionSection.astro';
+import VisionSection from '@/components/VisionSection.astro';
+import BaseLayout from '../../layouts/Layout.astro';
+
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { languageList } from "@/i18n/ui";
+import { useTranslations } from "@/i18n/utils";
+
+const currentLang = Astro.currentLocale || "es";
+const translateLabels = useTranslations(
+  currentLang as keyof typeof languageList
+);
+
+const visionItems = [
+  {
+    title: translateLabels("vision.items.title.amor"),
+    description: translateLabels("vision.items.description.amor")
+  },
+  {
+    title: translateLabels("vision.items.title.perdon"),
+    description: translateLabels("vision.items.description.perdon")
+  },
+  {
+    title: translateLabels("vision.items.title.servicio"),
+    description: translateLabels("vision.items.description.servicio")
+  }
+];
+
+const events = [ 
+{
+    imageUrl:  translateLabels("events.mesas.imageUrl"),
+    title: translateLabels("events.mesas.title"),
+    date: translateLabels("events.mesas.date"),
+  },
+  {
+    imageUrl: translateLabels("events.domingos.imageUrl"),
+    title: translateLabels("events.domingos.title"),
+    date: translateLabels("events.domingos.date"),
+  }
+];
+
+
+---
+
+<BaseLayout title={translateLabels("nav.home")}>
+  <HeroSection
+    videoUrl= {translateLabels("hero.section.videoUrl")}
+    title={translateLabels("hero.section.title")}
+    highlightedWord={translateLabels("hero.section.highlightedWord")}
+    subtitle={translateLabels("hero.section.subtitle")}
+    ctaText={translateLabels("hero.section.ctaText")}
+    ctaLink={getRelativeLocaleUrl(currentLang, "about")}
+    scheduleText= {translateLabels("hero.section.scheduleText")}
+  />
+
+   <MissionSection
+  title={translateLabels("mission.section.title")}
+  description= {translateLabels("mission.section.description")}
+  imageUrl= {translateLabels("mission.section.imageUrl")}
+  ctaText= {translateLabels("mission.section.ctaText")}
+  ctaLink= {getRelativeLocaleUrl(currentLang, "contact")} 
+  styles={{
+    sectionBg: "bg-accent dark:bg-accent",
+    titleColor: "text-dark",
+    textColor: "text-dark",
+    ctaBg: "bg-dark",
+    ctaColor: "text-accent dark:text-accent",
+    ctaHoverBg: "hover:bg-dark/90 dark:hover:bg-bg-light/70"
+  }}
+/>
+
+  <VisionSection title={translateLabels("vision.section.title")} items={visionItems} />
+
+   ,
+  <EventsSection 
+    title= {translateLabels("events.title")}
+    events={events}
+    className="py-16 px-8 bg-light dark:bg-dark"
+    cardProps={{
+      className: "relative overflow-hidden rounded-3xl bg-secondary dark:bg-secondary/20 shadow-md",
+      titleClassName: "text-2xl font-display font-bold text-dark dark:text-light mb-2",
+      dateClassName: "text-dark/70 dark:text-light/70"
+    }}
+  />
+
+
+  <CTASection
+    title={translateLabels("cta.section.title")} 
+    description= {translateLabels("cta.section.description")}
+    ctaText={translateLabels("cta.section.ctaText")}
+    ctaLink={getRelativeLocaleUrl(currentLang, "contact")} 
+  />
+</BaseLayout>

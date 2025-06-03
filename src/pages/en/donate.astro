@@ -1,0 +1,81 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { languageList } from "@/i18n/ui";
+import { useTranslations } from "@/i18n/utils";
+import DonationCard from "@/components/DonationCard.astro";
+import OtherWaysToGive from "@/components/OtherWaysToGive.astro";
+import PageHeader from "@/components/PageHeader.astro";
+import Layout from "@/layouts/Layout.astro";
+
+const getPathWithoutLocale = (path: string): string => {
+  const segments = path.split("/").filter(Boolean);
+  return segments.slice(1).join("/") || "/";
+};
+
+const currentPathWithoutLocale = getPathWithoutLocale(Astro.url.pathname);
+const currentLang = Astro.currentLocale || "es";
+const translateLabels = useTranslations(
+  currentLang as keyof typeof languageList
+);
+
+const donationOptions = [
+  {
+    title: translateLabels("donate.options.0.title"),
+    description: translateLabels("donate.options.0.description"),
+    options: [translateLabels("donate.options.0.options.0"),  
+              translateLabels("donate.options.0.options.1"), 
+              translateLabels("donate.options.0.options.2"), translateLabels("donate.options.0.options.3")
+            ],
+    buttonText: translateLabels("donate.options.0.buttonText"),
+    link: translateLabels("donate.options.0.link"),
+  },
+  {
+    title: translateLabels("donate.options.1.title"),
+    description: translateLabels("donate.options.1.description"),
+    options: [translateLabels("donate.options.1.options.0"),  
+              translateLabels("donate.options.1.options.1"), 
+              translateLabels("donate.options.1.options.2"), 
+              translateLabels("donate.options.0.options.3")
+            ],
+    buttonText: translateLabels("donate.options.1.buttonText"),
+    link: translateLabels("donate.options.1.link"),
+  },
+];
+
+const otherMethods = [
+  {
+    title: translateLabels("donate.methods.0.title"),
+    description: translateLabels("donate.methods.0.description"),
+    details: translateLabels("donate.methods.0.details"),
+  },
+  {
+    title: translateLabels("donate.methods.1.title"),
+    description: translateLabels("donate.methods.1.description"),
+  },
+  {
+    title: translateLabels("donate.methods.2.title"),
+    description: translateLabels("donate.methods.2.description"),
+    details: translateLabels("donate.methods.2.details"),
+  },
+];
+
+const pageTitle = `${translateLabels("donate.title")} | ${translateLabels("site.title")}`;
+---
+
+<Layout title={pageTitle}>
+  <PageHeader
+    title= {translateLabels("donate.header.title")}
+    highlightedWord={translateLabels("donate.header.highlightedWord")}
+    description= {translateLabels("donate.header.description")}
+  />
+
+  <OtherWaysToGive title={translateLabels("donate.otherWays.title")} methods={otherMethods} />
+
+  <div class="max-w-[90rem] mx-auto">
+    <div class="grid md:grid-cols-2 gap-8">
+      {donationOptions.map((option) => <DonationCard {...option} />)}
+    </div>
+
+    
+  </div>
+</Layout>

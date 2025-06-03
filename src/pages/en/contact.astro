@@ -1,0 +1,34 @@
+---
+// pages/es/contact.astro
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { languageList } from "@/i18n/ui";
+import { useTranslations } from "@/i18n/utils";
+import ContactSection from "@/components/ContactSection.astro";
+import Layout from "@/layouts/Layout.astro";
+
+const getPathWithoutLocale = (path: string): string => {
+  const segments = path.split("/").filter(Boolean);
+  return segments.slice(1).join("/") || "/";
+};
+
+const currentPathWithoutLocale = getPathWithoutLocale(Astro.url.pathname);
+const currentLang = Astro.currentLocale || "es";
+const translateLabels = useTranslations(
+  currentLang as keyof typeof languageList
+);
+
+const contactTexts = {
+  title: translateLabels("contact.title"),
+  highlightedWord: "", 
+  description: translateLabels("contact.description"),
+  callUs: translateLabels("contact.callUs"),
+  emailUs: translateLabels("contact.emailUs"),
+  whatsappButton: translateLabels("contact.whatsappButton"),
+};
+
+const pageTitle = `${translateLabels("contact.title")} | ${translateLabels("site.title")}`;
+---
+
+<Layout title={pageTitle}>
+  <ContactSection texts={contactTexts} />
+</Layout>

@@ -4,6 +4,12 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 import { languageList } from "@/i18n/ui";
 import { useTranslations } from "@/i18n/utils";
 
+const getPathWithoutLocale = (path: string): string => {
+  const segments = path.split("/").filter(Boolean);
+  return segments.slice(1).join("/") || "/";
+};
+const currentPathWithoutLocale = getPathWithoutLocale(Astro.url.pathname);
+
 const currentLang = Astro.currentLocale || "es";
 const translateLabels = useTranslations(
   currentLang as keyof typeof languageList,
@@ -46,6 +52,7 @@ const label = translateLabels("label");
             data-lang={langCode}
             role="menuitem"
             aria-label={langName}
+        
           >
             <Icon name={icon} class="w-5 h-5" />
             {langName}
@@ -90,7 +97,7 @@ const label = translateLabels("label");
       const newLang = btn.getAttribute("data-lang");
       const currentPath = window.location.pathname;
       const currentLang = currentPath.split("/")[1];
-
+      
       if (newLang) {
         if (["es", "en"].includes(currentLang)) {
           window.location.pathname = currentPath.replace(

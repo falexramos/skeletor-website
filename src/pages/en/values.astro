@@ -1,0 +1,157 @@
+---
+import AceroSection from "@/components/AceroSection.astro";
+
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { languageList } from "@/i18n/ui";
+import { useTranslations } from "@/i18n/utils";
+import JoinCommunitySection from "@/components/JoinCommunitySection.astro";
+import PageHeader from "@/components/PageHeader.astro";
+import ValuesSection from "@/components/ValuesSection.astro";
+import Layout from "@/layouts/Layout.astro";
+
+const getPathWithoutLocale = (path: string): string => {
+  const segments = path.split("/").filter(Boolean);
+  return segments.slice(1).join("/") || "/";
+};
+
+const currentPathWithoutLocale = getPathWithoutLocale(Astro.url.pathname);
+const currentLang = Astro.currentLocale || "es";
+const translateLabels = useTranslations(
+  currentLang as keyof typeof languageList,
+);
+
+// Datos de valores en español
+const values = [
+  {
+    title: translateLabels("value.section.items.0.title"),
+    icon: translateLabels("value.section.items.0.icon"),
+    description: translateLabels("value.section.items.0.description"),
+    verse: translateLabels("value.section.items.0.verse"),
+    reference: translateLabels("value.section.items.0.reference"),
+  },
+  {
+    title: translateLabels("value.section.items.1.title"),
+    icon: translateLabels("value.section.items.1.icon"),
+    description: translateLabels("value.section.items.1.description"),
+    verse: translateLabels("value.section.items.1.verse"),
+    reference: translateLabels("value.section.items.1.reference"),
+  },
+  {
+    title: translateLabels("value.section.items.2.title"),
+    icon: translateLabels("value.section.items.2.icon"),
+    description: translateLabels("value.section.items.2.description"),
+    verse: translateLabels("value.section.items.2.verse"),
+    reference: translateLabels("value.section.items.2.reference"),
+  },
+  {
+    title: translateLabels("value.section.items.3.title"),
+    icon: translateLabels("value.section.items.3.icon"),
+    description: translateLabels("value.section.items.3.description"),
+    verse: translateLabels("value.section.items.3.verse"),
+    reference: translateLabels("value.section.items.3.reference"),
+  },
+  {
+    title: translateLabels("value.section.items.4.title"),
+    icon: translateLabels("value.section.items.4.icon"),
+    description: translateLabels("value.section.items.4.description"),
+    verse: translateLabels("value.section.items.4.verse"),
+    reference: translateLabels("value.section.items.4.reference"),
+  },
+  {
+    title: translateLabels("value.section.items.5.title"),
+    icon: translateLabels("value.section.items.5.icon"),
+    description: translateLabels("value.section.items.5.description"),
+    verse: translateLabels("value.section.items.5.verse"),
+    reference: translateLabels("value.section.items.5.reference"),
+  },
+  {
+    title: translateLabels("value.section.items.6.title"),
+    icon: translateLabels("value.section.items.6.icon"),
+    description: translateLabels("value.section.items.6.description"),
+    verse: translateLabels("value.section.items.6.verse"),
+    reference: translateLabels("value.section.items.6.reference"),
+  },
+];
+
+const aceroItems = [
+  {
+    letter: translateLabels("acero.section.items.0.letter"),
+    title: translateLabels("acero.section.items.0.title"),
+    content: translateLabels("acero.section.items.0.content"),
+    verse: translateLabels("acero.section.items.0.verse"),
+    reference: translateLabels("acero.section.items.0.reference"),
+  },
+  {
+    letter: translateLabels("acero.section.items.1.letter"),
+    title: translateLabels("acero.section.items.1.title"),
+    content: translateLabels("acero.section.items.1.content"),
+    verse: translateLabels("acero.section.items.1.verse"),
+    reference: translateLabels("acero.section.items.1.reference"),
+  },
+  {
+    letter: translateLabels("acero.section.items.2.letter"),
+    title: translateLabels("acero.section.items.2.title"),
+    content: translateLabels("acero.section.items.2.content"),
+    verse: translateLabels("acero.section.items.2.verse"),
+    reference: translateLabels("acero.section.items.2.reference"),
+  },
+  {
+    letter: translateLabels("acero.section.items.3.letter"),
+    title: translateLabels("acero.section.items.3.title"),
+    content: translateLabels("acero.section.items.3.content"),
+    verse: translateLabels("acero.section.items.3.verse"),
+    reference: translateLabels("acero.section.items.3.reference"),
+  },
+  {
+    letter: translateLabels("acero.section.items.4.letter"),
+    title: translateLabels("acero.section.items.4.title"),
+    content: translateLabels("acero.section.items.4.content"),
+    verse: translateLabels("acero.section.items.4.verse"),
+    reference: translateLabels("acero.section.items.4.reference"),
+  },
+];
+// Datos de la comunidad en español
+const communityButtons = [
+  {
+    text: translateLabels("community.buttons.text"),
+    link: getRelativeLocaleUrl(currentLang, "messages"),
+    variant: "secondary" as const,
+  },
+  {
+    text: translateLabels("community.buttons.contact"),
+    link: getRelativeLocaleUrl(currentLang, "contact"),
+    variant: "primary" as const,
+  },
+];
+
+const pageTitle = `${translateLabels("nav.values")} | ${translateLabels("site.title")}`;
+---
+
+<Layout title={pageTitle}>
+  <PageHeader
+    title={translateLabels("value.section.header.title")}
+    highlightedWord={translateLabels("value.section.header.highlightedWord")}
+    description={translateLabels("value.section.header.description")}
+  />
+
+  <ValuesSection
+    title={translateLabels("value.section.title")}
+    values={values}
+    className="py-8 px-8 bg-accent"
+  />
+
+  <AceroSection
+    title={translateLabels("acero.section.title")}
+    subtitle={translateLabels("acero.section.subtitle")}
+    items={aceroItems}
+    className="py-32 px-8 bg-light dark:bg-dark"
+  />
+
+  <JoinCommunitySection
+    title={translateLabels("community.section.title")}
+    description={translateLabels("community.section.description")}
+    imageUrl={translateLabels("community.section.imageUrl")}
+    buttons={communityButtons}
+    className="py-32 px-8 bg-dark text-light dark:bg-accent dark:text-dark"
+  />
+</Layout>

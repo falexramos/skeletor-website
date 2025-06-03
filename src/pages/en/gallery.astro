@@ -1,0 +1,88 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { languageList } from "@/i18n/ui";
+import { useTranslations } from "@/i18n/utils";
+import GalleryItem from "@/components/GalleryItem.astro";
+import PageHeader from "@/components/PageHeader.astro";
+import Layout from "@/layouts/Layout.astro";
+
+const getPathWithoutLocale = (path: string): string => {
+  const segments = path.split("/").filter(Boolean);
+  return segments.slice(1).join("/") || "/";
+};
+
+const currentPathWithoutLocale = getPathWithoutLocale(Astro.url.pathname);
+const currentLang = Astro.currentLocale || "es";
+const translateLabels = useTranslations(
+  currentLang as keyof typeof languageList,
+);
+
+const galleryImages = [
+  {
+    title: translateLabels("gallery.images.0.title"),
+    category: translateLabels("gallery.images.0.category"),
+    description: translateLabels("gallery.images.0.description"),
+    url: translateLabels("gallery.images.0.url"),
+    link: translateLabels("gallery.images.0.link"),
+  },
+  {
+    title: translateLabels("gallery.images.1.title"),
+    category: translateLabels("gallery.images.1.category"),
+    description: translateLabels("gallery.images.1.description"),
+    url: translateLabels("gallery.images.1.url"),
+    link: translateLabels("gallery.images.1.link")
+  },
+  {
+    title: translateLabels("gallery.images.2.title"),
+    category: translateLabels("gallery.images.2.category"),
+    description: translateLabels("gallery.images.2.description"),
+    url: translateLabels("gallery.images.2.url"),
+    link: translateLabels("gallery.images.2.link")
+  },
+  {
+    title: translateLabels("gallery.images.3.title"),
+    category: translateLabels("gallery.images.3.category"),
+    description: translateLabels("gallery.images.3.description"),
+    url: translateLabels("gallery.images.3.url"),
+    link: translateLabels("gallery.images.3.link")
+  },
+  {
+    title: translateLabels("gallery.images.4.title"),
+    category: translateLabels("gallery.images.4.category"),
+    description: translateLabels("gallery.images.4.description"),
+    url: translateLabels("gallery.images.4.url"),
+    link: translateLabels("gallery.images.4.link")
+  },
+  {
+    title: translateLabels("gallery.images.5.title"),
+    category: translateLabels("gallery.images.5.category"),
+    description: translateLabels("gallery.images.5.description"),
+    url: translateLabels("gallery.images.5.url"),
+    link: translateLabels("gallery.images.5.link")
+  },
+];
+
+const headerText = {
+  title: translateLabels("gallery.header.title"),
+  highlightedWord: translateLabels("gallery.header.highlightedWord"),
+  description: translateLabels("gallery.header.description"),
+};
+
+const pageTitle = `${translateLabels("gallery.header.title")} | ${translateLabels("site.title")}`;
+---
+
+<Layout title={pageTitle}>
+  <main class="min-h-screen px-8 pb-16 md:px-16 mt-2">
+    <div class="max-w-[90rem] mx-auto mb-2">
+      <PageHeader
+        title={headerText.title}
+        highlightedWord={headerText.highlightedWord}
+        description={headerText.description}
+      />
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {galleryImages.map((image) => <GalleryItem {...image} />)}
+      </div>
+    </div>
+  </main>
+</Layout>

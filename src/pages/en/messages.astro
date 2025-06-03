@@ -1,0 +1,125 @@
+---
+// src/pages/es/messages.astro
+
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { languageList } from "@/i18n/ui";
+import { useTranslations } from "@/i18n/utils";
+import PageHeader from "@/components/PageHeader.astro";
+import SeriesFilter from "@/components/SeriesFilter.astro";
+import SermonCard from "@/components/SermonCard.astro";
+import Layout from "@/layouts/Layout.astro";
+
+const getPathWithoutLocale = (path: string): string => {
+  const segments = path.split("/").filter(Boolean);
+  return segments.slice(1).join("/") || "/";
+};
+
+const currentPathWithoutLocale = getPathWithoutLocale(Astro.url.pathname);
+const currentLang = Astro.currentLocale || "es";
+const translateLabels = useTranslations(
+  currentLang as keyof typeof languageList
+);
+
+
+const sermons = [
+  { title: 'EL PRINCIPIO DEL FIN', pastor: 'JOSUE MURILLO', date: '16 Febrero, 2025', description: 'descripcion en texto corto.', videoId: 'i_gyxSGm2X0', duration: '49:00', category: '7 Vidas' },
+  { title: 'RELIGION VS GRACIA', pastor: 'Pastor Juan Cano', date: '2 Abril, 2024', description: 'Quitar el polvo a conversaciones y asuntos que han generado controversia dentro y fuera de la Iglesia.', videoId: 'W5LpC95EQL8', duration: '59:59', category: 'EL SENTIDO' },
+  { title: 'El perdón en acción', pastor: 'Johan Murillo', date: '26 Abril, 2024', description: 'el perdon....', videoId: 'vvgem73t1zY', duration: '49:04', category: 'Perdon' }
+];
+
+const categoryNames = { all: "Todas las Series", faith: "7 Vidas", foundations: "SENTIDO", family: "Perdon" };
+
+const uniqueCategories = [...new Set(sermons.map(sermon => sermon.category))];
+const series = [
+  { id: "all", name: categoryNames.all, active: true },
+  ...uniqueCategories.map(category => ({ id: category, name: categoryNames[category] || category, active: false }))
+];
+
+
+const headerText = {
+  title: translateLabels("messages.header.title"),
+  highlightedWord: translateLabels("messages.header.highlightedWord"),
+  description: translateLabels("messages.header.description")
+};
+
+const pageTitle = `Predicacion | ${translateLabels("site.title")}`;
+
+---
+
+<Layout title={pageTitle}>
+  <main class="min-h-screen px-8 pb-16 md:px-16 mt-2 bg-light dark:bg-dark text-dark dark:text-light">
+    <div class="max-w-[90rem] mx-auto mb-2">
+      <PageHeader {...headerText} />
+      <SeriesFilter series={series} />
+      <div id="sermons-grid" class="grid gap-8">
+        {sermons.map(sermon => (
+          <SermonCard
+            {...sermon}
+            watchText= {translateLabels("messages.watchText")}
+          />
+        ))}
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  const tabsContainer = document.querySelector('.overflow-x-auto');
+  if (tabsContainer) {
+    let isScrolling = false;
+    let startX;
+    let scrollLeft;
+
+    tabsContainer.addEventListener('mousedown', (e) => {
+      isScrolling = true;
+      startX = (e as MouseEvent).pageX - (tabsContainer as HTMLElement).offsetLeft;
+      scrollLeft = (tabsContainer as HTMLElement).scrollLeft;
+    });
+
+    tabsContainer.addEventListener('mouseleave', () => {
+      isScrolling = false;
+    });
+
+    tabsContainer.addEventListener('mouseup', () => {
+      isScrolling = false;
+    });
+
+    tabsContainer.addEventListener('mousemove', (e) => {
+      if (!isScrolling) return;
+      e.preventDefault();
+      const x = (e as MouseEvent).pageX - (tabsContainer as HTMLElement).offsetLeft;
+      const walk = (x - startX) * 2;
+      tabsContainer.scrollLeft = scrollLeft - walk;
+    });
+  }
+
+  const categoryButtons = document.querySelectorAll('[data-category]');
+  const sermonCards = document.querySelectorAll('.sermon-card');
+
+  categoryButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      categoryButtons.forEach(btn => {
+        btn.classList.remove('border-accent', 'text-accent');
+        btn.classList.add('border-transparent');
+      });
+      button.classList.add('border-accent', 'text-accent');
+      button.classList.remove('border-transparent');
+
+      const selectedCategory = button.getAttribute('data-category');
+      sermonCards.forEach(card => {
+        const cardCategory = card.getAttribute('data-category');
+        if (selectedCategory === 'all' || selectedCategory === cardCategory) {
+          card.classList.remove('hidden');
+          card.classList.add('opacity-100');
+          card.classList.remove('opacity-0');
+        } else {
+          card.classList.add('opacity-0');
+          card.classList.remove('opacity-100');
+          setTimeout(() => {
+            card.classList.add('hidden');
+          }, 300);
+        }
+      });
+    });
+  });
+</script>
