@@ -77,8 +77,8 @@ export const labels = {
     // =========== team section =========== //
     "team.section.title": "Nuestros Lideres",
     "team.section.pastores.title": "Pastores",
-    "team.section.pastores.items.0.name": "William",
-    "team.section.pastores.items.0.role": "Pastor",
+    "team.section.pastores.items.0.name": "William Murillo y Jessica Simbal",
+    "team.section.pastores.items.0.role": "Pastores",
     "team.section.pastores.items.0.image": "/assets/img/somos_team_pastores.jpg",
     "team.section.pastores.items.1.name": "Jessica",
     "team.section.pastores.items.1.role": "Pastora",
@@ -456,8 +456,8 @@ export const labels = {
     // =========== team section =========== //
     "team.section.title": "Our Leaders",
     "team.section.pastores.title": "Pastors",
-    "team.section.pastores.items.0.name": "William",
-    "team.section.pastores.items.0.role": "Pastor",
+    "team.section.pastores.items.0.name": "William Murillo y Jessica Simbal",
+    "team.section.pastores.items.0.role": "Pastors",
     "team.section.pastores.items.0.image": "/assets/img/somos_team_pastores.jpg",
     "team.section.pastores.items.1.name": "Jessica",
     "team.section.pastores.items.1.role": "Pastor",

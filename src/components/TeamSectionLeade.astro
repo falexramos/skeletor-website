@@ -1,0 +1,38 @@
+---
+interface Props {
+  title: string;
+  name: string;
+  role: string;
+  image: string;
+  className?: string;
+  backgroundColor?: string;
+}
+
+const {
+  title,
+  name,
+  role,
+  image,
+  className = "py-32 px-8",
+  backgroundColor = "bg-accent"
+} = Astro.props;
+---
+
+<section class={`${className} ${backgroundColor}`}>
+  <div class="max-w-[90rem] mx-auto text-dark">
+     <h2 class="large-text mb-16 text-dark">{title}</h2>
+    <div class="flex justify-center">
+      <div class="group max-w-md">
+        <div class="mb-6 overflow-hidden rounded-3xl">
+          <img
+            src={image || "/placeholder.svg"}
+            alt={name}
+            class="w-full object-contain transition-transform duration-500 group-hover:scale-105"
+          />
+        </div>
+        <h3 class="text-2xl font-bold">{name}</h3>
+        <p class="text-xl opacity-70">{role}</p>
+      </div>
+    </div>
+  </div>
+</section>
