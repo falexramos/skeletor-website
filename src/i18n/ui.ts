@@ -35,7 +35,7 @@ export const labels = {
     "vision.items.title.amor": "Amor",
     "vision.items.description.amor": "El amor es el aroma que cada persona debe transmitir a los demás. Es la esencia de la Iglesia.",
 
-    "vision.items.title.perdon": "Perdon",
+    "vision.items.title.perdon": "Perdón",
     "vision.items.description.perdon": "Perdonar es amar. Solo con el perdón puedes crecer y sobretodo madurar. El perdón son los brazos de la Iglesia para abrazar al dolido.",
 
     "vision.items.title.servicio": "Servicio",
@@ -43,7 +43,7 @@ export const labels = {
 
     // ===========Mission section =========== //
     "mission.section.title": "Nuestra Misión",
-    "mission.section.description": "Exponer el Evangelio de Jesucristo.",
+    "mission.section.description": "Exponer el Evangelio de Jesucristo a toda persona.",
     "mission.section.imageUrl": "/assets/img/somos_mision.avif",
     "mission.section.ctaText": "Conoce más",
 
@@ -55,19 +55,19 @@ export const labels = {
     // =========== Eventos =========== //
     "events.title" : "Nuestra Agenda",
     "events.mesas.imageUrl" : "/assets/img/somos_mesas.avif",
-    "events.mesas.title": "Viernes, 19:00",
+    "events.mesas.title": "Viernes, 19:00 hrs",
     "events.mesas.date": "Mesas - Alfafar",
     "events.domingos.imageUrl" : "/assets/img/somos_domigos.avif",
-    "events.domingos.title": "Domingo, 11:00 AM",
+    "events.domingos.title": "Domingo, 11:30 AM",
     "events.domingos.date": "Super Reunión",
     
     // =========== Hero Section =========== //
     "hero.section.videoUrl": "/assets/video/somos_video_principal_inicio_compressed.mp4",
-    "hero.section.title": "Una iglesia para",
-    "hero.section.highlightedWord": "gente,",
-    "hero.section.subtitle": "sin iglesia",
+    "hero.section.title": "Una iglesia para gente,",
+    "hero.section.highlightedWord": "sin iglesia.",
+    "hero.section.subtitle": "",
     "hero.section.ctaText": "Conócenos",
-    "hero.section.scheduleText": "Vamos despacio por que vamos lejos.",
+    "hero.section.scheduleText": "Vamos despacio porque vamos lejos.",
 
     // =========== CTA Section =========== //
     "cta.section.title": "Bienvenido",
@@ -75,11 +75,11 @@ export const labels = {
     "cta.section.ctaText": "Contáctanos",
 
     // =========== team section =========== //
-    "team.section.title": "Nuestros Lideres",
+    "team.section.title": "Nuestros Pastores",
     "team.section.pastores.title": "Pastores",
-    "team.section.pastores.items.0.name": "William Murillo y Jessica Simbal",
-    "team.section.pastores.items.0.role": "Pastores",
-    "team.section.pastores.items.0.image": "/assets/img/somos_team_pastores.jpg",
+    "team.section.pastores.items.0.name": "William y Jessica Murillo",
+    "team.section.pastores.items.0.role": "",
+    "team.section.pastores.items.0.image": "/assets/img/somos_team_pastores.avif",
     "team.section.pastores.items.1.name": "Jessica",
     "team.section.pastores.items.1.role": "Pastora",
     "team.section.pastores.items.1.image": "/assets/img/somos_team_pastores.jpg",
@@ -95,7 +95,7 @@ export const labels = {
     "team.section.items.3.image": "/assets/img/team_kids.avif",
 
     // =========== Community Section =========== //  
-    "community.section.title": "Conoce y Conecta con Nuestra Comunidad",
+    "community.section.title": "Conecta con nuestra Comunidad",
     "community.section.description": "Te invitamos a ser parte de nuestra familia. Aquí encontrarás un lugar para crecer, servir y compartir el amor de Cristo.",
     "community.section.imageUrl": "/assets/img/somos_comunidad.avif",
 
@@ -105,7 +105,7 @@ export const labels = {
     // =========== Page Header =========== //
     "page.header.about.title": "Nuestra",
     "page.header.about.highlightedWord": "Historia",
-    "page.header.about.description": "Desde 2021, Somos es una comunidad cristiana en Alfafar, Valencia, que existe para compartir las buenas noticias de Jesús de Nazaret y hacer discípulos en comunidad.",
+    "page.header.about.description": "Desde 2022, Somos es una comunidad cristiana en Alfafar, Valencia, que existe para compartir las buenas noticias de Jesús de Nazaret y hacer discípulos en comunidad.",
 
 
     // =========== Values Section =========== //
@@ -157,7 +157,7 @@ export const labels = {
     "value.section.items.6.verse": "Porque somos hechura de Dios, creados en Cristo Jesús para buenas obras...",
     "value.section.items.6.reference": "Efesios 2:10",
 
-    "acero.section.title": "Somos Discicpulos ACERO",
+    "acero.section.title": "Somos Discípulos ACERO",
     "acero.section.subtitle": "Esto es ser un discípulo ACERO",
 
     "acero.section.items.0.letter": "A",
@@ -214,7 +214,7 @@ export const labels = {
     "gallery.images.1.link": "https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MTM0ODY5MTUwMzc5Mzg1?story_media_id=3334721146442659440_20973777906&igsh=MXJsemN5aGdlZnZzZg==",
 
     "gallery.images.2.title": "Somitos",
-    "gallery.images.2.category": "Jovenes",
+    "gallery.images.2.category": "Jóvenes",
     "gallery.images.2.description": "Construyendo el futuro de la iglesia",
     "gallery.images.2.url": "/assets/img/team_jovenes.avif",
     "gallery.images.2.link": "https://www.instagram.com/s/aGlnaGxpZ2h0OjE3OTE4MjY0OTcwMDQ0ODQ1?story_media_id=3188301227711654486_20973777906&igsh=ano2YzZyZnV1cW5s",
@@ -246,7 +246,7 @@ export const labels = {
     "association.header.description": "Ayudando a quienes más lo necesitan",
 
     "association.mission.title": "Somos una Asociación",
-    "association.mission.description": "Para proporcionar ayuda inmediata y sostenible a todas las personas, ofreciendo alimentos, ropa, y apoyo emocional para mejorar su calidad de vida y promover su integración social.",
+    "association.mission.description": "De acción social, para proporcionar ayuda inmediata y sostenible a todas las personas, ofreciendo alimentos, ropa, y apoyo emocional para mejorar su calidad de vida y promover su integración social.",
     "association.mission.imageUrl": "/assets/img/somos_asociacion.avif",
     "association.mission.ctaText": "Conoce más",
     "association.mission.ctaLink": "/contact",
@@ -292,7 +292,7 @@ export const labels = {
     "donate.options.0.options.0": "€ 50",
     "donate.options.0.options.1": "€ 100",
     "donate.options.0.options.2": "€ 200",
-    "donate.options.0.options.3": "Otro monto",
+    "donate.options.0.options.3": "Otro cantidad",
     "donate.options.0.buttonText": "Donar Ahora",
     "donate.options.0.link": "https://checkout.square.site/merchant/MLVCPMBE067QX/checkout/4LQASNIQNLO7ZS255XREYDOX",
 
@@ -301,7 +301,7 @@ export const labels = {
     "donate.options.1.options.0": "€ 25/mes",
     "donate.options.1.options.1": "€ 50/mes",
     "donate.options.1.options.2": "€ 100/mes",
-    "donate.options.1.options.3": "Otro monto",
+    "donate.options.1.options.3": "Otro cantidad",
     "donate.options.1.buttonText": "Donar Ahora",
     "donate.options.1.link": "https://checkout.square.site/merchant/MLVCPMBE067QX/checkout/4LQASNIQNLO7ZS255XREYDOX",
 
@@ -317,7 +317,7 @@ export const labels = {
     "donate.methods.2.details": "Bizum Código Donativo: [03587]",
 
     // =========== Apolos Section =========== //    
-    "apolos.header.title": "Rincon",
+    "apolos.header.title": "Rincón",
     "apolos.header.highlightedWord": "Apolos",
     "apolos.header.description": "Encuentra respuestas a preguntas comunes.",
 
@@ -346,16 +346,16 @@ export const labels = {
     "faq.header.description": "Información importante sobre nuestra comunidad.",
 
     "faq.items.0.question": "¿Dónde estamos ubicados?",
-    "faq.items.0.answer": "Estamos ubicados en Calle del Sol # 60, Alfafar, Valencia, España",
+    "faq.items.0.answer": "Estamos ubicados en Calle del Sol, 60, Alfafar, Valencia, España",
 
     "faq.items.1.question": "¿Cuáles son los horarios de servicio?",
-    "faq.items.1.answer": "Nuestros servicios dominicales son a las 11:00 AM. También tenemos reuniones de grupos pequeños en mesas los viernes a las 19:00 y servicios de oración los viernes a las 18:00",
+    "faq.items.1.answer": "Nuestros servicios dominicales son a las 11:30 AM. También tenemos reuniones de grupos pequeños en mesas los viernes a las 19:00 hrs y servicios de oración los viernes a las 18:00 hrs.",
 
     "faq.items.2.question": "¿Cómo puedo pedir ayuda o consejería?",
     "faq.items.2.answer": "Puedes solicitar ayuda o consejería en nuestra página de contacto, llamando a nuestra oficina al (+34) 679 88 50 65, o acercándote a nuestra comunidad.",
 
     "faq.items.3.question": "¿Cómo puedo ser parte de la comunidad?",
-    "faq.items.3.answer": "Hay muchas formas de involucrarte: asistiendo a nuestros servicios, uniéndote a un grupo pequeño, participando en nuestros eventos comunitarios o sirviendo como voluntario en alguno de nuestros ministerios. Tenemos una clase de orientación para nuevos miembros el primer domingo de cada mes después del servicio de las 11:00 AM.",
+    "faq.items.3.answer": "Hay muchas formas de involucrarte: asistiendo a nuestros servicios, uniéndote a un grupo pequeño, participando en nuestros eventos comunitarios o sirviendo como voluntario en alguno de nuestros ministerios.",
 
     "faq.items.4.question": "¿Ofrecen servicios en línea?",
     "faq.items.4.answer": "Sí, transmitimos nuestros servicios dominicales en vivo a través de nuestro canal de YouTube. También puedes acceder a sermones anteriores en nuestra sección de mensaje en esta página web.",
@@ -378,7 +378,7 @@ export const labels = {
     // =========== Footer =========== //
     "footer.email": "contacto@iglesiasomos.es",
     "footer.phone": "(+34) 679 88 5065 - 665 56 9144",
-    "footer.address": "Calle del sol #60, Alfafar - Valencia",
+    "footer.address": "Calle del sol, 60, Alfafar - Valencia",
     "footer.tagline": "Amor, Perdón, Servicio.",
     "footer.contact": "Contacto",
     "footer.followUs": "Síguenos",
@@ -434,17 +434,17 @@ export const labels = {
 
     // =========== Events =========== //
     "events.mesas.imageUrl": "/assets/img/somos_mesas.avif",
-    "events.mesas.title": "Friday, 19:00",
+    "events.mesas.title": "Friday, 19:00 hrs",
     "events.mesas.date": "Tables - Alfafar",
     "events.domingos.imageUrl": "/assets/img/somos_domigos.avif",
-    "events.domingos.title": "Sunday, 11:00 AM",
+    "events.domingos.title": "Sunday, 11:30 AM",
     "events.domingos.date": "Super Meeting",
     
     // =========== Hero Section =========== //
     "hero.section.videoUrl": "/assets/video/somos_video_principal_inicio_compressed.mp4",
-    "hero.section.title": "A church for",
-    "hero.section.highlightedWord": "people,",
-    "hero.section.subtitle": "without a church",
+    "hero.section.title": "A church for people,",
+    "hero.section.highlightedWord": "without a church",
+    "hero.section.subtitle": "",
     "hero.section.ctaText": "Get to know us",
     "hero.section.scheduleText": "We go slow because we're going far.",
 
@@ -454,11 +454,11 @@ export const labels = {
     "cta.section.ctaText": "Contact Us",
 
     // =========== team section =========== //
-    "team.section.title": "Our Leaders",
+    "team.section.title": "Our Pastors",
     "team.section.pastores.title": "Pastors",
-    "team.section.pastores.items.0.name": "William Murillo y Jessica Simbal",
-    "team.section.pastores.items.0.role": "Pastors",
-    "team.section.pastores.items.0.image": "/assets/img/somos_team_pastores.jpg",
+    "team.section.pastores.items.0.name": "William y Jessica Murillo",
+    "team.section.pastores.items.0.role": "",
+    "team.section.pastores.items.0.image": "/assets/img/somos_team_pastores.avif",
     "team.section.pastores.items.1.name": "Jessica",
     "team.section.pastores.items.1.role": "Pastor",
     "team.section.pastores.items.1.image": "/assets/img/somos_team_pastores.jpg",
@@ -474,8 +474,8 @@ export const labels = {
     "team.section.items.3.image": "/assets/img/team_kids.avif",
 
     // =========== Community Section =========== //  
-    "community.section.title": "Know and Connect with Our Community",
-    "community.section.description": "We invite you to be part of our family. Here you'll find a place to grow, serve, and share Christ's love.",
+    "community.section.title": "Connect with our Community",
+    "community.section.description": "We invite you to be part of our family. <br/> Here you'll find a place to grow, serve, and share Christ's love.",
     "community.section.imageUrl": "/assets/img/somos_comunidad.avif",
     "community.buttons.text": "View Messages",
     "community.buttons.contact": "Contact Us",
@@ -483,7 +483,7 @@ export const labels = {
     // =========== Page Header =========== //
     "page.header.about.title": "Our",
     "page.header.about.highlightedWord": "Story",
-    "page.header.about.description": "Since 2021, Somos is a Christian community in Alfafar, Valencia, that exists to share the good news of Jesus of Nazareth and make disciples in community.",
+    "page.header.about.description": "Since 2022, Somos is a Christian community in Alfafar, Valencia, that exists to share the good news of Jesus of Nazareth and make disciples in community.",
 
     // =========== Values Section =========== //
     "value.section.header.title": "Values",
@@ -723,16 +723,16 @@ export const labels = {
     "faq.header.description": "Important information about our community.",
 
     "faq.items.0.question": "Where are we located?",
-    "faq.items.0.answer": "We are located at Calle del Sol # 60, Alfafar, Valencia, Spain",
+    "faq.items.0.answer": "We are located at Calle del Sol, 60, Alfafar, Valencia, Spain",
 
     "faq.items.1.question": "What are the service hours?",
-    "faq.items.1.answer": "Our Sunday services are at 11:00 AM. We also have small group meetings at tables on Fridays at 19:00 and prayer services on Fridays at 18:00",
+    "faq.items.1.answer": "Our Sunday services are at 11:30 AM. We also have small group meetings at tables on Fridays at 19:00 hrs and prayer services on Fridays at 18:00 hrs.",
 
     "faq.items.2.question": "How can I ask for help or counseling?",
     "faq.items.2.answer": "You can request help or counseling on our contact page, by calling our office at (+34) 679 88 50 65, or by coming to our community.",
 
     "faq.items.3.question": "How can I be part of the community?",
-    "faq.items.3.answer": "There are many ways to get involved: attending our services, joining a small group, participating in our community events, or serving as a volunteer in any of our ministries. We have an orientation class for new members on the first Sunday of each month after the 11:00 AM service.",
+    "faq.items.3.answer": "There are many ways to get involved: attending our services, joining a small group, participating in our community events, or serving as a volunteer in any of our ministries. We have an orientation class for new members on the first Sunday of each month after the 11:30 AM service.",
 
     "faq.items.4.question": "Do you offer online services?",
     "faq.items.4.answer": "Yes, we broadcast our Sunday services live through our YouTube channel. You can also access previous sermons in our message section on this website.",
