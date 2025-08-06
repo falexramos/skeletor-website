@@ -1,0 +1,84 @@
+---
+// Modal promocional para el evento estelar
+---
+
+<div id="event-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-sm">
+  <div class="relative mx-4 max-w-2xl overflow-hidden rounded-2xl bg-light dark:bg-dark shadow-2xl animate-slide-up">
+    <!-- Botón cerrar -->
+    <button 
+      id="close-modal" 
+      class="absolute top-4 right-4 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-dark/10 dark:bg-light/10 hover:bg-dark/20 dark:hover:bg-light/20 transition-colors"
+    >
+      <svg class="h-4 w-4 text-dark dark:text-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+
+    <!-- Imagen del evento -->
+    <div class="relative h-48 md:h-64 overflow-hidden">
+      <picture>
+        <source media="(max-width: 768px)" srcset="/assets/img/movile.jpeg">
+        <img 
+          src="/assets/img/ordenador.jpeg" 
+          alt="Conferencia Renàixer" 
+          class="h-full w-full object-cover"
+        >
+      </picture>
+      <div class="absolute inset-0 bg-gradient-to-t from-dark/60 to-transparent"></div>
+      <div class="absolute bottom-4 left-4 text-light">
+        <span class="inline-block rounded-full bg-accent px-3 py-1 text-sm font-medium text-dark">
+          Evento Especial
+        </span>
+      </div>
+    </div>
+
+    <!-- Contenido del modal -->
+    <div class="p-6">
+      
+
+      <div class="flex flex-col sm:flex-row gap-3">
+        <a 
+          href="/evento/conferencia-renaixer" 
+          class="flex-1 bg-accent hover:bg-accent/90 text-dark font-medium py-3 px-6 rounded-xl transition-colors text-center"
+        >
+          Ver
+        </a>
+        <button 
+          id="close-modal-btn" 
+          class="flex-1 bg-secondary hover:bg-secondary/80 dark:bg-dark dark:hover:bg-dark/80 text-dark dark:text-light font-medium py-3 px-6 rounded-xl transition-colors border border-dark/10 dark:border-light/10"
+        >
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Mostrar modal después de 2 segundos
+  setTimeout(() => {
+    const modal = document.getElementById('event-modal');
+    if (modal) {
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+  }, 2000);
+
+  // Cerrar modal
+  function closeModal() {
+    const modal = document.getElementById('event-modal');
+    if (modal) {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+  }
+
+  // Event listeners
+  document.getElementById('close-modal')?.addEventListener('click', closeModal);
+  document.getElementById('close-modal-btn')?.addEventListener('click', closeModal);
+  document.getElementById('event-modal')?.addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) {
+      closeModal();
+    }
+  });
+</script>
