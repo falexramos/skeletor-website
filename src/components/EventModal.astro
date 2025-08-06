@@ -1,84 +1,125 @@
----
-// Modal promocional para el evento estelar
----
+<!-- Modal promocional para el evento estelar (Corregido) -->
+<!-- Este modal se oculta por defecto y se muestra con JavaScript -->
 
-<div id="event-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-sm">
-  <div class="relative mx-4 max-w-2xl overflow-hidden rounded-2xl bg-light dark:bg-dark shadow-2xl animate-slide-up">
-    <!-- Botón cerrar -->
+<div id="event-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/70 backdrop-blur-sm p-4 animate-fade-in transition-all duration-300">
+  <div class="relative w-full max-w-xl mx-auto rounded-3xl bg-light dark:bg-dark shadow-2xl overflow-hidden transform scale-95 transition-all duration-300 ease-out">
+    <!-- Botón de cerrar, estilizado y en una posición prominente -->
     <button 
       id="close-modal" 
-      class="absolute top-4 right-4 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-dark/10 dark:bg-light/10 hover:bg-dark/20 dark:hover:bg-light/20 transition-colors"
+      class="absolute top-4 right-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-light/20 dark:bg-dark/20 text-dark dark:text-light hover:bg-light/40 dark:hover:bg-dark/40 transition-colors duration-300"
+      aria-label="Cerrar modal"
     >
-      <svg class="h-4 w-4 text-dark dark:text-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
       </svg>
     </button>
 
-    <!-- Imagen del evento -->
-    <div class="relative h-48 md:h-64 overflow-hidden">
+    <!-- Hero Section del Modal: Imagen y Título sobrepuesto -->
+    <!-- Se ha quitado la altura fija para que la imagen no se corte -->
+    <div class="relative w-full overflow-hidden">
+      <!-- Imagen con gradiente para mejor legibilidad del texto -->
       <picture>
         <source media="(max-width: 768px)" srcset="/assets/img/movile.jpeg">
+        <!-- Se ha cambiado object-cover por object-contain para mostrar la imagen completa -->
         <img 
           src="/assets/img/ordenador.jpeg" 
           alt="Conferencia Renàixer" 
-          class="h-full w-full object-cover"
+          class="w-full h-auto object-contain object-center"
         >
       </picture>
-      <div class="absolute inset-0 bg-gradient-to-t from-dark/60 to-transparent"></div>
-      <div class="absolute bottom-4 left-4 text-light">
-        <span class="inline-block rounded-full bg-accent px-3 py-1 text-sm font-medium text-dark">
-          Evento Especial
-        </span>
+      <!-- Overlay de gradiente -->
+      <div class="absolute inset-0 bg-gradient-to-t from-dark/90 to-transparent"></div>
+      
+      <!-- Contenido de la cabecera sobre la imagen -->
+      <div class="absolute bottom-0 left-0 right-0 p-6 text-light">
+        <!-- Se ha quitado el texto "Evento Especial" -->
+        <h2 class="font-display text-3xl font-extrabold leading-tight shadow-text">
+          Conferencia "Renàixer"
+        </h2>
+        <p class="mt-1 text-sm font-light text-light/80">
+          Un encuentro transformador sobre salud mental.
+        </p>
       </div>
     </div>
 
-    <!-- Contenido del modal -->
-    <div class="p-6">
-      
-
-      <div class="flex flex-col sm:flex-row gap-3">
+    <!-- Contenido principal del modal -->
+    <!-- Se ha quitado todo el texto de detalles del evento -->
+    <div class="p-6 md:p-8">
+      <!-- Botones de acción mejorados -->
+      <div class="flex flex-col gap-4">
         <a 
           href="/evento/conferencia-renaixer" 
-          class="flex-1 bg-accent hover:bg-accent/90 text-dark font-medium py-3 px-6 rounded-xl transition-colors text-center"
+          class="w-full bg-accent hover:bg-accent/90 text-dark font-bold py-3 px-6 rounded-xl transition-all shadow-md text-center transform hover:scale-105 active:scale-95"
         >
-          Ver
+          Ver Detalles
         </a>
-        <button 
-          id="close-modal-btn" 
-          class="flex-1 bg-secondary hover:bg-secondary/80 dark:bg-dark dark:hover:bg-dark/80 text-dark dark:text-light font-medium py-3 px-6 rounded-xl transition-colors border border-dark/10 dark:border-light/10"
-        >
-          Cerrar
-        </button>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-  // Mostrar modal después de 2 segundos
-  setTimeout(() => {
-    const modal = document.getElementById('event-modal');
+  // Obtiene los elementos del modal
+  const modal = document.getElementById('event-modal');
+  const closeModalBtn = document.getElementById('close-modal');
+  const modalContent = modal?.querySelector('div > div');
+
+  // Clave para el sessionStorage
+  const modalShownKey = 'eventModalShown';
+
+  /**
+   * Muestra el modal con una animación
+   * El código ha sido modificado para que se muestre siempre.
+   */
+  function showModal() {
     if (modal) {
       modal.classList.remove('hidden');
       modal.classList.add('flex');
-    }
-  }, 2000);
-
-  // Cerrar modal
-  function closeModal() {
-    const modal = document.getElementById('event-modal');
-    if (modal) {
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
+      // Espera un frame para aplicar la animación de escala
+      requestAnimationFrame(() => {
+        modalContent?.classList.remove('scale-95');
+        modalContent?.classList.add('scale-100');
+      });
+      
+      // Si quieres que el modal se muestre solo una vez por sesión,
+      // descomenta la siguiente línea.
+      // sessionStorage.setItem(modalShownKey, 'true');
     }
   }
 
-  // Event listeners
-  document.getElementById('close-modal')?.addEventListener('click', closeModal);
-  document.getElementById('close-modal-btn')?.addEventListener('click', closeModal);
-  document.getElementById('event-modal')?.addEventListener('click', (e) => {
-    if (e.target === e.currentTarget) {
-      closeModal();
+  /**
+   * Oculta el modal con una animación
+   */
+  function hideModal() {
+    if (modal) {
+      modalContent?.classList.remove('scale-100');
+      modalContent?.classList.add('scale-95');
+      // Espera a que termine la animación para ocultarlo completamente
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }, 300); // Coincide con la duración de la transición en CSS
+    }
+  }
+
+  // Event Listeners
+  // Muestra el modal después de 2 segundos (ajustable)
+  setTimeout(showModal, 2000);
+
+  // Cierra el modal al hacer clic en el botón de la esquina
+  closeModalBtn?.addEventListener('click', hideModal);
+
+  // Cierra el modal al hacer clic fuera del contenido
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      hideModal();
+    }
+  });
+
+  // Cierra el modal con la tecla Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      hideModal();
     }
   });
 </script>
