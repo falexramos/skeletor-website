@@ -19,18 +19,25 @@ if (!evento) {
   return Astro.redirect('/404');
 }
 
+// Configuración del evento
+const EVENT_CONFIG = {
+  early: {
+    price: '20€',
+    promoText: '¡Precio especial de 20€ hasta el 18 de agosto! después subirá a 40€.',
+    squareLink: 'https://square.link/u/p5HihhLR'
+  },
+  regular: {
+    price: '40€',
+    promoText: 'El precio ha subido a 40€.',
+    squareLink: 'https://square.link/u/ussgfp2y'
+  },
+  deadline: new Date('2025-08-18T23:59:59')
+};
+
 // Lógica de precios dinámica
 const today = new Date();
-// La fecha límite es el 18 de agosto de 2025 a las 23:59:59
-const deadline = new Date('2025-08-18T23:59:59');
 
-let finalPrice = '40€';
-let promoText = 'El precio ha subido a 40€.';
-
-if (today <= deadline) {
-  finalPrice = '20€';
-  promoText = '¡Precio especial de 20€ hasta el 18 de agosto! después subirá a 40€.';
-}
+const { price: finalPrice, promoText, squareLink } =  today <= EVENT_CONFIG.deadline ? EVENT_CONFIG.early : EVENT_CONFIG.regular;
 
 // Prepara el título y subtítulo para una mejor presentación
 const mainTitle = evento.titulo.split(': ')[0];
@@ -231,7 +238,7 @@ const subTitle = evento.titulo.split(': ').length > 1 ? evento.titulo.split(': '
               
               <!-- Botón de pago de Square -->
               <a
-                href="https://square.link/u/p5HihhLR"
+                href={squareLink}
                 target="_blank"
                 class="w-full bg-accent hover:bg-accent/90 text-dark font-bold py-4 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl text-center block"
               >
@@ -244,7 +251,7 @@ Te contactaremos para confirmar tu registro.
               </p>
             </div>
           </div>
-        </div>
+        </div> 
 
       </div>
     </div>
