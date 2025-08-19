@@ -1,0 +1,216 @@
+---
+// src/components/Modal.astro
+export interface Props {
+  id: string;
+  title?: string;
+  type?: 'success' | 'error' | 'warning' | 'info';
+  showCloseButton?: boolean;
+  autoClose?: boolean;
+  autoCloseDelay?: number;
+  backdrop?: boolean;
+  size?: 'sm' | 'md' | 'lg' | 'xl';
+  position?: 'center' | 'top' | 'bottom';
+}
+
+const { 
+  id,
+  title,
+  type = 'info',
+  showCloseButton = true,
+  autoClose = false,
+  autoCloseDelay = 5000,
+  backdrop = true,
+  size = 'md',
+  position = 'center'
+} = Astro.props;
+
+// Configuración de estilos según el tipo
+const typeStyles = {
+  success: {
+    bg: 'bg-green-50 dark:bg-green-900/20',
+    border: 'border-green-200 dark:border-green-800',
+    text: 'text-green-800 dark:text-green-200',
+    icon: '✓'
+  },
+  error: {
+    bg: 'bg-red-50 dark:bg-red-900/20',
+    border: 'border-red-200 dark:border-red-800',
+    text: 'text-red-800 dark:text-red-200',
+    icon: '✕'
+  },
+  warning: {
+    bg: 'bg-yellow-50 dark:bg-yellow-900/20',
+    border: 'border-yellow-200 dark:border-yellow-800',
+    text: 'text-yellow-800 dark:text-yellow-200',
+    icon: '⚠'
+  },
+  info: {
+    bg: 'bg-blue-50 dark:bg-blue-900/20',
+    border: 'border-blue-200 dark:border-blue-800',
+    text: 'text-blue-800 dark:text-blue-200',
+    icon: 'ℹ'
+  }
+};
+
+const sizeStyles = {
+  sm: 'max-w-sm',
+  md: 'max-w-md',
+  lg: 'max-w-lg',
+  xl: 'max-w-xl'
+};
+
+const positionStyles = {
+  center: 'items-center justify-center',
+  top: 'items-start justify-center pt-16',
+  bottom: 'items-end justify-center pb-16'
+};
+
+const currentTypeStyle = typeStyles[type];
+---
+
+<!-- Modal Backdrop -->
+<div 
+  id={`${id}-backdrop`}
+  class={`fixed inset-0 z-50 ${backdrop ? 'bg-black bg-opacity-50' : ''} flex ${positionStyles[position]} p-4 transition-opacity duration-300 opacity-0 pointer-events-none`}
+>
+  <!-- Modal Content -->
+  <div 
+    id={`${id}-content`}
+    class={`
+      ${currentTypeStyle.bg} 
+      ${currentTypeStyle.border} 
+      ${currentTypeStyle.text}
+      ${sizeStyles[size]}
+      w-full border rounded-lg shadow-lg transform transition-all duration-300 scale-95 opacity-0
+    `}
+  >
+    <!-- Modal Header -->
+    {(title || showCloseButton) && (
+      <div class="flex items-center justify-between p-4 border-b border-current border-opacity-20">
+        <div class="flex items-center space-x-2">
+          <span class="text-xl font-bold">{currentTypeStyle.icon}</span>
+          {title && <h3 class="text-lg font-semibold">{title}</h3>}
+        </div>
+        {showCloseButton && (
+          <button 
+            id={`${id}-close`}
+            type="button" 
+            class="text-current hover:opacity-70 transition-opacity duration-200 text-xl font-bold"
+          >
+            ×
+          </button>
+        )}
+      </div>
+    )}
+    
+    <!-- Modal Body -->
+    <div id={`${id}-body`} class="p-4">
+      <slot>
+        <p>Contenido del modal</p>
+      </slot>
+    </div>
+    
+    <!-- Modal Footer (opcional) -->
+    <div id={`${id}-footer`} class="hidden p-4 border-t border-current border-opacity-20">
+      <slot name="footer" />
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ id, autoClose, autoCloseDelay, showCloseButton }}>
+  // Funciones del modal
+  window.modalUtils = window.modalUtils || {};
+  
+  window.modalUtils[id] = {
+    show: (message, options = {}) => {
+      const backdrop = document.getElementById(`${id}-backdrop`);
+      const content = document.getElementById(`${id}-content`);
+      const body = document.getElementById(`${id}-body`);
+      const footer = document.getElementById(`${id}-footer`);
+      
+      if (!backdrop || !content || !body) return;
+      
+      // Actualizar contenido
+      if (message) {
+        body.innerHTML = `<p>${message}</p>`;
+      }
+      
+      // Mostrar footer si se proporciona
+      if (options.footerContent) {
+        footer.innerHTML = options.footerContent;
+        footer.classList.remove('hidden');
+      } else {
+        footer.classList.add('hidden');
+      }
+      
+      // Mostrar modal
+      backdrop.classList.remove('pointer-events-none');
+      backdrop.classList.remove('opacity-0');
+      backdrop.classList.add('opacity-100');
+      
+      setTimeout(() => {
+        content.classList.remove('scale-95', 'opacity-0');
+        content.classList.add('scale-100', 'opacity-100');
+      }, 10);
+      
+      // Auto-cerrar si está habilitado
+      if (autoClose) {
+        setTimeout(() => {
+          window.modalUtils[id].hide();
+        }, autoCloseDelay);
+      }
+    },
+    
+    hide: () => {
+      const backdrop = document.getElementById(`${id}-backdrop`);
+      const content = document.getElementById(`${id}-content`);
+      
+      if (!backdrop || !content) return;
+      
+      content.classList.remove('scale-100', 'opacity-100');
+      content.classList.add('scale-95', 'opacity-0');
+      
+      setTimeout(() => {
+        backdrop.classList.remove('opacity-100');
+        backdrop.classList.add('opacity-0');
+        
+        setTimeout(() => {
+          backdrop.classList.add('pointer-events-none');
+        }, 300);
+      }, 150);
+    },
+    
+    toggle: (message, options = {}) => {
+      const backdrop = document.getElementById(`${id}-backdrop`);
+      if (backdrop && backdrop.classList.contains('pointer-events-none')) {
+        window.modalUtils[id].show(message, options);
+      } else {
+        window.modalUtils[id].hide();
+      }
+    }
+  };
+  
+  // Event listeners
+  if (showCloseButton) {
+    document.getElementById(`${id}-close`)?.addEventListener('click', () => {
+      window.modalUtils[id].hide();
+    });
+  }
+  
+  // Cerrar al hacer clic en el backdrop
+  document.getElementById(`${id}-backdrop`)?.addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) {
+      window.modalUtils[id].hide();
+    }
+  });
+  
+  // Cerrar con tecla Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      const backdrop = document.getElementById(`${id}-backdrop`);
+      if (backdrop && !backdrop.classList.contains('pointer-events-none')) {
+        window.modalUtils[id].hide();
+      }
+    }
+  });
+</script>
