@@ -1,0 +1,43 @@
+---
+// src/pages/evento/registration-event.astro
+import Layout from "../../../layouts/Layout.astro";
+import EventDetails from "../../../components/EventDetails.astro";
+import RegistrationForm from "@/components/RegistrationForm.astro";
+
+const event = {
+    title: "De muerte a vida, del vacío a la plenitud",
+    date: "Sábado 27 de Septiembre",
+    time: "19:00 hrs",
+    location: "Auditorio de Somos.",
+    registrationEndpoint:
+        "https://8qr8t0qsmg.execute-api.us-east-1.amazonaws.com/v1/contactos",
+    eventName: "Conferencia Renàixer",
+    imageSrc: "/assets/img/ordenador.jpeg",
+    imageAlt: "Conferencia Renàixer",
+    imageWidth: 800,
+    imageHeight: 600
+};
+---
+
+<Layout>
+    <div class="container mx-auto px-4 py-12">
+        <EventDetails
+            eventName={event.eventName}
+            title={event.title}
+            date={event.date}
+            time={event.time}
+            location={event.location}
+            imageSrc={event.imageSrc}
+            imageAlt={event.imageAlt}
+            imageWidth={event.imageWidth}
+            imageHeight={event.imageHeight}
+        />
+        <div class="w-full max-w-2xl mx-auto mt-8">
+            <RegistrationForm
+                client:load
+                endpoint={event.registrationEndpoint}
+                eventName={event.eventName}
+            />
+        </div>
+    </div>
+</Layout>
