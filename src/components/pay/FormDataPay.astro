@@ -3,10 +3,13 @@
 import PaymentSection from '@/components/react/PaymentSection.tsx';
 import Modal from '@/components/Modal.astro';
 
-const initialAmount = 25.00;
+export interface Props {
+  initialAmount: number;
+}
+const { initialAmount } = Astro.props;
 ---
 
-<section class="py-12 px-4 flex-1 flex justify-center items-center">
+<section class="py-12 px-4 flex-1 flex justify-center items-center" data-initial-amount={initialAmount}>
   <div class="bg-light dark:bg-dark p-8 rounded-lg shadow-xl-dark max-w-lg mx-auto">
     <h2 class="text-2xl font-bold mb-6 text-dark dark:text-light text-center">Formulario de Registro y Pago</h2>
     
@@ -65,7 +68,7 @@ const initialAmount = 25.00;
           id="card-payment-btn"
           class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-dark dark:text-light bg-accent hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent"
         >
-          Pagar con Tarjeta
+          Pagar {initialAmount.toFixed(2)} €
         </button>
       </div>
     </form>
@@ -125,7 +128,8 @@ const initialAmount = 25.00;
   </div>
 </Modal>
 
-<script>
+<script >
+   
   // Declaraciones de tipos para TypeScript
   declare global {
     interface Window {
@@ -140,7 +144,11 @@ const initialAmount = 25.00;
   }
 
   const paymentApiUrl = `${import.meta.env.PUBLIC_PAYMENT_API_URL}`;
-  const initialAmount = 25.00;
+  // Leer el valor del DOM en lugar de usar define:vars
+  const sectionElement = document.querySelector('section[data-initial-amount]');
+  const initialAmount = parseFloat(sectionElement?.getAttribute('data-initial-amount') || '0');
+  
+  let currentAmount = initialAmount;
   const paymentForm = document.getElementById('payment-form') as HTMLFormElement;
 
   // Función para validar el formulario completo de manera elegante
@@ -285,7 +293,7 @@ const initialAmount = 25.00;
       ciudad,
       codigoPostal,
       nonce,
-      monto: initialAmount,
+      monto: currentAmount,
       metodoPago: paymentType,
     };
 
