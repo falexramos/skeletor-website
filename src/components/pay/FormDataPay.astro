@@ -1,0 +1,391 @@
+---
+//src/components/pay/FormDataPay.astro
+import PaymentSection from '@/components/react/PaymentSection.tsx';
+import Modal from '@/components/Modal.astro';
+
+const initialAmount = 25.00;
+---
+
+<section class="py-12 px-4 flex-1 flex justify-center items-center">
+  <div class="bg-light dark:bg-dark p-8 rounded-lg shadow-xl-dark max-w-lg mx-auto">
+    <h2 class="text-2xl font-bold mb-6 text-dark dark:text-light text-center">Formulario de Registro y Pago</h2>
+    
+    <form id="payment-form" class="space-y-6">
+      <div>
+        <label for="nombre" class="block text-sm font-medium text-dark dark:text-light">Nombre Completo</label>
+        <input type="text" id="nombre" name="nombre" required class="mt-1 block w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 text-dark dark:text-light focus:outline-none focus:ring-accent focus:border-accent sm:text-sm" />
+      </div>
+      <div>
+        <label for="email" class="block text-sm font-medium text-dark dark:text-light">Email</label>
+        <input type="email" id="email" name="email" required class="mt-1 block w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 text-dark dark:text-light focus:outline-none focus:ring-accent focus:border-accent sm:text-sm" />
+      </div>
+      <div>
+        <label for="telefono" class="block text-sm font-medium text-dark dark:text-light">Teléfono</label>
+        <input type="tel" id="telefono" name="telefono" required class="mt-1 block w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 text-dark dark:text-light focus:outline-none focus:ring-accent focus:border-accent sm:text-sm" />
+      </div>
+      <div>
+        <label for="direccion" class="block text-sm font-medium text-dark dark:text-light">Dirección</label>
+        <input type="text" id="direccion" name="direccion" required class="mt-1 block w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 text-dark dark:text-light focus:outline-none focus:ring-accent focus:border-accent sm:text-sm" />
+      </div>
+      <div>
+        <label for="ciudad" class="block text-sm font-medium text-dark dark:text-light">Ciudad</label>
+        <input type="text" id="ciudad" name="ciudad" required class="mt-1 block w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 text-dark dark:text-light focus:outline-none focus:ring-accent focus:border-accent sm:text-sm" />
+      </div>
+      <div>
+        <label for="codigo-postal" class="block text-sm font-medium text-dark dark:text-light">Código Postal</label>
+        <input type="text" id="codigo-postal" name="codigo-postal" required class="mt-1 block w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 text-dark dark:text-light focus:outline-none focus:ring-accent focus:border-accent sm:text-sm" />
+      </div>
+
+      <div class="flex items-start">
+        <div class="flex items-center h-5">
+          <input id="accept-terms" name="accept-terms" type="checkbox" required class="focus:ring-accent h-4 w-4 text-accent border-gray-300 rounded" />
+        </div>
+        <div class="ml-3 text-sm">
+          <label for="accept-terms" class="font-medium text-dark dark:text-light">Acepto los <a href="#" class="text-accent hover:text-secondary">Términos y Condiciones</a></label>
+        </div>
+      </div>
+      
+      <!-- PaymentSection sin botón -->
+      <div data-payment-section>
+        <PaymentSection client:load initialAmount={initialAmount} />
+      </div>
+
+      <!-- Mensaje de validación elegante -->
+      <div id="validation-message" class="hidden p-3 rounded-md text-sm font-medium transition-all duration-300"></div>
+
+      <!-- Botón de pago controlado por el formulario -->
+      <div>
+        <button 
+          type="button" 
+          id="card-payment-btn"
+          class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-dark dark:text-light bg-accent hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent"
+        >
+          Pagar con Tarjeta
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- Solo modales para confirmaciones de pago y procesamiento API -->
+<Modal 
+  id="processing-modal" 
+  title="Procesando Pago" 
+  type="info" 
+  showCloseButton={false}
+  backdrop={true}
+  size="md"
+>
+  <div class="flex items-center justify-center space-x-3">
+    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+    <span>Por favor espere mientras procesamos su pago...</span>
+  </div>
+</Modal>
+
+<Modal 
+  id="success-modal" 
+  title="¡Pago Exitoso!" 
+  type="success" 
+  showCloseButton={true}
+  autoClose={false}
+  backdrop={true}
+  size="md"
+>
+  <p>Su pago ha sido procesado exitosamente. Recibirá un email de confirmación en breve.</p>
+  <div slot="footer">
+    <button 
+      id="success-ok-btn"
+      class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200"
+    >
+      Continuar
+    </button>
+  </div>
+</Modal>
+
+<Modal 
+  id="error-modal" 
+  title="Error en el Pago" 
+  type="error" 
+  showCloseButton={true}
+  backdrop={true}
+  size="md"
+>
+  <p id="error-message">Ha ocurrido un error durante el procesamiento del pago.</p>
+  <div slot="footer">
+    <button 
+      id="error-retry-btn"
+      class="w-full bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200"
+    >
+      Intentar de Nuevo
+    </button>
+  </div>
+</Modal>
+
+<script>
+  // Declaraciones de tipos para TypeScript
+  declare global {
+    interface Window {
+      modalUtils: {
+        [key: string]: {
+          show: (message?: string, options?: any) => void;
+          hide: () => void;
+          toggle: (message?: string, options?: any) => void;
+        };
+      };
+    }
+  }
+
+  const paymentApiUrl = `${import.meta.env.PUBLIC_PAYMENT_API_URL}`;
+  const initialAmount = 25.00;
+  const paymentForm = document.getElementById('payment-form') as HTMLFormElement;
+
+// Función para validar el formulario completo de manera elegante
+  function validateForm(): { isValid: boolean; message?: string; invalidFields?: string[] } {
+    const requiredFields = [
+      { id: 'nombre', name: 'Nombre Completo', element: document.getElementById('nombre') as HTMLInputElement },
+      { id: 'email', name: 'Email', element: document.getElementById('email') as HTMLInputElement },
+      { id: 'telefono', name: 'Teléfono', element: document.getElementById('telefono') as HTMLInputElement },
+      { id: 'direccion', name: 'Dirección', element: document.getElementById('direccion') as HTMLInputElement },
+      { id: 'ciudad', name: 'Ciudad', element: document.getElementById('ciudad') as HTMLInputElement },
+      { id: 'codigo-postal', name: 'Código Postal', element: document.getElementById('codigo-postal') as HTMLInputElement },
+    ];
+
+    const acceptTermsElement = document.getElementById('accept-terms') as HTMLInputElement;
+    
+    let invalidFields: string[] = [];
+    let firstInvalidField: HTMLInputElement | null = null;
+
+    // Limpiar estilos de error anteriores
+    requiredFields.forEach(field => {
+      if (field.element) {
+        field.element.classList.remove('border-red-500', 'dark:border-red-400');
+        field.element.classList.add('border-gray-300', 'dark:border-gray-600');
+      }
+    });
+
+    // Validar campos requeridos
+    requiredFields.forEach(field => {
+      if (!field.element || !field.element.value.trim()) {
+        invalidFields.push(field.name);
+        if (field.element) {
+          field.element.classList.remove('border-gray-300', 'dark:border-gray-600');
+          field.element.classList.add('border-red-500', 'dark:border-red-400');
+          if (!firstInvalidField) {
+            firstInvalidField = field.element;
+          }
+        }
+      }
+    });
+
+    // Validar email específicamente si tiene contenido
+    const emailElement = document.getElementById('email') as HTMLInputElement;
+    if (emailElement && emailElement.value.trim() && !emailElement.validity.valid) {
+      const emailIndex = invalidFields.indexOf('Email');
+      if (emailIndex !== -1) {
+        invalidFields[emailIndex] = 'Email (formato inválido)';
+      } else {
+        invalidFields.push('Email (formato inválido)');
+      }
+      emailElement.classList.remove('border-gray-300', 'dark:border-gray-600');
+      emailElement.classList.add('border-red-500', 'dark:border-red-400');
+      if (!firstInvalidField) {
+        firstInvalidField = emailElement;
+      }
+    }
+
+    // Validar términos y condiciones
+    if (!acceptTermsElement.checked) {
+      invalidFields.push('Términos y Condiciones');
+      if (!firstInvalidField) {
+        firstInvalidField = acceptTermsElement;
+      }
+    }
+
+    // Enfocar el primer campo inválido
+    if (firstInvalidField) {
+      firstInvalidField.focus();
+    }
+
+    if (invalidFields.length > 0) {
+      const count = invalidFields.length;
+      let message: string;
+      
+      if (count === 1) {
+        message = `Por favor, complete el campo: ${invalidFields[0]}`;
+      } else if (count <= 3) {
+        message = `Por favor, complete los campos: ${invalidFields.join(', ')}`;
+      } else {
+        message = `Por favor, complete todos los campos requeridos (${count} campos faltantes)`;
+      }
+      
+      return { 
+        isValid: false, 
+        message,
+        invalidFields 
+      };
+    }
+
+    return { isValid: true };
+  }
+
+
+
+    // Función para mostrar mensajes de validación elegantes
+  function showValidationMessage(message: string, type: 'error' | 'success' | 'warning' = 'warning'): void {
+    const messageDiv = document.getElementById('validation-message');
+    if (!messageDiv) return;
+
+    messageDiv.className = 'p-3 rounded-md text-sm font-medium transition-all duration-300';
+    
+    switch (type) {
+      case 'error':
+        messageDiv.className += ' bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-800 dark:text-red-200';
+        break;
+      case 'success':
+        messageDiv.className += ' bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 text-green-800 dark:text-green-200';
+        break;
+      case 'warning':
+        messageDiv.className += ' bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 text-yellow-800 dark:text-yellow-200';
+        break;
+    }
+
+    const icon = type === 'error' ? '❌' : type === 'success' ? '✅' : '⚠️';
+    messageDiv.innerHTML = `
+      <div class="flex items-center space-x-2">
+        <span class="text-lg">${icon}</span>
+        <span>${message}</span>
+      </div>
+    `;
+    messageDiv.classList.remove('hidden');
+
+    setTimeout(() => {
+      messageDiv.classList.add('hidden');
+    }, 7000);
+  }
+
+  // Función para procesar el pago con el API
+  async function sendPaymentToken(nonce: string, paymentType: string): Promise<void> {
+    // Mostrar modal de procesamiento
+    (window as any).modalUtils['processing-modal'].show(`Procesando pago con ${paymentType}...`);
+
+    // Recopilar todos los datos del formulario
+    const nombre = (document.getElementById('nombre') as HTMLInputElement).value.trim();
+    const email = (document.getElementById('email') as HTMLInputElement).value.trim();
+    const telefono = (document.getElementById('telefono') as HTMLInputElement).value.trim();
+    const direccion = (document.getElementById('direccion') as HTMLInputElement).value.trim();
+    const ciudad = (document.getElementById('ciudad') as HTMLInputElement).value.trim();
+    const codigoPostal = (document.getElementById('codigo-postal') as HTMLInputElement).value.trim();
+
+    const data = {
+      nombre,
+      email,
+      telefono,
+      direccion,
+      ciudad,
+      codigoPostal,
+      nonce,
+      monto: initialAmount,
+      metodoPago: paymentType,
+    };
+
+    try {
+      const response = await fetch(paymentApiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      const backendResponse = await response.json();
+
+      // Ocultar modal de procesamiento
+      (window as any).modalUtils['processing-modal'].hide();
+
+      if (response.ok) {
+        // Mostrar modal de éxito
+        (window as any).modalUtils['success-modal'].show('Su pago ha sido procesado exitosamente. Recibirá un email de confirmación en breve.');
+        
+        // Resetear el formulario después de un breve delay
+        setTimeout(() => {
+          if (paymentForm) {
+            paymentForm.reset();
+          }
+        }, 1000);
+      } else {
+        // Mostrar modal de error con mensaje específico
+        const errorMessage = backendResponse.message || 'Error desconocido en el servidor';
+        showErrorModal(`Hubo un error en el servidor: ${errorMessage}`);
+      }
+    } catch (e: unknown) {
+      // Ocultar modal de procesamiento
+      (window as any).modalUtils['processing-modal'].hide();
+      
+      // Mostrar modal de error de conexión
+      showErrorModal('Error de conexión. Por favor, verifique su conexión a internet e intente más tarde.');
+      console.error('Error en el proceso de pago:', e);
+    }
+  }
+
+  // Función auxiliar para mostrar errores
+  function showErrorModal(message: string): void {
+    const errorMessageElement = document.getElementById('error-message');
+    if (errorMessageElement) {
+      errorMessageElement.textContent = message;
+    }
+    (window as any).modalUtils['error-modal'].show();
+  }
+
+  // Función para manejar el clic del botón de pago
+  function handlePaymentClick(paymentType: string): void {
+    const validation = validateForm();
+    
+    if (!validation.isValid) {
+      // Mostrar mensaje de validación elegante
+      showValidationMessage(validation.message || 'Por favor, complete todos los campos requeridos.', 'warning');
+      return;
+    }
+
+    // Ocultar mensaje de validación si está visible
+    const messageDiv = document.getElementById('validation-message');
+    if (messageDiv) {
+      messageDiv.classList.add('hidden');
+    }
+
+    // Si la validación pasa, disparar evento para que PaymentSection procese el pago
+    const paymentEvent = new CustomEvent('form-validated', {
+      detail: { paymentType }
+    });
+    window.dispatchEvent(paymentEvent);
+  }
+
+  // Definir el tipo del evento personalizado
+  interface PaymentSuccessEvent extends CustomEvent {
+    detail: {
+      nonce: string;
+      paymentType: string;
+    };
+  }
+
+  // Event listeners
+  document.addEventListener('DOMContentLoaded', () => {
+    // Botón de pago con tarjeta
+    const cardButton = document.getElementById('card-payment-btn');
+    cardButton?.addEventListener('click', () => handlePaymentClick('card'));
+
+    // Botón de éxito
+    document.getElementById('success-ok-btn')?.addEventListener('click', () => {
+      (window as any).modalUtils['success-modal'].hide();
+    });
+
+    // Botón de error/reintentar
+    document.getElementById('error-retry-btn')?.addEventListener('click', () => {
+      (window as any).modalUtils['error-modal'].hide();
+    });
+  });
+
+  // Escuchar evento de pago exitoso del componente PaymentSection
+  window.addEventListener('payment-success', (e: Event) => {
+    const paymentEvent = e as PaymentSuccessEvent;
+    const { nonce, paymentType } = paymentEvent.detail;
+    sendPaymentToken(nonce, paymentType);
+  });
+</script>
