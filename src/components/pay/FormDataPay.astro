@@ -1,5 +1,5 @@
 ---
-//src/components/pay/FormDataPay.astro
+// src/components/pay/FormDataPay.astro
 import PaymentSection from '@/components/react/PaymentSection.tsx';
 import Modal from '@/components/Modal.astro';
 
@@ -11,29 +11,37 @@ const initialAmount = 25.00;
     <h2 class="text-2xl font-bold mb-6 text-dark dark:text-light text-center">Formulario de Registro y Pago</h2>
     
     <form id="payment-form" class="space-y-6">
-      <div>
-        <label for="nombre" class="block text-sm font-medium text-dark dark:text-light">Nombre Completo</label>
-        <input type="text" id="nombre" name="nombre" required class="mt-1 block w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 text-dark dark:text-light focus:outline-none focus:ring-accent focus:border-accent sm:text-sm" />
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label for="nombre" class="block text-sm font-medium text-dark dark:text-light">Nombre Completo</label>
+          <input type="text" id="nombre" name="nombre" required class="mt-1 block w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 text-dark dark:text-light focus:outline-none focus:ring-accent focus:border-accent sm:text-sm" />
+        </div>
+        <div>
+          <label for="email" class="block text-sm font-medium text-dark dark:text-light">Email</label>
+          <input type="email" id="email" name="email" required class="mt-1 block w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 text-dark dark:text-light focus:outline-none focus:ring-accent focus:border-accent sm:text-sm" />
+        </div>
       </div>
-      <div>
-        <label for="email" class="block text-sm font-medium text-dark dark:text-light">Email</label>
-        <input type="email" id="email" name="email" required class="mt-1 block w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 text-dark dark:text-light focus:outline-none focus:ring-accent focus:border-accent sm:text-sm" />
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label for="telefono" class="block text-sm font-medium text-dark dark:text-light">Teléfono</label>
+          <input type="tel" id="telefono" name="telefono" required class="mt-1 block w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 text-dark dark:text-light focus:outline-none focus:ring-accent focus:border-accent sm:text-sm" />
+        </div>
+        <div>
+          <label for="ciudad" class="block text-sm font-medium text-dark dark:text-light">Ciudad</label>
+          <input type="text" id="ciudad" name="ciudad" required class="mt-1 block w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 text-dark dark:text-light focus:outline-none focus:ring-accent focus:border-accent sm:text-sm" />
+        </div>
       </div>
-      <div>
-        <label for="telefono" class="block text-sm font-medium text-dark dark:text-light">Teléfono</label>
-        <input type="tel" id="telefono" name="telefono" required class="mt-1 block w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 text-dark dark:text-light focus:outline-none focus:ring-accent focus:border-accent sm:text-sm" />
-      </div>
-      <div>
-        <label for="direccion" class="block text-sm font-medium text-dark dark:text-light">Dirección</label>
-        <input type="text" id="direccion" name="direccion" required class="mt-1 block w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 text-dark dark:text-light focus:outline-none focus:ring-accent focus:border-accent sm:text-sm" />
-      </div>
-      <div>
-        <label for="ciudad" class="block text-sm font-medium text-dark dark:text-light">Ciudad</label>
-        <input type="text" id="ciudad" name="ciudad" required class="mt-1 block w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 text-dark dark:text-light focus:outline-none focus:ring-accent focus:border-accent sm:text-sm" />
-      </div>
-      <div>
-        <label for="codigo-postal" class="block text-sm font-medium text-dark dark:text-light">Código Postal</label>
-        <input type="text" id="codigo-postal" name="codigo-postal" required class="mt-1 block w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 text-dark dark:text-light focus:outline-none focus:ring-accent focus:border-accent sm:text-sm" />
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label for="direccion" class="block text-sm font-medium text-dark dark:text-light">Dirección</label>
+          <input type="text" id="direccion" name="direccion" required class="mt-1 block w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 text-dark dark:text-light focus:outline-none focus:ring-accent focus:border-accent sm:text-sm" />
+        </div>
+        <div>
+          <label for="codigo-postal" class="block text-sm font-medium text-dark dark:text-light">Código Postal</label>
+          <input type="text" id="codigo-postal" name="codigo-postal" required class="mt-1 block w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 text-dark dark:text-light focus:outline-none focus:ring-accent focus:border-accent sm:text-sm" />
+        </div>
       </div>
 
       <div class="flex items-start">
@@ -45,15 +53,12 @@ const initialAmount = 25.00;
         </div>
       </div>
       
-      <!-- PaymentSection sin botón -->
       <div data-payment-section>
         <PaymentSection client:load initialAmount={initialAmount} />
       </div>
 
-      <!-- Mensaje de validación elegante -->
       <div id="validation-message" class="hidden p-3 rounded-md text-sm font-medium transition-all duration-300"></div>
 
-      <!-- Botón de pago controlado por el formulario -->
       <div>
         <button 
           type="button" 
@@ -67,7 +72,6 @@ const initialAmount = 25.00;
   </div>
 </section>
 
-<!-- Solo modales para confirmaciones de pago y procesamiento API -->
 <Modal 
   id="processing-modal" 
   title="Procesando Pago" 
@@ -84,7 +88,7 @@ const initialAmount = 25.00;
 
 <Modal 
   id="success-modal" 
-  title="¡Pago Exitoso!" 
+  title="¡Pago Exitoso!"
   type="success" 
   showCloseButton={true}
   autoClose={false}
@@ -139,7 +143,7 @@ const initialAmount = 25.00;
   const initialAmount = 25.00;
   const paymentForm = document.getElementById('payment-form') as HTMLFormElement;
 
-// Función para validar el formulario completo de manera elegante
+  // Función para validar el formulario completo de manera elegante
   function validateForm(): { isValid: boolean; message?: string; invalidFields?: string[] } {
     const requiredFields = [
       { id: 'nombre', name: 'Nombre Completo', element: document.getElementById('nombre') as HTMLInputElement },
@@ -228,15 +232,12 @@ const initialAmount = 25.00;
     return { isValid: true };
   }
 
-
-
-    // Función para mostrar mensajes de validación elegantes
+  // Función para mostrar mensajes de validación elegantes
   function showValidationMessage(message: string, type: 'error' | 'success' | 'warning' = 'warning'): void {
     const messageDiv = document.getElementById('validation-message');
     if (!messageDiv) return;
 
     messageDiv.className = 'p-3 rounded-md text-sm font-medium transition-all duration-300';
-    
     switch (type) {
       case 'error':
         messageDiv.className += ' bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-800 dark:text-red-200';
@@ -294,7 +295,6 @@ const initialAmount = 25.00;
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
-
       const backendResponse = await response.json();
 
       // Ocultar modal de procesamiento
@@ -303,7 +303,7 @@ const initialAmount = 25.00;
       if (response.ok) {
         // Mostrar modal de éxito
         (window as any).modalUtils['success-modal'].show('Su pago ha sido procesado exitosamente. Recibirá un email de confirmación en breve.');
-        
+
         // Resetear el formulario después de un breve delay
         setTimeout(() => {
           if (paymentForm) {
@@ -318,7 +318,7 @@ const initialAmount = 25.00;
     } catch (e: unknown) {
       // Ocultar modal de procesamiento
       (window as any).modalUtils['processing-modal'].hide();
-      
+
       // Mostrar modal de error de conexión
       showErrorModal('Error de conexión. Por favor, verifique su conexión a internet e intente más tarde.');
       console.error('Error en el proceso de pago:', e);
@@ -337,7 +337,6 @@ const initialAmount = 25.00;
   // Función para manejar el clic del botón de pago
   function handlePaymentClick(paymentType: string): void {
     const validation = validateForm();
-    
     if (!validation.isValid) {
       // Mostrar mensaje de validación elegante
       showValidationMessage(validation.message || 'Por favor, complete todos los campos requeridos.', 'warning');
