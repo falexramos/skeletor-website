@@ -2,14 +2,24 @@
 //src\pages\ventas.astro
 import FormDataPay from '@/components/pay/FormDataPay.astro';
 import Layout from '@/layouts/Layout.astro';
+import type { ProductDetails } from '@/interfaces/product';
 
-const products = [
+const products: ProductDetails[] = [
   {
+    id: "1",
     unitPrice: 30,
     quantity: 6,
     image: '/assets/img/ordenador.jpeg',
     name: 'Producto de Ejemplo',
     description: 'Descripción del producto de ejemplo',
+  },
+   {
+    id: "2",
+    unitPrice: 10,
+    quantity: 4,
+    image: '/assets/img/ordenador.jpeg',
+    name: 'Producto de Ejemplo 2',
+    description: 'Descripción del producto de ejemplo 2',
   }
 ];
 
@@ -22,7 +32,7 @@ const initialAmount = products.reduce(
 <Layout title="Formulario de Pago y Registro">
  <section class="py-12 px-4 flex-1 flex justify-center items-center">
   <div class="max-w-7xl w-full">
-   <FormDataPay initialAmount={initialAmount}/>
+   <FormDataPay initialAmount={initialAmount} products={products} />
   </div>
  </section>
 </Layout>

@@ -2,14 +2,16 @@
 // src/components/pay/FormDataPay.astro
 import PaymentSection from '@/components/react/PaymentSection.tsx';
 import Modal from '@/components/Modal.astro';
+import type { ProductDetails } from '@/interfaces/product';
 
 export interface Props {
   initialAmount: number;
+  products: ProductDetails[];
 }
-const { initialAmount } = Astro.props;
+const { initialAmount, products } = Astro.props;
 ---
 
-<section class="py-12 px-4 flex-1 flex justify-center items-center" data-initial-amount={initialAmount}>
+<section class="py-12 px-4 flex-1 flex justify-center items-center" data-initial-amount={initialAmount} data-products={JSON.stringify(products)}>
   <div class="bg-light dark:bg-dark p-8 rounded-lg shadow-xl-dark max-w-lg mx-auto">
     <h2 class="text-2xl font-bold mb-6 text-dark dark:text-light text-center">Formulario de Registro y Pago</h2>
     
@@ -147,6 +149,7 @@ const { initialAmount } = Astro.props;
   // Leer el valor del DOM en lugar de usar define:vars
   const sectionElement = document.querySelector('section[data-initial-amount]');
   const initialAmount = parseFloat(sectionElement?.getAttribute('data-initial-amount') || '0');
+  const products = JSON.parse(sectionElement?.getAttribute('data-products') || '[]');
   
   let currentAmount = initialAmount;
   const paymentForm = document.getElementById('payment-form') as HTMLFormElement;
@@ -295,6 +298,7 @@ const { initialAmount } = Astro.props;
       nonce,
       monto: currentAmount,
       metodoPago: paymentType,
+      products: products,
     };
 
     try {
