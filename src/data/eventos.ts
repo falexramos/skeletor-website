@@ -43,7 +43,7 @@ export const eventos: Evento[] = [
     imagenMovil: '/assets/img/movile.jpeg',
     // Campos para el registro
     unitPrice: 30,
-    registrationEndpoint: "https://8qr8t0qsmg.execute-api.us-east-1.amazonaws.com/v1/contactos",
+    registrationEndpoint: "https://favian.com/v1/contactos",
     eventName: "Conferencia Renàixer",
     imageAlt: "Conferencia Renàixer",
     imageWidth: 800,
@@ -72,20 +72,7 @@ export const eventos: Evento[] = [
           ]
         },
         { id: 'deDondeNosVisitas', label: '¿De qué iglesia nos visitas? *', type: 'text', required: true, placeholder: '' },
-        { 
-          id: 'formaDePago', 
-          label: '¿Tu reserva se realizo en? *', 
-          type: 'select', 
-          required: true,
-          options: [
-            { value: "", text: "Selecciona una opción" },
-            { value: "Pagina Web", text: "Página Web" },
-            { value: "Efectivo", text: "Efectivo" },
-            { value: "Bizum", text: "Bizum" },
-            { value: "Tarjeta", text: "Tarjeta" },
-            { value: "Otro", text: "Otro" },
-          ]
-        },
+        
     ],
     companionFormFields: [
         { id: 'nombreCompleto', label: 'Nombre Completo', type: 'text', required: true, placeholder: 'Nombre', gridSpan: 'col-span-2' },

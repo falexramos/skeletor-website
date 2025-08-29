@@ -6,16 +6,13 @@ import { eventos, type Evento } from '@/data/eventos';
 
 // Esta función es REQUERIDA para rutas dinámicas
 export function getStaticPaths() {
-  console.log("--- Debugging getStaticPaths in [id].astro ---");
-  console.log("Eventos data being used:", JSON.stringify(eventos, null, 2));
 
   const paths = eventos.map((evento) => ({
     params: { id: evento.id },
     props: { evento },
   }));
 
-  console.log("Generated paths:", JSON.stringify(paths, null, 2));
-  console.log("--------------------------------------------");
+
   return paths;
 }
 
