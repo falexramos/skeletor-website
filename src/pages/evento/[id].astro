@@ -1,47 +1,36 @@
 ---
-// src/pages/eventos/[slug].astro
+// src/pages/eventos/[id].astro
 // Esta es la página de detalle para un evento específico con un diseño completamente nuevo.
 import Layout from '@/layouts/Layout.astro';
-import { eventos } from '@/data/eventos';
+import { eventos, type Evento } from '@/data/eventos';
 
 // Esta función es REQUERIDA para rutas dinámicas
-export async function getStaticPaths() {
-  return Object.keys(eventos).map((id) => ({
-    params: { id },
-    props: { evento: eventos[id as keyof typeof eventos] }
+export function getStaticPaths() {
+  console.log("--- Debugging getStaticPaths in [id].astro ---");
+  console.log("Eventos data being used:", JSON.stringify(eventos, null, 2));
+
+  const paths = eventos.map((evento) => ({
+    params: { id: evento.id },
+    props: { evento },
   }));
+
+  console.log("Generated paths:", JSON.stringify(paths, null, 2));
+  console.log("--------------------------------------------");
+  return paths;
 }
 
-const { evento } = Astro.props;
+const { evento } = Astro.props as { evento: Evento };
+
 
 if (!evento) {
   // Si el evento no se encuentra, redirige a una página 404
   return Astro.redirect('/404');
 }
 
-// Configuración del evento
-const EVENT_CONFIG = {
-  early: {
-    price: '20€',
-    promoText: '¡Precio especial de 20€ hasta el 18 de agosto! después subirá a 40€.',
-    squareLink: 'https://square.link/u/p5HihhLR'
-  },
-  regular: {
-    price: '40€',
-    promoText: 'El precio ha subido a 40€.',
-    squareLink: 'https://square.link/u/ussgfp2y'
-  },
-  deadline: new Date('2025-08-18T23:59:59')
-};
-
-// Lógica de precios dinámica
-const today = new Date();
-
-const { price: finalPrice, promoText, squareLink } =  today <= EVENT_CONFIG.deadline ? EVENT_CONFIG.early : EVENT_CONFIG.regular;
-
 // Prepara el título y subtítulo para una mejor presentación
 const mainTitle = evento.titulo.split(': ')[0];
 const subTitle = evento.titulo.split(': ').length > 1 ? evento.titulo.split(': ')[1] : '';
+const finalPrice = `${evento.unitPrice}€`;
 ---
 
 <Layout title={`${evento.titulo} - Somos`}>
@@ -161,7 +150,7 @@ const subTitle = evento.titulo.split(': ').length > 1 ? evento.titulo.split(': '
                     <p class="font-display text-2xl font-bold dark:text-accent text-dark">{finalPrice}</p>
                   </div>
                 </div>
-                <p class="text-sm text-dark/70 dark:text-light/70">{promoText}</p>
+               
               </div>
             </div>
           </section>
@@ -172,15 +161,11 @@ const subTitle = evento.titulo.split(': ').length > 1 ? evento.titulo.split(': '
               Sobre la Conferencia
             </h2>
             <!-- Iterate over the description array to create multiple paragraphs -->
-            <p class="text-dark/80 dark:text-light/80 text-lg leading-relaxed mb-4 text-justify">
-              {evento.descripcion}
-            </p>
-            <p class="text-dark/80 dark:text-light/80 text-lg leading-relaxed mb-4 text-justify">
-              {evento.descripcion2}
-            </p>
-            <p class="text-dark/80 dark:text-light/80 text-lg leading-relaxed mb-4 text-justify">
-              {evento.descripcion3}
-            </p>
+            {evento.descripcion.map((paragraph) => (
+              <p class="text-dark/80 dark:text-light/80 text-lg leading-relaxed mb-4 text-justify">
+                {paragraph}
+              </p>
+            ))}
           </section>
 
           <!-- About Speaker Section -->
@@ -236,18 +221,16 @@ const subTitle = evento.titulo.split(': ').length > 1 ? evento.titulo.split(': '
                 </p>
               </div>
               
-              <!-- Botón de pago de Square -->
+              
               <a
-                href={squareLink}
-                target="_blank"
+                href={`/evento/${evento.id}/registro`}
                 class="w-full bg-accent hover:bg-accent/90 text-dark font-bold py-4 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl text-center block"
               >
-                Registrarse
+                Registrarse 
               </a>
               
               <p class="text-xs text-dark/50 dark:text-light/50 text-center leading-relaxed mt-4">
-                Al registrarte, aceptas nuestros términos y condiciones.
-Te contactaremos para confirmar tu registro.
+                Serás redirigido a la página de registro y pago.
               </p>
             </div>
           </div>

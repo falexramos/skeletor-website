@@ -1,0 +1,64 @@
+---
+// src/pages/evento/[id]/registro.astro
+import Layout from "@/layouts/Layout.astro";
+import EventDetails from "@/components/EventDetails.astro";
+import DynamicPaymentForm from "@/components/pay/DynamicPaymentForm.astro";
+import type { ProductDetails } from "@/interfaces/product";
+import { eventos, type Evento } from "@/data/eventos";
+
+export function getStaticPaths() {
+  return eventos.map((event) => {
+    return {
+      params: { id: event.id },
+    };
+  });
+}
+
+// Obtener el ID del evento desde los parámetros de la RUTA
+const { id: eventoId } = Astro.params;
+
+const event = eventos.find(e => e.id === eventoId);
+
+// Si no se encuentra el evento, redirigir o mostrar un error
+if (!event) {
+  return Astro.redirect('/404');
+}
+
+// Prepara los detalles del producto para el formulario de pago
+const products: ProductDetails[] = [
+  {
+    id: event.id,
+    name: event.eventName,
+    description: `Entrada para: ${event.titulo}`,
+    unitPrice: event.unitPrice,
+    quantity: 1, // La cantidad inicial es 1, se actualiza en el formulario
+    image: event.imagen,
+  }
+];
+---
+
+<Layout title={`Registro para ${event.eventName}`}>
+    <div class="container mx-auto px-4 py-12">
+        <EventDetails
+            title={event.titulo}
+            date={event.fecha}
+            time={event.time}
+            location={event.location}
+            imageSrc={event.imagen}
+            imageAlt={event.imageAlt}
+            imageWidth={event.imageWidth}
+            imageHeight={event.imageHeight}
+            eventName={event.eventName}
+        />
+        <div class="w-full mt-12">
+            <DynamicPaymentForm
+                unitPrice={event.unitPrice}
+                formFields={event.formFields}
+                companionFormFields={event.companionFormFields}
+                products={products}
+                registrationEndpoint={event.registrationEndpoint}
+                eventName={event.eventName}
+            />
+        </div>
+    </div>
+</Layout>

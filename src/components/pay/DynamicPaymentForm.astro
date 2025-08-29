@@ -1,0 +1,584 @@
+---
+// src/components/pay/DynamicPaymentForm.astro
+import PaymentSection from '@/components/react/PaymentSection.tsx';
+import Modal from '@/components/Modal.astro';
+import type { ProductDetails } from '@/interfaces/product';
+
+// Define la estructura de un campo de formulario
+export interface FormField {
+  id: string;
+  label: string;
+  type: 'text' | 'email' | 'tel' | 'number' | 'textarea' | 'select';
+  required: boolean;
+  placeholder?: string;
+  gridSpan?: 'col-span-1' | 'col-span-2'; // Para campos que ocupan todo el ancho
+  options?: { value: string; text: string }[];
+}
+
+export interface Props {
+  unitPrice: number;
+  formFields: FormField[];
+  companionFormFields?: FormField[];
+  products: ProductDetails[];
+  registrationEndpoint?: string;
+  eventName?: string;
+}
+const { unitPrice, formFields, companionFormFields, products, registrationEndpoint, eventName } = Astro.props;
+---
+
+<section 
+  class="py-12 px-4 flex-1 flex justify-center items-center" 
+  data-unit-price={unitPrice}
+  data-form-fields={JSON.stringify(formFields)}
+  data-companion-form-fields={JSON.stringify(companionFormFields || [])}
+  data-products={JSON.stringify(products)}
+  data-registration-endpoint={registrationEndpoint}
+  data-event-name={eventName}
+>
+  <div class="max-w-4xl mx-auto bg-slate-50 dark:bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800">
+    <!-- Header Section -->
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full mb-4 shadow-lg">
+        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H7a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+      </div>
+      <h2 class="text-4xl font-display font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-3">
+        Registro y Pago
+      </h2>
+      <p class="text-lg text-slate-600 dark:text-slate-300 max-w-md mx-auto">
+        Completa tus datos para asegurar tu lugar.
+      </p>
+    </div>
+    
+    <form id="payment-form" class="space-y-6">
+      <!-- Buyer Information Section -->
+      <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-md border border-slate-200 dark:border-slate-700">
+        <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100 mb-6 flex items-center">
+          <svg class="w-5 h-5 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+          Datos
+        </h3>
+
+        <!-- Selector de Cantidad -->
+        <div class="grid grid-cols-2 gap-6 items-center mb-6">
+          <div class="form-group" data-quantity-selector>
+            <label for="quantity" class="block text-sm font-medium text-slate-600 dark:text-slate-400 mb-2">Cantidad de Entradas</label>
+            <div class="relative flex items-center max-w-[11rem]">
+              <button type="button" id="decrement-button" class="flex-shrink-0 bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 hover:bg-slate-300 inline-flex items-center justify-center border border-slate-300 dark:border-slate-600 rounded-l-lg p-3 h-11 focus:ring-slate-400 dark:focus:ring-slate-500 focus:ring-2 focus:outline-none transition-colors">
+                <svg class="w-3 h-3 text-slate-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16"/>
+                </svg>
+              </button>
+              <input type="number" id="quantity" name="quantity" value="1" min="1" max="20" class="bg-white dark:bg-slate-700 border-x-0 border-slate-300 dark:border-slate-600 h-11 text-center text-slate-900 dark:text-white text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5" required />
+              <button type="button" id="increment-button" class="flex-shrink-0 bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 hover:bg-slate-300 inline-flex items-center justify-center border border-slate-300 dark:border-slate-600 rounded-r-lg p-3 h-11 focus:ring-slate-400 dark:focus:ring-slate-500 focus:ring-2 focus:outline-none transition-colors">
+                <svg class="w-3 h-3 text-slate-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="text-right">
+            <p class="text-sm text-slate-500 dark:text-slate-400">Total a Pagar</p>
+            <p class="text-3xl font-bold text-slate-900 dark:text-slate-100">€<span id="total-amount-display">{unitPrice.toFixed(2)}</span></p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Renderizado dinámico de campos -->
+          {formFields.map(field => (
+            <div class={`form-group ${field.gridSpan || 'col-span-1'}`}>
+              <label for={field.id} class="block text-sm font-medium text-slate-600 dark:text-slate-400 mb-2">{field.label}</label>
+              {field.type === 'select' ? (
+                <select
+                  id={field.id}
+                  name={field.id}
+                  required={field.required}
+                  class="w-full px-4 py-3 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-slate-400 dark:hover:border-slate-500"
+                >
+                  {field.options?.map(option => (
+                    <option value={option.value}>{option.text}</option>
+                  ))}
+                </select>
+              ) : (
+                <input 
+                  type={field.type} 
+                  id={field.id} 
+                  name={field.id} 
+                  required={field.required}
+                  placeholder={field.placeholder || ''}
+                  class="w-full px-4 py-3 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-slate-400 dark:hover:border-slate-500" 
+                />
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Companions Section (se muestra dinámicamente) -->
+      <div id="companions-section" class="hidden bg-white dark:bg-slate-800 p-6 rounded-xl shadow-md border border-slate-200 dark:border-slate-700">
+        <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100 mb-4 flex items-center">
+          <svg class="w-5 h-5 mr-2 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+          Datos de los Acompañantes
+        </h3>
+        <div id="companions-container" class="space-y-4"></div>
+      </div>
+
+      <!-- Payment Information Section -->
+      <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-md border border-slate-200 dark:border-slate-700">
+        <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100 mb-4 flex items-center">
+          <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H7a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+          Información de Pago
+        </h3>
+        
+        <div class="flex items-start mb-6">
+          <div class="flex items-center h-5">
+            <input id="accept-terms" name="accept-terms" type="checkbox" required class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-slate-300 rounded" />
+          </div>
+          <div class="ml-3 text-sm">
+            <label for="accept-terms" class="font-medium text-slate-700 dark:text-slate-300">Acepto los <a href="/terminos-y-condiciones" class="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-500">Términos y Condiciones</a></label>
+          </div>
+        </div>
+        
+        <div data-payment-section>
+          <PaymentSection client:load initialAmount={unitPrice} />
+        </div>
+      </div>
+
+      <div id="validation-message" class="hidden p-4 rounded-xl text-sm font-medium transition-all duration-300"></div>
+
+      <div class="pt-6">
+        <button 
+          type="button" 
+          id="card-payment-btn"
+          class="w-full py-4 px-6 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold text-lg rounded-xl transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+        >
+          <span class="flex items-center justify-center">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            Pagar <span id="pay-button-amount" class="ml-2">{unitPrice.toFixed(2)}</span> €
+          </span>
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- Modals (sin cambios) -->
+<Modal 
+  id="processing-modal" 
+  title="Procesando Pago" 
+  type="info" 
+  showCloseButton={false}
+  backdrop={true}
+  size="md"
+>
+  <div class="flex items-center justify-center space-x-3">
+    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-accent"></div>
+    <span>Por favor espere mientras procesamos su pago...</span>
+  </div>
+</Modal>
+
+<Modal 
+  id="success-modal" 
+  title="¡Pago Exitoso!"
+  type="success" 
+  showCloseButton={true}
+  autoClose={false}
+  backdrop={true}
+  size="md"
+>
+  <p>Su pago ha sido procesado exitosamente. Recibirá un email de confirmación en breve.</p>
+  <div slot="footer">
+    <button 
+      id="success-ok-btn"
+      class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200"
+    >
+      Continuar
+    </button>
+  </div>
+</Modal>
+
+<Modal 
+  id="error-modal" 
+  title="Error en el Pago" 
+  type="error" 
+  showCloseButton={true}
+  backdrop={true}
+  size="md"
+>
+  <p id="error-message">Ha ocurrido un error durante el procesamiento del pago.</p>
+  <div slot="footer">
+    <button 
+      id="error-retry-btn"
+      class="w-full bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200"
+    >
+      Intentar de Nuevo
+    </button>
+  </div>
+</Modal>
+
+<style>
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-slide-up {
+    animation: slide-up 0.3s ease-out;
+  }
+  
+  /* Custom focus styles */
+  .form-group input:focus,
+  .form-group select:focus {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+  }
+
+  /* Hide spinner buttons in number inputs */
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type='number'] {
+    -moz-appearance: textfield; /* Firefox */
+  }
+</style>
+
+<script>
+  // Declaraciones de tipos para TypeScript
+  declare global {
+    interface Window {
+      modalUtils: {
+        [key: string]: {
+          show: (message?: string, options?: any) => void;
+          hide: () => void;
+          toggle: (message?: string, options?: any) => void;
+        };
+      };
+    }
+  }
+
+  const paymentApiUrl = `${import.meta.env.PUBLIC_PAYMENT_API_URL}`;
+  const sectionElement = document.querySelector('section[data-unit-price]');
+  
+  // Leer datos dinámicos del DOM desde el nuevo section
+  const formSectionElement = document.querySelector('section[data-unit-price]');
+  const unitPrice = parseFloat(formSectionElement?.getAttribute('data-unit-price') || '0');
+  const formFields = JSON.parse(sectionElement?.getAttribute('data-form-fields') || '[]');
+  const companionFormFields = JSON.parse(formSectionElement?.getAttribute('data-companion-form-fields') || '[]');
+  const products = JSON.parse(sectionElement?.getAttribute('data-products') || '[]');
+  const registrationEndpoint = sectionElement?.getAttribute('data-registration-endpoint');
+  const eventName = sectionElement?.getAttribute('data-event-name');
+  
+  const paymentForm = document.getElementById('payment-form') as HTMLFormElement;
+  const quantityInput = document.getElementById('quantity') as HTMLInputElement;
+  const totalAmountDisplay = document.getElementById('total-amount-display');
+  const payButtonAmount = document.getElementById('pay-button-amount');
+  const companionsContainer = document.getElementById('companions-container');
+  const companionsSection = document.getElementById('companions-section');
+
+  // Función para renderizar los formularios de acompañantes
+  function renderCompanionForms(quantity: number) {
+    if (!companionsContainer || companionFormFields.length === 0) return;
+
+    companionsContainer.innerHTML = ''; // Limpiar contenedor
+    if (quantity <= 1) return;
+
+    const fragment = document.createDocumentFragment();
+    for (let i = 1; i < quantity; i++) {
+      const companionIndex = i - 1;
+      const companionWrapper = document.createElement('div');
+      companionWrapper.className = 'bg-slate-100 dark:bg-slate-800/50 p-4 rounded-lg border border-slate-200 dark:border-slate-700 animate-slide-up';
+      
+      const header = document.createElement('button');
+      header.type = 'button';
+      header.className = 'w-full flex justify-between items-center font-medium text-slate-700 dark:text-slate-300';
+      header.innerHTML = `
+        <span>Acompañante ${i}</span>
+        <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+      `;
+
+      const body = document.createElement('div');
+      body.className = 'p-4 grid grid-cols-1 md:grid-cols-2 gap-4';
+      body.classList.add('pt-4', 'mt-4', 'border-t', 'border-slate-200', 'dark:border-slate-600');
+
+      companionFormFields.forEach((field: FormField) => {
+        const fieldId = `companion-${companionIndex}-${field.id}`;
+        let fieldHTML = '';
+
+        if (field.type === 'select') {
+          const optionsHTML = field.options?.map(option => `<option value="${option.value}">${option.text}</option>`).join('') || '';
+          fieldHTML = `
+            <div class="${field.gridSpan || 'col-span-1'}">
+              <label for="${fieldId}" class="block text-sm font-medium text-slate-600 dark:text-slate-400">${field.label}</label>
+              <select 
+                id="${fieldId}" 
+                name="${fieldId}" 
+                ${field.required ? 'required' : ''}
+                class="w-full px-4 py-3 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-slate-400 dark:hover:border-slate-500"
+              >
+                ${optionsHTML}
+              </select>
+            </div>
+          `;
+        } else {
+          fieldHTML = `
+            <div class="${field.gridSpan || 'col-span-1'}">
+              <label for="${fieldId}" class="block text-sm font-medium text-slate-600 dark:text-slate-400">${field.label}</label>
+              <input 
+                type="${field.type}" 
+                id="${fieldId}" 
+                name="${fieldId}" 
+                ${field.required ? 'required' : ''}
+                placeholder="${field.placeholder || ''}"
+                class="w-full px-4 py-3 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-slate-400 dark:hover:border-slate-500" 
+              />
+            </div>
+          `;
+        }
+        body.innerHTML += fieldHTML;
+      });
+
+      header.addEventListener('click', () => {
+        body.classList.toggle('hidden');
+        header.querySelector('svg')?.classList.toggle('rotate-180');
+      });
+
+      companionWrapper.appendChild(header);
+      companionWrapper.appendChild(body);
+      fragment.appendChild(companionWrapper);
+    }
+    companionsContainer.appendChild(fragment);
+  }
+
+  // Función para manejar el cambio de cantidad
+  function handleQuantityChange() {
+    const quantity = parseInt(quantityInput.value, 10) || 1;
+    const totalAmount = unitPrice * quantity;
+
+    if (totalAmountDisplay) totalAmountDisplay.textContent = totalAmount.toFixed(2);
+    if (payButtonAmount) payButtonAmount.textContent = totalAmount.toFixed(2);
+
+    // Notificar al componente de React sobre el cambio de monto
+    window.dispatchEvent(new CustomEvent('update-payment-amount', {
+      detail: { amount: totalAmount }
+    }));
+
+    // Mostrar u ocultar la sección de acompañantes
+    if (companionsSection) {
+      if (quantity > 1) {
+        companionsSection.classList.remove('hidden');
+      } else {
+        companionsSection.classList.add('hidden');
+      }
+    }
+    renderCompanionForms(quantity);
+  }
+
+  // Función de validación dinámica
+  function validateForm(): { isValid: boolean; message?: string; } {
+    let invalidFields: string[] = [];
+    let firstInvalidField: HTMLElement | null = null;
+
+    // Validar campos dinámicos
+    formFields.forEach((field: { id: string, label: string, required: boolean }) => {
+      const element = document.getElementById(field.id) as HTMLInputElement;
+      if (element) { // Reset styles
+        element.classList.remove('border-red-500', 'dark:border-red-400');
+        element.classList.add('border-slate-300', 'dark:border-slate-600');
+        if (field.required && !element.value.trim()) { // Validate
+          invalidFields.push(field.label);
+          element.classList.add('border-red-500', 'dark:border-red-400');
+          if (!firstInvalidField) firstInvalidField = element;
+        }
+      }
+    });
+
+    // Validar campos de acompañantes
+    const quantity = parseInt(quantityInput.value, 10) || 1;
+    if (quantity > 1) {
+      for (let i = 0; i < quantity - 1; i++) {
+        companionFormFields.forEach((field: { id: string, label: string, required: boolean }) => {
+          const fieldId = `companion-${i}-${field.id}`;
+          const element = document.getElementById(fieldId) as HTMLInputElement;
+          if (element) { // Reset styles
+            element.classList.remove('border-red-500', 'dark:border-red-400');
+          }
+          if (element && field.required && !element.value.trim()) {
+            invalidFields.push(`Acompañante ${i+1}: ${field.label}`);
+            element.classList.add('border-red-500', 'dark:border-red-400');
+            if (!firstInvalidField) firstInvalidField = element;
+          }
+        });
+      }
+    }
+
+    // Validar términos y condiciones
+    const acceptTermsElement = document.getElementById('accept-terms') as HTMLInputElement;
+    if (!acceptTermsElement.checked) {
+      invalidFields.push('Términos y Condiciones');
+      if (!firstInvalidField) firstInvalidField = acceptTermsElement;
+    }
+
+    if (firstInvalidField) {
+      firstInvalidField.focus();
+    }
+
+    if (invalidFields.length > 0) {
+      return { isValid: false, message: `Por favor, complete los campos requeridos: ${invalidFields.join(', ')}` };
+    }
+
+    return { isValid: true };
+  }
+
+  // Función para mostrar mensajes de validación
+  function showValidationMessage(message: string, type: 'warning' = 'warning'): void {
+    const messageDiv = document.getElementById('validation-message');
+    if (!messageDiv) return;
+    messageDiv.className = 'p-4 rounded-xl text-sm font-medium transition-all duration-300 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 text-yellow-800 dark:text-yellow-200';
+    messageDiv.innerHTML = `<div class="flex items-center space-x-2"><span class="text-lg">⚠️</span><span>${message}</span></div>`;
+    messageDiv.classList.remove('hidden');
+    setTimeout(() => messageDiv.classList.add('hidden'), 7000);
+  }
+
+  // Función para registrar el contacto (sin cambios)
+  async function registerContact(userData: { [key: string]: any }) {
+    if (!registrationEndpoint || !eventName) return;
+    const registrationData = {
+      ...userData,
+      evento: eventName,
+      origen: 'Pago Evento Web (Skeletor)',
+    };
+    try {
+      const response = await fetch(registrationEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(registrationData),
+      });
+      if (response.ok) console.log('Contacto registrado exitosamente.');
+      else console.error('Fallo al registrar el contacto:', await response.json());
+    } catch (error) {
+      console.error('Error de red durante el registro del contacto:', error);
+    }
+  }
+
+  // Función para procesar el pago, ahora con recolección dinámica de datos
+  async function sendPaymentToken(nonce: string, paymentType: string): Promise<void> {
+    (window as any).modalUtils['processing-modal'].show();
+
+    // Recopilar datos dinámicamente
+    const formData: { [key: string]: any } = {};
+    formFields.forEach((field: { id: string }) => {
+      const element = document.getElementById(field.id) as HTMLInputElement;
+      if (element) {
+        formData[field.id] = element.value.trim();
+      }
+    });
+
+    // Recopilar datos de acompañantes
+    const companions = [];
+    const quantity = parseInt(quantityInput.value, 10) || 1;
+    if (quantity > 1) {
+      for (let i = 0; i < quantity - 1; i++) {
+        const companionData: { [key: string]: any } = {};
+        companionFormFields.forEach((field: { id: string }) => {
+          const element = document.getElementById(`companion-${i}-${field.id}`) as HTMLInputElement;
+          if (element) companionData[field.id] = element.value.trim();
+        });
+        companions.push(companionData);
+      }
+    }
+
+    const paymentData = {
+      ...formData,
+      companions,
+      nonce,
+      monto: unitPrice * quantity,
+      metodoPago: paymentType,
+      products: products.map(p => ({ ...p, quantity })), // Actualizar cantidad en productos
+    };
+
+    try {
+      const response = await fetch(paymentApiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(paymentData),
+      });
+      const backendResponse = await response.json();
+
+      (window as any).modalUtils['processing-modal'].hide();
+
+      if (response.ok) {
+        (window as any).modalUtils['success-modal'].show();
+        await registerContact(formData);
+        setTimeout(() => paymentForm?.reset(), 1000);
+      } else {
+        showErrorModal(backendResponse.message || 'Error desconocido en el servidor');
+      }
+    } catch (e) {
+      (window as any).modalUtils['processing-modal'].hide();
+      showErrorModal('Error de conexión. Por favor, verifique su conexión e intente más tarde.');
+      console.error('Error en el proceso de pago:', e);
+    }
+  }
+
+  function showErrorModal(message: string): void {
+    const errorMessageElement = document.getElementById('error-message');
+    if (errorMessageElement) errorMessageElement.textContent = message;
+    (window as any).modalUtils['error-modal'].show();
+  }
+
+  function handlePaymentClick(paymentType: string): void {
+    const validation = validateForm();
+    if (!validation.isValid) {
+      showValidationMessage(validation.message || 'Por favor, complete todos los campos requeridos.');
+      return;
+    }
+    document.getElementById('validation-message')?.classList.add('hidden');
+    
+    const paymentEvent = new CustomEvent('form-validated', { detail: { paymentType } });
+    window.dispatchEvent(paymentEvent);
+  }
+
+  interface PaymentSuccessEvent extends CustomEvent {
+    detail: { nonce: string; paymentType: string; };
+  }
+
+  // Event listeners
+  document.addEventListener('DOMContentLoaded', () => {
+    // Custom quantity controls
+    const decrementButton = document.getElementById('decrement-button');
+    const incrementButton = document.getElementById('increment-button');
+
+    decrementButton?.addEventListener('click', () => {
+      const currentValue = parseInt(quantityInput.value, 10);
+      if (currentValue > parseInt(quantityInput.min)) {
+        quantityInput.value = (currentValue - 1).toString();
+        quantityInput.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+    });
+
+    incrementButton?.addEventListener('click', () => {
+      const currentValue = parseInt(quantityInput.value, 10);
+      if (currentValue < parseInt(quantityInput.max)) {
+        quantityInput.value = (currentValue + 1).toString();
+        quantityInput.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+    });
+
+    handleQuantityChange(); // Initial render for companions if quantity > 1
+    quantityInput?.addEventListener('change', handleQuantityChange);
+    document.getElementById('card-payment-btn')?.addEventListener('click', () => handlePaymentClick('card'));
+    document.getElementById('success-ok-btn')?.addEventListener('click', () => (window as any).modalUtils['success-modal'].hide());
+    document.getElementById('error-retry-btn')?.addEventListener('click', () => (window as any).modalUtils['error-modal'].hide());
+  });
+
+  window.addEventListener('payment-success', (e: Event) => {
+    const paymentEvent = e as PaymentSuccessEvent;
+    sendPaymentToken(paymentEvent.detail.nonce, paymentEvent.detail.paymentType);
+  });
+</script>
